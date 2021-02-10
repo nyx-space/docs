@@ -1,11 +1,24 @@
+# deploy:
+#   image: python:alpine
+#   script:
+#     - apk add npm
+#     - npm install -g firebase-tools
+#     - pip install mkdocs mkdocs-material
+#     - mkdocs build
+#     - firebase deploy --token $FIREBASE_TOKEN
+#   only:
+#     refs:
+#       - master
+
 deploy:
-  image: python:alpine
-  script:
-    - apk add npm
-    - npm install -g firebase-tools
-    - pip install mkdocs mkdocs-material
-    - mkdocs build
-    - firebase deploy --token $FIREBASE_TOKEN
+  image: python:latest
   only:
-    refs:
-      - master
+    - master
+  script:
+    - pip install mkdocs-material
+    - mkdocs build
+    - npm install -g firebase-tools
+    - firebase deploy --token $FIREBASE_TOKEN
+  artifacts:
+    paths:
+      - site
