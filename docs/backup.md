@@ -1,12 +1,5 @@
 ![Nyx logo](assets/logo.png){: .center }
 
-<p class="pitch">Blazing fast high-fidelity astrodynamics for <b>Monte Carlo</b> analyzes of <b>constellation</b> designs, <b>interplanetary</b> mission designs, and real-world <b>orbit determination</b> setups</p>
-
-<!-- !!! abstract "What?"
-    Blazing fast high-fidelity astrodynamics enabling Monte Carlo analyzes of constellation designs, interplanetary mission designs, and real-world orbit determination setups -->
-
-## Features
-
 :material-rocket-launch-outline: **Blah**
 
 ## Commands

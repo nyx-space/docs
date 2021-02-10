@@ -4,14 +4,15 @@ theme:
   features:
     - header.autohide
     - navigation.instant
-    - navigation.tabs
     - navigation.expand
     - toc.integrate
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png
   font:
-    text: IBM+Plex+Sans
-    code: IBM+Plex+Mono
+    text: IBM Plex Sans
+    code: IBM Plex Mono
+  palette:
+    scheme: default
 
 extra_css:
   - stylesheets/extras.css
@@ -26,19 +27,39 @@ repo_name: nyx-space/nyx
 
 extra:
   social:
+    - icon: material/blur
+      link: https://www.svgbackgrounds.com
+      name: Background licensed from SVGBackgrounds.com as CC BY 4.0. 
     - icon: material/comment-multiple
       link: https://app.element.io/#/room/#astrodyn:matrix.org
       name: Astrodynamics on Matrix.org
-    - icon: material/gitlab
-      link: https://gitlab.com/nyx-space
-      name: Nyx on Gitlab
     - icon: material/linkedin
       link: https://www.linkedin.com/in/chrisrabotin/
       name: Chris Rabotin on Twitter
     - icon: material/twitter
       link: https://twitter.com/CRabotin
       name: Chris Rabotin on Twitter
+    - icon: material/gitlab
+      link: https://gitlab.com/nyx-space
+      name: Nyx on Gitlab
 
 markdown_extensions:
   - toc:
       permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - abbr
+  - attr_list
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+extra_javascript:
+  - js/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
