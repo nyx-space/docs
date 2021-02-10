@@ -1,1 +1,44 @@
-site_name: My Docs
+site_name: Nyx
+theme:
+  name: material
+  features:
+    - header.autohide
+    - navigation.instant
+    - navigation.tabs
+    - navigation.expand
+    - toc.integrate
+  logo: assets/logo-icon-inverted.png
+  favicon: assets/favicon-256.png
+  font:
+    text: IBM+Plex+Sans
+    code: IBM+Plex+Mono
+
+extra_css:
+  - stylesheets/extras.css
+
+plugins:
+  - search
+
+copyright: Copyright &copy; 2021 Christopher Rabotin
+
+repo_url: https://gitlab.com/chrisrabotin/nyx
+repo_name: nyx-space/nyx
+
+extra:
+  social:
+    - icon: material/comment-multiple
+      link: https://app.element.io/#/room/#astrodyn:matrix.org
+      name: Astrodynamics on Matrix.org
+    - icon: material/gitlab
+      link: https://gitlab.com/nyx-space
+      name: Nyx on Gitlab
+    - icon: material/linkedin
+      link: https://www.linkedin.com/in/chrisrabotin/
+      name: Chris Rabotin on Twitter
+    - icon: material/twitter
+      link: https://twitter.com/CRabotin
+      name: Chris Rabotin on Twitter
+
+markdown_extensions:
+  - toc:
+      permalink: true
