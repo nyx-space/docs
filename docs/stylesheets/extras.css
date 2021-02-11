@@ -9,8 +9,10 @@ x: #7cb3cf;
 }
 
 :root {
-    --md-primary-fg-color:  #569ec2;
-    --md-accent-fg-color: #3d84e8;
+    --md-primary-fg-color:  #3d84e8;
+    --md-primary-bg-color:  #ffffff;
+    --md-accent-fg-color: #569ec2;
+    --md-accent-bg-color: #ffffff;
 }
 
 .pitch {
@@ -18,9 +20,11 @@ x: #7cb3cf;
     text-align: center;
 }
 
-.pitch b {
+.emph {
     border-bottom: #3d84e8 dotted 1px;
 }
+
+
 
 .center {
     display: block;

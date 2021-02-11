@@ -6,3 +6,9 @@
 *[EKF]: Extended Kalman filter
 *[SRIF]: Square Root Information filter
 *[MRP]: Modified Rodriguez Parameter
+*[DOF]: Degrees of freedom
+*[3DOF]: Three degrees of freedom
+*[6DOF]: Six degrees of freedom, includes attitude
+*[IAU]: International Astronomical Union
+*[NAIF]: Navigation and Ancillary Information Facility
+*[ConOps]: Concept of Operation
