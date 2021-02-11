@@ -21,7 +21,7 @@ The AGPLv3 license is a <span class="emph">business-friendly</span> license whic
 
 The AGPLv3 license is often negatively portrayed in industry, so let's go through a few standard questions. In the following, the term _unmodified version_ corresponds to the officially released and sanctioned version of Nyx linked to from this website, nyxspace.com.
 
-**TL;DR:** The license encourages you to build and sell programs on top of an unmodified version of Nyx, especially when those programs add a lot of value. Keep in mind that almost no customer can solely maintain a program which adds a lot of value without your help, so a custom is quite unlikely to become a competitor even if they have access to the source code. Also, you should really read the FAQ and contact a lawyer if you're super worried about free software even though the quasi-totality of webservers run Linux, which is free software.
+**TL;DR:** The license encourages you to build and sell programs on top of an unmodified version of Nyx, especially when those programs add significant value. Keep in mind that almost no customer can solely maintain an innovative program without your help, so a custom is quite unlikely to become a competitor even if they have access to the source code. Also, you should really read the FAQ and contact a lawyer if you're super worried about free software even though the quasi-totality of webservers run Linux, which is free software.
 
 ### Can I sell results of analyzes without disclosing my code?
 **Yes**, even if you use a modified version of Nyx, the output of Nyx or programs which use Nyx is _not_ subjected to the AGPLv3 license.
