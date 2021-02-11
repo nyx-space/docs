@@ -20,7 +20,7 @@ x: #7cb3cf;
     text-align: center;
 }
 
-.emph {
+.emph,em {
     border-bottom: #3d84e8 dotted 1px;
 }
 

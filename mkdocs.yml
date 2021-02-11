@@ -5,6 +5,7 @@ theme:
     - header.autohide
     - navigation.instant
     - navigation.expand
+    - navigation.tabs
     - toc.integrate
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png

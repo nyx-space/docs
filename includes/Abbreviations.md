@@ -12,3 +12,5 @@
 *[IAU]: International Astronomical Union
 *[NAIF]: Navigation and Ancillary Information Facility
 *[ConOps]: Concept of Operation
+*[STK]: AGI Satellite Toolkit
+*[AGPLv3]: Affero General Public License v3.0
