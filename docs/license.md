@@ -2,11 +2,22 @@
 
 !!! attention
 
-    **By using Nyx, you acknowledge that you have read and understood the open-source AGPLv3 license, as described [here](https://choosealicense.com/licenses/agpl-3.0/) and in the LICENSE file of Nyx.**
+    **By using Nyx, you acknowledge that you have read and understood the free software AGPLv3 license, as described [here](https://choosealicense.com/licenses/agpl-3.0/) and in the LICENSE file of Nyx.**
 
-    Christopher Rabotin is the copyright holder of the source code of Nyx. The respective authors of programs which use Nyx are _not_ required to release the source code of their program _unless_ they convey a program which uses modified version of Nyx.
+    Christopher Rabotin is the copyright holder of the source code of Nyx. The respective authors of programs which use Nyx own the copyright to their own programs. The concept of "free software" uses the term "free" as in "free speech," not as in "free snacks."
 
-The AGPLv3 license is a <span class="emph">business-friendly</span> license which protects your intellectual property and your research. It encourages users to modify the source code of Nyx and distribute their changes to the broader community. Anyone is allowed to use Nyx in any way they please, a personal or commercial setting, and sell software which packages or uses an unmodified version of Nyx (_propagate_). Private and commercial entities may run a _modified_ version of Nyx without limitations as long as they do not _convey_ the modified version of Nyx to third parties whose usage they do not fully control.
+## Executive summary
+In the following, the term _unmodified version_ corresponds to the officially released and sanctioned version of Nyx linked to from this website, nyxspace.com.
+
+1. The AGPLv3 license is a <span class="emph">business-friendly</span> license which protects your intellectual property and your research.
+2. You, as a personal or commercial entity, are allowed to <span class="emph">sell data products</span> created from programs that require a _modified_ or _unmodified_ version of Nyx without limitations.
+3. The license authorizes you to execute a _modified_ version of Nyx without limitation, as long as you do not distribute the software which executes the modified version of Nyx (_convey_).
+4. If you distribute software which packages a _modified_ or _unmodified_ version of Nyx to third parties such that they may execute or distribute your software without your supervision or guidance, then your software must be distributed under the AGPLv3 license (_propagate_). In that case, if your program uses an _unmodified_ version of Nyx, the source code of your software must be made available to those third parties who have access to your software on their explicit request at a reasonable cost. If, however, you _propagate_ your software which uses a _modified_ version of Nyx, then the source code of your software must be made available to public, because Nyx itself is available to the public without limitation.
+5. The AGPLv3 license encourages you to keep your intellectual property and only distribute/sell the data products from your program which uses Nyx. It also encourages you to share the changes you make to Nyx with the community of users of Nyx.
+6. If you do not abide by the terms and conditions of this license, Christopher Rabotin reserves the right to terminate your license, revoke your access to Nyx, and file a lawsuit for copyright infringement.
+
+!!! tip
+    Keep in mind that almost no customer can maintain a value-adding program without your help, so a customer is quite unlikely to become a competitor even if they have access to the source code. Also remember that the world runs on free software: the quasi-totality of servers run GNU/Linux.
 
 !!! info
 
@@ -19,9 +30,7 @@ The AGPLv3 license is a <span class="emph">business-friendly</span> license whic
 
 ## FAQ
 
-The AGPLv3 license is often negatively portrayed in industry, so let's go through a few standard questions. In the following, the term _unmodified version_ corresponds to the officially released and sanctioned version of Nyx linked to from this website, nyxspace.com.
-
-**TL;DR:** The license encourages you to build and sell programs on top of an unmodified version of Nyx, especially when those programs add significant value. Keep in mind that almost no customer can solely maintain an innovative program without your help, so a custom is quite unlikely to become a competitor even if they have access to the source code. Also, you should really read the FAQ and contact a lawyer if you're super worried about free software even though the quasi-totality of webservers run Linux, which is free software.
+The AGPLv3 license is often unfairly and negatively portrayed in industry, so let's go through a few standard questions.
 
 ### Can I sell results of analyzes without disclosing my code?
 **Yes**, even if you use a modified version of Nyx, the output of Nyx or programs which use Nyx is _not_ subjected to the AGPLv3 license.
@@ -33,7 +42,7 @@ The AGPLv3 license is often negatively portrayed in industry, so let's go throug
 **Yes**, unless you allow other parties to make or receive a copy of that modified version, or of a program which requires that modified version.
 
 ### Can I sell access to a program which provides analysis results?
-**Yes**, and you can keep the source to yourself unless you use a modified version of Nyx.
+**Yes**, and you do not need to publicly release the source if you use an _unmodified_ version of Nyx.
 
 ??? Example
     I wrote a super cool cloud-based Flight Dynamics System allowing external parties to plot the status of their constellations and run collision avoidance scenarios. All of the backend work uses an _unmodified_ version of Nyx, but the customers are not directly interacting with Nyx and only receive data products from Nyx. I _do not_ have to release the source code of that application.
@@ -41,7 +50,7 @@ The AGPLv3 license is often negatively portrayed in industry, so let's go throug
 ### Can I sell programs which use an unmodified version of Nyx?
 **Yes**, you may create and distribute (for free or for a fee) any program which runs on top of Nyx.
 
-However, the AGPLv3 is a transitive ("viral") license, so you must release your plugin as AGPLv3 as well. This does not mean that you need to redistribute the code of your plugin at the time of distribution of your program, it only means that you must provide the source of your plugins at a _reasonable cost_ upon request by whomever has access to that plugin.
+However, the AGPLv3 is a transitive ("viral") license, so you must release your program as AGPLv3 as well. This does not mean that you need to redistribute the code of your program at the time of distribution, it only means that you must provide the source of your program at a _reasonable cost_ upon request by whomever has access to that plugin.
 
 ### Overall, am I required to release the code developed in a private/academic/industry setting?
 **No**, unless you run a modified version of Nyx and are distributing your program to third parties whose use of your program is _not_ under your supervision.
