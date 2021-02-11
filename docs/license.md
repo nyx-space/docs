@@ -62,4 +62,10 @@ Oops, that's too bad, please file a bug report. Nyx is provided without warranty
 ### External contributions
 Additions and modifications of Nyx are encouraged! They help the astrodynamics industry as a whole. The best place to start is by forking the code, modifying it, and opening a pull/merge request. As per the license agreement, if you hold a patent to the code you add or modify, you thereby grant permission to the users of Nyx to use said patent.
 
+### See also
++ [GPLv3 official FAQ](https://www.gnu.org/licenses/gpl-faq.html)
++ [Violations of the GNU Licenses](https://www.gnu.org/licenses/gpl-violation.html)
++ [AGPLv3 source distribution](https://opensource.stackexchange.com/questions/5003/agplv3-source-redistribution-when-does-it-apply-to-my-code-for-a-server-side-ja)
++ [Express grant of patent rights?](https://opensource.stackexchange.com/questions/6302/what-does-express-grant-of-patent-rights-from-contributors-to-users-mean)
+
 --8<-- "includes/Abbreviations.md"

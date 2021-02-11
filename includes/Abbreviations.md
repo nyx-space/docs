@@ -14,3 +14,4 @@
 *[ConOps]: Concept of Operation
 *[STK]: AGI Satellite Toolkit
 *[AGPLv3]: Affero General Public License v3.0
+*[GPLv3]: General Public License v3.0
