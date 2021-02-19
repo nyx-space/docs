@@ -3,10 +3,8 @@ theme:
   name: material
   features:
     - header.autohide
-    - navigation.instant
     - navigation.expand
     - navigation.tabs
-    - toc.integrate
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png
   font:
@@ -15,13 +13,68 @@ theme:
   palette:
     scheme: default
 
+nav:
+  - Home: index.md
+  - License: license.md
+  - Showcase:
+    - Introduction: showcase/index.md
+    - Mission design: showcase/mission_design/index.md
+    - Constellation analysis: showcase/constellation_analysis/index.md
+    - Spacecraft navigation:
+      - Ground based navigation: showcase/spacecraft_navigation/ground_nav.md
+      - CAPS: showcase/spacecraft_navigation/CAPS.md
+  - User guide:
+    - Getting started: user_guide/start.md
+    - Orbit definition and manipulation: user_guide/orbits.md
+    - Propagators and Monte Carlo runs: user_guide/prop-mc.md
+    - High fidelity models: user_guide/hifimodels.md
+  - MathSpec:
+    - Introduction: MathSpec/index.md
+    - Time: MathSpec/time.md
+    - Celestial:
+      - Coordinate frames: MathSpec/celestial/coord_systems.md
+      - Ephemeris: MathSpec/celestial/ephemeris.md
+      - Orbital elements: MathSpec/celestial/orbital_elements.md
+      - Trajectory interpolation: MathSpec/celestial/interpolation.md
+      - Eclipses: MathSpec/celestial/eclipse.md
+      - Events: MathSpec/celestial/events.md
+    - Models:
+      - Gravity: MathSpec/models/gravity.md
+      - Spherical harmonics: MathSpec/models/harmonics.md
+      - Solar radiation pressure: MathSpec/models/srp.md
+      - Drag: MathSpec/models/drag.md
+    - Propagators:
+      - Runge Kutta: MathSpec/propagators/rk.md
+      - Dormand Prince: MathSpec/propagators/prince.md
+    - Navigation:
+      - Kalman filter: MathSpec/navigation/kalman.md
+      - Smoothing: MathSpec/navigation/smoothing.md
+      - Iteration: MathSpec/navigation/iteration.md
+      - Measurement generation: MathSpec/navigation/measurements.md
+    - Optimization:
+      - State transition matrix: MathSpec/optimization/stm.md
+      - Multiple shooting: MathSpec/optimization/multiple_shooting.md
+      - Optimizer: MathSpec/optimization/panoc.md
+    
+  - Validation:
+    - Introduction: validation/index.md
+    - Propagators: validation/propagators.md
+    - Cartesian/Keplerian state: validation/state_conversion.md
+    - Mission Design:
+      - Control laws: validation/mission_design/control_laws.md
+      - Finite burns: validation/mission_design/finite_burns.md
+    - Orbit determination:
+      - Introduction: validation/orbit_determination/index.md
+      - Consistency: validation/orbit_determination/consistency.md
+      - Smoothing: validation/orbit_determination/smoothing.md
+
 extra_css:
   - stylesheets/extras.css
 
 plugins:
   - search
 
-copyright: Copyright &copy; 2021 Christopher Rabotin
+copyright: Copyright &copy; 2021 - Christopher Rabotin
 
 repo_url: https://gitlab.com/chrisrabotin/nyx
 repo_name: nyx-space/nyx
@@ -36,13 +89,13 @@ extra:
       name: Astrodynamics on Matrix.org
     - icon: material/linkedin
       link: https://www.linkedin.com/in/chrisrabotin/
-      name: Chris Rabotin on Twitter
+      name: Chris Rabotin on LinkedIn
     - icon: material/twitter
       link: https://twitter.com/CRabotin
       name: Chris Rabotin on Twitter
-    - icon: material/gitlab
-      link: https://gitlab.com/nyx-space
-      name: Nyx on Gitlab
+    - icon: material/email-outline
+      link: mailto:chris.rabotin@pm.me
+      name: Email me
 
 markdown_extensions:
   - toc:

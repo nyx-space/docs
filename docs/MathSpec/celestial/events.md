@@ -1,0 +1,1 @@
+Talk about events and the Brent solver

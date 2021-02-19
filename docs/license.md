@@ -32,11 +32,11 @@ In the following, the term _unmodified version_ corresponds to the officially re
 
 The AGPLv3 license is often unfairly and negatively portrayed in industry, so let's go through a few standard questions.
 
-### Can I sell results of analyzes without disclosing my code?
+### Can I sell results of analyses without disclosing my code?
 **Yes**, even if you use a modified version of Nyx, the output of Nyx or programs which use Nyx is _not_ subjected to the AGPLv3 license.
 
 ??? Example
-    I wrote a program which uses a custom version of Nyx to run large scale Monte Carlo analyzes from my laptop. The project was funded by an external company and I will be providing the results of this work (but not the source code to generate the results) to that company. I _do not_ need to release the source code to anyone.
+    I wrote a program which uses a custom version of Nyx to run large scale Monte Carlo analyses from my laptop. The project was funded by an external company and I will be providing the results of this work (but not the source code to generate the results) to that company. I _do not_ need to release the source code to anyone.
 
 ### Can I modify Nyx and keep those modifications to myself?
 **Yes**, unless you allow other parties to make or receive a copy of that modified version, or of a program which requires that modified version.
@@ -56,9 +56,9 @@ However, the AGPLv3 is a transitive ("viral") license, so you must release your 
 **No**, unless you run a modified version of Nyx and are distributing your program to third parties whose use of your program is _not_ under your supervision.
 
 ??? Example
-    1. I wrote a program which uses a **modified** version of Nyx to run large scale Monte Carlo analyzes from my company cloud deployment. The program will be used only within the company. I _do not_ need to make the source code available to anyone because this is considered _private use_, and is therefore unrestricted.
-    2. I wrote a program which uses an **unmodified** version of Nyx to run large scale Monte Carlo analyzes from my company cloud deployment. The program will be available for use by external parties. I _do not_ need to make the source code available to anyone because I am using an **unmodified** version of Nyx.
-    3. I wrote a program which uses an **modified** version of Nyx to run large scale Monte Carlo analyzes from my company cloud deployment. The program will be available for use by external parties. _Because_ I am running a **modified** version, upon request by these parties, and for a reasonable cost (or free and publicly if said parties is the general public), I _must_ make the source code of all programs and scripts required to execute the larger program available.
+    1. I wrote a program which uses a **modified** version of Nyx to run large scale Monte Carlo analyses from my company cloud deployment. The program will be used only within the company. I _do not_ need to make the source code available to anyone because this is considered _private use_, and is therefore unrestricted.
+    2. I wrote a program which uses an **unmodified** version of Nyx to run large scale Monte Carlo analyses from my company cloud deployment. The program will be available for use by external parties. I _do not_ need to make the source code available to anyone because I am using an **unmodified** version of Nyx.
+    3. I wrote a program which uses an **modified** version of Nyx to run large scale Monte Carlo analyses from my company cloud deployment. The program will be available for use by external parties. _Because_ I am running a **modified** version, upon request by these parties, and for a reasonable cost (or free and publicly if said parties is the general public), I _must_ make the source code of all programs and scripts required to execute the larger program available.
 
 ### Results from Nyx caused my customer to crash on the Moon!
 Oops, that's too bad, please file a bug report. Nyx is provided without warranty of any kind.
