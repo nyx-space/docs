@@ -154,3 +154,5 @@ Using the same methodology as previously, it is evident that the sensitivity mat
 
 
 [^1]: That's me. `\o/`
+
+--8<-- "includes/Abbreviations.md"

@@ -1,7 +1,7 @@
 *[GMAT]: NASA Goddard's General Mission Analysis Toolkit
 *[OD]: statistical orbit determination
 *[MD]: mission design
-*[STM]: state transition matrix`
+*[STM]: state transition matrix
 *[CKF]: Conventional Kalman filter
 *[EKF]: Extended Kalman filter
 *[SRIF]: Square Root Information filter
@@ -15,3 +15,7 @@
 *[STK]: AGI Satellite Toolkit
 *[AGPLv3]: Affero General Public License v3.0
 *[GPLv3]: General Public License v3.0
+*[CKF]: Conventional Kalman Filter
+*[EKF]: Extended Kalman Filter
+*[SNC]: state noise compensation
+*[DMC]: dynamic model compensation
