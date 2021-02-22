@@ -69,6 +69,8 @@ nav:
       - Consistency: validation/orbit_determination/consistency.md
       - Smoothing: validation/orbit_determination/smoothing.md
 
+  - Versions: versions.md
+
 extra_css:
   - stylesheets/extras.css
 
@@ -77,7 +79,7 @@ plugins:
 
 copyright: Copyright &copy; 2021 - Christopher Rabotin
 
-repo_url: https://gitlab.com/chrisrabotin/nyx
+repo_url: https://gitlab.com/nyx-space/nyx
 repo_name: nyx-space/nyx
 
 extra:

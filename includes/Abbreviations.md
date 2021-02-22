@@ -19,3 +19,4 @@
 *[EKF]: Extended Kalman Filter
 *[SNC]: state noise compensation
 *[DMC]: dynamic model compensation
+*[PDF]: probability density function

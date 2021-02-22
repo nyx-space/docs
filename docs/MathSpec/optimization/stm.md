@@ -139,19 +139,6 @@ In the case of two-body dynamics, the $\boldsymbol A$ matrix is relatively simpl
 
 Dual numbers, however, provide the partials matrix as part of the computation of the equations of motion (EOM) themselves, as long as these EOMs describe the movement of all of the state variables to be estimated. In practice, this requires defining a hyper-dual space whose size is equal to the number of variables in the state to be estimated. For example, if estimating the Cartesian state a spacecraft and a maneuver magnitude at a reference point during an orbital determination arc, building a seven-dimensional dual space will return the result of the EOMs and the partials matrix computed at that point. An open source example of the building of such hyper-dual space has been implemented as a test case in \textit{dual\_num}, a thorough dual number library in a programming language called Rust.
 
-### The sensitivity matrix
-In a Kalman filter, the sensitivity matrix, noted $\tilde{H}$, relates the filter covariance, the filter gain, the measurements and the noise of the measurement. Like the state transition matrix, the sensitivity matrix is a partials matrix of size $N\times M$, where $N$ is the size of the measurement and $M$ is the size of the state to be estimated. For example, if the measurement is the range $\rho$ and the range-rate $\dot{\rho}$, and the estimated state is the position $\{x,y,z\}$ and velocity $\{\dot x, \dot y, \dot z\}$, then the sensitivity matrix is written as follows.
-
-\begin{equation}
-\label{sensitivity}
-\tilde H = \begin{bmatrix}
-    \frac{\partial \rho}{\partial x} & \frac{\partial \rho}{\partial y} & \frac{\partial \rho}{\partial z} & \frac{\partial \rho}{\partial \dot x} & \frac{\partial \rho}{\partial \dot y} & \frac{\partial \rho}{\partial \dot z} \\
-    \frac{\partial \dot \rho}{\partial x} & \frac{\partial \dot \rho}{\partial y} & \frac{\partial \dot \rho}{\partial z} & \frac{\partial \dot \rho}{\partial \dot x} & \frac{\partial \dot \rho}{\partial \dot y} & \frac{\partial \dot \rho}{\partial \dot z} \\
-\end{bmatrix}
-\end{equation}
-
-Using the same methodology as previously, it is evident that the sensitivity matrix may be computed by simply defining a hyper-dual space whose size is equal to that of the state to be estimated. The equations which return the range $\rho$ and the range-rate $\dot\rho$ from an input state will then automatically also return the components of the sensitivity matrix. An open source example of this hyper-dual space has also been implemented as a testing procedure in the Rust dual numbers library \textit{dual\_num}. It should also be noted that auto-differentiation libraries using dual numbers are also available in C++, Python, and Julia.
-
 
 [^1]: That's me. `\o/`
 

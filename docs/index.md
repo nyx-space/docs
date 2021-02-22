@@ -52,6 +52,13 @@
 
 <small>Contact me to add your company to the list!</small>
 
+## :material-email-outline: Contact
+If some documentation needs clarification, or if you've found a bug, please open a new issue [here](https://gitlab.com/nyx-space/nyx/-/issues/new) (you'll need a free gitlab.com account). Otherwise, you may also create a new issue by emailing the Gitlab project directly by clicking <a href="mailto:incoming+nyx-space-nyx-11893257-issue-@incoming.gitlab.com">here</a>.
+
+
+For general chatter about astrodynamics, you can join the [#astrodyn](https://app.element.io/#/room/#astrodyn:matrix.org) room on Element.io, a secure and decentralized internet chat platform.
+
+To contact the author of Nyx, Chris Rabotin, email chris.rabotin@pm.me.
 
 !!! quote
     Ce que l'on conçoit bien s'énonce clairement, et les mots pour le dire arrivent aisément.
