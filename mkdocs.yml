@@ -3,7 +3,6 @@ theme:
   name: material
   features:
     - header.autohide
-    - navigation.expand
     - navigation.tabs
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png
@@ -38,15 +37,16 @@ nav:
       - Trajectory interpolation: MathSpec/celestial/interpolation.md
       - Eclipses: MathSpec/celestial/eclipse.md
       - Events: MathSpec/celestial/events.md
-    - Models:
+    - Acceleration and Force Models:
+      - Overview: MathSpec/models/overview.md
       - Gravity: MathSpec/models/gravity.md
       - Spherical harmonics: MathSpec/models/harmonics.md
       - Solar radiation pressure: MathSpec/models/srp.md
       - Drag: MathSpec/models/drag.md
-    - Propagators:
-      - Runge Kutta: MathSpec/propagators/rk.md
-      - Dormand Prince: MathSpec/propagators/prince.md
+      - Control laws: MathSpec/models/control_laws.md
+      - Finite burns: MathSpec/models/finite_burns.md
     - Navigation:
+      - Overview: MathSpec/navigation/overview.md
       - Kalman filter: MathSpec/navigation/kalman.md
       - State noise compensation: MathSpec/navigation/snc.md
       - Smoothing: MathSpec/navigation/smoothing.md
@@ -56,18 +56,9 @@ nav:
       - State transition matrix: MathSpec/optimization/stm.md
       - Multiple shooting: MathSpec/optimization/multiple_shooting.md
       - Optimizer: MathSpec/optimization/panoc.md
-    
-  - Validation:
-    - Introduction: validation/index.md
-    - Propagators: validation/propagators.md
-    - Cartesian/Keplerian state: validation/state_conversion.md
-    - Mission Design:
-      - Control laws: validation/mission_design/control_laws.md
-      - Finite burns: validation/mission_design/finite_burns.md
-    - Orbit determination:
-      - Introduction: validation/orbit_determination/index.md
-      - Consistency: validation/orbit_determination/consistency.md
-      - Smoothing: validation/orbit_determination/smoothing.md
+    - Propagators:
+      - Runge Kutta: MathSpec/propagators/rk.md
+      - Dormand Prince: MathSpec/propagators/prince.md
 
   - Versions: versions.md
 

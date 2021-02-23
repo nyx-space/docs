@@ -20,3 +20,4 @@
 *[SNC]: state noise compensation
 *[DMC]: dynamic model compensation
 *[PDF]: probability density function
+*[V&V]: verification and validation

@@ -1,6 +1,0 @@
-# Overview
-This section aims to convince skeptical users that Nyx is thoroughly validated. Its results are as trustworthy as those of GMAT.
-
-If you'd like to add a validation test case, please contact me at one of the links on the bottom of the page.
-
---8<-- "includes/Abbreviations.md"
