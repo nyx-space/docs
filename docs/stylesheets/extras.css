@@ -1,5 +1,5 @@
 
-:blah {
+.__colors {
 x: #3d84e8;
 x: #ffffff;
 x: #569ec2;
@@ -24,7 +24,9 @@ x: #7cb3cf;
     border-bottom: #3d84e8 dotted 1px;
 }
 
-
+.right {
+    float: right;
+}
 
 .center {
     display: block;

@@ -1,7 +1,7 @@
 # Orbit design from a genetic algorithm
 
-[View project code :material-language-rust:](https://gitlab.com/nyx-space/showcase/orbit_design_ga/){: .md-button  }
-[Execute on Gitpod :material-console:](https://gitpod.io/#https://gitlab.com/nyx-space/showcase/orbit_design_ga/){: .md-button .md-button--primary }
+[![View project code](https://img.shields.io/badge/Nyx-View_project_code-3d84e8?logo=rust)](https://gitlab.com/nyx-space/showcase/orbit_design_ga/)
+[![Gitpod Run on the cloud](https://img.shields.io/badge/Gitpod-Run_on_the_cloud-blue?logo=gitpod)](https://gitpod.io/#https://gitlab.com/nyx-space/showcase/orbit_design_ga){.right}
 
 [**Jump to results**](#results)
 
@@ -271,6 +271,11 @@ loop {
     }
 }
 ```
+
+## Genetic algorithm
+**Recap:** At this stage, we can find the maximum elevation of the landmark for each orbit. This is cool, but it doesn't give a solution to the best orbit we need to properly image the Eiffel Tower from different elevations.
+
+One options is brute force: iterate through a ton of different initial states. It would work, and frankly it wouldn't be _that_ slow because Nyx is blazing fast. In fact, since each propagation is 0.75 seconds in release mode, it would take about 40 minutes on ten CPU core to test every inclination from 0 to 90 degrees and every AoP from 0 to 360 degrees (with 1 degree increments).
 
 ## Results
 _todo_
