@@ -155,10 +155,122 @@ Max elevation 58.63 degrees @ 2021-02-25T20:08:00 TAI
 
 On my computer, this scenario takes 7.89 seconds to run, which is a bit slow for my liking. So speed it up, tell Rust to compile this in `release` mode by running with `cargo run --release`. This whole analysis then runs in 0.75 seconds.
 
-## Bucket the desired elevation
+## Buckets for the desired elevation angles
 So far, we have a pretty poor initial guess, and we aren't even checking if we fit in the buckets!
 
 Let's define the buckets as specified in the goals above.
+
+We change the trajectory iteration code to the following:
+
+```rust
+
+// Let's keep track of the max elevation for each bucket
+let mut el_bw_45_60 = std::f64::NEG_INFINITY;
+let mut el_bw_45_60_epoch = epoch;
+let mut el_bw_60_75 = std::f64::NEG_INFINITY;
+let mut el_bw_60_75_epoch = epoch;
+let mut el_bw_75_90 = std::f64::NEG_INFINITY;
+let mut el_bw_75_90_epoch = epoch;
+for state in traj.every(2 * TimeUnit::Minute) {
+    // Compute the elevation
+    let (elevation, _) = landmark.elevation_of(&state);
+    if elevation >= 75.0 && elevation > el_bw_75_90 {
+        el_bw_75_90 = elevation;
+        el_bw_75_90_epoch = state.epoch();
+    } else if elevation >= 60.0 && elevation > el_bw_60_75 {
+        el_bw_60_75 = elevation;
+        el_bw_60_75_epoch = state.epoch();
+    } else if elevation >= 45.0 && elevation > el_bw_45_60 {
+        el_bw_45_60 = elevation;
+        el_bw_45_60_epoch = state.epoch();
+    }
+}
+
+println!("Buckets");
+println!("75.0+: {:.2} @ {}", el_bw_75_90, el_bw_75_90_epoch);
+println!("60.0+: {:.2} @ {}", el_bw_60_75, el_bw_60_75_epoch);
+println!("45.0+: {:.2} @ {}", el_bw_45_60, el_bw_45_60_epoch);
+```
+
+And as expected (because we didn't change the initial state), this initial guess is still as bad as earlier.
+
+```
+$ cargo run
+   Compiling orbit_design_ga v0.1.0 (/home/chris/Workspace/nyx-space/showcase/orbit_design_ga)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.46s
+     Running `target/debug/orbit_design_ga`
+[Earth IAU Fixed] Eiffel Tower (lat.: 48.86 deg    long.: 2.29 deg    alt.: 0.00 m)
+[Earth J2000] 2021-02-26T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.010000  inc = 49.000000 deg     raan = 0.000000 deg     aop = 0.000000 deg      ta = 109.485866 deg
+Buckets
+75.0+: -inf @ 2021-02-25T12:00:00 TAI
+60.0+: -inf @ 2021-02-25T12:00:00 TAI
+45.0+: 58.63 @ 2021-02-25T20:08:00 TAI
+
+```
+## Buckets per orbit
+Let's search for these elevations on a per-orbit basis: we'll probably want this in the genetic algorithm, not sure. I can always remove it.
+
+For this, we'll be using two super useful features of Nyx. First, we'll iterate through the trajectory between specific times using `traj.every_between(...)`. Second, we'll be incrementing the start time just by adding the orbital period to the initial time: all of the fancy stuff is handled under the hood.
+
+```rust
+// Let's create a variable which stores the start of the orbit.
+let mut orbit_start = epoch;
+let mut orbit_cnt = 1;
+loop {
+    // Let's keep track of the max elevation for each bucket
+    let mut el_bw_45_60 = std::f64::NEG_INFINITY;
+    let mut el_bw_45_60_epoch = epoch;
+    let mut el_bw_60_75 = std::f64::NEG_INFINITY;
+    let mut el_bw_60_75_epoch = epoch;
+    let mut el_bw_75_90 = std::f64::NEG_INFINITY;
+    let mut el_bw_75_90_epoch = epoch;
+
+    // Iterate through the trajectory between the bounds.
+    for state in traj.every_between(
+        2 * TimeUnit::Minute,
+        orbit_start,
+        orbit_start + orbit.period(),
+    ) {
+        // Compute the elevation
+        let (elevation, _) = landmark.elevation_of(&state);
+        if elevation >= 75.0 && elevation > el_bw_75_90 {
+            el_bw_75_90 = elevation;
+            el_bw_75_90_epoch = state.epoch();
+        } else if elevation >= 60.0 && elevation > el_bw_60_75 {
+            el_bw_60_75 = elevation;
+            el_bw_60_75_epoch = state.epoch();
+        } else if elevation >= 45.0 && elevation > el_bw_45_60 {
+            el_bw_45_60 = elevation;
+            el_bw_45_60_epoch = state.epoch();
+        }
+    }
+
+    println!("Buckets in orbit #{}", orbit_cnt);
+    if el_bw_75_90.is_finite() {
+        println!("75.0+: {:.2} @ {}", el_bw_75_90, el_bw_75_90_epoch);
+    } else {
+        println!("75.0+: nothing found");
+    }
+    if el_bw_60_75.is_finite() {
+        println!("60.0+: {:.2} @ {}", el_bw_60_75, el_bw_60_75_epoch);
+    } else {
+        println!("60.0+: nothing found");
+    }
+    if el_bw_45_60.is_finite() {
+        println!("45.0+: {:.2} @ {}", el_bw_45_60, el_bw_45_60_epoch);
+    } else {
+        println!("45.0+: nothing found");
+    }
+
+    // Increment the counters
+    orbit_cnt += 1;
+    orbit_start += orbit.period();
+
+    if orbit_start >= final_state.epoch() {
+        break;
+    }
+}
+```
 
 ## Results
 _todo_
