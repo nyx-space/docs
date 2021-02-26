@@ -1,6 +1,6 @@
 # Orbit design from a genetic algorithm
 
-[![View project code](https://img.shields.io/badge/Nyx-View_project_code-3d84e8?logo=rust)](https://gitlab.com/nyx-space/showcase/orbit_design_ga/)
+[![View project code](https://img.shields.io/badge/Nyx_v.1-View_project_code-3d84e8?logo=rust)](https://gitlab.com/nyx-space/showcase/orbit_design_ga/)
 [![Gitpod Run on the cloud](https://img.shields.io/badge/Gitpod-Run_on_the_cloud-blue?logo=gitpod)](https://gitpod.io/#https://gitlab.com/nyx-space/showcase/orbit_design_ga){.right}
 
 [**Jump to results**](#results)
@@ -275,9 +275,187 @@ loop {
 ## Genetic algorithm
 **Recap:** At this stage, we can find the maximum elevation of the landmark for each orbit. This is cool, but it doesn't give a solution to the best orbit we need to properly image the Eiffel Tower from different elevations.
 
-One options is brute force: iterate through a ton of different initial states. It would work, and frankly it wouldn't be _that_ slow because Nyx is blazing fast. In fact, since each propagation is 0.75 seconds in release mode, it would take about 40 minutes on ten CPU core to test every inclination from 0 to 90 degrees and every AoP from 0 to 360 degrees (with 1 degree increments).
+One options is brute force: iterate through a ton of different initial states. It would work and frankly it wouldn't be _that_ slow[^1] because Nyx is blazing fast.
+
+However, let's setup a genetic algorithm using the crate [oxigen](https://docs.rs/oxigen/). Not shown here in the snippets below, but we've added `oxigen = "2"` and `rand = {version = "0.7", features = ["small_rng"]}` to the Cargo.toml dependency file.
+
+We're using a genetic algorithm because it works great for optimization problems where there isn't a gradient. At first thought, I can't think of a gradient approach to solving this "multiple elevation buckets" problem. If there is one, let me know!
+
+### Genetic algorithm fitness function
+We'll change the buckets idea a bit. The problem with the current implementation is that we only store the maximum elevation. Really, we should be determining the usefulness of our initial orbit by simply by the number of times we've hit the bucket during the whole propagation of one day. Then, we can define the cost function as the sum of these hits. But we also need to emphasize however that a single pass in any of the buckets is great.
+
+Let's define the fitness function as follows:
+
++ 100 points for the first item in each bucket;
++ 1 point for each subsequent item.
+
+For example, if there's one passage between 45 and 60, two between 60 and 75, but none above 75, then the fitness of that individual is $(100)+(100+1)+(0)=201$. This should work decently well because we're sampling the trajectory the same number of times each trajectory. The search will also be faster because we don't have to advance through the trajectory orbit-by-orbit.
+
+We change the elevation count to the following:
+
+```rust
+// Let's keep track of the max elevation for each bucket
+let mut el_bw_45_60: u32 = 0;
+let mut el_bw_60_75: u32 = 0;
+let mut el_bw_75_90: u32 = 0;
+
+// Iterate through the trajectory between the bounds.
+for state in traj.every(2 * TimeUnit::Minute) {
+    // Compute the elevation
+    let (elevation, _) = landmark.elevation_of(&state);
+    if elevation >= 75.0 {
+        // Fun syntax to increment the value by some number in a conditional way
+        el_bw_75_90 += if el_bw_75_90 == 0 { 100 } else { 1 };
+    } else if elevation >= 60.0 {
+        el_bw_60_75 += if el_bw_60_75 == 0 { 100 } else { 1 };
+    } else if elevation >= 45.0 {
+        el_bw_45_60 += if el_bw_45_60 == 0 { 100 } else { 1 };
+    }
+}
+
+let sum_fitness = el_bw_45_60 + el_bw_60_75 + el_bw_75_90;
+
+println!("Fitness = {}", sum_fitness);
+```
+
+The original orbit has a fitness score of $105$.
+
+### Initial guess for the genome
+With all genetic algorithms, one needs to specify the genes which are used to vary the population. In our case, we'll only vary the initial orbit. My hunch is that an orbit which solves this problem adequately is nearly a sun-synchronous orbit, but not quite. Let's setup the genome such that it allows variation of the eccentricity, inclination, argument of periapse and RAAN.
+
+However, this is my first time trying to use a genetic algorithm, so I'll simply change the inclination first and increase the size of the genome later. So the genome will have a unique gene of type `f64`. I'll be using the [onemax](https://github.com/Martin1887/oxigen/blob/master/onemax-oxigen/src/main.rs) implementation as an example.
+
+Let's create a new file which will implement oxigen's [Genotype trait](https://docs.rs/oxigen/2.2.0/oxigen/genotype/trait.Genotype.html). The whole file is [a bit long](https://gitlab.com/nyx-space/showcase/orbit_design_ga/-/blob/6c7c973eca164a76273707eb64d8ad3a736f3009/src/genotype.rs), so here I'll simply paste on the `fitness` function and the updated `main` function. All I did was copy the code from the previous main function into the fitness function and accounted for the genes.
+
+=== "`genome.rs`"
+    ```rust
+    fn fitness(&self) -> f64 {
+        // For now, we'll redefine everything here.
+    
+        // Load the NASA NAIF DE438 planetary ephemeris.
+        let cosm = Cosm::de438();
+        // Grab the Earth Mean Equator J2000 frame
+        let eme2k = cosm.frame("EME2000");
+        // Set the initial start time of the scenario
+        let epoch = Epoch::from_gregorian_tai_at_noon(2021, 2, 25);
+        // Define the state with an altitude above the reference frame.
+        // Nearly circular orbit (ecc of 0.01), inclination of 49 degrees and TA at 30.0
+        let orbit = Orbit::keplerian_alt(
+            500.0,
+            0.01,
+            49.0 + self.genes[0],
+            0.0,
+            0.0,
+            30.0,
+            epoch,
+            eme2k,
+        );
+    
+        // Define the landmark by specifying a name, a latitude, a longitude, an altitude (in km) and a frame.
+        // Note that we're also "cloning" the Cosm: don't worry, it's a shared object, so we're just cloning the
+        // the reference to it in memory, and never loading it more than once.
+        let landmark = GroundStation::from_point(
+            "Eiffel Tower".to_string(),
+            48.8584,
+            2.2945,
+            0.0,
+            cosm.frame("IAU Earth"),
+            cosm.clone(),
+        );
+    
+        // Let's specify the force model to be two body dynamics
+        // And use the default propagator setup: a variable step Runge-Kutta 8-9
+        let setup = Propagator::default(OrbitalDynamics::two_body());
+    
+        // Use the setup to seed a propagator with the initial state we defined above.
+        let mut prop = setup.with(orbit);
+        // Now let's propagate for a week and generate the trajectory so we can analyse it.
+        let (_, traj) = prop.for_duration_with_traj(1 * TimeUnit::Day).unwrap();
+    
+        // Let's keep track of the max elevation for each bucket
+        let mut el_bw_45_60: u32 = 0;
+        let mut el_bw_60_75: u32 = 0;
+        let mut el_bw_75_90: u32 = 0;
+    
+        // Iterate through the trajectory between the bounds.
+        for state in traj.every(2 * TimeUnit::Minute) {
+            // Compute the elevation
+            let (elevation, _) = landmark.elevation_of(&state);
+            if elevation >= 75.0 {
+                // Fun syntax to increment the value by some number in a conditional way
+                el_bw_75_90 += if el_bw_75_90 == 0 { 100 } else { 1 };
+            } else if elevation >= 60.0 {
+                el_bw_60_75 += if el_bw_60_75 == 0 { 100 } else { 1 };
+            } else if elevation >= 45.0 {
+                el_bw_45_60 += if el_bw_45_60 == 0 { 100 } else { 1 };
+            }
+        }
+    
+        let sum_fitness = el_bw_45_60 + el_bw_60_75 + el_bw_75_90;
+    
+        println!("{} => {:o} => {}", self, orbit, sum_fitness);
+    
+        f64::from(sum_fitness)
+    }
+    ```
+
+=== "`main.rs`"
+    ```rust
+    fn main() {
+        let problem_size: usize = 1;
+        let population_size = problem_size * 8;
+        let log2 = (f64::from(problem_size as u32) * 4_f64).log2().ceil();
+        let (solutions, generation, _progress, _population) =
+            GeneticExecution::<f64, OrbitIndividual>::new()
+                .population_size(population_size)
+                .genotype_size(problem_size)
+                .mutation_rate(Box::new(MutationRates::Linear(SlopeParams {
+                    start: f64::from(problem_size as u32) / (8_f64 + 2_f64 * log2) / 100_f64,
+                    bound: 0.005,
+                    coefficient: -0.0002,
+                })))
+                .selection_rate(Box::new(SelectionRates::Linear(SlopeParams {
+                    start: log2 - 2_f64,
+                    bound: log2 / 1.5,
+                    coefficient: -0.0005,
+                })))
+                .select_function(Box::new(SelectionFunctions::Cup))
+                .run();
+    
+        println!("Finished in the generation {}", generation);
+        for sol in &solutions {
+            println!("{}", sol);
+        }
+    }
+    ```
+
+This converges in the **first generation**!
+
+```
+$ cargo run --release
+   Compiling orbit_design_ga v0.1.0 (/home/chris/Workspace/nyx-space/showcase/orbit_design_ga)
+    Finished release [optimized] target(s) in 3.52s
+     Running `target/release/orbit_design_ga`
+[0.5595646111692654] => [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.010000  inc = 49.559565 deg     raan = 0.000000 deg     aop = 360.000000 deg    ta = 30.000000 deg => 206
+[1.8047327480852193] => [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.010000  inc = 50.804733 deg     raan = 360.000000 deg   aop = 360.000000 deg    ta = 30.000000 deg => 207
+[4.937132954499962] => [Earth J2000] 2021-02-25T12:00:00 TAI    sma = 6878.136300 km    ecc = 0.010000  inc = 53.937133 deg     raan = 360.000000 deg   aop = 360.000000 deg    ta = 30.000000 deg => 313
+[8.733245489773708] => [Earth J2000] 2021-02-25T12:00:00 TAI    sma = 6878.136300 km    ecc = 0.010000  inc = 57.733245 deg     raan = 360.000000 deg   aop = 0.000000 deg      ta = 30.000000 deg => 317
+[6.560870232109691] => [Earth J2000] 2021-02-25T12:00:00 TAI    sma = 6878.136300 km    ecc = 0.010000  inc = 55.560870 deg     raan = 360.000000 deg   aop = 360.000000 deg    ta = 30.000000 deg => 215
+[1.9207503374182244] => [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.010000  inc = 50.920750 deg     raan = 0.000000 deg     aop = 360.000000 deg    ta = 30.000000 deg => 207
+[8.140198536077483] => [Earth J2000] 2021-02-25T12:00:00 TAI    sma = 6878.136300 km    ecc = 0.010000  inc = 57.140199 deg     raan = 360.000000 deg   aop = 360.000000 deg    ta = 30.000000 deg => 317
+[1.9670620359924451] => [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.010000  inc = 50.967062 deg     raan = 360.000000 deg   aop = 0.000000 deg      ta = 30.000000 deg => 208
+Finished in the generation 0
+[4.937132954499962]
+[8.733245489773708]
+[8.140198536077483]
+
+```
+
+### Making the problem harder
 
 ## Results
 _todo_
+
+[^1]: In fact, since each propagation is 0.75 seconds in release mode, it would take about 40 minutes on ten CPU core to test every inclination from 0 to 90 degrees and every AoP from 0 to 360 degrees (with 1 degree increments).
 
 --8<-- "includes/Abbreviations.md"
