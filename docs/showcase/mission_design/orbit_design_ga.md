@@ -6,12 +6,12 @@
 [**Jump to results**](#results)
 
 ## Goal
-We would like an orbit which flies over a point of interest on the Earth such that it can see that object from different angles. Let's assume that we can fly over that object regardless of the time of day (e.g. if we had a SAR sensor for imaging).
+We would like an orbit that flies over a point of interest on the Earth such that it can see that landmark from different angles. Let's assume that we can fly over that object regardless of the time of day (e.g. if we had a SAR sensor for imaging).
 
-In the following, I detail each iteration and how the problem was build. Each of the steps received their own commit on the repo, so you can track the development of the script there.
+In the following, I detail each step of the solution, written as I was developing the code. Each of the steps received [their own commit](https://gitlab.com/nyx-space/showcase/orbit_design_ga/-/commits/master) on the repo, so you can track the development of the script there as well.
 
 ### Constraints
-Let's start by defining the target object: the Eiffel Tower, located at 48.8584° N, 2.2945° E. We want to the spacecraft to see it from different angles over a one-day period. More specifically, we want the spaceraft will fly over this landmark once over that period with the following elevation:
+Let's start by defining the target object: the Eiffel Tower, located at 48.8584° N, 2.2945° E. We want the spacecraft to see it from different angles over a one-day period. More specifically, the spaceraft shall fly over this landmark once over that period with the following elevations:
 
 + 75 - 90 degrees
 + 60 - 75 degrees
@@ -31,7 +31,7 @@ extern crate nyx_space as nyx;
 use nyx::md::ui::*;
 ```
 
-Now let's define a LEO orbit specifying an altitude of 500 km. The definition of an orbit from Keplerian elements always follows the order: semi-major axis (km), eccentricity (no unit), inclination (degrees), right ascension of the ascending node (degrees), argument of periapse (degrees), true anomaly (degrees), epoch, and frame.
+Now let's define a LEO orbit with an altitude of 500 km. The definition of an orbit from Keplerian elements always follows the order: semi-major axis (km), eccentricity (no unit), inclination (degrees), right ascension of the ascending node (degrees), argument of periapse (degrees), true anomaly (degrees), epoch, and frame.
 
 ```rust
 // Load the NASA NAIF DE438 planetary ephemeris.
@@ -48,10 +48,10 @@ let orbit = Orbit::keplerian_alt(500.0, 0.01, 49.0, 0.0, 0.0, 30.0, epoch, eme2k
     We defined the initial inclination to be 49 degrees: we know from basic two-body dynamics that this implies the ground track of the spacecraft will reach a maximum latitude of 49 degrees. So this is a good initial guess that we might be able to fly over the Eiffel Tower at the proper inclination we'd like.
 
 ### Define the landmark
-Let's define the Eiffel Tower. It is fixed to the Earth, so we're specifying the IAU Earth frame. Nyx only has high-fidelity frames, so none of the educational ECEF or ECI frames here.
+Let's define the Eiffel Tower. It is fixed to the Earth, so we're specifying the IAU Earth frame.[^1]
 
 !!! tip
-    Anything that is defined on the surface of a celestial body in terms of latitude, longitude and height is created using the `GroundStation` structure. That structure is defined in the orbit determination module of Nyx, so make sure to import that: `use nyx::od::ui::GroundStation;`.
+    Use the `GroundStation` structure to define anything on the surface of a celestial body in terms of latitude, longitude and height. That structure is defined in the orbit determination module of Nyx, so make sure to import that: `use nyx::od::ui::GroundStation;`.
 
 ```rust
 // Define the landmark by specifying a name, a latitude, a longitude,
@@ -111,7 +111,7 @@ println!("{:o}", final_state);
 ```
 
 ### Elevation computation from trajectory
-One of the best analysis features of Nyx is being able to play with trajectories generated from a propagation segment. One can iterate through the trajectory with a simple `for` loop.
+One of the best analysis features of Nyx is being able to generate and analyze trajectories generated from a propagation segment. One can iterate through the trajectory with a simple `for` loop.
 
 ```rust
 // Finally, let's query the trajectory every other minute,
@@ -210,7 +210,7 @@ Buckets
 ## Buckets per orbit
 Let's search for these elevations on a per-orbit basis: we'll probably want this in the genetic algorithm, not sure. I can always remove it.
 
-For this, we'll be using two super useful features of Nyx. First, we'll iterate through the trajectory between specific times using `traj.every_between(...)`. Second, we'll be incrementing the start time just by adding the orbital period to the initial time: all of the fancy stuff is handled under the hood.
+For this, we'll be using two super useful features of Nyx. First, we'll iterate through the trajectory between specific times using `traj.every_between(...)`. Second, we'll be incrementing the start time just by adding the orbital period to the initial time: all of the fancy stuff is handled under the hood and you still retain picosecond time accuracy.
 
 ```rust
 // Let's create a variable which stores the start of the orbit.
@@ -275,14 +275,14 @@ loop {
 ## Genetic algorithm
 **Recap:** At this stage, we can find the maximum elevation of the landmark for each orbit. This is cool, but it doesn't give a solution to the best orbit we need to properly image the Eiffel Tower from different elevations.
 
-One options is brute force: iterate through a ton of different initial states. It would work and frankly it wouldn't be _that_ slow[^1] because Nyx is blazing fast.
+One options is brute force: iterate through a ton of different initial states. It would work, and frankly it wouldn't be _that_ slow[^2] because Nyx is blazing fast, but it's a waste of resources.
 
-However, let's setup a genetic algorithm using the crate [oxigen](https://docs.rs/oxigen/). Not shown here in the snippets below, but we've added `oxigen = "2"` and `rand = {version = "0.7", features = ["small_rng"]}` to the Cargo.toml dependency file.
+A better option is to use a genetic algorithm. Let's setup a genetic algorithm using the crate [oxigen](https://docs.rs/oxigen/). Not shown here in the snippets below, but we've added `oxigen = "2"` and `rand = {version = "0.7", features = ["small_rng"]}` to the Cargo.toml dependency file.
 
 We're using a genetic algorithm because it works great for optimization problems where there isn't a gradient. At first thought, I can't think of a gradient approach to solving this "multiple elevation buckets" problem. If there is one, let me know!
 
 ### Genetic algorithm fitness function
-We'll change the buckets idea a bit. The problem with the current implementation is that we only store the maximum elevation. Really, we should be determining the usefulness of our initial orbit by simply by the number of times we've hit the bucket during the whole propagation of one day. Then, we can define the cost function as the sum of these hits. But we also need to emphasize however that a single pass in any of the buckets is great.
+We'll change the buckets idea a bit. The problem with the current implementation is that we only store the maximum elevation. Really, we should be determining the usefulness of our initial orbit by simply by the number of times we've hit the bucket during the whole propagation of one day. Then, we can define the cost function as the sum of these hits. But we also need to reward a single pass in a new bucket more than an extra pass in a previously visited bucket.
 
 Let's define the fitness function as follows:
 
@@ -323,9 +323,9 @@ The original orbit has a fitness score of $105$.
 ### Initial guess for the genome
 With all genetic algorithms, one needs to specify the genes which are used to vary the population. In our case, we'll only vary the initial orbit. My hunch is that an orbit which solves this problem adequately is nearly a sun-synchronous orbit, but not quite. Let's setup the genome such that it allows variation of the eccentricity, inclination, argument of periapse and RAAN.
 
-However, this is my first time trying to use a genetic algorithm, so I'll simply change the inclination first and increase the size of the genome later. So the genome will have a unique gene of type `f64`. I'll be using the [onemax](https://github.com/Martin1887/oxigen/blob/master/onemax-oxigen/src/main.rs) implementation as an example.
+However, this is my first time using a genetic algorithm, so I'll simply change the inclination first and increase the size of the genome later. The genome will have a unique gene of type `f64`. I'll be using the [onemax](https://github.com/Martin1887/oxigen/blob/master/onemax-oxigen/src/main.rs) implementation as an example.
 
-Let's create a new file which will implement oxigen's [Genotype trait](https://docs.rs/oxigen/2.2.0/oxigen/genotype/trait.Genotype.html). The whole file is [a bit long](https://gitlab.com/nyx-space/showcase/orbit_design_ga/-/blob/6c7c973eca164a76273707eb64d8ad3a736f3009/src/genotype.rs), so here I'll simply paste on the `fitness` function and the updated `main` function. All I did was copy the code from the previous main function into the fitness function and accounted for the genes.
+Let's create a new file (`genome.rs`) which will implement oxigen's [Genotype trait](https://docs.rs/oxigen/2.2.0/oxigen/genotype/trait.Genotype.html). The whole file is [a bit long](https://gitlab.com/nyx-space/showcase/orbit_design_ga/-/blob/6c7c973eca164a76273707eb64d8ad3a736f3009/src/genotype.rs), so here I'll simply paste on the `fitness` function and the updated `main` function. All I did was copy the code from the previous main function into the fitness function and accounted for the genes.
 
 === "`genome.rs`"
     ```rust
@@ -504,7 +504,7 @@ To summarize, we've seen how Nyx can be combined with a genetic algorithm quite 
 
 Now that we know the genetic algorithm can find a solution, let's clean up the code and make sure to test the solution found by the GA. The only change was adding an `impl` for `OrbitIndividual` and moving the fitness calculation in there. This allows checking the solutions found.
 
-Of course, the genetic algorithm is a probabilistic solution, so it won't always converge on the same solution. Here are five runs with different solutions.
+Of course, the genetic algorithm is a probabilistic solution, so it won't always converge on the same solution. Here are five runs with different solutions. It's also interesting to note that the solutions found are far from a sun-sync orbit!
 
 Click the following button to run these cases yourself directly on the cloud! [![Gitpod Run on the cloud](https://img.shields.io/badge/Gitpod-Run_on_the_cloud-blue?logo=gitpod)](https://gitpod.io/#https://gitlab.com/nyx-space/showcase/orbit_design_ga)
 
@@ -600,6 +600,7 @@ Solution found in the 0th generation:
 
 
 
-[^1]: In fact, since each propagation is 0.75 seconds in release mode, it would take about 40 minutes on ten CPU core to test every inclination from 0 to 90 degrees and every AoP from 0 to 360 degrees (with 1 degree increments).
+[^1]: Nyx only has high-fidelity frames, so none of the educational ECEF or ECI frames here.
+[^2]: In fact, since each propagation is 0.75 seconds in release mode, it would take about 40 minutes on ten CPU core to test every inclination from 0 to 90 degrees and every AoP from 0 to 360 degrees (with 1 degree increments).
 
 --8<-- "includes/Abbreviations.md"
