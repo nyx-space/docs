@@ -452,9 +452,153 @@ Finished in the generation 0
 ```
 
 ### Making the problem harder
+This was too easy. Let's add more buckets, provide a higher reward for the first hit ($1000$ point reward), and vary more parameters: inc, ecc, RAAN and AoP.
+
+To avoid changing the eccentricity by something too crazy, let's only change it by 1% of the random value. Angles still vary by ten times the random number.
+
+All that has really changed is the way we handle the buckets. We now have five buckets of different elevations: 45-55; 55-65; 65-75; 75-85; 85-90. We consider an initial orbit to be a solution only if its fitness is greater than $5000$, so it must pass through the five buckets.
+
+```rust
+// (...)
+
+// Let's keep track of the max elevation for each bucket:
+// 45-55; 55-65; 65-75; 75-85; 85-90
+// We'll store them in a vector
+let mut elevations = vec![0, 0, 0, 0, 0];
+
+// Iterate through the trajectory between the bounds.
+for state in traj.every(2 * TimeUnit::Minute) {
+    // Compute the elevation
+    let (elevation, _) = landmark.elevation_of(&state);
+    let bucket_idx = if elevation >= 85.0 {
+        0
+    } else if elevation >= 75.0 {
+        1
+    } else if elevation >= 65.0 {
+        2
+    } else if elevation >= 55.0 {
+        3
+    } else if elevation >= 45.0 {
+        4
+    } else {
+        // We don't care about this elevation
+        continue;
+    };
+    if elevations[bucket_idx] == 0 {
+        elevations[bucket_idx] += 1000;
+    } else {
+        elevations[bucket_idx] += 1
+    }
+}
+
+let sum_fitness: u32 = elevations.iter().sum();
+
+// (...)
+```
+
+This finds a solutions in 2 to 4 generations, depending on the run. It takes less than a minute to propagate hundreds of spacecraft (in two body dynamics of course).
 
 ## Results
-_todo_
+
+To summarize, we've seen how Nyx can be combined with a genetic algorithm quite trivially and how to build the problem up from nothing. Here, we've varied the inclination, eccentricity, RAAN and AoP.
+
+Now that we know the genetic algorithm can find a solution, let's clean up the code and make sure to test the solution found by the GA. The only change was adding an `impl` for `OrbitIndividual` and moving the fitness calculation in there. This allows checking the solutions found.
+
+Of course, the genetic algorithm is a probabilistic solution, so it won't always converge on the same solution. Here are five runs with different solutions.
+
+Click the following button to run these cases yourself directly on the cloud! [![Gitpod Run on the cloud](https://img.shields.io/badge/Gitpod-Run_on_the_cloud-blue?logo=gitpod)](https://gitpod.io/#https://gitlab.com/nyx-space/showcase/orbit_design_ga)
+
+!!! note
+    It took me about five hours from the first line of code until the end of this post. I can't imagine solving this problem with STK or GMAT in that time, yet I know the latter very well.
+
+
+#### Case 1
+Solution found in the 0th generation:
+
+| ecc  | inc (deg) | RAAN (deg) | AoP (deg) |
+| -- | -- | -- | -- |
+| 0.013294  | 57.545662 | 2.336691 | 0.953208 |
+
+| 45-55  | 55-65 | 65-75 | 75-85 | 85-90 |
+| -- | -- | -- | -- | -- |
+| 10  | 5 | 3 | 1 | 1 |
+
+??? info "Output"
+
+        Finished in the generation 0
+        [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.013294  inc = 57.545662 deg     raan = 2.336691 deg     aop = 0.953208 deg      ta = 30.000000 deg
+        45-55: 10     55-65: 5     65-75: 3     75-85: 1     85-90: 1
+        Fitness: 5015
+
+#### Case 2
+Solution found in the 0th generation:
+
+| ecc  | inc (deg) | RAAN (deg) | AoP (deg) |
+| -- | -- | -- | -- |
+| 0.011963  | 53.376785 | 5.376642 | 6.973544 |
+
+| 45-55  | 55-65 | 65-75 | 75-85 | 85-90 |
+| -- | -- | -- | -- | -- |
+| 6  | 3 | 1 | 1 | 1 |
+
+??? info "Output"
+        Finished in the generation 0
+        [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.011963  inc = 53.376785 deg     raan = 5.376642 deg     aop = 6.973544 deg      ta = 30.000000 deg
+        45-55: 6        55-65: 3        65-75: 1        75-85: 1        85-90: 1
+        Fitness: 5007
+
+#### Case 3
+Solution found in the 2nd generation:
+
+| ecc  | inc (deg) | RAAN (deg) | AoP (deg) |
+| -- | -- | -- | -- |
+| 0.018035  | 57.507162 | 0.460785 | 2.268064 |
+
+| 45-55  | 55-65 | 65-75 | 75-85 | 85-90 |
+| -- | -- | -- | -- | -- |
+| 10  | 5 | 3 | 1 | 1 |
+
+??? info "Output"
+        Finished in the generation 2
+        [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.018035  inc = 57.507162 deg     raan = 0.460785 deg     aop = 2.268064 deg      ta = 30.000000 deg
+        45-55: 10       55-65: 5        65-75: 3        75-85: 1        85-90: 1
+        Fitness: 5015
+
+#### Case 4
+Solution found in the 0th generation:
+
+| ecc  | inc (deg) | RAAN (deg) | AoP (deg) |
+| -- | -- | -- | -- |
+| 0.017843  | 53.885220 | 7.111687 | 5.823606 |
+
+| 45-55  | 55-65 | 65-75 | 75-85 | 85-90 |
+| -- | -- | -- | -- | -- |
+| 7  | 3 | 1 | 1 | 1 |
+
+??? info "Output"
+        Finished in the generation 0
+        [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.017843  inc = 53.885220 deg     raan = 7.111687 deg     aop = 5.823606 deg      ta = 30.000000 deg
+        45-55: 7        55-65: 3        65-75: 1        75-85: 1        85-90: 1
+        Fitness: 5008
+    
+#### Case 5
+Solution found in the 0th generation:
+
+| ecc  | inc (deg) | RAAN (deg) | AoP (deg) |
+| -- | -- | -- | -- |
+| 0.018346  | 57.788652 | 0.979918 | 9.990995 |
+
+| 45-55  | 55-65 | 65-75 | 75-85 | 85-90 |
+| -- | -- | -- | -- | -- |
+| 9  | 6 | 2 | 1 | 1 |
+
+??? info "Output"
+        Finished in the generation 0
+        [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.018346  inc = 57.788652 deg     raan = 0.979918 deg     aop = 9.990995 deg      ta = 30.000000 deg
+        45-55: 9        55-65: 6        65-75: 2        75-85: 1        85-90: 1
+        Fitness: 5014
+
+
 
 [^1]: In fact, since each propagation is 0.75 seconds in release mode, it would take about 40 minutes on ten CPU core to test every inclination from 0 to 90 degrees and every AoP from 0 to 360 degrees (with 1 degree increments).
 
