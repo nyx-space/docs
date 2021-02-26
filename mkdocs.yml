@@ -15,7 +15,7 @@ theme:
 nav:
   - Home: index.md
   - License: license.md
-  - Showcase:
+  - Examples:
     - Introduction: showcase/index.md
     - Mission design: showcase/mission_design/index.md
     - Constellation analysis: showcase/constellation_analysis/index.md
