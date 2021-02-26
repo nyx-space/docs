@@ -21,3 +21,5 @@
 *[DMC]: dynamic model compensation
 *[PDF]: probability density function
 *[V&V]: verification and validation
+*[SAR]: synthetic aperture radar
+*[GA]: genetic algorithm

@@ -17,7 +17,9 @@ nav:
   - License: license.md
   - Examples:
     - Introduction: showcase/index.md
-    - Mission design: showcase/mission_design/index.md
+    - Mission design:
+      - Table of contents: showcase/mission_design/index.md
+      - Orbit design from a genetic algorithm: showcase/mission_design/orbit_design_ga.md
     - Constellation analysis: showcase/constellation_analysis/index.md
     - Spacecraft navigation:
       - Ground based navigation: showcase/spacecraft_navigation/ground_nav.md

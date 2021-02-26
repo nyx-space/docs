@@ -1,4 +1,4 @@
-This section demonstrates some of the capabilities of Nyx. By design, Nyx supports a plethora of scenarios which are poorly supported by NASA GMAT or STK's Astrogator[^1].
+This section demonstrates some of the capabilities of Nyx. By design, Nyx supports a plethora of scenarios which are poorly supported by NASA GMAT or STK's Astrogator[^1]. Nyx aims to be a free-software alternative to JPL Monte.
 
 Each showcased example is categorized and the exact version of Nyx is specified. When possible, relevant source code will be published. However, note that Nyx is mainly used for research and development whose results offer significant competitive. Therefore, source code may be kept tightly, but some results may be published.
 
