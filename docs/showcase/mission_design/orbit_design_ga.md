@@ -519,7 +519,7 @@ Click the following button to run these cases yourself directly on the cloud! [!
 
 --8<-- "includes/ga.html"
 
-Five solutions found in the 0th generation:
+Five solutions found in the 0th generation when the inclination is allowed to vary up until a polar orbit (as expected really).
 
 | ecc  | inc (deg) | RAAN (deg) | AoP (deg) |
 | -- | -- | -- | -- |
