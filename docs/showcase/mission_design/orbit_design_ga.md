@@ -3,7 +3,7 @@
 [![View project code](https://img.shields.io/badge/Nyx_v.1-View_project_code-3d84e8?logo=rust)](https://gitlab.com/nyx-space/showcase/orbit_design_ga/)
 [![Gitpod Run on the cloud](https://img.shields.io/badge/Gitpod-Run_on_the_cloud-blue?logo=gitpod)](https://gitpod.io/#https://gitlab.com/nyx-space/showcase/orbit_design_ga){.right}
 
-[**Jump to results**](#results)
+[**Jump to results and plot**](#results)
 
 ## Introduction
 **This is step by step guide to solving a hard astrodynamics problem while also demonstrating some mission design capabilities in Nyx.** By the end of this example, you'll know how to setup an initial orbit, propagate it in time, and analysis the trajectory.
@@ -508,13 +508,57 @@ To summarize, we've seen how Nyx can be combined with a genetic algorithm quite 
 
 Now that we know the genetic algorithm can find a solution, let's clean up the code and make sure to test the solution found by the GA. The only change was adding an `impl` for `OrbitIndividual` and moving the fitness calculation in there. This allows checking the solutions found.
 
-Of course, the genetic algorithm is a probabilistic solution, so it won't always converge on the same solution. Here are five runs with different solutions. It's also interesting to note that the solutions found are far from a sun-sync orbit!
+Of course, the genetic algorithm is a probabilistic solution, so it won't always converge on the same solution. Here are five runs with different solutions. It's also interesting to note a number of the solutions found are far from a sun-sync orbits.
 
 Click the following button to run these cases yourself directly on the cloud! [![Gitpod Run on the cloud](https://img.shields.io/badge/Gitpod-Run_on_the_cloud-blue?logo=gitpod)](https://gitpod.io/#https://gitlab.com/nyx-space/showcase/orbit_design_ga)
 
 !!! note
     It took me about five hours from the first line of code until the end of this post. I can't imagine solving this problem with STK or GMAT in that time, yet I know the latter very well.
 
+#### Case 0
+
+--8<-- "includes/ga.html"
+
+Five solutions found in the 0th generation:
+
+| ecc  | inc (deg) | RAAN (deg) | AoP (deg) |
+| -- | -- | -- | -- |
+| 0.029370  | 98.402050 | 3.978344 | 1.329391 |
+| 0.028479  | 99.202881 | 4.114644 | 4.645739 |
+| 0.025768  | 98.343421 | 1.014507 | 2.090413 |
+| 0.022190  | 100.12196 | 0.276506 | 5.431374 |
+| 0.026817  | 99.932727 | 0.350217 | 4.625569 |
+
+| 45-55  | 55-65 | 65-75 | 75-85 | 85-90 |
+| -- | -- | -- | -- | -- |
+| 18  | 10 | 2 | 2 | 1 |
+| 17  | 10 | 3 | 1 | 1 |
+| 19  | 10 | 3 | 2 | 1 |
+| 16  | 10 | 3 | 1 | 1 |
+| 17  | 10 | 3 | 1 | 1 |
+
+??? info "Output"
+
+        Finished in the generation 0
+        [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.029370  inc = 98.402050 deg     raan = 3.978344 deg     aop = 1.329391 deg      ta = 30.000000 deg
+        45-55: 18       55-65: 10       65-75: 2        75-85: 2        85-90: 1
+        Fitness: 5028
+        [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.028479  inc = 99.202881 deg     raan = 4.114644 deg     aop = 4.645739 deg      ta = 30.000000 deg
+        45-55: 17       55-65: 10       65-75: 3        75-85: 1        85-90: 1
+        Fitness: 5027
+        [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.025768  inc = 98.343421 deg     raan = 1.014507 deg     aop = 2.090413 deg      ta = 30.000000 deg
+        45-55: 19       55-65: 10       65-75: 2        75-85: 2        85-90: 1
+        Fitness: 5029
+        [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.022190  inc = 100.121962 deg    raan = 0.276506 deg     aop = 5.431374 deg      ta = 30.000000 deg
+        45-55: 16       55-65: 10       65-75: 3        75-85: 1        85-90: 1
+        Fitness: 5026
+        [Earth J2000] 2021-02-25T12:00:00 TAI   sma = 6878.136300 km    ecc = 0.026817  inc = 99.932727 deg     raan = 0.350217 deg     aop = 4.625569 deg      ta = 30.000000 deg
+        45-55: 17       55-65: 10       65-75: 3        75-85: 1        85-90: 1
+        Fitness: 5027
+        
+
+??? note
+    This case was generated from the updated version of the code which added the ground tracks. Plot generated via [`nyx_plotly/plot_ground_track.py`](https://gitlab.com/nyx-space/nyx_plotly).
 
 #### Case 1
 Solution found in the 0th generation:
