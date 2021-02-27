@@ -5,7 +5,11 @@
 
 [**Jump to results**](#results)
 
+## Introduction
+**This is step by step guide to solving a hard astrodynamics problem while also demonstrating some mission design capabilities in Nyx.** By the end of this example, you'll know how to setup an initial orbit, propagate it in time, and analysis the trajectory.
+
 ## Goal
+
 We would like an orbit that flies over a point of interest on the Earth such that it can see that landmark from different angles. Let's assume that we can fly over that object regardless of the time of day (e.g. if we had a SAR sensor for imaging).
 
 In the following, I detail each step of the solution, written as I was developing the code. Each of the steps received [their own commit](https://gitlab.com/nyx-space/showcase/orbit_design_ga/-/commits/master) on the repo, so you can track the development of the script there as well.
