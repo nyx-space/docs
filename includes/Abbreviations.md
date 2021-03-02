@@ -23,3 +23,4 @@
 *[V&V]: verification and validation
 *[SAR]: synthetic aperture radar
 *[GA]: genetic algorithm
+*[NaN]: Not a Number
