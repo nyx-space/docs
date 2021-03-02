@@ -2,25 +2,23 @@
 
 Ths computation of orbital element is either a clone of the NASA GMAT C++ code or of the Vallado algorithms (4-th edition). The validation for the computation of all elements is listed at [the bottom](#validation) of this page.
 
-API documentation available [here](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.State.html).
+API documentation available [here](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.Orbit.html).
 
 ## Storage
-Nyx stores all of the orbit information as a Cartesian state because it is a non-singular representation of an orbit. Furthermore, all propagation using `OrbitalDynamics`, its acceleration models, and it force models is in Cartesian form for the same reason.
+Nyx stores all of the orbit information as a Cartesian state (units of kilometer and kilometer per second) because it is a non-singular representation of an orbit. Furthermore, all propagation using `OrbitalDynamics`, its acceleration models, and its force models is in Cartesian form for the same reason.
 
 ## Initialization methods
 
 An orbit may be initialized from its Cartesian position and velocity components (from 64 bit floating point values or from a vector of that type), from Keplerian orbital elements where the phasing parameter is the true anomaly, or from its geodesic elements (latitude, longitude and height compared to the reference ellipsoid of the frame[^1]). The initializer also includes an epoch (cf. [Time MathSpec](/MathSpec/time/)) and a frame (cf. [Frame MathSpec](/MathSpec/celestial/coord_systems/)).
 
-As discussed above, the state is stored in Cartesian form. Hence, initializing in Keplerian form will trigger the conversion of the state from Keplerian orbital element into Cartesian orbital elements. This method _does support_ hyperbolic, circular inclined, circular equatorial, and the common elliptical orbits. The eccentricity tolerance is set to $1e^{-11}$, i.e. if the eccentricity is below that number, then the orbit is considered circular and the appropriate conversions to Cartesian will be triggered. The algorithm is almost a clone from GMAT: you may read the implementation [here](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.State.html#method.keplerian), but to convince yourself that it works, probably best to check out the [validation](#validation) below.
+As discussed above, the state is stored in Cartesian form. Hence, initializing in Keplerian form will trigger the conversion of the state from Keplerian orbital element into Cartesian orbital elements. This method _does support_ hyperbolic, circular inclined, circular equatorial, and the common elliptical orbits. The eccentricity tolerance is set to $1e^{-11}$, i.e. if the eccentricity is below that number, then the orbit is considered circular and the appropriate conversions to Cartesian will be triggered. The algorithm implementation is available [here](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.Orbit.html#method.keplerian), but to convince yourself that it works, probably best to check out the [validation](#validation) below.
 
 Vallado's geodetic to Cartesian initializer is also implemented allowing the initialization of a state known only by its longitude, laltitude and height above the reference ellipsoid of that rocky celestial object.
 
-Finally, one may also initialize a new orbit from a previous orbit with the `with_sma`, `with_ecc`, `with_inc`, `with_raan`, `with_aop`, `with_ta`: these copy a previous orbit but change the requested Keplerian orbital element to the requested value. Analogous methods exist with `add` instead of `with` which will add the provided value to the current Keplerian element value. For example `some_orbit.add_inc(-10.0)` will create a new orbit where the inclination 10 degrees lower than `some_orbit`'s inclination.
-
-Finally, 
+Finally, one may also initialize a new orbit from a previous orbit via `with_sma`, `with_ecc`, `with_inc`, `with_raan`, `with_aop`, `with_ta`: these copy a previous orbit but change the requested Keplerian orbital element to the requested value. Analogous methods exist with `add` instead of `with` which will add the provided value to the current Keplerian element value. For example `some_orbit.add_inc(-10.0)` will create a new orbit where the inclination 10 degrees lower than `some_orbit`'s inclination.
 
 ## Accessor methods
-In the following, the position coordinates are referred to as $x,y,z$ and the velocity components as $v_x,v_y,v_z$.
+In the following, the position coordinates are referred to as $x,y,z$ and the velocity components as $v_x,v_y,v_z$. More generally, $\gamma_x$, $\gamma_y$, $\gamma_z$ respectively refer to the x, y, and z component of the $\gamma$ vector.
 
 
 ### Radius vector (`radius`, `rmag`)
@@ -54,9 +52,9 @@ The magnitude of the velocity vector in kilometers per second.
 $$|\mathbf v| = \sqrt{v_x^2+v_y^2+v_z^2}$$
 
 ### Distance between two orbits `distance_to`
-The distance in kilometers between two states, computed as follows (where $t$ and $o$ respectively refer to the `this` state and the `other` state).
+The distance in kilometers between two states, computed as follows (where $r$ and $r'$ respectively refer to the `this` state and the `other` state).
 
-$$\sqrt {(t_x-o_x)^2+(t_y-o_y)^2+(t_z-o_z)^2} $$
+$$\sqrt {(r_x-r^\prime_x)^2+(r_y-r^\prime_y)^2+(r_z-r^\prime_z)^2} $$
 
 ### Radius unit vector `r_hat`
 Unit vector in the direction of the radius vector.
@@ -119,7 +117,7 @@ The argument of periapsis is computed as follows and is returned in degrees:
 
 2. Compute the AoP:
 
-$$ \omega = \cos ^{-1} \left(\frac{\mathbf n \cdot \mathbf e}{|\mathbf n| \times e}\right) $$
+    $$ \omega = \cos ^{-1} \left(\frac{\mathbf n \cdot \mathbf e}{|\mathbf n| \times e}\right) $$
 
 3. Perform a quadrant check: if $e_z$ is less then zero, return the AoP as $2\pi - \omega$ instead.
 
@@ -138,7 +136,7 @@ The right ascension of the ascending node and is returned in degrees:
 
 2. Compute the RAAN:
 
-$$ \Omega = \cos ^{-1} \left( \frac {n_x}{|\mathbf n|} \right) $$
+    $$ \Omega = \cos ^{-1} \left( \frac {n_x}{|\mathbf n|} \right) $$
 
 3. Perform a quadrant check: if $n_y$ is less then zero, return the AoP as $2\pi - \Omega$ instead.
 
@@ -234,15 +232,15 @@ $$ p = a (1-e^2) $$
 ### Geodetic longitude (`geodetic_longitude`)
 This is computed using G. Xu and Y. Xu, "GPS", DOI 10.1007/978-3-662-50367-6_2, 2016, but the validation against the Vallado examples proves to be correct. The following uses the quadrant-checked arctan (`atan2`). The angle is returned in degrees and is between $[0;360]$.
 
-$$ \lambda = \tan^{-1} \frac{x}{y} $$
+$$ \lambda = \tan^{-1} \frac{y}{x} $$
 
 ### Geodetic latitude (`geodetic_latitude`)
 The parameter is returned in degrees between $[-180;180]$.
-This is computed using the Vallado iterative approach, Algorithm 12 page 172 in the 4-th edition. It accounts for the flattening of the ellipsoid and its semi-major axis. It's a notch complex to write up, so please refer to the [code](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.State.html#method.geodetic_latitude) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
+This is computed using the Vallado iterative approach, Algorithm 12 page 172 in the 4-th edition. It accounts for the flattening of the ellipsoid and its semi-major axis. It's a notch complex to write up, so please refer to the [code](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.Orbit.html#method.geodetic_latitude) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
 
 ### Geodetic height (`geodetic_height`)
 The parameter is returned in kilometers.
-This is computed using the Vallado approach, Algorithm 12 page 172 in the 4-th edition. This accounts for the correction when near the poles. It's a notch complex to write up, so please refer to the [code](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.State.html#method.geodetic_height) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
+This is computed using the Vallado approach, Algorithm 12 page 172 in the 4-th edition. This accounts for the correction when near the poles. It's a notch complex to write up, so please refer to the [code](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.Orbit.html#method.geodetic_height) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
 
 ### Right ascension (`right_ascension`)
 Returned in degrees between $[0;360]$.
@@ -261,12 +259,12 @@ $$ b = \sqrt{(a e)^2 - a^2} $$
 
 ## Validation
 
-This validation compares the computations of orbital elements in nyx with those in GMAT. Each scenario script is in the subfolder [state](./tests/GMAT_scripts/state/).
+This validation compares the computations of orbital elements in nyx with those in GMAT. Each scenario script is in the subfolder [state](https://gitlab.com/nyx-space/nyx/-/tree/master/tests/GMAT_scripts/state).
 
 The following table corresponds to the **absolute errors** between the Nyx computations and those of GMAT. I'll save you the read: the absolute errors are precisely zero for a 64-bit floating point representation (`double` in C).
 
 ??? check "Validation"
-    To run all of the OD test cases, clone the Nyx repo and execute the following command:
+    To run all of these test cases, clone the Nyx repo and execute the following command:
     ```
     cargo test state_def_circ_eq -- --nocapture
     cargo test state_def_circ_inc -- --nocapture
