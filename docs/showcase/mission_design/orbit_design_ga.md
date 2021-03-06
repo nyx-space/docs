@@ -8,6 +8,8 @@
 ## Introduction
 **This is step by step guide to solving a hard astrodynamics problem while also demonstrating some mission design capabilities in Nyx.** By the end of this example, you'll know how to setup an initial orbit, propagate it in time, and analysis the trajectory.
 
+--8<-- "includes/ga-49d-orbit.html"
+
 ## Goal
 
 We would like an orbit that flies over a point of interest on the Earth such that it can see that landmark from different angles. Let's assume that we can fly over that object regardless of the time of day (e.g. if we had a SAR sensor for imaging).
@@ -517,7 +519,8 @@ Click the following button to run these cases yourself directly on the cloud! [!
 
 #### Case 0
 
---8<-- "includes/ga.html"
+--8<-- "includes/ga-polar-orbit.html"
+Above is an example of a polar orbit, which aren't the ones from this Genetic Algorithm execution (I had to redo the plot).
 
 Five solutions found in the 0th generation when the inclination is allowed to vary up until a polar orbit (as expected really).
 

@@ -34,7 +34,7 @@ The radius vector, in kilometers.
 
 The magnitude of the radius vector in kilometers.
 
-$$|\mathbf r| = \sqrt{x^2+y^2+z^2}$$
+$$||\mathbf r|| = \sqrt{x^2+y^2+z^2}$$
 
 ### Velocity vector (`velocity`, `vmag`)
 The velocity vector, in kilometers per second.
@@ -49,7 +49,7 @@ The velocity vector, in kilometers per second.
 
 The magnitude of the velocity vector in kilometers per second.
 
-$$|\mathbf v| = \sqrt{v_x^2+v_y^2+v_z^2}$$
+$$||\mathbf v|| = \sqrt{v_x^2+v_y^2+v_z^2}$$
 
 ### Distance between two orbits `distance_to`
 The distance in kilometers between two states, computed as follows (where $r$ and $r'$ respectively refer to the `this` state and the `other` state).
@@ -78,7 +78,7 @@ $$\mathbf{h} = \mathbf r \times \mathbf v$$
 ### Orbit energy (`energy`)
 The orbit's energy:
 
-$$ \xi = \frac {|\mathbf v|^2}{2} - \frac{\mu}{\mathbf r} $$
+$$ \xi = \frac {||\mathbf v||^2}{2} - \frac{\mu}{\mathbf r} $$
 
 ### Semi major axis (`sma`)
 The semi major axis, returned in kilometers.
@@ -93,9 +93,9 @@ $$\mathcal{P} = 2\pi \sqrt{\frac{a^3}{\mu}}$$
 ### Eccentricity (`evec`, `ecc`)
 Respectively, the eccentricity vector and its magnitude (i.e. the eccentricity)
 
-$$ \mathbf e = \left(|\mathbf v|^2 - \frac{\mu}{|\mathbf r|}\right) \cdot \mathbf r - \frac{\mathbf r \cdot \mathbf v}{\mu}\cdot \mathbf v$$
+$$ \mathbf e = \left(||\mathbf v||^2 - \frac{\mu}{||\mathbf r||}\right) \cdot \mathbf r - \frac{\mathbf r \cdot \mathbf v}{\mu}\cdot \mathbf v$$
 
-For the rest of the MathSpec, let $e = |\mathbf e|$.
+For the rest of the MathSpec, let $e = ||\mathbf e||$.
 
 ### Inclination (`inc`)
 The inclination of this orbit, returned in degrees.
@@ -147,7 +147,7 @@ The true anomaly is computed as follows and is returned in degrees.
 
     We also check that the value is bounded between $[-1;1]$ (as it should be mathematically but rounding issues on computers may cause problems): if not, depending on the value of $\cos \nu$ the phasing is set to either 0 or 180 degrees.
 
-    $$ \cos \nu = \mathbf e \cdot \frac {\mathbf r}{e \times |\mathbf r| } $$
+    $$ \cos \nu = \mathbf e \cdot \frac {\mathbf r}{e \times ||\mathbf r|| } $$
 
 2. Compute the true anomaly with a quadrant check.
     1. If the arccos of $\nu$ fails (NaN), then a warning is emited and return 0 degrees.
@@ -234,13 +234,22 @@ This is computed using G. Xu and Y. Xu, "GPS", DOI 10.1007/978-3-662-50367-6_2, 
 
 $$ \lambda = \tan^{-1} \frac{y}{x} $$
 
+!!! warning
+    This function requires that the orbit already be in a body fixed frame. Nyx will _not_ check that.
+
 ### Geodetic latitude (`geodetic_latitude`)
 The parameter is returned in degrees between $[-180;180]$.
 This is computed using the Vallado iterative approach, Algorithm 12 page 172 in the 4-th edition. It accounts for the flattening of the ellipsoid and its semi-major axis. It's a notch complex to write up, so please refer to the [code](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.Orbit.html#method.geodetic_latitude) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
 
+!!! warning
+    This function requires that the orbit already be in a body fixed frame. Nyx will _not_ check that.
+
 ### Geodetic height (`geodetic_height`)
 The parameter is returned in kilometers.
 This is computed using the Vallado approach, Algorithm 12 page 172 in the 4-th edition. This accounts for the correction when near the poles. It's a notch complex to write up, so please refer to the [code](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.Orbit.html#method.geodetic_height) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
+
+!!! warning
+    This function requires that the orbit already be in a body fixed frame. Nyx will _not_ check that.
 
 ### Right ascension (`right_ascension`)
 Returned in degrees between $[0;360]$.
@@ -250,12 +259,77 @@ $$\alpha = \tan^{-1} \frac y x $$
 ### Declination (`declination`)
 Returned in degrees between $[-180;180]$.
 
-$$ \delta = \sin^{-1} \frac z {|\mathbf r|} $$
+$$ \delta = \sin^{-1} \frac z {||\mathbf r||} $$
+
+### Velocity declination (`velocity_declination`)
+Returned in degrees between $[-180;180]$.
+
+$$ \delta = \sin^{-1} \frac {v_z} {||\mathbf v||} $$
 
 ### Semi minor axis (`semi_minor_axis`)
-Returns the semi minor axis in kilometers.
+Returns the semi minor axis in kilometers for hyperbolic and elliptical orbits (will fail for a perfectly circular orbit).
+
+If the eccentricity is less than $1.0$:
 
 $$ b = \sqrt{(a e)^2 - a^2} $$
+
+Else:
+
+$$ b = \frac {h^2} {\mu \sqrt{e^2 - 1}} $$
+
+### C3
+Computes the $C_3$ of this orbit:
+
+$$ C_3= -\frac \mu a$$
+
+### B-plane (`b_plane`)
+This function will return an error (`NyxError::BPlaneError`) if called on a non-hyperbolic orbit. In other words, to compute the B-plane of an orbit, convert it to the desired planetary inertial frame first.
+
+!!! warning
+    Nyx will _not_ check whether the frame of the orbit is inertial. This is up to the user.
+
+The algorithm is identical to that outlined in the GMAT MathSpec, section 3.2.7, paraphrased here.
+
+The $\mathbf B$ vector is defined from the center of mass of the desired central body to the incoming hyperbolic asymptote: B is perpendicular to the incoming asymptote.
+We define $\mathbf {\hat S}$ as a unit vector in the direction of the incoming asymptot and $\mathbf{\hat T}$ as the unit vector perpendicular to $\mathbf {\hat S}$ such that $\mathbf {\hat T}$ lies in the $xy$ plane of the frame in which is represented this orbit. $\mathbf {\hat R}$ is a unit vector perpendicular to both $\mathbf {\hat T}$ and $\mathbf {\hat S}$.
+
+We define $B_T=\mathbf B \cdot \mathbf {\hat T}$ and $B_R=\mathbf B \cdot \mathbf {\hat R}$. The method was adopted from work by Kizner
+
+1. Compute the eccentricity unit vector, the momentum unit vector, and their cross product:
+
+    $$ \mathbf{\hat e} = \frac {\mathbf{e}}{e}
+    \quad\quad \mathbf{\hat h} = \frac {\mathbf{h}}{h} \quad\quad \mathbf{\hat n} = \mathbf{\hat h}\times \mathbf{\hat e}$$
+
+2. Compute the $\mathbf{\hat S}$, $\mathbf B$, $\mathbf{\hat T}$ and $\mathbf{\hat R}$ vectors, where $b$ is the [semi-minor axis](#semi-minor-axis-semi_minor_axis).
+
+
+    $$ \mathbf{\hat S} = \frac {\mathbf{\hat e}} {e} + \sqrt{1 - \left(\frac {1} {e}\right)^2} \mathbf{\hat n}$$
+
+    \begin{equation}
+    \mathbf{\hat T} = \frac 1 {\sqrt {S_x^2 + S_y^2}} \begin{bmatrix}
+        S_y \\
+        -S_x \\
+        0 \\
+    \end{bmatrix}
+    \end{equation}
+
+    $$ \mathbf{B} = b \left(\sqrt{1- \left(\frac 1 e \right)^2 \mathbf{\hat e}} - \frac 1 e \mathbf{\hat n} \right)$$
+
+    $$ \mathbf{\hat R} = \mathbf{\hat S} \times \mathbf{\hat T}$$
+
+3. Compute the B plane parameters
+
+    $$B_T=\mathbf B \cdot \mathbf {\hat T} \quad\quad B_R=\mathbf B \cdot \mathbf {\hat R}$$
+
+#### B Vector Angle (`angle`)
+Returns the angle of the B plane, in degrees between $[0;360]$.
+
+$$ \theta = \tan^{-1} \frac {B_R}{B_T} $$
+
+#### B Vector magnitude (`mag`)
+Returns the magnitude of the B vector in kilometers.
+
+$$||\mathbf B|| = \sqrt{B_T^2 + B_R^2|$$
 
 ## Validation
 
