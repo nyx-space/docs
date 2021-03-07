@@ -1,6 +1,6 @@
 # Orbital elements
 
-Ths computation of orbital element is either a clone of the NASA GMAT C++ code or of the Vallado algorithms (4-th edition). The validation for the computation of all elements is listed at [the bottom](#validation) of this page.
+Ths computation of orbital element is either a clone of the NASA GMAT C++ code or of the Vallado algorithms (4-th edition). The [validation for the computation](#validation) of all elements is listed at the bottom of this page, apart for the B-Plane validation, which at the bottom of the B-Plane section [here](#b-plane-b_plane).
 
 API documentation available [here](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.Orbit.html).
 
@@ -286,7 +286,7 @@ $$ C_3= -\frac \mu a$$
 This function will return an error (`NyxError::BPlaneError`) if called on a non-hyperbolic orbit. In other words, to compute the B-plane of an orbit, convert it to the desired planetary inertial frame first.
 
 !!! warning
-    Nyx will _not_ check whether the frame of the orbit is inertial. This is up to the user.
+    Nyx will _not_ check whether the frame of the orbit is hyperbolic. This is up to the user.
 
 The algorithm is identical to that outlined in the GMAT MathSpec, section 3.2.7, paraphrased here.
 
@@ -320,6 +320,15 @@ We define $B_T=\mathbf B \cdot \mathbf {\hat T}$ and $B_R=\mathbf B \cdot \mathb
 3. Compute the B plane parameters
 
     $$B_T=\mathbf B \cdot \mathbf {\hat T} \quad\quad B_R=\mathbf B \cdot \mathbf {\hat R}$$
+
+??? check "Validation"
+    The validation was done by following the `Ex_LunarTransfer.script` GMAT example script, from which we've added the export of the B Plane parameters (B dot R, B dot T, B Vector Mag, B Vector Angle and C3).
+    The validation test is called `val_b_plane_gmat`. It propagates the initial orbit of the script until Earth periapse and generates the trajectory.
+    **Note:** in that example, GMAT will use all of the force models available (high fidelity drag, SRP, all celestial objects) but we only use the point masses of Earth, Moon, Sun and Jupiter. This leads to a small error (less than 500 meters) for the B Plane. For each of the nine exported states (from some Earth apoapse to the Earth periapse), we check that the B plane and C3 parameters computed by Nyx are within 500 meters of error (due to force model differences) for positions and less than 0.1 millidegrees for B vector angle.
+    
+    ```
+    cargo test val_b_plane_gmat --release -- --nocapture
+    ```
 
 #### B Vector Angle (`angle`)
 Returns the angle of the B plane, in degrees between $[0;360]$.
