@@ -19,6 +19,7 @@ nav:
     - Introduction: showcase/index.md
     - Mission design:
       - Table of contents: showcase/mission_design/index.md
+      - Lunar transfer: showcase/mission_design/lunar_transfer.md
       - Orbit design from a genetic algorithm: showcase/mission_design/orbit_design_ga.md
     - Constellation analysis: showcase/constellation_analysis/index.md
     - Spacecraft navigation:

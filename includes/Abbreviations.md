@@ -24,3 +24,4 @@
 *[SAR]: synthetic aperture radar
 *[GA]: genetic algorithm
 *[NaN]: Not a Number
+*[DCM]: Direct Cosine Matrix
