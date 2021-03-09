@@ -74,14 +74,8 @@ We define $B_T=\mathbf B \cdot \mathbf {\hat T}$ and $B_R=\mathbf B \cdot \mathb
 
     $$ \mathbf{\hat S} = \frac {\mathbf{\hat e}} {e} + \sqrt{1 - \left(\frac {1} {e}\right)^2} \mathbf{\hat n}$$
 
-    \begin{equation}
-    \mathbf{\hat T} = \frac 1 {\sqrt {S_x^2 + S_y^2}} \begin{bmatrix}
-        S_y \\
-        -S_x \\
-        0 \\
-    \end{bmatrix}
-    \end{equation}
-
+    $$ \mathbf{\hat T} = \frac {\mathbf{\hat S} \times \mathbf{\hat k}} { || \mathbf{\hat S} \times \mathbf{\hat k} ||} $$
+    
     $$ \mathbf{B} = b \left(\sqrt{1- \left(\frac 1 e \right)^2 \mathbf{\hat e}} - \frac 1 e \mathbf{\hat n} \right)$$
 
     $$ \mathbf{\hat R} = \mathbf{\hat S} \times \mathbf{\hat T}$$
@@ -121,16 +115,9 @@ Returns the DCM to convert to this B-Plane frame from the inertial frame (with i
 \end{equation}
 
 #### Linearized Time of Flight (`ltof`)
-Returns a `Duration` object corresponding to the linearized time of flight: this is the duration between this B-Plane's epoch and the time at which this orbit will cross the B-Plane. Note that, at this point in the execution, the orbit is already hyperbolic compared to its reference frame, therefore the $v_\infty$ is simply the magnitude of the velocity vector. Also note that $p$ corresponds to the semi-parameter.
+Returns a `Duration` object corresponding to the linearized time of flight as computed in "Closed loop terminal guidance navigation for a kinetic impactor spacecraft.", Bhaskaran & Kennedy (2014). Acta Astronautica, 103, 322–332 (doi:10.1016/j.actaastro.2014.02.024).[^2]
 
-1. Compute $f$
-
-    $$ f = \cosh^{-1} \left( 1 + \frac{v^2}{\mu} \frac {p} {1+e\cos \nu} \right) $$
-
-2. Compute the LTOF in seconds
-
-    $$ ltof = \frac {\mu}{v^3} \left( \sinh (f) - f \right) $$
-
+$$L_{TOF}=\frac{\mathbf B \cdot \mathbf {\hat S}} {||\mathbf v||}$$
 
 ### C3
 Computes the $C_3$ of this orbit:
@@ -464,7 +451,14 @@ Earth.SemilatusRectum | 0.0 | 0.0 | 0.0
     test cosmic::state::geodetic_vallado ... ok
     ```
 
+## Partial (`OrbitDual`)
+Nyx is all about using dual numbers![^3] An `OrbitDual` object can be created from a normal `Orbit` structure in order to retrieve the exact partials of many orbital elements with respect to each component of the position and velocity. These can be combined for achieving specific targets and is used for achieving B-Plane targets.
+
+List of available partials, always with respect to the position components x,y,z and the velocity components vx,vy,vz.
++ radius vector, as 
+
 
 [^1]: Nyx allows initialization from geodesic elements only for the following celestial bodies: Mercury, Venus, Earth, Luna/Earth Moon, and Mars. Although the Jupiter, Saturn, Uranus, and Neptune also have an angular velocity defined in Nyx, they do not have an ellipsoid flatenning parameter.
-
+[^2]: Two other computation methods were attempted (McMahon and Jah). The first prevented convergence of the shooting algorithm and the second led to near infinite LTOF.
+[^3]: Please refer to [Dual Numbers](/MathSpec/appendix/dual_numbers) for a primer on dual number theory.
 --8<-- "includes/Abbreviations.md"

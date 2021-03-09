@@ -62,6 +62,8 @@ nav:
     - Propagators:
       - Runge Kutta: MathSpec/propagators/rk.md
       - Dormand Prince: MathSpec/propagators/prince.md
+    - Appendices:
+      - Dual numbers: MathSpec/appendix/dual_numbers.md
 
   - Versions: versions.md
 
