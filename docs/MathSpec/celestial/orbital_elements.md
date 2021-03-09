@@ -101,16 +101,16 @@ $$ \theta = \tan^{-1} \frac {B_R}{B_T} $$
 #### B Vector magnitude (`mag`)
 Returns the magnitude of the B vector in kilometers.
 
-$$||\mathbf B|| = \sqrt{B_T^2 + B_R^2|$$
+$$||\mathbf B|| = \sqrt{B_T^2 + B_R^2}$$
 
 #### B Plane frame from inertial frame (`inertial_to_bplane`)
 Returns the DCM to convert to this B-Plane frame from the inertial frame (with identical central bodies).
 
 \begin{equation}
 \mathbf{C} = \begin{bmatrix}
-    &\hat S_x &\hat S_y &\hat S_z \\
-    &\hat T_x &\hat T_y &\hat T_z \\
-    &\hat R_x &\hat R_y &\hat R_z \\
+    \hat S_x &\hat S_y &\hat S_z \\
+    \hat T_x &\hat T_y &\hat T_z \\
+    \hat R_x &\hat R_y &\hat R_z \\
 \end{bmatrix}
 \end{equation}
 
@@ -454,9 +454,37 @@ Earth.SemilatusRectum | 0.0 | 0.0 | 0.0
 ## Partial (`OrbitDual`)
 Nyx is all about using dual numbers![^3] An `OrbitDual` object can be created from a normal `Orbit` structure in order to retrieve the exact partials of many orbital elements with respect to each component of the position and velocity. These can be combined for achieving specific targets and is used for achieving B-Plane targets.
 
-List of available partials, always with respect to the position components x,y,z and the velocity components vx,vy,vz.
-+ radius vector, as 
+List of available partials, always with respect to the position components x,y,z and the velocity components vx, vy, vz. Each of these partials are accessible via their respective `wtr_PARAM()` function.
 
++ magnitude of radius vector `rmag`
++ magnitude of velocity vector `vmag`
++ X component of the orbital momentum `hx`
++ Y component of the orbital momentum `hy`
++ Z component of the orbital momentum `hz`
++ magnitude of orbital momentum vector `hmag`
++ orbital energy `energy`
++ eccentricity `ecc`
++ inclination `inc`
++ argument of periapsis `aop`
++ right ascension of the ascending node `raan`
++ true anomaly `ta`
++ true longitude `tlong`
++ argument of latitude `aol`
++ periapsis 
++ apoapsis
++ eccentric anomaly `ea`
++ flight path angle `fpa`
++ mean anomaly `ma`
++ semi parameter `semi_parameter`
++ geodetic longitude `geodetic_longitude`
++ geodetic latitude `geodetic_latitude`
++ geodetic height `geodetic_height`
++ right ascension `right_ascension`
++ decliation `decliation`
++ semi minor axis `semi_minor_axis`
++ velocity decliation `velocity_decliation`
++ $C_3$ `c3`
++ hyperbolic anomaly `hyperbolic_anomaly`
 
 [^1]: Nyx allows initialization from geodesic elements only for the following celestial bodies: Mercury, Venus, Earth, Luna/Earth Moon, and Mars. Although the Jupiter, Saturn, Uranus, and Neptune also have an angular velocity defined in Nyx, they do not have an ellipsoid flatenning parameter.
 [^2]: Two other computation methods were attempted (McMahon and Jah). The first prevented convergence of the shooting algorithm and the second led to near infinite LTOF.
