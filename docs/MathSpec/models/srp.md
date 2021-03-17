@@ -36,7 +36,13 @@ $$ \mathbf{F}_{\text{SRP}} = C_r \mathcal{A} \Phi_{\text{SRP}} \mathbf{\hat r_\o
 ??? check "Validation"
     Nyx has three validation scenarios for the SRP computation to ensure that we test full illumination (`srp_earth_full_vis`), long penumbra passages (`srp_earth_meo_ecc_inc`), and very short penumbra passages (`srp_earth_penumbra`). In all of the test cases, we propagate a spacecraft for 24 **days** to ensure that a high amount of error can accumulate if the modeling is incorrect. The worst absolute position error is _high_ compared to GMAT: 287 meters.
 
-    Given the long propagation time, I have deemed this error _acceptable_ and attributed it to the difference in the penumbra percentage calculation and the difference in constants. For example GMAT uses an older definition of 1 AU which is 700 meters different from the IAU definition: changing that will bring down this maximum error by over 30 meters (to around 250 meters). Please **email me** your modeling recommendations.
+    I have deemed this error _acceptable_. I've attributed it to the following factors:
+
+    + the difference in the penumbra percentage calculation;
+    + the difference in constants; [^3]
+    + the fact that GMAT performs its calculations with respect to the integration frame central position instead of the spacecraft position itself, which might lead to an accumulation of rounding errors.
+
+    Please **email me** your recommendations to further check this model.
 
     Case | RSS position (m) | RSS velocity (m/s) 
     --|---|--
@@ -61,5 +67,6 @@ $$ \mathbf{F}_{\text{SRP}} = C_r \mathcal{A} \Phi_{\text{SRP}} \mathbf{\hat r_\o
 
 [^1]: Computation of the shadowing factor uses the Eclipse computation derived [here](/MathSpec/celestial/eclipse/).
 [^2]: The code multiplies the value by 1e-3 to convert from $\frac{m}{s^2}$ to $\frac{km}{s^2}$.
+[^3]: For example GMAT uses an older definition of 1 AU which is 700 meters different from the IAU definition: changing that will bring down this maximum error by over 30 meters (to around 250 meters).
 
 --8<-- "includes/Abbreviations.md"

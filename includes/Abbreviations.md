@@ -36,3 +36,4 @@
 *[AU]: Astronomical Unit (set to 149,597,870.700 km, as per IAU)
 *[EOM]: equation(s) of motion
 *[SRP]: solar radiation pressure
+*[CAPS]: Cislunar Autonomous Positioning System
