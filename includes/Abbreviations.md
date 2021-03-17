@@ -25,3 +25,11 @@
 *[GA]: genetic algorithm
 *[NaN]: Not a Number
 *[DCM]: Direct Cosine Matrix
+*[RK]: Runge Kutta
+*[RSS]: Root sum square
+*[LEO]: Low Earth Orbit
+*[MEO]: Medium Earth Orbit
+*[HEO]: High Earth Orbit
+*[GEO]: Geostationary Earth Orbit
+*[FSW]: flight software
+*[EME2000]: Earth Mean Equator J2000
