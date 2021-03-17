@@ -1,3 +1,65 @@
 # Solar radiation pressure
 
+SRP is implemented as a `ForceModel`, meaning that the implementation computes a force from which the instantaneous mass of the spacecraft is subsequently divided to apply an acceleration. Therefore, as opposed to most formulations in the literature, we will use a force formulation.
+
+Currently, Nyx only supports spherical SRP model.
+
+## Nomenclature
+
++ $\mathbf{r_\odot}$: vector from the Sun to the spacecraft, in km
++ $\mathbf{\hat r_\odot}$: unit vector of $\mathbf{r_\odot}$, unitless
++ $k$: shaddowing factor, 1.0 in full illumination and 0.0 in full shadow [^1], unitless
++ $\phi$: mean solar flux at 1 AU, defaults to 1367.0, in $\frac{W}{m^2}$
++ $C_r$: coefficient of reflectivity of the spacecraft, unitless
++ $\mathcal{A}$: SRP area of the spacecraft, in $m^2$
++ $c$: the speed of light in meters per second, set to 299,792,458.0
+
+Note that $C_r$ and $\mathcal{A}$ are stored in the "context" passed to the EOM function, and therefore may vary at any step of the propagation.
+
+## Algorithm
+
+First, we compute the position of the Sun as seen from the spacecraft, and that unit vector, respectively $\mathbf{r_\odot}$ and $\hat {\mathbf{r_\odot}}$. Then, we compute the shadowing factor, $k$.
+
+Compute the norm of Sun vector in AU, $|\mathbf{r_\odot}|_{\text{AU}}$ by dividing the vector by 1 AU.
+
+Compute the flux pressure as follows:
+
+$$\Phi_{\text{SRP}} = \frac{k\phi}{c} \left(\frac{1.0}{|\mathbf{r_\odot}|_{\text{AU}}} \right)^2$$
+
+Finally, return the SRP force [^2]:
+
+$$ \mathbf{F}_{\text{SRP}} = C_r \mathcal{A} \Phi_{\text{SRP}} \mathbf{\hat r_\odot}$$
+
+!!! note
+    Although the above derivation mentions the Sun, Nyx trivially supports any other light source regardless of the integration frame and as long as the user updates the value of the solar flux in the model constructor.
+
+??? check "Validation"
+    Nyx has three validation scenarios for the SRP computation to ensure that we test full illumination (`srp_earth_full_vis`), long penumbra passages (`srp_earth_meo_ecc_inc`), and very short penumbra passages (`srp_earth_penumbra`). In all of the test cases, we propagate a spacecraft for 24 **days** to ensure that a high amount of error can accumulate if the modeling is incorrect. The worst absolute position error is _high_ compared to GMAT: 287 meters.
+
+    Given the long propagation time, I have deemed this error _acceptable_ and attributed it to the difference in the penumbra percentage calculation and the difference in constants. For example GMAT uses an older definition of 1 AU which is 700 meters different from the IAU definition: changing that will bring down this maximum error by over 30 meters (to around 250 meters). Please **email me** your modeling recommendations.
+
+    Case | RSS position (m) | RSS velocity (m/s) 
+    --|---|--
+    Full visibility | 0.489 | 0.0
+    MEO | 32.251 | 0.011
+    LEO | 286.869 | 0.309
+
+    ```bash
+    $ RUST_BACKTRACE=1 cargo test --release -- srp_earth_ --nocapture
+    (...)
+    Error accumulated in full sunlight over 24 days 0 h 0 min 0 s : 0.489 m         0.000 m/s
+    test mission_design::force_models::srp_earth_full_vis ... ok
+    [Earth J2000] 2000-01-25T00:00:00 TAI   sma = 13999.490774 km   ecc = 0.500183  inc = 19.999552 deg     raan = 359.999754 deg   aop = 0.008741 deg      ta = 228.062085 deg     300 kg
+    Error accumulated in ecc+inc MEO (with penumbras) over 24 days 0 h 0 min 0 s : 32.251 m         0.011 m/s
+    test mission_design::force_models::srp_earth_meo_ecc_inc ... ok
+    [Earth J2000] 2000-01-25T00:00:00 TAI   sma = 6999.999601 km    ecc = 0.000118  inc = 0.000737 deg      raan = 293.400138 deg   aop = 90.464431 deg     ta = 252.621372 deg     300 kg
+    Error accumulated in circular equatorial LEO (with penumbras) over 24 days 0 h 0 min 0 s : 286.869 m    0.309 m/s
+    test mission_design::force_models::srp_earth_penumbra ... ok
+
+    ```
+    
+
+[^1]: Computation of the shadowing factor uses the Eclipse computation derived [here](/MathSpec/celestial/eclipse/).
+[^2]: The code multiplies the value by 1e-3 to convert from $\frac{m}{s^2}$ to $\frac{km}{s^2}$.
+
 --8<-- "includes/Abbreviations.md"
