@@ -14,33 +14,33 @@ Currently, Nyx only supports spherical SRP model.
 + $\mathcal{A}$: SRP area of the spacecraft, in $m^2$
 + $c$: the speed of light in meters per second, set to 299,792,458.0
 
-Note that $C_r$ and $\mathcal{A}$ are stored in the "context" passed to the EOM function, and therefore may vary at any step of the propagation.
+Note that $C_r$ and $\mathcal{A}$ are stored in the "context" passed to the EOM function and therefore can vary between integration steps.
 
 ## Algorithm
 
-First, we compute the position of the Sun as seen from the spacecraft, and that unit vector, respectively $\mathbf{r_\odot}$ and $\hat {\mathbf{r_\odot}}$. Then, we compute the shadowing factor, $k$.
+First, we compute the position of the Sun as seen from the spacecraft, and its unit vector, respectively $\mathbf{r_\odot}$ and $\mathbf{\hat r_\odot}$. Then, we compute the shadowing factor, $k$, using the [eclipse model](/MathSpec/celestial/eclipse/).
 
-Compute the norm of Sun vector in AU, $|\mathbf{r_\odot}|_{\text{AU}}$ by dividing the vector by 1 AU.
+Compute the norm of Sun vector in AU, $||\mathbf{r_\odot}||_{\text{AU}}$ by dividing the $\mathbf{r_\odot}$ vector by 1 AU.
 
 Compute the flux pressure as follows:
 
-$$\Phi_{\text{SRP}} = \frac{k\phi}{c} \left(\frac{1.0}{|\mathbf{r_\odot}|_{\text{AU}}} \right)^2$$
+$$\Phi_{\text{SRP}} = \frac{k\phi}{c} \left(\frac{1.0}{||\mathbf{r_\odot}||_{\text{AU}}} \right)^2$$
 
 Finally, return the SRP force [^2]:
 
 $$ \mathbf{F}_{\text{SRP}} = C_r \mathcal{A} \Phi_{\text{SRP}} \mathbf{\hat r_\odot}$$
 
 !!! note
-    Although the above derivation mentions the Sun, Nyx trivially supports any other light source regardless of the integration frame and as long as the user updates the value of the solar flux in the model constructor.
+    Although the above derivation mentions the Sun, Nyx trivially supports any other light source regardless of the integration frame.
 
 ??? check "Validation"
     Nyx has three validation scenarios for the SRP computation to ensure that we test full illumination (`srp_earth_full_vis`), long penumbra passages (`srp_earth_meo_ecc_inc`), and very short penumbra passages (`srp_earth_penumbra`). In all of the test cases, we propagate a spacecraft for 24 **days** to ensure that a high amount of error can accumulate if the modeling is incorrect. The worst absolute position error is _high_ compared to GMAT: 287 meters.
 
-    I have deemed this error _acceptable_. I've attributed it to the following factors:
+    I have deemed this error _acceptable_ and attributed it to the following factors:
 
-    + the difference in the penumbra percentage calculation;
     + the difference in constants; [^3]
-    + the fact that GMAT performs its calculations with respect to the integration frame central position instead of the spacecraft position itself, which might lead to an accumulation of rounding errors.
+    + the difference in the penumbra percentage calculation method;
+    + the fact that GMAT performs its penumbra calculation with respect to the spacecraft integration frame position instead of the spacecraft position itself, which I think might lead to an accumulation of rounding errors.
 
     Please **email me** your recommendations to further check this model.
 
