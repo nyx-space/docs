@@ -19,36 +19,36 @@ nav:
     - Introduction: showcase/index.md
     - Mission design:
       - Table of contents: showcase/mission_design/index.md
-      - Lunar transfer: showcase/mission_design/lunar_transfer.md
+      - Lunar transfer [WIP]: showcase/mission_design/lunar_transfer.md
       - Orbit design from a genetic algorithm: showcase/mission_design/orbit_design_ga.md
-    - Constellation analysis: showcase/constellation_analysis/index.md
+    - Constellation analysis [WIP]: showcase/constellation_analysis/index.md
     - Spacecraft navigation:
-      - Ground based navigation: showcase/spacecraft_navigation/ground_nav.md
-      - CAPS: showcase/spacecraft_navigation/CAPS.md
+      - Ground based navigation [WIP]: showcase/spacecraft_navigation/ground_nav.md
+      - CAPS [WIP]: showcase/spacecraft_navigation/CAPS.md
   - User guide:
-    - Getting started: user_guide/start.md
-    - Orbit definition and manipulation: user_guide/orbits.md
-    - Propagators and Monte Carlo runs: user_guide/prop-mc.md
-    - High fidelity models: user_guide/hifimodels.md
+    - Getting started [WIP]: user_guide/start.md
+    - Orbit definition and manipulation [WIP]: user_guide/orbits.md
+    - Propagators and Monte Carlo runs [WIP]: user_guide/prop-mc.md
+    - High fidelity models [WIP]: user_guide/hifimodels.md
   - MathSpec:
     - Introduction: MathSpec/index.md
-    - Time: MathSpec/time.md
+    - Time [WIP]: MathSpec/time.md
     - Celestial:
-      - Coordinate frames: MathSpec/celestial/coord_systems.md
-      - Ephemeris: MathSpec/celestial/ephemeris.md
-      - Orbital elements: MathSpec/celestial/orbital_elements.md
-      - Trajectory interpolation: MathSpec/celestial/interpolation.md
-      - Eclipses: MathSpec/celestial/eclipse.md
-      - Events: MathSpec/celestial/events.md
+      - Coordinate frames [WIP]: MathSpec/celestial/coord_systems.md
+      - Ephemeris [WIP]: MathSpec/celestial/ephemeris.md
+      - Orbital elements [DONE]: MathSpec/celestial/orbital_elements.md
+      - Trajectory interpolation [WIP]: MathSpec/celestial/interpolation.md
+      - Eclipses [DONE]: MathSpec/celestial/eclipse.md
+      - Events [WIP]: MathSpec/celestial/events.md
     - Acceleration and Force Models:
-      - Overview: MathSpec/models/overview.md
-      - Gravity: MathSpec/models/gravity.md
-      - Spherical harmonics: MathSpec/models/harmonics.md
-      - Solar radiation pressure: MathSpec/models/srp.md
-      - Drag: MathSpec/models/drag.md
-      - Control laws: MathSpec/models/control_laws.md
-      - Finite burns: MathSpec/models/finite_burns.md
-    - Navigation:
+      - Overview [DONE]: MathSpec/models/overview.md
+      - Gravity [DONE]: MathSpec/models/gravity.md
+      - Spherical harmonics [WIP]: MathSpec/models/harmonics.md
+      - Solar radiation pressure [DONE]: MathSpec/models/srp.md
+      - Drag [WIP]: MathSpec/models/drag.md
+      - Control laws [WIP]: MathSpec/models/control_laws.md
+      - Finite burns [WIP]: MathSpec/models/finite_burns.md
+    - Navigation [DONE]:
       - Overview: MathSpec/navigation/overview.md
       - Kalman filter: MathSpec/navigation/kalman.md
       - State noise compensation: MathSpec/navigation/snc.md
@@ -56,13 +56,13 @@ nav:
       - Iteration: MathSpec/navigation/iteration.md
       - Measurement generation: MathSpec/navigation/measurements.md
     - Optimization:
-      - State transition matrix: MathSpec/optimization/stm.md
+      - State transition matrix [DONE]: MathSpec/optimization/stm.md
       - Multiple shooting: MathSpec/optimization/multiple_shooting.md
       - Optimizer: MathSpec/optimization/panoc.md
     - Propagators:
       - Runge Kutta: MathSpec/propagators/rk.md
       - Dormand Prince: MathSpec/propagators/prince.md
-    - Appendices:
+    - Appendices [DONE]:
       - Dual numbers: MathSpec/appendix/dual_numbers.md
 
   - Versions: versions.md
