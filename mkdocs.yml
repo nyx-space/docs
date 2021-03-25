@@ -55,6 +55,9 @@ nav:
       - Smoothing: MathSpec/navigation/smoothing.md
       - Iteration: MathSpec/navigation/iteration.md
       - Measurement generation: MathSpec/navigation/measurements.md
+    - Monte Carlo [WIP]:
+      - Overview: MathSpec/monte_carlo/overview.md
+      - Error modeling: MathSpec/monte_carlo/error_models.md
     - Optimization:
       - State transition matrix [DONE]: MathSpec/optimization/stm.md
       - Multiple shooting: MathSpec/optimization/multiple_shooting.md

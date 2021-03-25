@@ -94,7 +94,7 @@ We define $B_T=\mathbf B \cdot \mathbf {\hat T}$ and $B_R=\mathbf B \cdot \mathb
     ```
 
 #### B Vector Angle (`angle`)
-Returns the angle of the B plane, in degrees between $[0;360]$.
+Returns the angle of the B plane, in degrees between $]-180;180]$.
 
 $$ \theta = \tan^{-1} \frac {B_R}{B_T} $$
 
