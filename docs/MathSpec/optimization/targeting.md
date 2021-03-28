@@ -1,0 +1,2 @@
+# Targeting
+Nyx provides a typical targeting method using a differential corrector. It innovates in the computation of the Jacobian for the correction: instead of relying on small perturbations and finite differencing, 

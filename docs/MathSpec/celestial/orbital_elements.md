@@ -486,6 +486,7 @@ List of available partials, always with respect to the position components x,y,z
 + $C_3$ `c3`
 + hyperbolic anomaly `hyperbolic_anomaly`
 
+
 [^1]: Nyx allows initialization from geodesic elements only for the following celestial bodies: Mercury, Venus, Earth, Luna/Earth Moon, and Mars. Although the Jupiter, Saturn, Uranus, and Neptune also have an angular velocity defined in Nyx, they do not have an ellipsoid flatenning parameter.
 [^2]: Two other computation methods were attempted (McMahon and Jah). The first prevented convergence of the shooting algorithm and the second led to near infinite LTOF.
 [^3]: Please refer to [Dual Numbers](/MathSpec/appendix/dual_numbers) for a primer on dual number theory.
