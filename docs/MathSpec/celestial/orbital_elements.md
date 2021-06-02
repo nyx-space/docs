@@ -52,10 +52,8 @@ The argument of periapsis is computed as follows and is returned in degrees:
 3. Perform a quadrant check: if $e_z$ is less then zero, return the AoP as $2\pi - \omega$ instead.
 
 ### B-plane (`b_plane`)
-This function will return an error (`NyxError::NotHyperbolic`) if called on a non-hyperbolic orbit. In other words, to compute the B-plane of an orbit, convert it to the desired planetary inertial frame first.
-
 !!! warning
-    Nyx will _not_ check whether the frame of the orbit is hyperbolic. This is up to the user.
+    This function will return an error (`NyxError::NotHyperbolic`) if called on a non-hyperbolic orbit. In other words, to compute the B-plane of an orbit, convert it to the desired planetary inertial frame first.
 
 The algorithm is identical to that outlined in the GMAT MathSpec, section 3.2.7, paraphrased here.
 
