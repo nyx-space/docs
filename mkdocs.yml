@@ -32,7 +32,7 @@ nav:
     - High fidelity models [WIP]: user_guide/hifimodels.md
   - MathSpec:
     - Introduction: MathSpec/index.md
-    - Time [WIP]: MathSpec/time.md
+    - Time [DONE]: MathSpec/time.md
     - Celestial:
       - Coordinate frames [WIP]: MathSpec/celestial/coord_systems.md
       - Ephemeris [WIP]: MathSpec/celestial/ephemeris.md
@@ -60,7 +60,7 @@ nav:
       - Error modeling: MathSpec/monte_carlo/error_models.md
     - Optimization:
       - State transition matrix [DONE]: MathSpec/optimization/stm.md
-      - Targeting: MathSpec/optimization/targeter.md
+      - Targeting: MathSpec/optimization/targeting.md
       - Multiple shooting: MathSpec/optimization/multiple_shooting.md
       - Optimizer: MathSpec/optimization/panoc.md
     - Propagators:

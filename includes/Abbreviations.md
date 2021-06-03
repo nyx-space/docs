@@ -37,3 +37,11 @@
 *[EOM]: equation(s) of motion
 *[SRP]: solar radiation pressure
 *[CAPS]: Cislunar Autonomous Positioning System
+*[UTC]: Universal Coordinated Time
+*[TAI]: International Atomic Time (Temps Atomique Universel)
+*[TDB]: Dynamic Barycentric Time (Temps Dynamique Barycentrique)
+*[ET]: Ephemeris Time
+*[TT]: Terrestrial Time
+*[JDE]: Julian Date
+*[MJD]: Modified Julian Date (17 November 1858 at midnight)
+*[GPST]: GPS Time
