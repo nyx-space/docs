@@ -32,23 +32,23 @@ nav:
     - High fidelity models [WIP]: user_guide/hifimodels.md
   - MathSpec:
     - Introduction: MathSpec/index.md
-    - Time [DONE]: MathSpec/time.md
+    - Time: MathSpec/time.md
     - Celestial:
       - Coordinate frames [WIP]: MathSpec/celestial/coord_systems.md
       - Ephemeris [WIP]: MathSpec/celestial/ephemeris.md
-      - Orbital elements [DONE]: MathSpec/celestial/orbital_elements.md
+      - Orbital elements: MathSpec/celestial/orbital_elements.md
       - Trajectory interpolation [WIP]: MathSpec/celestial/interpolation.md
-      - Eclipses [DONE]: MathSpec/celestial/eclipse.md
+      - Eclipses: MathSpec/celestial/eclipse.md
       - Events [WIP]: MathSpec/celestial/events.md
     - Acceleration and Force Models:
-      - Overview [DONE]: MathSpec/models/overview.md
-      - Gravity [DONE]: MathSpec/models/gravity.md
+      - Overview: MathSpec/models/overview.md
+      - Gravity: MathSpec/models/gravity.md
       - Spherical harmonics [WIP]: MathSpec/models/harmonics.md
-      - Solar radiation pressure [DONE]: MathSpec/models/srp.md
+      - Solar radiation pressure: MathSpec/models/srp.md
       - Drag [WIP]: MathSpec/models/drag.md
       - Control laws [WIP]: MathSpec/models/control_laws.md
       - Finite burns [WIP]: MathSpec/models/finite_burns.md
-    - Navigation [DONE]:
+    - Navigation:
       - Overview: MathSpec/navigation/overview.md
       - Kalman filter: MathSpec/navigation/kalman.md
       - State noise compensation: MathSpec/navigation/snc.md
@@ -59,14 +59,14 @@ nav:
       - Overview: MathSpec/monte_carlo/overview.md
       - Error modeling: MathSpec/monte_carlo/error_models.md
     - Optimization:
-      - State transition matrix [DONE]: MathSpec/optimization/stm.md
-      - Targeting: MathSpec/optimization/targeting.md
-      - Multiple shooting: MathSpec/optimization/multiple_shooting.md
-      - Optimizer: MathSpec/optimization/panoc.md
-    - Propagators:
+      - State transition matrix: MathSpec/optimization/stm.md
+      - Targeting [WIP]: MathSpec/optimization/targeting.md
+      - Multiple shooting [WIP]: MathSpec/optimization/multiple_shooting.md
+      - Optimizer [WIP]: MathSpec/optimization/panoc.md
+    - Propagators [WIP]:
       - Runge Kutta: MathSpec/propagators/rk.md
       - Dormand Prince: MathSpec/propagators/prince.md
-    - Appendices [DONE]:
+    - Appendices:
       - Dual numbers: MathSpec/appendix/dual_numbers.md
 
   - Versions: versions.md
