@@ -46,22 +46,23 @@ $$ \mathbf{F}_{\text{SRP}} = C_r \mathcal{A} \Phi_{\text{SRP}} \mathbf{\hat r_\o
 
     Case | RSS position (m) | RSS velocity (m/s) 
     --|---|--
-    Full visibility | 0.489 | 0.0
-    MEO | 32.251 | 0.011
-    LEO | 286.869 | 0.309
+    Full visibility | 0.488578 | 0.000081
+    MEO | 1.381728 | 0.000470
+    LEO | 5.980461 | 0.006447
 
     ```bash
     $ RUST_BACKTRACE=1 cargo test --release -- srp_earth_ --nocapture
     (...)
-    Error accumulated in full sunlight over 24 days 0 h 0 min 0 s : 0.489 m         0.000 m/s
+    Error accumulated in full sunlight over 24 days 0 h 0 min 0 s : 0.488578 m      0.000081 m/s
     test mission_design::force_models::srp_earth_full_vis ... ok
-    [Earth J2000] 2000-01-25T00:00:00 TAI   sma = 13999.490774 km   ecc = 0.500183  inc = 19.999552 deg     raan = 359.999754 deg   aop = 0.008741 deg      ta = 228.062085 deg     300 kg
-    Error accumulated in ecc+inc MEO (with penumbras) over 24 days 0 h 0 min 0 s : 32.251 m         0.011 m/s
+    [Earth J2000] 2000-01-25T00:00:00 TAI   sma = 13999.490721 km   ecc = 0.500183  inc = 19.999552 deg     raan = 359.999754 deg   aop = 0.008741 deg      ta = 228.062192 deg     300 kg
+    Error accumulated in ecc+inc MEO (with penumbras) over 24 days 0 h 0 min 0 s : 1.381728 m       0.000470 m/s
     test mission_design::force_models::srp_earth_meo_ecc_inc ... ok
-    [Earth J2000] 2000-01-25T00:00:00 TAI   sma = 6999.999601 km    ecc = 0.000118  inc = 0.000737 deg      raan = 293.400138 deg   aop = 90.464431 deg     ta = 252.621372 deg     300 kg
-    Error accumulated in circular equatorial LEO (with penumbras) over 24 days 0 h 0 min 0 s : 286.869 m    0.309 m/s
-    test mission_design::force_models::srp_earth_penumbra ... ok
-
+    [Earth J2000] 2000-01-25T00:00:00 TAI   sma = 6999.999433 km    ecc = 0.000118  inc = 0.000736 deg      raan = 293.379260 deg   aop = 90.482624 deg     ta = 252.626454 deg     300 kg
+    Error accumulated in circular equatorial LEO (with penumbras) over 24 days 0 h 0 min 0 s : 5.980461 m   0.006447 m/s
+    test mission_design::force_models::srp_earth_leo ... ok
+    
+    test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 96 filtered out; finished in 10.51s
     ```
     
 
