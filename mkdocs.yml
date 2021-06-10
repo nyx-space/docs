@@ -40,7 +40,7 @@ nav:
       - Trajectory interpolation [WIP]: MathSpec/celestial/interpolation.md
       - Eclipses: MathSpec/celestial/eclipse.md
       - Events [WIP]: MathSpec/celestial/events.md
-    - Acceleration and Force Models:
+    - Dynamical Models:
       - Overview: MathSpec/models/overview.md
       - Gravity: MathSpec/models/gravity.md
       - Spherical harmonics [WIP]: MathSpec/models/harmonics.md
@@ -48,13 +48,13 @@ nav:
       - Drag [WIP]: MathSpec/models/drag.md
       - Control laws [WIP]: MathSpec/models/control_laws.md
       - Finite burns [WIP]: MathSpec/models/finite_burns.md
-    - Navigation:
-      - Overview: MathSpec/navigation/overview.md
-      - Kalman filter: MathSpec/navigation/kalman.md
-      - State noise compensation: MathSpec/navigation/snc.md
-      - Smoothing: MathSpec/navigation/smoothing.md
-      - Iteration: MathSpec/navigation/iteration.md
-      - Measurement generation: MathSpec/navigation/measurements.md
+    - Orbit determination:
+      - Overview: MathSpec/orbit_determination/overview.md
+      - Kalman filter: MathSpec/orbit_determination/kalman.md
+      - State noise compensation: MathSpec/orbit_determination/snc.md
+      - Smoothing: MathSpec/orbit_determination/smoothing.md
+      - Iteration: MathSpec/orbit_determination/iteration.md
+      - Measurement generation: MathSpec/orbit_determination/measurements.md
     - Monte Carlo [WIP]:
       - Overview: MathSpec/monte_carlo/overview.md
       - Error modeling: MathSpec/monte_carlo/error_models.md

@@ -45,3 +45,4 @@
 *[JDE]: Julian Date
 *[MJD]: Modified Julian Date (17 November 1858 at midnight)
 *[GPST]: GPS Time
+*[RMS]: Root mean squared
