@@ -79,6 +79,11 @@ The measurement update will compute a new state estimate, its covariance, and it
 
     $$P_i = (I_n - K_i \tilde H_i) \bar P_i (I_n - K_i \tilde H_i)^{-1} + K_i R_i K_i^T $$
 
+!!! note
+    In the output file, when the covariance is requested to be rotated (e.g. in the RIC frame), the operation performed is the following:
+
+    $$ ^\text{RIC} P_i = ^\text{RIC}[C_i]\cdot P_i\cdot^\text{RIC}[C_i]^T $$
+
 [^1]: Thanks for Sai Chikine for implementing this formulation.
 [^2]: This should really be called the "surprise factor" because if it's big it means our estimate state is far off the real state and we should be surprised.
 
