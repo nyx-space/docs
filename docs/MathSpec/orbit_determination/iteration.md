@@ -18,9 +18,11 @@ This allows iterating the filter until one of the following conditions are met:
 Whether to use the prefit or the postfit (cf. [nomenclature](/MathSpec/navigation/kalman/#nomenclature)) is defined in configuration of the iteration function call. By default, Nyx will use the postfit residuals.
 
 !!! info "Average root mean square of postfit residual"
-    It is defined as follows, where $z_i$ is the postfit $i$-th residual:
+    It is defined as follows, where $\hat{z_i}$ is the postfit $i$-th residual normalized by the measurement noise $R_i$ at that epoch:
 
-    $$ \text{RMS} = \sqrt{\frac{1}{N} \sum_{i=1}^{N} \mathbb{z_i}\cdot \mathbb{z_i} }$$
+    $$ \text{RMS} = \sqrt{\frac{1}{N} \sum_{i=1}^{N} \mathbb{\hat{z_i}}\cdot \mathbb{\hat{z_i}} }$$
+
+    We normalize the postfits for the dot product to be unitless (otherwise it would be a mix of units if the measurements have different units).
 
 !!! warning
     In practice, an EKF does not need iteration, only a CKF _might_ benefit from one.

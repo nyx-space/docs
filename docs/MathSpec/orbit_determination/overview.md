@@ -12,3 +12,7 @@ Spacecraft navigation / orbit determination is a first-class feature of Nyx. The
     ```
     RUST_LOG=info cargo test od_ --release
     ```
+!!! note
+    Nyx uses a state replacement model for orbit determination: the STM is recomputed at each step and copied into the filter for appropriate estimate of the arc between two subsequent measurements.
+
+--8<-- "includes/Abbreviations.md"
