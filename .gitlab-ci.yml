@@ -3,7 +3,8 @@ deploy:
   only:
     - master
   script:
-    - pip install mkdocs-material
+    - curl "https://pyenv.run" | bash
+    - pipenv install
     - mkdocs build
     - apt-get update && apt-get install npm -y
     - npm install -g firebase-tools
