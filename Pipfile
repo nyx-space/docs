@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 mkdocs = "*"
 mkdocs-material = "*"
+mkdocs-git-revision-date-localized-plugin = "*"
 
 [requires]
 python_version = "3.8"
