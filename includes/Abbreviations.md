@@ -46,3 +46,6 @@
 *[MJD]: Modified Julian Date (17 November 1858 at midnight)
 *[GPST]: GPS Time
 *[RMS]: Root mean squared
+*[RIC]: Radial, In-track, Normal frame
+*[RCN]: Radial, Cross, Orbit normal frame
+*[VNC]: Velocity, Orbit normal, Cross
