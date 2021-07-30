@@ -71,6 +71,7 @@ nav:
       - Dual numbers: MathSpec/appendix/dual_numbers.md
 
   - Versions: versions.md
+  - Blog: blog/index.md
 
 extra_css:
   - stylesheets/extras.css

@@ -2,7 +2,7 @@
 
 Ths computation of orbital element is either a clone of the NASA GMAT C++ code or of the Vallado algorithms (4-th edition). The [validation for the computation](#validation) of all elements is listed at the bottom of this page, apart for the B-Plane validation, which at the bottom of the B-Plane section [here](#b-plane-b_plane).
 
-API documentation available [here](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.Orbit.html).
+API documentation available [here for Orbit](https://nyx-space.gitlab.io/nyx/nyx_space/struct.Orbit.html) and [here for OrbitDual](https://nyx-space.gitlab.io/nyx/nyx_space/cosmic/struct.OrbitDual.html).
 
 ## Storage
 Nyx stores all of the orbit information as a Cartesian state (units of kilometer and kilometer per second) because it is a non-singular representation of an orbit. Furthermore, all propagation using `OrbitalDynamics`, its acceleration models, and its force models is in Cartesian form for the same reason.
@@ -11,7 +11,7 @@ Nyx stores all of the orbit information as a Cartesian state (units of kilometer
 
 An orbit may be initialized from its Cartesian position and velocity components (from 64 bit floating point values or from a vector of that type), from Keplerian orbital elements where the phasing parameter is the true anomaly, or from its geodesic elements (latitude, longitude and height compared to the reference ellipsoid of the frame[^1]). The initializer also includes an epoch (cf. [Time MathSpec](/MathSpec/time/)) and a frame (cf. [Frame MathSpec](/MathSpec/celestial/coord_systems/)).
 
-As discussed above, the state is stored in Cartesian form. Hence, initializing in Keplerian form will trigger the conversion of the state from Keplerian orbital element into Cartesian orbital elements. This method _does support_ hyperbolic, circular inclined, circular equatorial, and the common elliptical orbits. The eccentricity tolerance is set to $1e^{-11}$, i.e. if the eccentricity is below that number, then the orbit is considered circular and the appropriate conversions to Cartesian will be triggered. The algorithm implementation is available [here](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.Orbit.html#method.keplerian), but to convince yourself that it works, probably best to check out the [validation](#validation) below.
+As discussed above, the state is stored in Cartesian form. Hence, initializing in Keplerian form will trigger the conversion of the state from Keplerian orbital element into Cartesian orbital elements. This method _does support_ hyperbolic, circular inclined, circular equatorial, and the common elliptical orbits. The eccentricity tolerance is set to $1e^{-11}$, i.e. if the eccentricity is below that number, then the orbit is considered circular and the appropriate conversions to Cartesian will be triggered. The algorithm implementation is available [here](https://nyx-space.gitlab.io/nyx/nyx_space/struct.Orbit.html#method.keplerian), but to convince yourself that it works, probably best to check out the [validation](#validation) below.
 
 Vallado's geodetic to Cartesian initializer is also implemented allowing the initialization of a state known only by its longitude, laltitude and height above the reference ellipsoid of that rocky celestial object.
 
@@ -169,14 +169,14 @@ Nyx returns this parameter ($E$) in degrees.
 
 ### Geodetic height (`geodetic_height`)
 The parameter is returned in kilometers.
-This is computed using the Vallado approach, Algorithm 12 page 172 in the 4-th edition. This accounts for the correction when near the poles. It's a notch complex to write up, so please refer to the [code](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.Orbit.html#method.geodetic_height) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
+This is computed using the Vallado approach, Algorithm 12 page 172 in the 4-th edition. This accounts for the correction when near the poles. It's a notch complex to write up, so please refer to the [code](https://nyx-space.gitlab.io/nyx/nyx_space/struct.Orbit.html#method.geodetic_height) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
 
 !!! warning
     This function requires that the orbit already be in a body fixed frame. Nyx will _not_ check that.
 
 ### Geodetic latitude (`geodetic_latitude`)
 The parameter is returned in degrees between $[-180;180]$.
-This is computed using the Vallado iterative approach, Algorithm 12 page 172 in the 4-th edition. It accounts for the flattening of the ellipsoid and its semi-major axis. It's a notch complex to write up, so please refer to the [code](https://docs.rs/nyx-space/*/nyx_space/celestia/struct.Orbit.html#method.geodetic_latitude) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
+This is computed using the Vallado iterative approach, Algorithm 12 page 172 in the 4-th edition. It accounts for the flattening of the ellipsoid and its semi-major axis. It's a notch complex to write up, so please refer to the [code](https://nyx-space.gitlab.io/nyx/nyx_space/struct.Orbit.html#method.geodetic_latitude) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
 
 !!! warning
     This function requires that the orbit already be in a body fixed frame. Nyx will _not_ check that.
