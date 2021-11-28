@@ -38,7 +38,7 @@ nav:
       - Coordinate frames [WIP]: MathSpec/celestial/coord_systems.md
       - Ephemeris [WIP]: MathSpec/celestial/ephemeris.md
       - Orbital elements: MathSpec/celestial/orbital_elements.md
-      - Trajectory interpolation [WIP]: MathSpec/celestial/interpolation.md
+      - Trajectory interpolation: MathSpec/celestial/interpolation.md
       - Eclipses: MathSpec/celestial/eclipse.md
       - Events [WIP]: MathSpec/celestial/events.md
     - Dynamical Models:
