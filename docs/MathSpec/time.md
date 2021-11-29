@@ -4,7 +4,7 @@ Space applications require high fidelity time compution, including time systems 
 
 All time computation is handled by [hifitime](https://crates.io/crates/hifitime), also written by Chris Rabotin. This library computes all time using lossless fractions with a numerator stored as an unsigned integer on 128 bits and a denominator stored as a 16 bit unsigned integer: conversion into a 64 bit floating point value happens only on request at the end of the time conversion. As such, **hifitime is quite possibly the most precise time computation library in the world.**
 
-[![Build Status](https://travis-ci.org/ChristopherRabotin/hifitime.svg?branch=master)](https://travis-ci.org/ChristopherRabotin/hifitime)
+[![Build Status](https://api.travis-ci.com/nyx-space/hifitime.svg?branch=master)](https://app.travis-ci.com/nyx-space/hifitime)
 [![hifitime on crates.io](https://img.shields.io/crates/v/hifitime.svg)](https://crates.io/crates/hifitime)
 [![hifitime on docs.rs](https://docs.rs/hifitime/badge.svg)](https://docs.rs/hifitime/)
 
