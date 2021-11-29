@@ -1,10 +1,39 @@
 # Versions
 This page lists the versions of Nyx and the changes you should expect between them. Nyx uses [semantic versioning](https://semver.org/): `major.minor.patch`. You will _not_ encounter any breaking changes between versions which share the same major version. For example, whatever code you develop for version `1.0.0` will also work for version `1.159.0`.
 
-You may find an approximate roadmap [here](https://gitlab.com/nyx-space/nyx/-/milestones). It's important to note that Chris Rabotin develops this toolkit on his free time and is not paid for this development. Therefore milestone deadlines tend to slip.
+You may find an approximate roadmap [here](https://gitlab.com/nyx-space/nyx/-/milestones). It's important to note that Chris Rabotin develops this toolkit mostly on his free time and is not paid for this development. Therefore milestone deadlines tend to slip.
+
+## Version 1.1.0 - WIP
+[Milestone 1.1.0](https://gitlab.com/nyx-space/nyx/-/milestones/20)
+
+!!! warning "Breaking change (likely not)"
+    NyxError enum no longer has `OutOfInterpolationWindow` or `TrajectoryCreationError`. These are now part of the more detailed `TrajError` error enum.
+    The major version has _not_ been changed because functions still returns a `NyxError`.
+
+
+### New features
++ Trajectories can be merged, use a `+` or `+=` operation on a mutable trajectory [_135_](https://gitlab.com/nyx-space/nyx/-/merge_requests/135)
+
+### Bug fixes
++ Trajectories can be build with a backward propagation
+
+## Version 1.0.0
+[Milestone 1.0.0](https://gitlab.com/nyx-space/nyx/-/milestones/19)
+
+[Milestone 1.0.0-beta.2](https://gitlab.com/nyx-space/nyx/-/milestones/15)
+
+### New features
++ Covariances can be mapped into different frames
++ Targeting works with the hyperdual formaltion in addition to the finite differencing method
++ Targeting can now be done in the VNC frame
+
+### Improvements
++ Trajectory creation rewritten from scratch: now follows the correct map-reduce pattern and uses a Hermite interpolation (leads to significant speed improvements)
++ ODP can iterate on a solution until convergence
++ Eclipse computation model now uses a slightly more precise percentage calculation [_126_](https://gitlab.com/nyx-space/nyx/-/merge_requests/126)
 
 ## Version 1.0.0-beta.1
-[Milestone](https://gitlab.com/nyx-space/nyx/-/milestones/17)
+[Milestone 1.0.0-beta.1](https://gitlab.com/nyx-space/nyx/-/milestones/17)
 
 **Previous version:** 0.0.23
 
@@ -14,7 +43,6 @@ You may find an approximate roadmap [here](https://gitlab.com/nyx-space/nyx/-/mi
 + Import/export trajectories from STK, GMAT, or a custom format.
 + Thorough documentation (this website is new!).
 + Orbit determination can now iterate on a solution until convergence
-
 
 ### Improvements
 + Event finding has been moved to interpolated trajectories allowing for significantly increased precision. For example, Nyx can now detect an upcoming Eclipse event as soon as the Penumbra reaches 2% of shadowing. It is also possible to search for any orbital event in any celestial frame.
