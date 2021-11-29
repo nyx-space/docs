@@ -61,7 +61,7 @@ nav:
       - Error modeling: MathSpec/monte_carlo/error_models.md
     - Optimization:
       - State transition matrix: MathSpec/optimization/stm.md
-      - Targeting [WIP]: MathSpec/optimization/targeting.md
+      - Targeting: MathSpec/optimization/targeting.md
       - Multiple shooting [WIP]: MathSpec/optimization/multiple_shooting.md
       - Optimizer [WIP]: MathSpec/optimization/panoc.md
     - Propagators [WIP]:
