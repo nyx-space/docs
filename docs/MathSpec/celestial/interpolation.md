@@ -13,7 +13,7 @@ Trajectories store a interpolation splines created from a Hermite interpolation 
 !!! warning "Limitations"
     1. To support generating the trajectories in parallell and storing them in a binary tree, it was necessary to choose an indexing method independent of the duration of the interpolation spline. This has been chosen to be the _centiseconds_ (10 milliseconds) since the start of the trajectory, the start being the very first state used to seed the trajectory. This means that if two splines last _less than 10 ms_, one will **overwrite** the other in the binary tree, meaning that part of the trajectory will **not** be queryable.
     1. Changing the frame of a trajectory follows the Shannon Nyquist sampling theorem. However, this will introduce _some imprecision_ nevertheless. Multiple conversions (e.g. from EME2000 to Moon J2000 back to EME2000) will accumulate errors quickly.
-    1. Trajectories can currently only be generated with forward propagation.
+    1. Trajectories can currently only be generated with forward propagation. (Fixed in version 1.1.)
 
 ## Ephemeris
 
@@ -27,7 +27,7 @@ Trajectories store a interpolation splines created from a Hermite interpolation 
 1. Sample that "double converted" trajectory every five minutes and compare each of those states with the initial interpolated trajectory.
 1. Ensure that the interpolation error in position is less than 1 micrometer and the error in velocity is less than 1 micrometer per second.
 
-All of the above is computed in 5.7 seconds on a standard desktop computer.
+All of the above is computed in 0.9 seconds on a standard desktop computer.
 
 !!! note
     If propagating with the STM, then the trajectory will also include the STM for that specific step forward.
