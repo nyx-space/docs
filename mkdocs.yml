@@ -64,9 +64,7 @@ nav:
       - Targeting: MathSpec/optimization/targeting.md
       - Multiple shooting [WIP]: MathSpec/optimization/multiple_shooting.md
       - Optimizer [WIP]: MathSpec/optimization/panoc.md
-    - Propagators [WIP]:
-      - Runge Kutta: MathSpec/propagators/rk.md
-      - Dormand Prince: MathSpec/propagators/prince.md
+    - Propagators: MathSpec/propagators.md
     - Appendices:
       - Dual numbers: MathSpec/appendix/dual_numbers.md
 
