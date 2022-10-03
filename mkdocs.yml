@@ -3,7 +3,6 @@ site_url: https://nyxspace.com
 theme:
   name: material
   features:
-    - header.autohide
     - navigation.tabs
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png
@@ -11,7 +10,20 @@ theme:
     text: IBM Plex Sans
     code: IBM Plex Mono
   palette:
-    scheme: default
+    - scheme: default
+      primary: blue grey
+      accent: orange
+      media: "(prefers-color-scheme: light)"
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue grey
+      accent: orange
+      media: "(prefers-color-scheme: dark)"
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
 
 nav:
   - Home: index.md
@@ -33,7 +45,7 @@ nav:
       - High fidelity models [WIP]: user_guide/hifimodels.md
   - MathSpec:
       - Introduction: MathSpec/index.md
-      - Time: MathSpec/time.md
+      - Hifitime (time): MathSpec/time.md
       - Celestial:
           - Coordinate frames [WIP]: MathSpec/celestial/coord_systems.md
           - Ephemeris [WIP]: MathSpec/celestial/ephemeris.md
@@ -79,9 +91,9 @@ plugins:
   - git-revision-date-localized:
       type: iso_date
 
-copyright: Copyright &copy; 2021 - Christopher Rabotin
+copyright: Copyright &copy; 2022 - Christopher Rabotin
 
-repo_url: https://gitlab.com/nyx-space/nyx
+repo_url: https://github.com/nyx-space/nyx
 repo_name: nyx-space/nyx
 
 extra:
