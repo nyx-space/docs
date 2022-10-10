@@ -14,90 +14,67 @@
 
 ## :material-rocket-launch-outline: Mission Design
 
-<ul>
-<li>
-    <b class="emph">Designed for Monte Carlo analyzes</b>
-    <ul>
-        <li>Monte Carlo safely run on all processors without any of the multi-threading risks you'd see in C++ or Python (no data race conditions, no stopping the program before saving data)</li>
-        <li>Simulate and analyze ten thousand (10,000 !!) spacecraft in high-fidelity in 90 seconds on a standard desktop (celestial bodies of Earth, Moon, Sun, Earth spherical harmonics of 12x12)</li>
-        <li>Analyze trajectories in parallel by generating their ephemerides</li>
-    </ul>
-</li>
-<li>
-    <b class="emph">High fidelity models</b>
-    <ul>
-        <li>Multi-body gravity, solar radiation pressure, and atmospheric drag models</li>
-        <li>Spherical harmonic gravity fields: JGM3 and EGM2008 for Earth, JGGRX for the Moon</li>
-        <li>Eclipse modeling with multiple concurrent celestial objects</li>
-    </ul>
-</li>
-<li>
-    <b class="emph">Maneuver planning</b>
-    <ul>
-        <li>Differential corrector and multiple shooting for finite burn and low-thrust trajectory optimization</li>
-        <li>Guidance laws: Ruggiero, Lyapunov control, or add your own guidance law</li>
-        <li>Two-body approximations: Lambert solver, Hohmann transfer</li>
-    </ul>
-</li>
-</ul>
++ **Designed for Monte Carlo analyzes**{ .emph }
+
+    + Monte Carlo safely run on all processors without any of the multi-threading risks you'd see in C++ or Python (no data race conditions, no stopping the program before saving data)
+    + Simulate and analyze ten thousand (10,000 !!) spacecraft in high-fidelity in 90 seconds on a standard desktop (celestial bodies of Earth, Moon, Sun, Earth spherical harmonics of 12x12)
+    + Analyze trajectories in parallel by generating their ephemerides
+
++ **High fidelity models**{ .emph }
+    
+    + Multi-body gravity, solar radiation pressure, and atmospheric drag models
+    + Spherical harmonic gravity fields: JGM3 and EGM2008 for Earth, JGGRX for the Moon
+    + Eclipse modeling with multiple concurrent celestial objects
+    
++ **Maneuver planning**{ .emph }
+
+    + Differential corrector and multiple shooting for finite burn and low-thrust trajectory optimization
+    + Guidance laws: Ruggiero, Lyapunov control, or add your own guidance law
+    + Two-body approximations: Lambert solver, Hohmann transfer
 
 <hr/>
 
 ## :material-vector-curve: Orbit Determination
 
-<ul>
-<li>
-    <b class="emph">Spaceflight Navigation</b>
-    <ul>
-        <li>Conventional and Extended Kalman filters</li>
-        <li>Smoothing and iteration of navigation estimates</li>
-        <li>One-way and two-range ranging and Doppler measurements</li>
-    </ul>
-</li>
-<li>
-    <b class="emph">State-of-the-art partials computation</b>
-    <ul>
-        <li>Dual Number theory for STM computation (Rabotin 2019)</li>
-        <li>Partials available for multibody dynamics, spherical harmonics</li>
-    </ul>
-</li>
-<li>
-    <b class="emph">Automation and workflows</b>
-    <ul>
-        <li>Leverage computational speed for simulating a OD of off-nominal trajectories</li>
-        <li>Cloud-ready library and application enables automation of your workflow</li>
-    </ul>
-</li>
-</ul>
++ **Spaceflight Navigation**{ .emph }
+
+    + Conventional and Extended Kalman filters
+    + Smoothing and iteration of navigation estimates
+    + One-way and two-range ranging and Doppler measurements
+
+
++ **State-of-the-art partials computation**{ .emph }
+
+    + Dual Number theory for STM computation (Rabotin 2019)
+    + Partials available for multibody dynamics, spherical harmonics
+
++ **Automation and workflows**{ .emph }
+
+    + Leverage computational speed for simulating a OD of off-nominal trajectories
+    + Cloud-ready library and application enables automation of your workflow
+    
 
 <hr/>
 
 ## :material-globe-model: ConOps Analysis
 
-<ul>
-<li>
-    <b class="emph">Event-based ConOps</b>
-    <ul>
-        <li>Design concepts of operations by finding specific events in a spacecraft trajectories</li>
-        <li>Seek spacecraft and cosmic events in any celestial frame</li>
-    </ul>
-</li>
-<li>
-    <b class="emph">State-of-the-art models</b>
-    <ul>
-        <li>Planetary and solar eclipse, penumbra and visibility computations</li>
-        <li>NAIF DE438s planetary ephemeris by NASA</li>
-        <li>IAU 2018 body fixed frames (Archinal et al. 2018)</li>
-    </ul>
-</li>
-<li>
-    <b class="emph">Orbital state transformation</b>
-    <ul>
-        <li>Conversion between Cartesian states and Keplerian orbital elements</li>
-        <li>Central body and rotation transformations</li>
-    </ul>
-</li>
-</ul>
++ **Event-based ConOps**{ .emph }
+
+    + Design concepts of operations by finding specific events in a spacecraft trajectories
+    + Seek spacecraft and cosmic events in any celestial frame
+    
+
++ **State-of-the-art models**{ .emph }
+
+    + Planetary and solar eclipse, penumbra and visibility computations
+    + NAIF DE438s planetary ephemeris by NASA
+    + IAU 2018 body fixed frames (Archinal et al. 2018)
+
++ **Orbital state transformation**{ .emph }
+
+    + Conversion between Cartesian states and Keplerian orbital elements
+    + Central body and rotation transformations
+
 
 <hr/>
 
