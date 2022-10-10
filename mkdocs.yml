@@ -1,9 +1,14 @@
 site_name: Nyx
 site_url: https://nyxspace.com
+edit_uri: ""
 theme:
   name: material
   features:
     - navigation.tabs
+    - navigation.indexes
+    - navigation.top
+    - toc.follow
+    - toc.integrate
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png
   font:
@@ -98,9 +103,6 @@ repo_name: nyx-space/nyx
 
 extra:
   social:
-    - icon: material/blur
-      link: https://www.svgbackgrounds.com
-      name: Background licensed from SVGBackgrounds.com as CC BY 4.0.
     - icon: material/comment-multiple
       link: https://app.element.io/#/room/#astrodyn:matrix.org
       name: Astrodynamics on Matrix.org

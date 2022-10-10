@@ -29,6 +29,14 @@
     color: #d55e00;
 }
 
+.blk {
+    display: block;
+}
+
+.left {
+    float: left;
+}
+
 .right {
     float: right;
 }
