@@ -1,15 +1,15 @@
 ![Nyx logo](assets/logo.png){: .center }
 
-<p class="pitch">Nyx is a set of open-source astrodynamics tools to support space missions from its early design phase through flight operations.</p>
+<p class="tagline">Analyze, automate, and fly &mdash; as a team</p>
 
-<!-- <p class="pitch">Blazing fast high-fidelity astrodynamics for <b class="emph">Monte Carlo</b> analyzes of <b class="emph">constellations</b>, <b class="emph">interplanetary</b> missions, and deep space <b class="emph">orbit determination</b></p> -->
+<p class="pitch">Nyx is a platform for astrodynamics tools to support space missions from its early design phase through flight operations.</p>
 
 | Nyx Space | ANISE | Hifitime |
 | :---: | :---: | :---: | 
-| A fully featured astrodynamics toolkit in Rust and Python | A modern rewrite of NASA/NAIF SPICE available in Rust, Python, FORTRAN, and C | An ultra-precise time computation library suitable for microcontrollers |
-| [Design Docs](#) | [Purpose](#) | [Design Docs](#) |
-| [Mathematical specifications](#) | [Design Docs](#) | [Get started in Python](#) |
-| [Get started in Rust](#) | [Get started in Python](#) | [Get started in Rust](#) |
+| <big>A fully featured astrodynamics toolkit for mission design and orbit determination</big> | <big>A modern rewrite of NASA SPICE for desktop and embedded systems</big> | <big>An ultra-precise time computation library for safety-critical systems</big> |
+| [Design Docs](#) | [Purpose](#) | [Design Docs](/hifitime/design/) |
+| [Mathematical specifications](#) | [Design Docs](#) | [Get started in Rust](/hifitime/rust/) |
+| [Get started in Rust](#) | [Get started in Python](#) | [Get started in Python](hifitime/python/) |
 
 
 ## :material-rocket-launch-outline: Mission Design

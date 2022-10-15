@@ -33,6 +33,12 @@ theme:
 nav:
   - Home: index.md
   - License: license.md
+  - Hifitime:
+      - Introduction: hifitime/intro.md
+      - Design: hifitime/design.md
+      - Python user guide: hifitime/python.md
+      - Rust user guide: hifitime/rust.md
+      - Change Log: hifitime/changelog.md
   - Examples:
       - Introduction: showcase/index.md
       - Mission design:
@@ -131,10 +137,14 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.tabbed
   - footnotes
-  - pymdownx.superfences
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 extra_javascript:
   - js/config.js

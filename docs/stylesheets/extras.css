@@ -20,6 +20,12 @@
 } */
 
 .pitch {
+    font-size: 150%;
+    text-align: center;
+}
+
+.tagline {
+    font-weight: bold;
     font-size: 200%;
     text-align: center;
 }
