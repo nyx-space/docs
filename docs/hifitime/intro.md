@@ -30,6 +30,18 @@ Hifitime supports the following time scales:
 + Dynamic Barycentric Time (TDB), a higher fidelity ephemeris time
 + Global Positioning System (GPS), and UNIX
 
+```mermaid
+flowchart LR
+    TAI:::engr -- +32.184 s --> TT
+    GPST -- "-2,524,953,619 s" --> TAI
+    TT -- "f(K, M0, M1, EB)" --> ET
+    TT -- "g(357.528, 1.658e-3, 1.9...e-7)" --> TDB
+    TAI -- IERS Leap seconds --> UTC
+
+    classDef lead fill:green,opacity:0.6,stroke:darkgreen,stroke-width:2px,color:black
+    classDef engr fill:dodgerblue,opacity:0.6,stroke:navy,stroke-width:2px,color:black
+```
+
 ## Comparison with SPICE
 
 1. Hifitime and SPICE perform the same computation for Ephemeris Time, i.e. the error between hifitime and SPICE in Ephemeris Time is constrained only by the precision of the SPICE representation.
