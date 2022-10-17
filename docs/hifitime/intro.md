@@ -42,6 +42,14 @@ flowchart LR
     classDef engr fill:dodgerblue,opacity:0.6,stroke:navy,stroke-width:2px,color:black
 ```
 
+The following figures show the deviation of different time with respect to TAI scales from 01 January 1970 until 01 January 2023.
+
+--8<-- "includes/time-scale-deviation.html"
+
+--8<-- "includes/time-scale-deviation-no-utc.html"
+
+--8<-- "includes/time-scale-deviation-tdb-et.html"
+
 ## Comparison with SPICE
 
 1. Hifitime and SPICE perform the same computation for Ephemeris Time, i.e. the error between hifitime and SPICE in Ephemeris Time is constrained only by the precision of the SPICE representation.
@@ -64,15 +72,6 @@ flowchart LR
 1. SOFA supports the TCB and TCG time scales, which hifitime does not support.
 1. SOFA supports the unpredictable `UT1` time scale, which hifitime does not support.
 
-## Figures
-
-The following figures show the deviation of different time with respect to TAI scales from 01 January 1970 until 01 January 2023.
-
---8<-- "includes/time-scale-deviation.html"
-
---8<-- "includes/time-scale-deviation-no-utc.html"
-
---8<-- "includes/time-scale-deviation-tdb-et.html"
 
 [^1]: Note that hifitime does not support date-agnostic epochs or time-agnostic epochs, only a combination of both.
 
