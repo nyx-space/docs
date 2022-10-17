@@ -1,5 +1,5 @@
 
-Hifitime is a time management library available in Rust and Python designed for scientific use or in programs that require high accuracy in time computations. It provides several main constructs:
+Hifitime is a time management library available in [Rust](/hifitime/rust/) and [Python](/hifitime/python) designed for scientific use or in programs that require high accuracy in time computations. It provides several main constructs:
 
 + `Duration`: a positive or negative duration with nanosecond precision
 + `Epoch`: a datetime with the time scale used to initialize it [^1]
