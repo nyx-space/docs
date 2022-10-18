@@ -11,6 +11,8 @@
 | [Mathematical specifications](#) | [Design Docs](#) | [Get started in Rust](/hifitime/rust/) |
 | [Get started in Rust](#) | [Get started in Python](#) | [Get started in Python](hifitime/python/) |
 
+!!! question
+    All of the software written as part of Nyx is thoroughly tested and validated as it follows the [Nyx quality assurance process](http://quality.nyxspace.com).
 
 ## :material-rocket-launch-outline: Mission Design
 
