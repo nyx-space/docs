@@ -129,6 +129,40 @@ let epoch = Epoch::from_gregorian_utc_at_midnight(1972, 1, 1);
 
 All of the initialization functions start with [`from_`](https://docs.rs/hifitime/latest/hifitime/?search=from_).
 
+## Converting into another time scale
+
+One of the main use cases of hifitime is to initialize an epoch in one time scale and converting it into another. Hifitime provides the conversion from any Epoch into UTC, TAI, TDB, TT, and ET. That is done through two main ways.
+
+The first is with the `to_TIMESCALE_duration` such as `to_tai_duration` which will always return a `Duration` type. This can then be converted into the relevant time unit you with, like `Centuries` or `Days`:
+
+```rust
+println!("{}", my_epoch.to_tdb_duration().to_unit(Unit::Day))
+```
+
+All of the relevant functions are available in the [API documentation](https://docs.rs/hifitime/latest/hifitime/?search=_duration).
+
+For some often used conversions, a direct function is available:
+
++ [`to_tai_days`](https://docs.rs/hifitime/latest/hifitime/prelude/struct.Epoch.html#method.to_tai_days)
++ [`to_tai_seconds`](https://docs.rs/hifitime/latest/hifitime/prelude/struct.Epoch.html#method.to_tai_seconds)
++ [`to_tdb_centuries_since_j2000`](https://docs.rs/hifitime/latest/hifitime/prelude/struct.Epoch.html#method.to_tdb_centuries_since_j2000)
++ [`to_tdb_days_since_j2000`](https://docs.rs/hifitime/latest/hifitime/prelude/struct.Epoch.html#method.to_tdb_days_since_j2000)
+
+And [many others...](https://docs.rs/hifitime/latest/hifitime/?search=to_).
+
+### Example converting from Gregorian UTC to ET
+
+!!! note
+    The ET and TDB conversions are always in reference to J2000 to match NAIF SPICE, unless you use the `to_tdb_duration_since_j1900` or `to_et_duration_since_1900`.
+
+```rust
+let e = Epoch::from_gregorian_utc(2000, 2, 29, 14, 57, 29, 0);
+
+println!("{}", e.to_et_seconds()); // Prints `5108313.185383182`
+
+println!("{}", e.to_jde_utc_days()); // Prints `2451604.1232523`
+```
+
 ## Epoch arithmetics
 
 You can easily check whether an epoch is before or after another one with the `>` and `<` operators.
@@ -221,7 +255,7 @@ Time units and frequency units are trivially supported. Hifitime only supports u
 
 ### Initialization
 
-A Duration can be initialization from a `i64` integer or an `f64` floating point values by simply suffixing it with one of the following units defined in [TimeUnits](https://docs.rs/hifitime/latest/hifitime/trait.TimeUnits.html):
+A Duration can be initialized from a `i64` integer or an `f64` floating point values by simply suffixing it with one of the following units defined in [TimeUnits](https://docs.rs/hifitime/latest/hifitime/trait.TimeUnits.html):
 
 + `.centuries()`
 + `.days()`
