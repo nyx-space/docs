@@ -49,3 +49,4 @@
 *[RIC]: Radial, In-track, Normal frame
 *[RCN]: Radial, Cross, Orbit normal frame
 *[VNC]: Velocity, Orbit normal, Cross
+*[SOFA]: Standards Of Fundamental Astronomy
