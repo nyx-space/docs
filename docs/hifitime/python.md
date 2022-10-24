@@ -18,9 +18,9 @@ from hifitime import Epoch, Duration, TimeScale, TimeSeries
 
 Possibly the best way to get started after installing the package is to look at two example scripts:
 
-+ [`basic.py`](https://github.com/nyx-space/hifitime/blob/3.5.0/examples/python/basic.py) shows a typical workflow from initialization of an Epoch from the system's clock to printing it in different time scales
++ [`basic.py`](https://github.com/nyx-space/hifitime/blob/3.6.0/examples/python/basic.py) shows a typical workflow from initialization of an Epoch from the system's clock to printing it in different time scales
 
-+ [`timescales.py`](https://github.com/nyx-space/hifitime/blob/3.5.0/examples/python/timescales.py) shows how to use hifitime to compute differences between Epochs in different time scales and how to plot these differences with [plotly](plotly.com/) [^1]
++ [`timescales.py`](https://github.com/nyx-space/hifitime/blob/3.6.0/examples/python/timescales.py) shows how to use hifitime to compute differences between Epochs in different time scales and how to plot these differences with [plotly](plotly.com/) [^1]
 
 
 ## Epoch initialization
@@ -163,7 +163,7 @@ The arithmetics on Epochs are done in the time scales used at initialization. Fo
 
 ### Epoch differences
 
-Epoch time differences are supported in Python starting with version `3.5.1` using the method `timedelta`.
+Epoch time differences are supported in Python starting with version `3.6.0` using the method `timedelta`.
 
 ```python
 e1 = Epoch.system_now()

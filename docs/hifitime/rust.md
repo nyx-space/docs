@@ -6,7 +6,7 @@ Put this in your `Cargo.toml`:
 
 ```toml
 [dependencies]
-hifitime = "3.5"
+hifitime = "3.6"
 ```
 
 Then at the top of each source file, just add the following line:
