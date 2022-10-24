@@ -4,7 +4,7 @@ Each showcased example is categorized and detailed. Relevant source code will be
 
 --8<-- "includes/ga-49d-orbit.html"
 
-This figure above is from the step-by-step example on [using a genetic algorithm to design an orbit](/showcase/mission_design/orbit_design_ga/).
+This figure above is from the step-by-step example on [using a genetic algorithm to design an orbit](/nyxspace/showcase/mission_design/orbit_design_ga/).
 
 !!! info
     The more examples the better! So contact me to add yours!

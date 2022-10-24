@@ -163,7 +163,15 @@ The arithmetics on Epochs are done in the time scales used at initialization. Fo
 
 ### Epoch differences
 
-As of version 3.5.0, hifitime in Python does not support differences between epochs, unlike its Rust API. This will be handled in [#159](https://github.com/nyx-space/hifitime/issues/159).
+Epoch time differences are supported in Python starting with version `3.5.1` using the method `timedelta`.
+
+```python
+e1 = Epoch.system_now()
+e3 = e1 + Unit.Day * 1.5998
+epoch_delta = e3.timedelta(e1)
+assert epoch_delta == Unit.Day * 1 + Unit.Hour * 14 + Unit.Minute * 23 + Unit.Second * 42.720
+print(epoch_delta)
+```
 
 ### Arithmetics in different time scales
 
