@@ -28,7 +28,10 @@ Hifitime supports the following time scales:
 + Terrestrial Time (TT)
 + Ephemeris Time (ET) without the small perturbations as per NASA/NAIF SPICE leap seconds kernel
 + Dynamic Barycentric Time (TDB), a higher fidelity ephemeris time
-+ Global Positioning System (GPS), and UNIX
++ Global Positioning System (GPST)
++ Galileo time scale (GST)
++ BeiDou time scale (BDT)
++ UNIX (although not exactly a time scale but very useful in interoperability with computers)
 
 ```mermaid
 flowchart LR
