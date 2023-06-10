@@ -31,6 +31,10 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
+  icon:
+    admonition:
+      tip: material/rocket-launch-outline
+
 
 nav:
   - Nyx: index.md

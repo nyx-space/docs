@@ -6,21 +6,30 @@ hide:
 
 
 # Blazing fast spacecraft navigation {: .tagline}
-[:material-github: Github](https://docs.nyxspace.com){ .md-button } [:material-file-document-multiple-outline: Tutorials](https://docs.nyxspace.com){ .md-button } [:material-fast-forward: Guides](https://docs.nyxspace.com){ .md-button } [:material-lightbulb-on-outline: Explanations](https://docs.nyxspace.com){ .md-button } [:material-math-integral: Math Spec](https://docs.nyxspace.com){ .md-button }
+
+<!-- [:material-github: Github](https://docs.nyxspace.com){ .md-button } [:material-file-document-multiple-outline: Tutorials](https://docs.nyxspace.com){ .md-button } [:material-fast-forward: Guides](https://docs.nyxspace.com){ .md-button } [:material-lightbulb-on-outline: Explanations](https://docs.nyxspace.com){ .md-button } [:material-math-integral: Math Spec](https://docs.nyxspace.com){ .md-button } -->
+
+!!! tip inline "Get started for free"
+
+    Add Nyx to your current Python environment:
+    ```sh
+    pip install nyx_space
+    ```
+
+    Add Nyx to your [Rust :material-language-rust:](https://rust-lang.org) project:
+    ```sh
+    cargo add nyx_space
+    ```
+
+    [**Read the documentation** :material-file-document-multiple-outline:](https://docs.nyxspace.com)
 
 
-Get started right away in Python:
+    [**Browse the source code** :material-github:](https://github.com/nyx-space/nyx)
 
-```
-pip install nyx_space
-```
-
-Or automated your flight dynamics via Docker:
+    [**Learn about companion projects** :material-compass-rose:](#)
 
 
-```sh
-docker pull nyx_space:latest
-```
+<script src="https://asciinema.org/a/14.js" id="asciicast-14" async data-autoplay="false" data-theme="solarized-dark" data-rows="17"></script>
 
 <main class="landing">
     

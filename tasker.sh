@@ -18,8 +18,4 @@ fi
 
 setup
 
-if [[ -n $GITHUB_ACTIONS ]]; then
-  pipenv run mkdocs build
-else
-  pipenv run mkdocs serve
-fi
+pipenv run mkdocs $1

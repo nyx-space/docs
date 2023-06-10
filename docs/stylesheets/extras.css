@@ -154,9 +154,6 @@ article h2 {
   background-color: #66ccff;
 }
 
-.center-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.ctr {
     text-align: center;
 }
