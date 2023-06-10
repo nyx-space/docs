@@ -5,34 +5,52 @@ hide:
 ---
 
 
+<header class="landing">
 <h1 class="tagline">Blazing fast spacecraft navigation</h1>
+</header>
 
-<div class="card-container">
+<main class="landing">
+    
+<section class="grid">
+    <article>
+        <h2>Title 1</h2>
+        <p>
+        <div class="chart">
+            <div class="bar nyx" style="width: 90%">
+                <div>Nyx</div>
+                <div class="bar-text">90%</div>
+            </div>
+            <div class="bar gmat" style="width: 50%">
+                <div>GMAT</div>
+                <div class="bar-text">50%</div>
+            </div>
+            <div class="bar ansys" style="width: 30%">
+                <div>ANSYS</div>
+                <div class="bar-text">30%</div>
+            </div>
+            </div>
 
-<div class="card">
-    <h2 class="emph">Tutorials</h2>
-    Step-by-step guidance to help complete a task using Nyx
-</div>
+        </p>
+    </article>
 
-<div class="card">
-    <h2 class="emph">How-to guides</h2>
-    <div class="card-content">
-    Instructions for how to achieve a specific goal using Nyx
-    </div>
-</div>
+    <article>
+        <h2>Title 2</h2>
+        <p>
+        <img class="blurry-image" src="assets/pipelines.png">
+        </p>
+    </article>
 
-<div class="card">
-    <h2 class="emph">Technical reference</h2>
-    <div class="card-content">
-    Math spec of Nyx, including algorithms and validation against third-party tools
-    </div>
-</div>
+    <article>
+        <h2>Title 3</h2>
+        <p>Content 3</p>
+    </article>
 
-<div class="card">
-    <h2 class="emph">Lessons</h2>
-    <div class="card-content">
-    In depth explanation of spacecraft navigation and trajectory optimization for real-world missions
-    </div>
-</div>
+    <article>
+        <h2>Title 4</h2>
+        <p>Content 4</p>
+    </article>
+</section>
+    
+</main>
 
 </div>

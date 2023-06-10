@@ -108,10 +108,8 @@ extra_css:
 
 plugins:
   - search
-  - git-revision-date-localized:
-      type: iso_date
 
-copyright: Copyright &copy; 2022 - Christopher Rabotin
+copyright: Copyright &copy; 2023 - Christopher Rabotin
 
 repo_url: https://github.com/nyx-space/nyx
 repo_name: nyx-space/nyx
