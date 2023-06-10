@@ -75,7 +75,7 @@ Click on the requirement to see its description, verification method, and its ch
     
             **Test plan:** TAI demonstrates a purely monotonic clock.
 
-    ???+ warning "1.2: Human time shall be supported"
+    ???+ success "1.2: Human time shall be supported"
         Humans (mostly) live on Earth, where gravity is real and affects time.
 
         **Verification:** inspection
@@ -89,7 +89,7 @@ Click on the requirement to see its description, verification method, and its ch
     
             **Test plan:** UTC computations shall be cross checked against external sources.
 
-        ??? failure "1.2.2: Universal Time (UT or UT1) shall be supported"
+        ??? success "1.2.2: Universal Time (UT or UT1) shall be supported"
             UT1 cannot be predicted and instead are announced by NASA and others, like on [JPL's website](https://eop2-external.jpl.nasa.gov/).
     
             **Verification:** testing
@@ -103,7 +103,7 @@ Click on the requirement to see its description, verification method, and its ch
 
     **Test plan:** N/A
 
-    ???+ warning "2.1: RFC3339"
+    ???+ success "2.1: RFC3339"
         The [RFC3339](https://www.rfc-editor.org/rfc/rfc3339) defines datetime objects with a fully qualified year, month, day, hour, minute, second, and optionally sub-seconds. It also supports either UTC time or a fixed offset from UTC defined in hours and minutes from UTC.
 
         **Verification:** testing
@@ -131,7 +131,7 @@ Click on the requirement to see its description, verification method, and its ch
     
             **Test plan:** Epochs to demonstrate formatting with and without sub-seconds.
 
-        ??? failure "2.1.4: Epochs shall be representable in RFC3339 with UTC offsets"
+        ??? success "2.1.4: Epochs shall be representable in RFC3339 with UTC offsets"
             The UTC offset of the current computer shall be supported in the RFC3339 formatting/
     
             **Verification:** testing

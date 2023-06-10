@@ -7,8 +7,6 @@ hide:
 
 # Blazing fast spacecraft navigation {: .tagline}
 
-<!-- [:material-github: Github](https://docs.nyxspace.com){ .md-button } [:material-file-document-multiple-outline: Tutorials](https://docs.nyxspace.com){ .md-button } [:material-fast-forward: Guides](https://docs.nyxspace.com){ .md-button } [:material-lightbulb-on-outline: Explanations](https://docs.nyxspace.com){ .md-button } [:material-math-integral: Math Spec](https://docs.nyxspace.com){ .md-button } -->
-
 !!! tip inline "Get started for free"
 
     Add Nyx to your current Python environment:
@@ -21,7 +19,7 @@ hide:
     cargo add nyx_space
     ```
 
-    [**Read the documentation** :material-file-document-multiple-outline:](https://docs.nyxspace.com)
+    [**Read the documentation** :material-file-document-multiple-outline:](/nyxspace/showcase/)
 
 
     [**Browse the source code** :material-github:](https://github.com/nyx-space/nyx)

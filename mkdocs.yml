@@ -7,10 +7,7 @@ theme:
     - navigation.instant
     - navigation.tabs
     - navigation.tracking
-    #- navigation.indexes
-    #- navigation.top
-    #- toc.follow
-    #- toc.integrate
+    - toc.follow
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png
   font:
@@ -38,8 +35,8 @@ theme:
 
 nav:
   - Nyx: index.md
-  - License: license.md
-  - Nyx Space:
+  - Pricing: pricing.md
+  - Documentation:
       - Examples:
           - Introduction: nyxspace/showcase/index.md
           - Mission design:
@@ -93,14 +90,15 @@ nav:
               - Dual numbers: nyxspace/MathSpec/appendix/dual_numbers.md
       - Versions: versions.md
 
-  - ANISE:
-      - Introduction: anise/intro.md
-  - Hifitime:
-      - Introduction: hifitime/intro.md
-      - Design: hifitime/design.md
-      - Python user guide: hifitime/python.md
-      - Rust user guide: hifitime/rust.md
-      - Change Log: hifitime/changelog.md
+  - Companion projects:
+    - Hifitime:
+        - Introduction: hifitime/intro.md
+        - Design: hifitime/design.md
+        - Python user guide: hifitime/python.md
+        - Rust user guide: hifitime/rust.md
+        - Change Log: hifitime/changelog.md
+    - ANISE:
+        - Introduction: anise/intro.md
 
   - Blog:
       - "2022.10": blog/2022.10-hifitime-3.5.md
