@@ -29,7 +29,7 @@ hide:
     [**Learn about companion projects** :material-compass-rose:](#)
 
 
-<script src="https://asciinema.org/a/14.js" id="asciicast-14" async data-autoplay="false" data-theme="solarized-dark" data-rows="17"></script>
+<script src="https://asciinema.org/a/590749.js" id="asciicast-590749" async data-autoplay="false" data-theme="solarized-dark" data-rows="20"></script>
 
 <main class="landing">
     
