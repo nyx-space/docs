@@ -60,7 +60,30 @@
     font-weight: bold;
     font-size: 200%;
     text-align: center;
+    font-style: italic;
+    border-bottom: #0072b2 dotted 1px;
+    color: #d55e00 !important;
 }
+/* 
+h1.tagline {
+    font-weight: bold;
+    font-size: 200%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    font-style: italic;
+}
+h1.tagline:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    border-bottom: 1px dotted #0072b2;
+    left: 25%;
+    right: 25%;
+    background: linear-gradient(to right, transparent, #0072b2, transparent);
+} */
 
 .emph {
     border-bottom: #0072b2 dotted 1px;

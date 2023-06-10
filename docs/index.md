@@ -4,7 +4,8 @@ hide:
   - toc
 ---
 
-# Blazing fast spacecraft navigation
+
+<h1 class="tagline">Blazing fast spacecraft navigation</h1>
 
 <div class="card-container">
 
