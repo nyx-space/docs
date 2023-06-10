@@ -1,19 +1,18 @@
-site_name: Nyx
+site_name: Nyx Space
 site_url: https://nyxspace.com
 edit_uri: ""
 theme:
   name: material
   features:
+    - navigation.instant
     - navigation.tabs
-    - navigation.indexes
-    - navigation.top
+    - navigation.tracking
     - toc.follow
-    - toc.integrate
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png
   font:
-    text: IBM Plex Sans
-    code: IBM Plex Mono
+    text: Montserrat
+    code: Inconsolata
   palette:
     - scheme: default
       primary: blue grey
@@ -29,11 +28,15 @@ theme:
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
+  icon:
+    admonition:
+      tip: material/rocket-launch-outline
+
 
 nav:
-  - Home: index.md
-  - License: license.md
-  - Nyx Space:
+  - Nyx: index.md
+  - Pricing: pricing.md
+  - Documentation:
       - Examples:
           - Introduction: nyxspace/showcase/index.md
           - Mission design:
@@ -87,14 +90,15 @@ nav:
               - Dual numbers: nyxspace/MathSpec/appendix/dual_numbers.md
       - Versions: versions.md
 
-  - ANISE:
-      - Introduction: anise/intro.md
-  - Hifitime:
-      - Introduction: hifitime/intro.md
-      - Design: hifitime/design.md
-      - Python user guide: hifitime/python.md
-      - Rust user guide: hifitime/rust.md
-      - Change Log: hifitime/changelog.md
+  - Companion projects:
+    - Hifitime:
+        - Introduction: hifitime/intro.md
+        - Design: hifitime/design.md
+        - Python user guide: hifitime/python.md
+        - Rust user guide: hifitime/rust.md
+        - Change Log: hifitime/changelog.md
+    - ANISE:
+        - Introduction: anise/intro.md
 
   - Blog:
       - "2022.10": blog/2022.10-hifitime-3.5.md
@@ -106,10 +110,8 @@ extra_css:
 
 plugins:
   - search
-  - git-revision-date-localized:
-      type: iso_date
 
-copyright: Copyright &copy; 2022 - Christopher Rabotin
+copyright: Copyright &copy; 2023 - Christopher Rabotin
 
 repo_url: https://github.com/nyx-space/nyx
 repo_name: nyx-space/nyx
@@ -152,6 +154,12 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+
 
 extra_javascript:
   - js/config.js

@@ -1,104 +1,102 @@
-![Nyx logo](assets/logo.png){: .center }
+---
+hide:
+  - navigation
+  - toc
+---
 
-<p class="tagline">Analyze, automate, and fly &mdash; as a team</p>
 
-<p class="pitch">Nyx is a platform for astrodynamics tools to support space missions from its early design phase through flight operations.</p>
+# Nyx: Revolutionizing Flight Dynamics {: .tagline}
 
-| Nyx Space | ANISE | Hifitime |
-| :---: | :---: | :---: | 
-| <big>A fully featured astrodynamics toolkit for mission design and orbit determination</big> | <big>A modern rewrite of NASA SPICE for desktop and embedded systems</big> | <big>An ultra-precise time computation library for safety-critical systems</big> |
-| [Design Docs](#) | [Purpose](#) | [Design Docs](/hifitime/design/) |
-| [Mathematical specifications](#) | [Design Docs](#) | [Get started in Rust](/hifitime/rust/) |
-| [Get started in Rust](#) | [Get started in Python](#) | [Get started in Python](hifitime/python/) |
+<p class="subtagline">Blazing fast from mission concept to operations, and automation</p>
 
-!!! question
-    All of the software written as part of Nyx is thoroughly tested and validated as it follows the [Nyx quality assurance process](http://quality.nyxspace.com).
+!!! tip inline "Get started for free"
 
-## :material-rocket-launch-outline: Mission Design
+    Add Nyx to your current Python environment:
+    ```sh
+    pip install nyx_space
+    ```
 
-+ **Designed for Monte Carlo analyzes**{ .emph }
+    Add Nyx to your [Rust :material-language-rust:](https://rust-lang.org) project:
+    ```sh
+    cargo add nyx_space
+    ```
 
-    + Monte Carlo safely run on all processors without any of the multi-threading risks you'd see in C++ or Python (no data race conditions, no stopping the program before saving data)
-    + Simulate and analyze ten thousand (10,000 !!) spacecraft in high-fidelity in 90 seconds on a standard desktop (celestial bodies of Earth, Moon, Sun, Earth spherical harmonics of 12x12)
-    + Analyze trajectories in parallel by generating their ephemerides
+    [**Read the documentation** :material-file-document-multiple-outline:](/nyxspace/showcase/)
 
-+ **High fidelity models**{ .emph }
+
+    [**Browse the source code** :material-github:](https://github.com/nyx-space/nyx)
+
+    [**Learn about companion projects** :material-compass-rose:](/hifitime/intro)
+
+
+<script src="https://asciinema.org/a/590749.js" id="asciicast-590749" async data-autoplay="false" data-theme="solarized-dark" data-rows="20"></script>
+
+<main class="landing">
     
-    + Multi-body gravity, solar radiation pressure, and atmospheric drag models
-    + Spherical harmonic gravity fields: JGM3 and EGM2008 for Earth, JGGRX for the Moon
-    + Eclipse modeling with multiple concurrent celestial objects
+<section class="grid">
+    <article>
+        <h2>Empowering flight dynamics engineers</h2>
+        <h4>Powerful, open-source tools for mission design and analysis</h4>
+        <p>As a flight dynamics engineer, you need to plan maneuvers, analyze spacecraft trajectories, and quickly turn around orbit determination solutions. Most options are proprietary, clunky, expensive, and slow.
+        </p>
+        <p>
+        <span class="emph">Nyx is different.</span>
+        <ul>
+        <li>Trajectory planning - Targeting and optimization, low thrust or not</li>
+        <li>Orbit determination - Gauss Markov noise models, and state-of-the-art autodiff for all orbital dynamics</li>
+        <li>Interoperable - uses CCSDS standards and open formats (parquet, yaml)</li>
+        <li>Free and open-source - no expensive licenses</li>
+        <li>Analysis - plots are finally interactive</li>
+        </ul>
+        Plotting some residuals (dots dots dots!)
+        <img class="blurry-image" src="assets/prefit-resid.png">
+        </p>
+    </article>
+    <article>
+        <h2>Built for speed, automation and scalability</h2>
+        <h4>Simulate more, faster, from your desktop to the cloud</h4>
+        <p>Nyx was built from the ground up to leverage advancements in computer science for space mission design. Our focus on performance, automation, and cloud/HPC-readiness provide insights for any operational scenario.</p>
+        <p>
+        <span class="emph">Unlock the future.</span>
+        <ul>
+        <li>Simulate and analyze thousands spacecraft in high-fidelity in mere seconds on a standard desktop</li>
+        <li>Automate repetitive tasks like report generation, data processing, and off-nominal simulation</li>
+        <li>Python API for easy integration into your automated pipelines and workflows</li>
+        <li>Deploy across architectures from a laptop to the cloud for massive scaling</li>
+        </ul>
+        </p>
+        <p>
+        Simulation of ten thousand spacecraft in high-fidelity in 90 seconds on a standard desktop (gravity of Earth, Moon, Sun, and Earth spherical harmonics of 12x12)
+        <div class="chart">
+            <div class="bar nyx" style="width: 45%">
+                <div>Nyx: 90 seconds</div>
+            </div>
+            <div class="bar gmat" style="width: 85%">
+                <div>GMAT: > 1 hour</div>
+            </div>
+            <div class="bar ansys" style="width: 100%">
+                <div>ANSYS STK: > 1 hour + $$$</div>
+            </div>
+        </div>
+        </p>
+    </article>
+    <article>
+        <h2>Reliable, tested and documented</h2>
+        <h4>Mission-critical reliability through transparency and rigor</h4>
+        <p>Nyx provides a robust astrodynamics library tested against real-world scenarios and well documented to support your mission from planning to operations. You can also discuss solutions directly <a href="https://github.com/nyx-space/nyx/discussions">with the community</a>.</p>
+        <p>
+        <span class="emph">No more obsolete documentation</span>
+        <ul>
+        <li>Documentation uses the proven Diátaxis method to orient users</li>
+        <li>Hundreds of tests validate calculations, methods and outputs</li>
+        <li>Approachable syntax and interactive visuals foster understanding</li>
+        <li>Lower risk through transparent verification and validation</li>
+        </ul>
+        <img class="blurry-image" src="assets/pipelines.png">
+        </p>
+    </article>
+</section>
     
-+ **Maneuver planning**{ .emph }
+</main>
 
-    + Differential corrector and multiple shooting for finite burn and low-thrust trajectory optimization
-    + Guidance laws: Ruggiero, Lyapunov control, or add your own guidance law
-    + Two-body approximations: Lambert solver, Hohmann transfer
-
-<hr/>
-
-## :material-vector-curve: Orbit Determination
-
-+ **Spaceflight Navigation**{ .emph }
-
-    + Conventional and Extended Kalman filters
-    + Smoothing and iteration of navigation estimates
-    + One-way and two-range ranging and Doppler measurements
-
-
-+ **State-of-the-art partials computation**{ .emph }
-
-    + Dual Number theory for STM computation (Rabotin 2019)
-    + Partials available for multibody dynamics, spherical harmonics
-
-+ **Automation and workflows**{ .emph }
-
-    + Leverage computational speed for simulating a OD of off-nominal trajectories
-    + Cloud-ready library and application enables automation of your workflow
-    
-
-<hr/>
-
-## :material-globe-model: ConOps Analysis
-
-+ **Event-based ConOps**{ .emph }
-
-    + Design concepts of operations by finding specific events in a spacecraft trajectories
-    + Seek spacecraft and cosmic events in any celestial frame
-    
-
-+ **State-of-the-art models**{ .emph }
-
-    + Planetary and solar eclipse, penumbra and visibility computations
-    + NAIF DE438s planetary ephemeris by NASA
-    + IAU 2018 body fixed frames (Archinal et al. 2018)
-
-+ **Orbital state transformation**{ .emph }
-
-    + Conversion between Cartesian states and Keplerian orbital elements
-    + Central body and rotation transformations
-
-
-<hr/>
-
-## :material-file-document-outline: Licensing
-
-Nyx itself is licensed in AGPL version 3.0. Learn more about the important terms of this license [here](/license/). ANISE is licensed in Mozilla Public License (MPL). Hifitime is licensed in Apache 2.0
-
-<hr/>
-
-## :material-email-outline: Contact
-If some documentation needs clarification, or if you've found a bug, please open a new issue [here](https://gitlab.com/nyx-space/nyx/-/issues/new) (you'll need a free gitlab.com account). Otherwise, you may also create a new issue by emailing the Gitlab project directly by clicking <a href="mailto:incoming+nyx-space-nyx-11893257-issue-@incoming.gitlab.com">here</a>.
-
-
-For general chatter about astrodynamics, you can join the [#astrodyn](https://app.element.io/#/room/#astrodyn:matrix.org) room on Element.io, a secure and decentralized internet chat platform.
-
-To contact the author of Nyx, Chris Rabotin, email chris.rabotin@pm.me.
-
-!!! quote
-    Ce que l'on conçoit bien s'énonce clairement, et les mots pour le dire arrivent aisément.
-
-    <small>Whatever is well conceived is clearly said, and the words to say it flow with ease.</small>
-
-    -- Nicolas Boileau Despréaux
-
---8<-- "includes/Abbreviations.md"
+</div>
