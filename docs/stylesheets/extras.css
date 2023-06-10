@@ -87,11 +87,6 @@
     margin: 0 auto;
 }
 
-header.landing {
-    padding: 20px;
-    text-align: center;
-}
-
 main.landing {
     padding: 20px;
 }
@@ -157,4 +152,11 @@ article h2 {
 
 .ansys {
   background-color: #66ccff;
+}
+
+.center-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
