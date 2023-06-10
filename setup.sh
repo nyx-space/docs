@@ -18,7 +18,7 @@ fi
 
 setup
 
-if [ "$GITHUB_ACTIONS" == "true" ]; then
+if [[ -n $GITHUB_ACTIONS ]]; then
   pipenv run mkdocs build
 else
   pipenv run mkdocs serve
