@@ -19,6 +19,38 @@
     purple: #cc79a7;
 } */
 
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-radius: 0.25em;
+    /* background-color: #f0f0f0; */
+    /* background-color: rgba(213, 94, 0, 0.05); */
+    background-color: rgba(0, 114, 178, 0.05);
+    background-image: radial-gradient(circle at 1em 1em, rgba(0,0,0,0.05) 5%, transparent 0);
+    background-size: 3em 3em;
+    transition: transform 0.3s ease-in-out;
+    border: #d55e00 double 1px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1em;
+    justify-items: center;
+    padding: 1em;
+}
+
+.card-content {
+    text-align: center;
+}
+
 .pitch {
     font-size: 150%;
     text-align: center;

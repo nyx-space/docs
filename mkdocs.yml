@@ -1,19 +1,21 @@
-site_name: Nyx
+site_name: Nyx Space
 site_url: https://nyxspace.com
 edit_uri: ""
 theme:
   name: material
   features:
+    - navigation.instant
     - navigation.tabs
-    - navigation.indexes
-    - navigation.top
-    - toc.follow
-    - toc.integrate
+    - navigation.tracking
+    #- navigation.indexes
+    #- navigation.top
+    #- toc.follow
+    #- toc.integrate
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png
   font:
-    text: IBM Plex Sans
-    code: IBM Plex Mono
+    text: Montserrat
+    code: Inconsolata
   palette:
     - scheme: default
       primary: blue grey
@@ -31,7 +33,7 @@ theme:
         name: Switch to light mode
 
 nav:
-  - Home: index.md
+  - Nyx: index.md
   - License: license.md
   - Nyx Space:
       - Examples:
