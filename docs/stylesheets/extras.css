@@ -60,9 +60,15 @@
     font-weight: bold;
     font-size: 200%;
     text-align: center;
-    font-style: italic;
-    border-bottom: #0072b2 dotted 1px;
+    border-bottom: #0072b2 double 1px;
     color: #d55e00 !important;
+}
+
+.subtagline {
+    font-weight: bold;
+    font-size: 125%;
+    text-align: center;
+    color: #0072b2 !important;
 }
 
 .emph {
@@ -147,11 +153,11 @@ article h2 {
 }
 
 .gmat {
-  background-color: #33a8ff;
+  background-color: #f0e442;
 }
 
 .ansys {
-  background-color: #66ccff;
+  background-color: #d55e00;
 }
 
 .ctr {

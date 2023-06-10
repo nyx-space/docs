@@ -31,7 +31,7 @@ Yes, you are free to use Nyx for commercial purposes and to build proprietary so
 + If you link to or bundle Nyx in your own software, the copyleft requirement typically applies and you must open source your software under AGPLv3.
 + If you use Nyx to build a hosted service, any interaction exposing a Nyx API or component to users triggers the copyleft requirement. You must provide your source code and ensure your terms allow freedoms equivalent to AGPLv3.
 
-The goal of these requirements is to protect user freedoms and encourage collaborative progress. By building on Nyx, your project also gains the benefits and protections of open source. However, if uncertain how AGPLv3 applies or impacts your commercial plans, do consult legal counsel.
+The goal of these requirements is to protect user freedoms and encourage collaborative progress. By building on Nyx, your project also gains the benefits and protections of open source. However, if you are uncertain how AGPLv3 applies to, or impacts your commercial plans, please consult legal counsel.
 
 !!! info
     We aim to clarify the terms and implications of AGPLv3 to empower users, but cannot provide legal advice for specific use cases. If additional concerns arise in your implementation or distribution of Nyx, submit an issue so we can attempt to address it. Our goal is advancing access to technology, not creating legal entanglements - so please let's work through any questions together! But ultimately, you assume responsibility for adhering to the license.

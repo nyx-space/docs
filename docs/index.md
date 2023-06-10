@@ -5,7 +5,9 @@ hide:
 ---
 
 
-# Blazing fast spacecraft navigation {: .tagline}
+# Nyx: Revolutionizing Flight Dynamics {: .tagline}
+
+<p class="subtagline">Blazing fast from mission concept to operations, and automation</p>
 
 !!! tip inline "Get started for free"
 
@@ -24,7 +26,7 @@ hide:
 
     [**Browse the source code** :material-github:](https://github.com/nyx-space/nyx)
 
-    [**Learn about companion projects** :material-compass-rose:](#)
+    [**Learn about companion projects** :material-compass-rose:](/hifitime/intro)
 
 
 <script src="https://asciinema.org/a/590749.js" id="asciicast-590749" async data-autoplay="false" data-theme="solarized-dark" data-rows="20"></script>
@@ -57,16 +59,16 @@ hide:
         <p>
         <span class="emph">Unlock the future.</span>
         <ul>
-        <li>Simulate and analyze ten thousand spacecraft in high-fidelity in 90 seconds on a standard desktop</li>
-        <li>Automate repetitive tasks like report generation, data processing, and simulations</li>
+        <li>Simulate and analyze thousands spacecraft in high-fidelity in mere seconds on a standard desktop</li>
+        <li>Automate repetitive tasks like report generation, data processing, and off-nominal simulation</li>
         <li>Python API for easy integration into your automated pipelines and workflows</li>
         <li>Deploy across architectures from a laptop to the cloud for massive scaling</li>
         </ul>
         </p>
         <p>
-        Simulate and analyze ten thousand spacecraft in high-fidelity in 90 seconds on a standard desktop (gravity of Earth, Moon, Sun, and Earth spherical harmonics of 12x12)
+        Simulation of ten thousand spacecraft in high-fidelity in 90 seconds on a standard desktop (gravity of Earth, Moon, Sun, and Earth spherical harmonics of 12x12)
         <div class="chart">
-            <div class="bar nyx" style="width: 50%">
+            <div class="bar nyx" style="width: 45%">
                 <div>Nyx: 90 seconds</div>
             </div>
             <div class="bar gmat" style="width: 85%">
@@ -80,7 +82,7 @@ hide:
     </article>
     <article>
         <h2>Reliable, tested and documented</h2>
-        <h4>Even the examples from the documentation are tested</h4>
+        <h4>Mission-critical reliability through transparency and rigor</h4>
         <p>Nyx provides a robust astrodynamics library tested against real-world scenarios and well documented to support your mission from planning to operations. You can also discuss solutions directly <a href="https://github.com/nyx-space/nyx/discussions">with the community</a>.</p>
         <p>
         <span class="emph">No more obsolete documentation</span>
