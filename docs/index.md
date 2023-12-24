@@ -33,7 +33,7 @@ hide:
 
 <main class="landing">
     
-<section class="grid">
+<section class="card-container">
     <article class="card">
         <h2>Empowering flight dynamics engineers</h2>
         <h4>Powerful, open-source tools for mission design and analysis</h4>
