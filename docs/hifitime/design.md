@@ -1,6 +1,13 @@
 This sections explains the inner workings of epochs and durations in hifitime. This is not relevant to people who just want to use the library.
 
-This section aims to adhere to the [Nyx Quality Assurance](https://quality.nyxspace.com).
+Hifitime provides several main constructs:
+
++ `Duration`: a positive or negative duration with nanosecond precision
++ `Epoch`: a datetime with the time scale used to initialize it [^1]
++ `TimeScale`: an enum storing the different time scales (or "time systems") supported by hifitime
++ `TimeSeries`: an iterable structure that yields epochs at a fixed interval between a starting and ending datetime
+
+In addition to extensive unit and integration testing, Hifitime is formally verified for operations on epochs and durations using the [`Kani`](https://model-checking.github.io/kani/) model checking.
 
 ## Memory layout
 
