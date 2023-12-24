@@ -19,6 +19,31 @@
     purple: #cc79a7;
 } */
 
+.md-main {
+    background-image: url('../assets/background.png');
+    background-attachment: fixed;
+    background-position: center;
+    /* position: relative; */
+    /* z-index: -2; */
+}
+
+.md-main::before {
+    content: "";
+    background-color: rgba(256, 256, 256, 0.9);
+    /* Adjust the alpha value to control the tint intensity */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* z-index: -1; */
+}
+
+.md-main__inner {
+    position: relative;
+    z-index: 1;
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -26,10 +51,8 @@
     align-items: center;
     padding: 1em;
     border-radius: 0.25em;
-    /* background-color: #f0f0f0; */
-    /* background-color: rgba(213, 94, 0, 0.05); */
     background-color: rgba(0, 114, 178, 0.05);
-    background-image: radial-gradient(circle at 1em 1em, rgba(0,0,0,0.05) 5%, transparent 0);
+    background-image: radial-gradient(circle at 1em 1em, rgba(0, 0, 0, 0.05) 5%, transparent 0);
     background-size: 3em 3em;
     transition: transform 0.3s ease-in-out;
     border: #d55e00 double 1px;
@@ -128,36 +151,36 @@ article h2 {
 
 
 .chart {
-  width: 100%;
-  padding: 20px;
+    width: 100%;
+    padding: 20px;
 }
 
 .bar {
-  margin-bottom: 10px;
-  height: 30px;
-  color: white;
-  line-height: 30px;
-  background-color: #0072b2;
-  text-indent: 10px;
-  position: relative;
+    margin-bottom: 10px;
+    height: 30px;
+    color: white;
+    line-height: 30px;
+    background-color: #0072b2;
+    text-indent: 10px;
+    position: relative;
 }
 
 .bar-text {
-  position: absolute;
-  right: 10px;
-  color: #d55e00;
+    position: absolute;
+    right: 10px;
+    color: #d55e00;
 }
 
 .nyx {
-  background-color: #0072b2;
+    background-color: #0072b2;
 }
 
 .gmat {
-  background-color: #f0e442;
+    background-color: #f0e442;
 }
 
 .ansys {
-  background-color: #d55e00;
+    background-color: #d55e00;
 }
 
 .ctr {

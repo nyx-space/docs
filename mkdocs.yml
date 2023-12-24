@@ -13,20 +13,14 @@ theme:
     text: Montserrat
     code: Inconsolata
   palette:
-    - scheme: default
-      primary: blue grey
-      accent: orange
-      media: "(prefers-color-scheme: light)"
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
-    - scheme: slate
-      primary: blue grey
-      accent: orange
-      media: "(prefers-color-scheme: dark)"
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
+    scheme: default
+    primary: blue grey
+    accent: orange
+    media: "(prefers-color-scheme: light)"
+    toggle:
+      icon: material/weather-night
+      name: Switch to dark mode
+
   icon:
     admonition:
       tip: material/rocket-launch-outline

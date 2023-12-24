@@ -34,7 +34,7 @@ hide:
 <main class="landing">
     
 <section class="grid">
-    <article>
+    <article class="card">
         <h2>Empowering flight dynamics engineers</h2>
         <h4>Powerful, open-source tools for mission design and analysis</h4>
         <p>As a flight dynamics engineer, you need to plan maneuvers, analyze spacecraft trajectories, and quickly turn around orbit determination solutions. Most options are proprietary, clunky, expensive, and slow.
@@ -52,7 +52,7 @@ hide:
         <img class="blurry-image" src="assets/prefit-resid.png">
         </p>
     </article>
-    <article>
+    <article class="card">
         <h2>Built for speed, automation and scalability</h2>
         <h4>Simulate more, faster, from your desktop to the cloud</h4>
         <p>Nyx was built from the ground up to leverage advancements in computer science for space mission design. Our focus on performance, automation, and cloud/HPC-readiness provide insights for any operational scenario.</p>
@@ -80,7 +80,7 @@ hide:
         </div>
         </p>
     </article>
-    <article>
+    <article class="card">
         <h2>Reliable, tested and documented</h2>
         <h4>Mission-critical reliability through transparency and rigor</h4>
         <p>Nyx provides a robust astrodynamics library tested against real-world scenarios and well documented to support your mission from planning to operations. You can also discuss solutions directly <a href="https://github.com/nyx-space/nyx/discussions">with the community</a>.</p>
