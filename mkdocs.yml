@@ -7,6 +7,8 @@ theme:
     - navigation.tabs
     - navigation.tracking
     - toc.follow
+    - content.code.copy
+    - navigation.footer
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png
   font:
@@ -16,10 +18,6 @@ theme:
     scheme: default
     primary: blue grey
     accent: orange
-    media: "(prefers-color-scheme: light)"
-    toggle:
-      icon: material/weather-night
-      name: Switch to dark mode
 
   icon:
     admonition:

@@ -23,8 +23,6 @@
     background-image: url('../assets/background.png');
     background-attachment: fixed;
     background-position: center;
-    /* position: relative; */
-    /* z-index: -2; */
 }
 
 .md-main::before {
@@ -36,7 +34,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* z-index: -1; */
 }
 
 .md-main__inner {
@@ -47,6 +44,11 @@
 .md-footer {
     z-index: 1;
 }
+
+.md-overlay {
+    z-index: 0;
+}
+
 
 /* Horizontal Card Layout with Content and Logo */
 .card {
