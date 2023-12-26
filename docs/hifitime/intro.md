@@ -1,14 +1,7 @@
 
-Hifitime is a time management library available in [Rust](/hifitime/rust/) and [Python](/hifitime/python) designed for scientific use or in programs that require high accuracy in time computations. It provides several main constructs:
+Hifitime is a precision-oriented time management library available in [Rust](rust.md) and [Python](python.md) tailored for scientific applications and programs that demand high accuracy in time computations. Hifitime guarantees exactly one nanosecond of precision in all epochs and duration computations for 65,536 years, centered on 01-JAN-1900 TAI. Refer to the [design](design.md) for details.
 
-+ `Duration`: a positive or negative duration with nanosecond precision
-+ `Epoch`: a datetime with the time scale used to initialize it [^1]
-+ `TimeScale`: an enum storing the different time scales (or "time systems") supported by hifitime
-+ `TimeSeries`: an iterable structure that yields epochs at a fixed interval between a starting and ending datetime
-
-This library guarantees exactly one nanosecond of precision in all epochs and duration computations for 65,536 years, centered on 01-JAN-1900 TAI. Refer to the [design](/hifitime/design/) for details.
-
-In addition to extensive unit and integration testing, hifitime is formally verified for operations on epochs and durations using the [`Kani`](https://model-checking.github.io/kani/) model checking.
+Hifitime is trusted and utilized by leading scientific and aerospace organizations for critical time computation tasks in their pioneering projects and research, including [**Amazon Web Services**](https://aws.amazon.com/blogs/opensource/how-open-source-projects-are-using-kani-to-write-better-software-in-rust/), the [**Murchison Widefield Array**](https://www.mwatelescope.org/) radio telescope, [**Rocketlab USA**](https://www.rocketlabusa.com), and [many others](https://pepy.tech/project/hifitime). This widespread adoption underscores Hifitime's role as a foundational tool in the field of high-precision time management.
 
 ## Time scales
 

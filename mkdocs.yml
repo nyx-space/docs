@@ -4,7 +4,6 @@ edit_uri: ""
 theme:
   name: material
   features:
-    - navigation.instant
     - navigation.tabs
     - navigation.tracking
     - toc.follow
@@ -14,29 +13,22 @@ theme:
     text: Montserrat
     code: Inconsolata
   palette:
-    - scheme: default
-      primary: blue grey
-      accent: orange
-      media: "(prefers-color-scheme: light)"
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
-    - scheme: slate
-      primary: blue grey
-      accent: orange
-      media: "(prefers-color-scheme: dark)"
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
+    scheme: default
+    primary: blue grey
+    accent: orange
+    media: "(prefers-color-scheme: light)"
+    toggle:
+      icon: material/weather-night
+      name: Switch to dark mode
+
   icon:
     admonition:
       tip: material/rocket-launch-outline
 
 
 nav:
-  - Nyx: index.md
-  - Pricing: pricing.md
-  - Documentation:
+  - Home: index.md
+  - Nyx:
       - Examples:
           - Introduction: nyxspace/showcase/index.md
           - Mission design:
@@ -54,7 +46,6 @@ nav:
           - High fidelity models [WIP]: nyxspace/user_guide/hifimodels.md
       - MathSpec:
           - Introduction: nyxspace/MathSpec/index.md
-          - Hifitime (time): nyxspace/MathSpec/time.md
           - Celestial:
               - Coordinate frames [WIP]: nyxspace/MathSpec/celestial/coord_systems.md
               - Ephemeris [WIP]: nyxspace/MathSpec/celestial/ephemeris.md
@@ -90,20 +81,17 @@ nav:
               - Dual numbers: nyxspace/MathSpec/appendix/dual_numbers.md
       - Versions: versions.md
 
-  - Companion projects:
-    - Hifitime:
-        - Introduction: hifitime/intro.md
-        - Design: hifitime/design.md
-        - Python user guide: hifitime/python.md
-        - Rust user guide: hifitime/rust.md
-        - Change Log: hifitime/changelog.md
-    - ANISE:
-        - Introduction: anise/intro.md
+  - Hifitime:
+      - Introduction: hifitime/intro.md
+      - Design: hifitime/design.md
+      - Python user guide: hifitime/python.md
+      - Rust user guide: hifitime/rust.md
+      - Change Log: hifitime/changelog.md
 
-  - Blog:
-      - "2022.10": blog/2022.10-hifitime-3.5.md
-      - "2021.07": blog/2021.07-ieee-smc-it.md
-      - Index: blog/index.md
+  - ANISE:
+      - Introduction: anise/intro.md
+  
+  - Pricing: pricing.md
 
 extra_css:
   - stylesheets/extras.css

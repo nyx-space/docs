@@ -18,16 +18,16 @@ from hifitime import Epoch, Duration, TimeScale, TimeSeries
 
 Possibly the best way to get started after installing the package is to look at two example scripts:
 
-+ [`basic.py`](https://github.com/nyx-space/hifitime/blob/3.6.0/examples/python/basic.py) shows a typical workflow from initialization of an Epoch from the system's clock to printing it in different time scales
++ [`basic.py`](https://github.com/nyx-space/hifitime/blob/3.8.6/examples/python/basic.py) shows a typical workflow from initialization of an Epoch from the system's clock to printing it in different time scales
 
-+ [`timescales.py`](https://github.com/nyx-space/hifitime/blob/3.6.0/examples/python/timescales.py) shows how to use hifitime to compute differences between Epochs in different time scales and how to plot these differences with [plotly](plotly.com/) [^1]
++ [`timescales.py`](https://github.com/nyx-space/hifitime/blob/3.8.6/examples/python/timescales.py) shows how to use hifitime to compute differences between Epochs in different time scales and how to plot these differences with [plotly](https://plotly.com/) [^1]
 
 
 ## Epoch initialization
 
 The default constructor for `Epoch` in Python is from a string.
 
-Just like in the Rust library, this can be an [RFC3339](http://127.0.0.1:8000/hifitime/rust/#from-a-string-representation-in-rfc3339) representation:
+Just like in the Rust library, this can be an [RFC3339](rust.md#from-a-string-representation-in-rfc3339) representation:
 
 ```python
 >>> print(Epoch("1994-11-05T13:15:30Z"))

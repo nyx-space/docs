@@ -6,7 +6,7 @@ The following is an extract of the AAS-19-716 conference paper called _Applicati
 
 First, the mathematical notions of dual numbers and hyper-dual spaces is recalled, along with their error-free auto-differentiation properties. Subsequently, hyper-dual spaces are elegantly applied to statistical orbital determination problems, both for the computation of linearized dynamics, and for the sensitivity matrix of a Kalman filter. Further, a comparison of the execution speeds of the same statistical orbital determination problem using the hyper-dual space formulation and the traditional manual derivation formulation is provided.
 
-Please refer to [Dual Numbers](/MathSpec/appendix/dual_numbers) for a primer on dual number theory.
+Please refer to [Dual Numbers](../appendix/dual_numbers.md) for a primer on dual number theory.
 
 ## Applying hyper-dual space to statistical orbital determination using Kalman filtering
 ### The state transition matrix

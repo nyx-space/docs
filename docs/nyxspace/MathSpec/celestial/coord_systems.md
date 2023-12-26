@@ -7,7 +7,7 @@ _TODO_
 ### Trajectory centered frames
 Nyx supports the RIC, VNC and RCN trajectory frames. These frames are right-handed and orthonormal. To retrieve the $3\times 3$ rotation matrix of these frames, call the `dcm_from_traj_frame` function on an `Orbit` structure.
 
-Here is how Nyx computes these frames, where $\Omega$ refers to the [RAAN](/MathSpec/celestial/orbital_elements/#right-ascension-of-the-ascending-node-raan), $i$ to the [inclination](/MathSpec/celestial/orbital_elements/#inclination-inc), and $u$ to the [argument of latitude](/MathSpec/celestial/orbital_elements/#argument-of-latitude-aol). Moreover, $R_1$, $R_2$, $R_3$ respectively correspond to a rotation about the first, second and third axes.
+Here is how Nyx computes these frames, where $\Omega$ refers to the [RAAN](orbital_elements.md#right-ascension-of-the-ascending-node-raan), $i$ to the [inclination](orbital_elements.md#inclination-inc), and $u$ to the [argument of latitude](orbital_elements.md#argument-of-latitude-aol). Moreover, $R_1$, $R_2$, $R_3$ respectively correspond to a rotation about the first, second and third axes.
 
 #### RIC
 

@@ -2,16 +2,14 @@
 
 Ths computation of orbital element is either a clone of the NASA GMAT C++ code or of the Vallado algorithms (4-th edition). The [validation for the computation](#validation) of all elements is listed at the bottom of this page, apart for the B-Plane validation, which at the bottom of the B-Plane section [here](#b-plane-b_plane).
 
-API documentation available [here for Orbit](https://nyx-space.gitlab.io/nyx/nyx_space/struct.Orbit.html) and [here for OrbitDual](https://nyx-space.gitlab.io/nyx/nyx_space/cosmic/struct.OrbitDual.html).
-
 ## Storage
 Nyx stores all of the orbit information as a Cartesian state (units of kilometer and kilometer per second) because it is a non-singular representation of an orbit. Furthermore, all propagation using `OrbitalDynamics`, its acceleration models, and its force models is in Cartesian form for the same reason.
 
 ## Initialization methods
 
-An orbit may be initialized from its Cartesian position and velocity components (from 64 bit floating point values or from a vector of that type), from Keplerian orbital elements where the phasing parameter is the true anomaly, or from its geodesic elements (latitude, longitude and height compared to the reference ellipsoid of the frame[^1]). The initializer also includes an epoch (cf. [Time MathSpec](/MathSpec/time/)) and a frame (cf. [Frame MathSpec](/MathSpec/celestial/coord_systems/)).
+An orbit may be initialized from its Cartesian position and velocity components (from 64 bit floating point values or from a vector of that type), from Keplerian orbital elements where the phasing parameter is the true anomaly, or from its geodesic elements (latitude, longitude and height compared to the reference ellipsoid of the frame[^1]). The initializer also includes an epoch (cf. [Time MathSpec](../../../hifitime/intro.md)) and a frame (cf. [Frame MathSpec](../celestial/coord_systems.md)).
 
-As discussed above, the state is stored in Cartesian form. Hence, initializing in Keplerian form will trigger the conversion of the state from Keplerian orbital element into Cartesian orbital elements. This method _does support_ hyperbolic, circular inclined, circular equatorial, and the common elliptical orbits. The eccentricity tolerance is set to $1e^{-11}$, i.e. if the eccentricity is below that number, then the orbit is considered circular and the appropriate conversions to Cartesian will be triggered. The algorithm implementation is available [here](https://nyx-space.gitlab.io/nyx/nyx_space/struct.Orbit.html#method.keplerian), but to convince yourself that it works, probably best to check out the [validation](#validation) below.
+As discussed above, the state is stored in Cartesian form. Hence, initializing in Keplerian form will trigger the conversion of the state from Keplerian orbital element into Cartesian orbital elements. This method _does support_ hyperbolic, circular inclined, circular equatorial, and the common elliptical orbits. The eccentricity tolerance is set to $1e^{-11}$, i.e. if the eccentricity is below that number, then the orbit is considered circular and the appropriate conversions to Cartesian will be triggered. The algorithm implementation is available [here](https://rustdoc.nyxspace.com/nyx_space/cosmic/struct.Orbit.htmltent#method.keplerian), but to convince yourself that it works, probably best to check out the [validation](#validation) below.
 
 Vallado's geodetic to Cartesian initializer is also implemented allowing the initialization of a state known only by its longitude, laltitude and height above the reference ellipsoid of that rocky celestial object.
 
@@ -169,14 +167,14 @@ Nyx returns this parameter ($E$) in degrees.
 
 ### Geodetic height (`geodetic_height`)
 The parameter is returned in kilometers.
-This is computed using the Vallado approach, Algorithm 12 page 172 in the 4-th edition. This accounts for the correction when near the poles. It's a notch complex to write up, so please refer to the [code](https://nyx-space.gitlab.io/nyx/nyx_space/struct.Orbit.html#method.geodetic_height) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
+This is computed using the Vallado approach, Algorithm 12 page 172 in the 4-th edition. This accounts for the correction when near the poles. It's a notch complex to write up, so please refer to the [code](https://rustdoc.nyxspace.com/nyx_space/cosmic/struct.Orbit.htmltent#method.geodetic_height) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
 
 !!! warning
     This function requires that the orbit already be in a body fixed frame. Nyx will _not_ check that.
 
 ### Geodetic latitude (`geodetic_latitude`)
 The parameter is returned in degrees between $[-180;180]$.
-This is computed using the Vallado iterative approach, Algorithm 12 page 172 in the 4-th edition. It accounts for the flattening of the ellipsoid and its semi-major axis. It's a notch complex to write up, so please refer to the [code](https://nyx-space.gitlab.io/nyx/nyx_space/struct.Orbit.html#method.geodetic_latitude) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
+This is computed using the Vallado iterative approach, Algorithm 12 page 172 in the 4-th edition. It accounts for the flattening of the ellipsoid and its semi-major axis. It's a notch complex to write up, so please refer to the [code](https://rustdoc.nyxspace.com/nyx_space/cosmic/struct.Orbit.htmltent#method.geodetic_latitude) or Vallado for implementation details. As you'll note from the Validation section, it has been validated against Vallado examples.
 
 !!! warning
     This function requires that the orbit already be in a body fixed frame. Nyx will _not_ check that.
@@ -487,5 +485,5 @@ List of available partials, always with respect to the position components x,y,z
 
 [^1]: Nyx allows initialization from geodesic elements only for the following celestial bodies: Mercury, Venus, Earth, Luna/Earth Moon, and Mars. Although the Jupiter, Saturn, Uranus, and Neptune also have an angular velocity defined in Nyx, they do not have an ellipsoid flatenning parameter.
 [^2]: Two other computation methods were attempted (McMahon and Jah). The first prevented convergence of the shooting algorithm and the second led to near infinite LTOF.
-[^3]: Please refer to [Dual Numbers](/MathSpec/appendix/dual_numbers) for a primer on dual number theory.
+[^3]: Please refer to [Dual Numbers](../appendix/dual_numbers.md) for a primer on dual number theory.
 --8<-- "includes/Abbreviations.md"

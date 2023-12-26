@@ -3,8 +3,8 @@ Nyx supports iterations by smoothing the estimates first and then iterating on t
 
 The algorithm is straight-forward:
 
-1. Smooth all estimates, or until the end of the smoothing arc (cf. [smoothing](/MathSpec/navigation/smoothing/)).
-2. Process all of the measurements sequentially forward in time via the [measurement update](https://nyxspace.com/MathSpec/navigation/kalman/#measurement-update) call of the OD Process.
+1. Smooth all estimates, or until the end of the smoothing arc (cf. [smoothing](../orbit_determination/smoothing.md)).
+2. Process all of the measurements sequentially forward in time via the [measurement update](../orbit_determination/kalman.md#measurement-update) call of the OD Process.
 
 ## Iteration until convergence
 
@@ -15,7 +15,7 @@ This allows iterating the filter until one of the following conditions are met:
 1. The maximum number of iterations until the above convergence criteria is met (defaults to `15`); or
 1. The average RMS of the residuals increases after each iterations until a maximum number of iterations (defaults to `3`).
 
-Whether to use the prefit or the postfit (cf. [nomenclature](/MathSpec/navigation/kalman/#nomenclature)) is defined in configuration of the iteration function call. By default, Nyx will use the postfit residuals.
+Whether to use the prefit or the postfit (cf. [nomenclature](../orbit_determination/kalman.md#nomenclature)) is defined in configuration of the iteration function call. By default, Nyx will use the postfit residuals.
 
 !!! info "Average root mean square of postfit residual"
     It is defined as follows, where $\hat{z_i}$ is the postfit $i$-th residual normalized by the measurement noise $R_i$ at that epoch:

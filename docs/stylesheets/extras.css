@@ -19,36 +19,89 @@
     purple: #cc79a7;
 } */
 
-.card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1em;
-    border-radius: 0.25em;
-    /* background-color: #f0f0f0; */
-    /* background-color: rgba(213, 94, 0, 0.05); */
-    background-color: rgba(0, 114, 178, 0.05);
-    background-image: radial-gradient(circle at 1em 1em, rgba(0,0,0,0.05) 5%, transparent 0);
-    background-size: 3em 3em;
-    transition: transform 0.3s ease-in-out;
-    border: #d55e00 double 1px;
+.md-main {
+    background-image: url('../assets/background.png');
+    background-attachment: fixed;
+    background-position: center;
+    /* position: relative; */
+    /* z-index: -2; */
 }
 
+.md-main::before {
+    content: "";
+    background-color: rgba(256, 256, 256, 0.9);
+    /* Adjust the alpha value to control the tint intensity */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* z-index: -1; */
+}
+
+.md-main__inner {
+    position: relative;
+    z-index: 1;
+}
+
+.md-footer {
+    z-index: 1;
+}
+
+/* Horizontal Card Layout with Content and Logo */
+.card {
+    display: flex;
+    flex-direction: row;
+    /* Align items horizontally */
+    justify-content: space-between;
+    align-items: center;
+    /* Center items vertically */
+    padding: 1em;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(213, 94, 0, 0.2);
+}
+
+.card-content {
+    flex-grow: 1;
+    /* Allows content to fill available space */
+    padding-right: 1em;
+    /* Spacing between content and logo */
+}
+
+
 .card:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(213, 94, 0, 0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+        /* Revert to column layout for smaller screens */
+    }
+
+    .card-container {
+        grid-template-rows: 1fr;
+        /* Single column layout on small screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .card {
+        padding: 1em;
+    }
 }
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1em;
-    justify-items: center;
-    padding: 1em;
-}
-
-.card-content {
-    text-align: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
+    /* Adjust row height as needed */
+    gap: 2em;
+    padding: 2em;
+    justify-content: center;
 }
 
 .pitch {
@@ -93,33 +146,65 @@
     margin: 0 auto;
 }
 
-main.landing {
-    padding: 20px;
+article h2 {
+    color: #0072b2;
+    font-weight: bold;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+h2,
+h4 {
+    margin-bottom: 0.5em;
 }
 
-@media (max-width: 600px) {
-    .grid {
+h2 {
+    color: #0072b2;
+    /* Nyx branding color */
+    font-size: 1.5em;
+}
+
+h4 {
+    font-size: 1.2em;
+    color: #555;
+}
+
+p {
+    margin-bottom: 1em;
+    text-align: justify;
+    /* Improved readability */
+}
+
+/* List and Emphasis Styles */
+ul {
+    list-style: inside;
+    /* Cleaner look */
+    padding-left: 1em;
+}
+
+.emph {
+    font-weight: bold;
+    color: #d55e00;
+    /* Highlight color */
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    .card-container {
         grid-template-columns: 1fr;
     }
 }
 
-.grid article {
-    transition: transform 0.3s ease;
-}
+@media (max-width: 600px) {
+    .card {
+        padding: 1em;
+    }
 
-.grid article:hover {
-    transform: scale(1.05);
-}
+    h2 {
+        font-size: 1.4em;
+    }
 
-article h2 {
-    color: #0072b2;
-    font-weight: bold;
+    h4 {
+        font-size: 1.1em;
+    }
 }
 
 .blurry-image {
@@ -128,36 +213,36 @@ article h2 {
 
 
 .chart {
-  width: 100%;
-  padding: 20px;
+    width: 100%;
+    padding: 20px;
 }
 
 .bar {
-  margin-bottom: 10px;
-  height: 30px;
-  color: white;
-  line-height: 30px;
-  background-color: #0072b2;
-  text-indent: 10px;
-  position: relative;
+    margin-bottom: 10px;
+    height: 30px;
+    color: white;
+    line-height: 30px;
+    background-color: #0072b2;
+    text-indent: 10px;
+    position: relative;
 }
 
 .bar-text {
-  position: absolute;
-  right: 10px;
-  color: #d55e00;
+    position: absolute;
+    right: 10px;
+    color: #d55e00;
 }
 
 .nyx {
-  background-color: #0072b2;
+    background-color: #0072b2;
 }
 
 .gmat {
-  background-color: #f0e442;
+    background-color: #f0e442;
 }
 
 .ansys {
-  background-color: #d55e00;
+    background-color: #d55e00;
 }
 
 .ctr {
