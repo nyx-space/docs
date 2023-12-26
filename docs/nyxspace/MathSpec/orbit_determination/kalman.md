@@ -3,12 +3,12 @@ The Kalman Filter in Nyx is a sequential filter which can switch between convent
 
 The only algorithmic difference between a CKF and an EKF is that, after a measurement update, the EKF will consider the state estimate as the new reference state of the system. On the contrary, the CKF will only keep track of the state deviation from the reference state and not change the propagator state.
 
-Nyx performs a Joseph update for the covariance[^1]. Nyx does **not** use a UDU factorization for the covariance (cf. [this pull request](https://github.com/dimforge/nalgebra/pull/766) on the linear algebra library used by Nyx and [this issue](https://gitlab.com/nyx-space/nyx/-/issues/164) on the repo).
+Nyx performs a Joseph update for the covariance[^1].
 
-Moreover, Nyx no longer supports a square root information filter; if that is important to your application, reach out as it should not be too difficult to update the pre-1.0 code to the latest version of Nyx.
+Moreover, Nyx no longer supports a square root information filter; if that is important to your application, [reach out](https://7ug5imdtt8v.typeform.com/to/neFvVW3p) as it should not be too difficult to update the pre-1.0 code to the latest version of Nyx.
 
 !!! note
-    Please read the [SNC](/MathSpec/navigation/snc/) MathSpec for details on the state noise compensation / process noise.
+    Please read the [SNC](./snc.md) MathSpec for details on the state noise compensation / process noise.
 
 ### Nomenclature
 + $\Phi(t_i,~t_{i+1})$ : state transition matrix from time $t_i$ to time $t_{i+1}$

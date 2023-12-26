@@ -17,7 +17,7 @@ An eclipse state is represented in Nyx as an enum whose accepted values are `Vis
 + $r_L'$: apparent radius of the light source
 + $d'$: apparent separation of the centers of the circles formed by the aforementioned apparent radii
 
-![eclipse geometry](/assets/figures/eclipse.png)
+![eclipse geometry](../../../assets/figures/eclipse.png)
 
 <span class="center" style="text-align:center"><b>Figure 1</b>: eclipse computation geometry</span>
 
@@ -107,7 +107,7 @@ If $\mathcal{L}_0 \vee \mathcal{L}_1$, the eclipsing body is _not_ in the way of
     This is the Algorithm 35 of Vallado, 4th edition, page 308.
 
 ??? check "Validation"
-    The most crucial validation of the penumbral calculation is in the SRP modeling. You may find the validation cases [here](/MathSpec/models/srp/).
+    The most crucial validation of the penumbral calculation is in the SRP modeling. You may find the validation cases [here](../models/srp.md).
 
     Nyx has two line of slight verification cases (to check for boundary cases). You may run these with `RUST_BACKTRACE=1 cargo test --release -- los_ --nocapture`. These test cases were initial designed to confirm the modeling for CAPS.
 

@@ -94,6 +94,6 @@ $$\dot{\mathbf{v}}_{t'} = \dot{\mathbf{v}}_{t'} - \mu_i \left( \frac{\mathbf{r_j
 
     Rerun the Halo validation with `RUST_BACKTRACE=1 cargo test --release -- val_halo --nocapture`. Rerun the LLO validation with `RUST_BACKTRACE=1 cargo test --release -- val_llo --nocapture`. Rerun the LEO validation with `RUST_BACKTRACE=1 cargo test --release -- val_leo_multi --nocapture`.
 
-[^1]: This is the accuracy GMAT expects from a back propagation, as detailed in the [GMAT_V&V_ProcessAndResults.pdf](/assets/pdf/GMAT_VV_ProcessAndResults.pdf) file.
+[^1]: This is the accuracy GMAT expects from a back propagation, as detailed in the [GMAT_V&V_ProcessAndResults.pdf](../../../assets/pdf/GMAT_VV_ProcessAndResults.pdf) file.
 
 --8<-- "includes/Abbreviations.md"

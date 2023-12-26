@@ -18,7 +18,7 @@ Note that $C_r$ and $\mathcal{A}$ are stored in the "context" passed to the EOM 
 
 ## Algorithm
 
-First, we compute the position of the Sun as seen from the spacecraft, and its unit vector, respectively $\mathbf{r_\odot}$ and $\mathbf{\hat r_\odot}$. Then, we compute the shadowing factor, $k$, using the [eclipse model](/MathSpec/celestial/eclipse/).
+First, we compute the position of the Sun as seen from the spacecraft, and its unit vector, respectively $\mathbf{r_\odot}$ and $\mathbf{\hat r_\odot}$. Then, we compute the shadowing factor, $k$, using the [eclipse model](../celestial/eclipse.md).
 
 Compute the norm of Sun vector in AU, $||\mathbf{r_\odot}||_{\text{AU}}$ by dividing the $\mathbf{r_\odot}$ vector by 1 AU.
 
@@ -66,7 +66,7 @@ $$ \mathbf{F}_{\text{SRP}} = C_r \mathcal{A} \Phi_{\text{SRP}} \mathbf{\hat r_\o
     ```
     
 
-[^1]: Computation of the shadowing factor uses the Eclipse computation derived [here](/MathSpec/celestial/eclipse/).
+[^1]: Computation of the shadowing factor uses the Eclipse computation derived [here](../celestial/eclipse.md).
 [^2]: The code multiplies the value by 1e-3 to convert from $\frac{m}{s^2}$ to $\frac{km}{s^2}$.
 [^3]: For example GMAT uses an older definition of 1 AU which is 700 meters different from the IAU definition: changing that will bring down this maximum error by over 30 meters (to around 250 meters).
 
