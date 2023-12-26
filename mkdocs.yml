@@ -46,7 +46,6 @@ nav:
           - High fidelity models [WIP]: nyxspace/user_guide/hifimodels.md
       - MathSpec:
           - Introduction: nyxspace/MathSpec/index.md
-          - Hifitime (time): nyxspace/MathSpec/time.md
           - Celestial:
               - Coordinate frames [WIP]: nyxspace/MathSpec/celestial/coord_systems.md
               - Ephemeris [WIP]: nyxspace/MathSpec/celestial/ephemeris.md

@@ -62,7 +62,7 @@ Click on the requirement to see its description, verification method, and its ch
     **Test plan:** Two epochs representing the same datetime but initialized in different formats (in seconds past J2000 or in Julian days) should indeed represent the same epoch with the same accuracy.
 
     ???+ success "1.1: Astronomy time scales shall be supported"
-        Astronomy has its own set of time scales, as described in the [introduction](/hifitime/intro).
+        Astronomy has its own set of time scales, as described in the [introduction](intro.md).
 
         **Verification:** testing
 
