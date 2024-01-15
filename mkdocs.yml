@@ -8,6 +8,7 @@ theme:
     - navigation.tracking
     - toc.follow
     - content.code.copy
+    - content.tabs.link
     - navigation.footer
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png
@@ -114,7 +115,7 @@ extra:
       link: https://twitter.com/CRabotin
       name: Chris Rabotin on Twitter
     - icon: material/email-outline
-      link: mailto:chris.rabotin@pm.me
+      link: mailto:christopher.rabotin@gmail.com
       name: Email me
   analytics:
     provider: google
@@ -145,6 +146,8 @@ markdown_extensions:
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
 
 
 extra_javascript:
