@@ -32,34 +32,34 @@ nav:
           - Introduction: nyxspace/showcase/index.md
           - Mission design:
               - Table of contents: nyxspace/showcase/mission_design/index.md
-              - Lunar transfer [WIP]: nyxspace/showcase/mission_design/lunar_transfer.md
+              # - Lunar transfer [WIP]: nyxspace/showcase/mission_design/lunar_transfer.md
               - Orbit design from a genetic algorithm: nyxspace/showcase/mission_design/orbit_design_ga.md
-          - Constellation analysis [WIP]: nyxspace/showcase/constellation_analysis/index.md
-          - Spacecraft navigation:
-              - Ground based navigation [WIP]: nyxspace/showcase/spacecraft_navigation/ground_nav.md
-              - CAPS [WIP]: nyxspace/showcase/spacecraft_navigation/CAPS.md
-      - User guide:
-          - Getting started [WIP]: nyxspace/user_guide/start.md
-          - Orbit definition and manipulation [WIP]: nyxspace/user_guide/orbits.md
-          - Propagators and Monte Carlo runs [WIP]: nyxspace/user_guide/prop-mc.md
-          - High fidelity models [WIP]: nyxspace/user_guide/hifimodels.md
+          # - Constellation analysis [WIP]: nyxspace/showcase/constellation_analysis/index.md
+          # - Spacecraft navigation:
+          #     - Ground based navigation [WIP]: nyxspace/showcase/spacecraft_navigation/ground_nav.md
+              # - CAPS [WIP]: nyxspace/showcase/spacecraft_navigation/CAPS.md
+      # - User guide:
+      #     - Getting started [WIP]: nyxspace/user_guide/start.md
+      #     - Orbit definition and manipulation [WIP]: nyxspace/user_guide/orbits.md
+      #     - Propagators and Monte Carlo runs [WIP]: nyxspace/user_guide/prop-mc.md
+      #     - High fidelity models [WIP]: nyxspace/user_guide/hifimodels.md
       - MathSpec:
           - Introduction: nyxspace/MathSpec/index.md
           - Celestial:
               - Coordinate frames [WIP]: nyxspace/MathSpec/celestial/coord_systems.md
-              - Ephemeris [WIP]: nyxspace/MathSpec/celestial/ephemeris.md
+              # - Ephemeris [WIP]: nyxspace/MathSpec/celestial/ephemeris.md
               - Orbital elements: nyxspace/MathSpec/celestial/orbital_elements.md
               - Trajectory interpolation: nyxspace/MathSpec/celestial/interpolation.md
               - Eclipses: nyxspace/MathSpec/celestial/eclipse.md
-              - Events [WIP]: nyxspace/MathSpec/celestial/events.md
+              # - Events [WIP]: nyxspace/MathSpec/celestial/events.md
           - Dynamical Models:
               - Overview: nyxspace/MathSpec/models/overview.md
               - Gravity: nyxspace/MathSpec/models/gravity.md
-              - Spherical harmonics [WIP]: nyxspace/MathSpec/models/harmonics.md
+              # - Spherical harmonics [WIP]: nyxspace/MathSpec/models/harmonics.md
               - Solar radiation pressure: nyxspace/MathSpec/models/srp.md
-              - Drag [WIP]: nyxspace/MathSpec/models/drag.md
-              - Control laws [WIP]: nyxspace/MathSpec/models/control_laws.md
-              - Finite burns [WIP]: nyxspace/MathSpec/models/finite_burns.md
+              # - Drag [WIP]: nyxspace/MathSpec/models/drag.md
+              # - Control laws [WIP]: nyxspace/MathSpec/models/control_laws.md
+              # - Finite burns [WIP]: nyxspace/MathSpec/models/finite_burns.md
           - Orbit determination:
               - Overview: nyxspace/MathSpec/orbit_determination/overview.md
               - Kalman filter: nyxspace/MathSpec/orbit_determination/kalman.md
@@ -67,28 +67,28 @@ nav:
               - Smoothing: nyxspace/MathSpec/orbit_determination/smoothing.md
               - Iteration: nyxspace/MathSpec/orbit_determination/iteration.md
               - Measurement generation: nyxspace/MathSpec/orbit_determination/measurements.md
-          - Monte Carlo [WIP]:
+          - Monte Carlo:
               - Overview: nyxspace/MathSpec/monte_carlo/overview.md
               - Error modeling: nyxspace/MathSpec/monte_carlo/error_models.md
           - Optimization:
               - State transition matrix: nyxspace/MathSpec/optimization/stm.md
               - Targeting: nyxspace/MathSpec/optimization/targeting.md
-              - Multiple shooting [WIP]: nyxspace/MathSpec/optimization/multiple_shooting.md
-              - Optimizer [WIP]: nyxspace/MathSpec/optimization/panoc.md
+              # - Multiple shooting [WIP]: nyxspace/MathSpec/optimization/multiple_shooting.md
+              # - Optimizer [WIP]: nyxspace/MathSpec/optimization/panoc.md
           - Propagators: nyxspace/MathSpec/propagators.md
           - Appendices:
               - Dual numbers: nyxspace/MathSpec/appendix/dual_numbers.md
       - Versions: versions.md
 
   - Hifitime:
-      - Introduction: hifitime/intro.md
+      - Hifitime Intro: hifitime/intro.md
       - Design: hifitime/design.md
       - Python user guide: hifitime/python.md
       - Rust user guide: hifitime/rust.md
       - Change Log: hifitime/changelog.md
 
   - ANISE:
-      - Introduction: anise/intro.md
+      - ANISE Intro: anise/intro.md
   
   - Pricing: pricing.md
 

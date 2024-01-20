@@ -1,5 +1,9 @@
 Nyx aims to be a free-software alternative to JPL Monte. This section demonstrates some of the capabilities of Nyx. By design, Nyx supports a plethora of scenarios which are poorly supported by NASA GMAT or STK's Astrogator[^1].
 
+!!! warning
+    This documentation may not be up to date. Nyx version 2.0 is nearing completion, introduces _many_ breaking changes, and the documentation will be rewritten in full once released.
+    You can follow the progress on version 2.0.0 on Github: <https://github.com/nyx-space/nyx/milestone/7>
+
 Each showcased example is categorized and detailed. Relevant source code will be published when possible. Nyx is mainly used for novel research and development whose results offer a competitive advantage. Therefore, it may not be possible to publish the source code and only some final results may be shown.
 
 --8<-- "includes/ga-49d-orbit.html"
