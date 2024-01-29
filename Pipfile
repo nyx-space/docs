@@ -9,6 +9,7 @@ verify_ssl = true
 mkdocs = "*"
 mkdocs-material = "*"
 mkdocs-git-revision-date-localized-plugin = "*"
+mkdocs-jupyter = "*"
 
 [requires]
 python_version = "3.8"

@@ -20,14 +20,9 @@ Installation of ANISE is trivial:
 
 ## Documentation
 
-This documentation aims to follow the [_Diataxis_ method](https://www.diataxis.fr/). Lots more documentation is needed, but don't hesitate to request some by [creating an issue on Github](https://github.com/nyx-space/anise/issues/new?assignees=&labels=Documentation&projects=&template=documentation.md&title=).
+This documentation aims to follow the [_Diataxis_ method](https://www.diataxis.fr/). Lots more documentation is needed, and don't hesitate to request some by [creating an issue on Github](https://github.com/nyx-space/anise/issues/new?assignees=&labels=Documentation&projects=&template=documentation.md&title=).
 
 ### Tutorials
 
-A list of tutorials in Python is available as [Jupyter notebooks on Github](https://github.com/nyx-space/anise/tree/master/anise-py/notebooks).
-
-### How-to guides
-
-In Rust, please refer to the [README at the root of the repo](https://github.com/nyx-space/anise#rust-usage).
-
-In Python, please refer to the [README in the `anise-py` folder](https://github.com/nyx-space/anise/tree/master/anise-py#usage).
+The latest tutorials in Python are available as [Jupyter notebooks on Github](https://github.com/nyx-space/anise/tree/master/anise-py/notebooks).
+They are also available in the [tutorials](./tutorials/) section of this website.
