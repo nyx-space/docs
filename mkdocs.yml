@@ -98,6 +98,8 @@ nav:
         - Sun Probe Earth angle (SPE): anise/tutorials/Tutorial 06 - Sun probe Earth angle.ipynb
   
   - Pricing: pricing.md
+  - Blog:
+    - blog/index.md
 
 extra_css:
   - stylesheets/extras.css
@@ -106,6 +108,7 @@ plugins:
   - search
   - mkdocs-jupyter:
       ignore_h1_titles: True
+  - blog
 
 copyright: Copyright &copy; 2023 - Christopher Rabotin
 
@@ -143,8 +146,8 @@ markdown_extensions:
   - pymdownx.tabbed
   - footnotes
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
