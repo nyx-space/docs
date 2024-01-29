@@ -89,14 +89,26 @@ nav:
 
   - ANISE:
       - ANISE Intro: anise/intro.md
+      - Tutorials:
+        - Querying SPK files: anise/tutorials/Tutorial 01 - Querying SPK files.ipynb
+        - Loading remote data: anise/tutorials/Tutorial 02 - Loading remote SPICE and ANISE files (meta almanac).ipynb
+        - Working with Orbit class: anise/tutorials/Tutorial 03 - Defining and working with the Orbit structure.ipynb
+        - Azimuth, Elevation, Range (AER): anise/tutorials/Tutorial 04 - Computing Azimuth Elevation and Range data.ipynb
+        - Planetary constant kernels (PCK): anise/tutorials/Tutorial 05 - Using frame kernels and text planetary kernels.ipynb
+        - Sun Probe Earth angle (SPE): anise/tutorials/Tutorial 06 - Sun probe Earth angle.ipynb
   
   - Pricing: pricing.md
+  - Blog:
+    - blog/index.md
 
 extra_css:
   - stylesheets/extras.css
 
 plugins:
   - search
+  - mkdocs-jupyter:
+      ignore_h1_titles: True
+  - blog
 
 copyright: Copyright &copy; 2023 - Christopher Rabotin
 
@@ -134,8 +146,8 @@ markdown_extensions:
   - pymdownx.tabbed
   - footnotes
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
