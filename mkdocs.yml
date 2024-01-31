@@ -90,7 +90,7 @@ nav:
   - ANISE:
       - ANISE: anise/index.md
       - Tutorials:
-        - Tutorials intro: anise/tutorials/index.md
+        - Tutorials index: anise/tutorials/index.md
         - Querying SPK files: anise/tutorials/Tutorial 01 - Querying SPK files.ipynb
         - Loading remote data: anise/tutorials/Tutorial 02 - Loading remote SPICE and ANISE files (meta almanac).ipynb
         - Working with Orbit class: anise/tutorials/Tutorial 03 - Defining and working with the Orbit structure.ipynb
@@ -98,7 +98,7 @@ nav:
         - Planetary constant kernels (PCK): anise/tutorials/Tutorial 05 - Using frame kernels and text planetary kernels.ipynb
         - Sun Probe Earth angle (SPE): anise/tutorials/Tutorial 06 - Sun probe Earth angle.ipynb
       - Explanation:
-        - Explanation intro: anise/explanation/index.md
+        - Explanation index: anise/explanation/index.md
         - Time management: anise/explanation/time.md
         - Validation: anise/explanation/validation.md
   
