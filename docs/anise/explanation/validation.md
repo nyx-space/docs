@@ -1,0 +1,5 @@
+[![ANISE Validation](https://github.com/nyx-space/anise/actions/workflows/rust.yml/badge.svg)](https://github.com/nyx-space/anise/actions/workflows/rust.yml)
+
+ANISE undergoes a rigorous validation process, meticulously detailed in the Validation step linked above. This comprehensive workflow involves running parallel queries in both ANISE and SPICE (in single-threaded test mode using the `rust-spice` crate by Grégoire Henry) for precise comparison.
+
+Specifically, it includes the validation of 101,000 BSP queries against the DE440.BSP file. Additionally, we validate 7,305 queries for each frame in the PCK08 file, covering every day across a span of 20 years. This is complemented by an extensive series of rotations from the Earth's high-precision BPC file. This thorough and detailed validation process ensures that ANISE meets the highest standards of accuracy and reliability as expected by high profile missions.

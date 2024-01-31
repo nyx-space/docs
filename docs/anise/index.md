@@ -1,10 +1,10 @@
-ANISE is a modern rewrite of the NAIF SPICE toolkit. ANISE provides a toolkit and files for **A**ttitude, **N**avigation, **I**nstrument, **S**pacecraft, and **E**phemeris data.
+ANISE is a modern rewrite of the NAIF SPICE toolkit, with many additional features. ANISE provides a toolkit for **A**ttitude, **N**avigation, **I**nstrument, **S**pacecraft, and **E**phemeris computations.
 
-ANISE is fully validated against SPICE by executing the same instructions in SPICE and in ANISE, and ensuring that the output matches.
+Answer questions like _what will be the elevation of the Moon from a ground station on 21 Dec 2033_, or _will visible-light cameras on my spacecraft be able to image a given location in 3 orbital periods_.
 
-Follow the work on [Github](https://github.com/nyx-space/anise) and show your support by adding a star.
+[Github :material-github:](https://github.com/nyx-space/anise){ .md-button } [User survey :material-file-question:](https://7ug5imdtt8v.typeform.com/to/qYDB14Hj){ .md-button }
 
-Installation of ANISE is trivial:
+## Installation
 
 === "Python"
 
@@ -20,20 +20,16 @@ Installation of ANISE is trivial:
 
 ## Documentation
 
-This documentation aims to follow the [_Diataxis_ method](https://www.diataxis.fr/). Lots more documentation is needed, and don't hesitate to request some by [creating an issue on Github](https://github.com/nyx-space/anise/issues/new?assignees=&labels=Documentation&projects=&template=documentation.md&title=).
+This documentation aims to follow the [_Diataxis_ method](https://www.diataxis.fr/).
 
-### Tutorials
++ [Tutorials](./tutorials/index.md)
++ [Explanation](./explanation/index.md)
 
-The latest tutorials in Python are available as [Jupyter notebooks on Github](https://github.com/nyx-space/anise/tree/master/anise-py/notebooks). They are also available in the tutorials section of this website.
+Lots more documentation is needed, and don't hesitate to request some by [creating an issue on Github](https://github.com/nyx-space/anise/issues/new?assignees=&labels=Documentation&projects=&template=documentation.md&title=).
 
 ## Validation
 
-[![ANISE Validation](https://github.com/nyx-space/anise/actions/workflows/rust.yml/badge.svg)](https://github.com/nyx-space/anise/actions/workflows/rust.yml)
-
-ANISE is validated by running the same queries in ANISE and in SPICE (single threaded) in the _Validation_ step linked above. This workflow validates 101,000 BSP queries in the DE440.BSP file, and 7305 queries each frame in the PCK08 file (every day for 20 years), along with thousands of rotations from Earth high precision BPC file.
-
-**Note:** The PCK data comes from the IAU Reports, which publishes angle, angle rate, and angle acceleration data, expressed in centuries past the J2000 reference epoch.
-ANISE uses Hifitime for time conversions. Hifitime's reliance solely on integers for all time computations eliminates the risk of rounding errors. In contrast, SPICE utilizes floating-point values, which introduces rounding errors in calculations like centuries past J2000. Consequently, you might observe a discrepancy of up to 1 millidegree in rotation angles between SPICE and ANISE. However, this difference is a testament to ANISE's superior precision.
+Refer to the explanation on [validation](./explanation/validation.md).
 
 ## Resources / Assets
 
@@ -59,4 +55,4 @@ For more details, please see the [full text of the license](https://github.com/n
 
 ## Acknowledgements
 
-ANISE is heavily inspired by the NAIF SPICE toolkit and its excellent documentation.
+ANISE is heavily inspired by the NAIF SPICE toolkit and its excellent documentation. Huge thanks to Grégoire Henry from the Royal Observtory of Belgium and Chris De Calverie from GAMA Space for their continued support of this work.
