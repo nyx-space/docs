@@ -81,14 +81,14 @@ nav:
       - Versions: versions.md
 
   - Hifitime:
-      - Hifitime Intro: hifitime/intro.md
+      - Hifitime: hifitime/index.md
       - Design: hifitime/design.md
       - Python user guide: hifitime/python.md
       - Rust user guide: hifitime/rust.md
       - Change Log: hifitime/changelog.md
 
   - ANISE:
-      - ANISE Intro: anise/intro.md
+      - ANISE: anise/index.md
       - Tutorials:
         - Querying SPK files: anise/tutorials/Tutorial 01 - Querying SPK files.ipynb
         - Loading remote data: anise/tutorials/Tutorial 02 - Loading remote SPICE and ANISE files (meta almanac).ipynb
@@ -109,6 +109,10 @@ plugins:
   - mkdocs-jupyter:
       ignore_h1_titles: True
   - blog
+  - redirects:
+      redirect_maps:
+        'hifitime/intro.md': 'hifitime/index.md'
+        'anise/intro.md': 'anise/index.md'
 
 copyright: Copyright &copy; 2023 - Christopher Rabotin
 
