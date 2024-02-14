@@ -1,0 +1,1 @@
+The Rust API documentation can be found directly on docs.rs: <https://docs.rs/anise>.

@@ -6,6 +6,7 @@ theme:
   features:
     - navigation.tabs
     - navigation.tracking
+    - navigation.sections
     - toc.follow
     - content.code.copy
     - content.tabs.link
@@ -101,6 +102,16 @@ nav:
         - Explanation index: anise/explanation/index.md
         - Time management: anise/explanation/time.md
         - Validation: anise/explanation/validation.md
+      - Reference:
+        - Reference index: anise/reference/index.md
+        - Math Spec:
+          - Orbital elements: anise/reference/mathspec/orbital_elements.md
+        - Python API:
+          - ANISE Python: anise/reference/api/python/index.md
+          - Astro: anise/reference/api/python/astro/index.md
+          - Constants: anise/reference/api/python/astro/constants.md
+          - Time: anise/reference/api/python/time.md
+        - Rust API: anise/reference/api/rust/index.md
   
   - Pricing: pricing.md
   - Blog:
@@ -118,8 +129,9 @@ plugins:
       redirect_maps:
         'hifitime/intro.md': 'hifitime/index.md'
         'anise/intro.md': 'anise/index.md'
+        'nyxspace/MathSpec/celestial/orbital_elements.md': 'anise/reference/mathspec/orbital_elements.md'
 
-copyright: Copyright &copy; 2023 - Christopher Rabotin
+copyright: Copyright &copy; 2024 - Christopher Rabotin
 
 repo_url: https://github.com/nyx-space/nyx
 repo_name: nyx-space/nyx
