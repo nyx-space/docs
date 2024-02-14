@@ -104,6 +104,8 @@ nav:
         - Validation: anise/explanation/validation.md
       - Reference:
         - Reference index: anise/reference/index.md
+        - Math Spec:
+          - Orbital elements: anise/reference/mathspec/orbital_elements.md
         - Python API:
           - ANISE Python: anise/reference/api/python/index.md
           - Astro: anise/reference/api/python/astro/index.md
@@ -127,6 +129,7 @@ plugins:
       redirect_maps:
         'hifitime/intro.md': 'hifitime/index.md'
         'anise/intro.md': 'anise/index.md'
+        'nyxspace/MathSpec/celestial/orbital_elements.md': 'anise/reference/mathspec/orbital_elements.md'
 
 copyright: Copyright &copy; 2024 - Christopher Rabotin
 
