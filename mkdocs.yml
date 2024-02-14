@@ -101,6 +101,14 @@ nav:
         - Explanation index: anise/explanation/index.md
         - Time management: anise/explanation/time.md
         - Validation: anise/explanation/validation.md
+      - Reference:
+        - API:
+          - Python:
+            - Python index: anise/reference/api/python/index.md
+            - Astro: anise/reference/api/python/astro/index.md
+            - Constants: anise/reference/api/python/astro/constants.md
+            - Time: anise/reference/api/python/time.md
+          - Rust: anise/reference/api/rust/index.md
   
   - Pricing: pricing.md
   - Blog:
