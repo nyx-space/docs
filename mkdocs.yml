@@ -103,8 +103,9 @@ nav:
         - Time management: anise/explanation/time.md
         - Validation: anise/explanation/validation.md
       - Reference:
+        - Reference index: anise/reference/index.md
         - Python API:
-          - Python index: anise/reference/api/python/index.md
+          - ANISE Python: anise/reference/api/python/index.md
           - Astro: anise/reference/api/python/astro/index.md
           - Constants: anise/reference/api/python/astro/constants.md
           - Time: anise/reference/api/python/time.md
