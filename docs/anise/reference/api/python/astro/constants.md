@@ -1,211 +1,233 @@
-Module _anise.astro.constants
-=============================
+# Module `anise.astro.constants`
 
-Classes
--------
+    
+## Classes
 
-`CelestialObjects(...)`
-:   
+    
+### Class `CelestialObjects`
 
-    ### Class variables
+>     class CelestialObjects(
+>         ...
+>     )
 
-    `EARTH`
-    :
+    
+#### Class variables
 
-    `EARTH_MOON_BARYCENTER`
-    :
+    
+##### Variable `EARTH`
 
-    `JUPITER`
-    :
+    
+##### Variable `EARTH_MOON_BARYCENTER`
 
-    `JUPITER_BARYCENTER`
-    :
+    
+##### Variable `JUPITER`
 
-    `MARS`
-    :
+    
+##### Variable `JUPITER_BARYCENTER`
 
-    `MARS_BARYCENTER`
-    :
+    
+##### Variable `MARS`
 
-    `MERCURY`
-    :
+    
+##### Variable `MARS_BARYCENTER`
 
-    `MOON`
-    :
+    
+##### Variable `MERCURY`
 
-    `NEPTUNE`
-    :
+    
+##### Variable `MOON`
 
-    `NEPTUNE_BARYCENTER`
-    :
+    
+##### Variable `NEPTUNE`
 
-    `PLUTO_BARYCENTER`
-    :
+    
+##### Variable `NEPTUNE_BARYCENTER`
 
-    `SATURN`
-    :
+    
+##### Variable `PLUTO_BARYCENTER`
 
-    `SATURN_BARYCENTER`
-    :
+    
+##### Variable `SATURN`
 
-    `SOLAR_SYSTEM_BARYCENTER`
-    :
+    
+##### Variable `SATURN_BARYCENTER`
 
-    `SUN`
-    :
+    
+##### Variable `SOLAR_SYSTEM_BARYCENTER`
 
-    `URANUS`
-    :
+    
+##### Variable `SUN`
 
-    `URANUS_BARYCENTER`
-    :
+    
+##### Variable `URANUS`
 
-    `VENUS`
-    :
+    
+##### Variable `URANUS_BARYCENTER`
 
-`Frames(...)`
-:   
+    
+##### Variable `VENUS`
 
-    ### Class variables
+    
+### Class `Frames`
 
-    `EARTH_ECLIPJ2000`
-    :
+>     class Frames(
+>         ...
+>     )
 
-    `EARTH_ITRF93`
-    :
+    
+#### Class variables
 
-    `EARTH_J2000`
-    :
+    
+##### Variable `EARTH_ECLIPJ2000`
 
-    `EARTH_MOON_BARYCENTER_J2000`
-    :
+    
+##### Variable `EARTH_ITRF93`
 
-    `EME2000`
-    :
+    
+##### Variable `EARTH_J2000`
 
-    `IAU_EARTH_FRAME`
-    :
+    
+##### Variable `EARTH_MOON_BARYCENTER_J2000`
 
-    `IAU_JUPITER_FRAME`
-    :
+    
+##### Variable `EME2000`
 
-    `IAU_MARS_FRAME`
-    :
+    
+##### Variable `IAU_EARTH_FRAME`
 
-    `IAU_MERCURY_FRAME`
-    :
+    
+##### Variable `IAU_JUPITER_FRAME`
 
-    `IAU_MOON_FRAME`
-    :
+    
+##### Variable `IAU_MARS_FRAME`
 
-    `IAU_NEPTUNE_FRAME`
-    :
+    
+##### Variable `IAU_MERCURY_FRAME`
 
-    `IAU_SATURN_FRAME`
-    :
+    
+##### Variable `IAU_MOON_FRAME`
 
-    `IAU_URANUS_FRAME`
-    :
+    
+##### Variable `IAU_NEPTUNE_FRAME`
 
-    `IAU_VENUS_FRAME`
-    :
+    
+##### Variable `IAU_SATURN_FRAME`
 
-    `JUPITER_BARYCENTER_J2000`
-    :
+    
+##### Variable `IAU_URANUS_FRAME`
 
-    `MARS_BARYCENTER_J2000`
-    :
+    
+##### Variable `IAU_VENUS_FRAME`
 
-    `MERCURY_J2000`
-    :
+    
+##### Variable `JUPITER_BARYCENTER_J2000`
 
-    `MOON_J2000`
-    :
+    
+##### Variable `MARS_BARYCENTER_J2000`
 
-    `MOON_ME_FRAME`
-    :
+    
+##### Variable `MERCURY_J2000`
 
-    `MOON_PA_FRAME`
-    :
+    
+##### Variable `MOON_J2000`
 
-    `NEPTUNE_BARYCENTER_J2000`
-    :
+    
+##### Variable `MOON_ME_FRAME`
 
-    `PLUTO_BARYCENTER_J2000`
-    :
+    
+##### Variable `MOON_PA_FRAME`
 
-    `SATURN_BARYCENTER_J2000`
-    :
+    
+##### Variable `NEPTUNE_BARYCENTER_J2000`
 
-    `SSB_J2000`
-    :
+    
+##### Variable `PLUTO_BARYCENTER_J2000`
 
-    `SUN_J2000`
-    :
+    
+##### Variable `SATURN_BARYCENTER_J2000`
 
-    `URANUS_BARYCENTER_J2000`
-    :
+    
+##### Variable `SSB_J2000`
 
-    `VENUS_J2000`
-    :
+    
+##### Variable `SUN_J2000`
 
-`Orientations(...)`
-:   
+    
+##### Variable `URANUS_BARYCENTER_J2000`
 
-    ### Class variables
+    
+##### Variable `VENUS_J2000`
 
-    `ECLIPJ2000`
-    :
+    
+### Class `Orientations`
 
-    `IAU_EARTH`
-    :
+>     class Orientations(
+>         ...
+>     )
 
-    `IAU_JUPITER`
-    :
+    
+#### Class variables
 
-    `IAU_MARS`
-    :
+    
+##### Variable `ECLIPJ2000`
 
-    `IAU_MERCURY`
-    :
+    
+##### Variable `IAU_EARTH`
 
-    `IAU_MOON`
-    :
+    
+##### Variable `IAU_JUPITER`
 
-    `IAU_NEPTUNE`
-    :
+    
+##### Variable `IAU_MARS`
 
-    `IAU_SATURN`
-    :
+    
+##### Variable `IAU_MERCURY`
 
-    `IAU_URANUS`
-    :
+    
+##### Variable `IAU_MOON`
 
-    `IAU_VENUS`
-    :
+    
+##### Variable `IAU_NEPTUNE`
 
-    `ITRF93`
-    :
+    
+##### Variable `IAU_SATURN`
 
-    `J2000`
-    :
+    
+##### Variable `IAU_URANUS`
 
-    `MOON_ME`
-    :
+    
+##### Variable `IAU_VENUS`
 
-    `MOON_PA`
-    :
+    
+##### Variable `ITRF93`
 
-`UsualConstants(...)`
-:   
+    
+##### Variable `J2000`
 
-    ### Class variables
+    
+##### Variable `MOON_ME`
 
-    `MEAN_EARTH_ANGULAR_VELOCITY_DEG_S`
-    :
+    
+##### Variable `MOON_PA`
 
-    `MEAN_MOON_ANGULAR_VELOCITY_DEG_S`
-    :
+    
+### Class `UsualConstants`
 
-    `SPEED_OF_LIGHT_KM_S`
-    :
+>     class UsualConstants(
+>         ...
+>     )
+
+    
+#### Class variables
+
+    
+##### Variable `MEAN_EARTH_ANGULAR_VELOCITY_DEG_S`
+
+    
+##### Variable `MEAN_MOON_ANGULAR_VELOCITY_DEG_S`
+
+    
+##### Variable `SPEED_OF_LIGHT_KM_S`
+
+-----
+Generated by *pdoc* 0.10.0 (<https://pdoc3.github.io>).
