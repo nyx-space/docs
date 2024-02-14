@@ -73,7 +73,7 @@ hide:
                 <li>Murchison Widefield Array</li>
                 <li>Rocketlab USA</li>
             </ul>
-            <a href="https://7ug5imdtt8v.typeform.com/to/neFvVW3p" class="md-button md-button--primary" target="_blank">Contact Us</a>
+            <a href="https://7ug5imdtt8v.typeform.com/to/neFvVW3p" class="md-button md-button--primary" target="_blank">Contact Form</a>
         </div>
     </article>
 </section>
