@@ -25,20 +25,23 @@ theme:
     admonition:
       tip: material/rocket-launch-outline
 
-
 nav:
   - Home: index.md
   - Nyx:
-      - Examples:
-          - Introduction: nyxspace/showcase/index.md
-          - Mission design:
-              - Table of contents: nyxspace/showcase/mission_design/index.md
-              # - Lunar transfer [WIP]: nyxspace/showcase/mission_design/lunar_transfer.md
-              - Orbit design from a genetic algorithm: nyxspace/showcase/mission_design/orbit_design_ga.md
+      - Showcase:
+          - Showcase home: nyxspace/showcase/index.md
+          - High fidelity orbit propagation: nyxspace/showcase/01_orbit_prop/index.md
+          - James Webb Space Telescope Monte Carlo: nyxspace/showcase/02_jwst_covar_monte_carlo/index.md
+          - GEO low thrust orbit raising: nyxspace/showcase/03_geo_analysis/index.md
+          - LRO orbit determination: nyxspace/showcase/04_lro_od/index.md
+          # - Mission design:
+          #     - Table of contents: nyxspace/showcase/mission_design/index.md
+          #     # - Lunar transfer [WIP]: nyxspace/showcase/mission_design/lunar_transfer.md
+          #     - Orbit design from a genetic algorithm: nyxspace/showcase/mission_design/orbit_design_ga.md
           # - Constellation analysis [WIP]: nyxspace/showcase/constellation_analysis/index.md
           # - Spacecraft navigation:
           #     - Ground based navigation [WIP]: nyxspace/showcase/spacecraft_navigation/ground_nav.md
-              # - CAPS [WIP]: nyxspace/showcase/spacecraft_navigation/CAPS.md
+          # - CAPS [WIP]: nyxspace/showcase/spacecraft_navigation/CAPS.md
       # - User guide:
       #     - Getting started [WIP]: nyxspace/user_guide/start.md
       #     - Orbit definition and manipulation [WIP]: nyxspace/user_guide/orbits.md
@@ -91,31 +94,31 @@ nav:
   - ANISE:
       - ANISE: anise/index.md
       - Tutorials:
-        - Tutorials index: anise/tutorials/index.md
-        - Querying SPK files: anise/tutorials/Tutorial 01 - Querying SPK files.ipynb
-        - Loading remote data: anise/tutorials/Tutorial 02 - Loading remote SPICE and ANISE files (meta almanac).ipynb
-        - Working with Orbit class: anise/tutorials/Tutorial 03 - Defining and working with the Orbit structure.ipynb
-        - Azimuth, Elevation, Range (AER): anise/tutorials/Tutorial 04 - Computing Azimuth Elevation and Range data.ipynb
-        - Planetary constant kernels (PCK): anise/tutorials/Tutorial 05 - Using frame kernels and text planetary kernels.ipynb
-        - Sun Probe Earth angle (SPE): anise/tutorials/Tutorial 06 - Sun probe Earth angle.ipynb
+          - Tutorials index: anise/tutorials/index.md
+          - Querying SPK files: anise/tutorials/Tutorial 01 - Querying SPK files.ipynb
+          - Loading remote data: anise/tutorials/Tutorial 02 - Loading remote SPICE and ANISE files (meta almanac).ipynb
+          - Working with Orbit class: anise/tutorials/Tutorial 03 - Defining and working with the Orbit structure.ipynb
+          - Azimuth, Elevation, Range (AER): anise/tutorials/Tutorial 04 - Computing Azimuth Elevation and Range data.ipynb
+          - Planetary constant kernels (PCK): anise/tutorials/Tutorial 05 - Using frame kernels and text planetary kernels.ipynb
+          - Sun Probe Earth angle (SPE): anise/tutorials/Tutorial 06 - Sun probe Earth angle.ipynb
       - Explanation:
-        - Explanation index: anise/explanation/index.md
-        - Time management: anise/explanation/time.md
-        - Validation: anise/explanation/validation.md
+          - Explanation index: anise/explanation/index.md
+          - Time management: anise/explanation/time.md
+          - Validation: anise/explanation/validation.md
       - Reference:
-        - Reference index: anise/reference/index.md
-        - Math Spec:
-          - Orbital elements: anise/reference/mathspec/orbital_elements.md
-        - Python API:
-          - ANISE Python: anise/reference/api/python/index.md
-          - Astro: anise/reference/api/python/astro/index.md
-          - Constants: anise/reference/api/python/astro/constants.md
-          - Time: anise/reference/api/python/time.md
-        - Rust API: anise/reference/api/rust/index.md
-  
+          - Reference index: anise/reference/index.md
+          - Math Spec:
+              - Orbital elements: anise/reference/mathspec/orbital_elements.md
+          - Python API:
+              - ANISE Python: anise/reference/api/python/index.md
+              - Astro: anise/reference/api/python/astro/index.md
+              - Constants: anise/reference/api/python/astro/constants.md
+              - Time: anise/reference/api/python/time.md
+          - Rust API: anise/reference/api/rust/index.md
+
   - Pricing: pricing.md
   - Blog:
-    - blog/index.md
+      - blog/index.md
 
 extra_css:
   - stylesheets/extras.css
@@ -127,9 +130,9 @@ plugins:
   - blog
   - redirects:
       redirect_maps:
-        'hifitime/intro.md': 'hifitime/index.md'
-        'anise/intro.md': 'anise/index.md'
-        'nyxspace/MathSpec/celestial/orbital_elements.md': 'anise/reference/mathspec/orbital_elements.md'
+        "hifitime/intro.md": "hifitime/index.md"
+        "anise/intro.md": "anise/index.md"
+        "nyxspace/MathSpec/celestial/orbital_elements.md": "anise/reference/mathspec/orbital_elements.md"
 
 copyright: Copyright &copy; 2024 - Christopher Rabotin
 
@@ -161,6 +164,7 @@ markdown_extensions:
       generic: true
   - abbr
   - attr_list
+  - md_in_html
   - pymdownx.snippets
   - admonition
   - pymdownx.details
@@ -181,7 +185,6 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.tabbed:
       alternate_style: true
-
 
 extra_javascript:
   - js/config.js

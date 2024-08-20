@@ -1,20 +1,49 @@
-Nyx aims to be a free-software alternative to JPL Monte. This section demonstrates some of the capabilities of Nyx. By design, Nyx supports a plethora of scenarios which are poorly supported by NASA GMAT or STK's Astrogator[^1].
+Nyx provides flight dynamics engineers with a set of powerful, open-source tools for mission design and orbit determination. From trajectory optimization to orbit estimation, Nyx is built for speed, automation, and scalability.
 
-!!! warning
-    This documentation may not be up to date. Nyx version 2.0 is nearing completion, introduces _many_ breaking changes, and the documentation will be rewritten in full once released.
-    You can follow the progress on version 2.0.0 on Github: <https://github.com/nyx-space/nyx/milestone/7>
+This section showcases some of the problems that you can solve with the whole suite of tools of Nyx.
 
-Each showcased example is categorized and detailed. Relevant source code will be published when possible. Nyx is mainly used for novel research and development whose results offer a competitive advantage. Therefore, it may not be possible to publish the source code and only some final results may be shown.
+<div class="grid cards" markdown>
 
---8<-- "includes/ga-49d-orbit.html"
+-   :material-axis-z-rotate-clockwise:{ .lg .middle } __Exporting High Fidelity Orbit Propagation to CCSDS OEM__
 
-This figure above is from the step-by-step example on [using a genetic algorithm to design an orbit](./mission_design/orbit_design_ga.md).
+    ---
 
-!!! info
-    The more examples the better! So contact me to add yours!
+    _HPOP_ of an Earth centered spacecraft, exporting the OEM, and computing passes from Colorado, USA.
 
-    _Why?_ It demonstrates the versatility of Nyx, thereby increasing its usage. This helps the overall astrodynamics community and shows yet again the power of free software.
+    [:octicons-arrow-right-24: Read more](./01_orbit_prop/index.md)
+    
+    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/examples/01_orbit_prop)
 
-[^1]: Despite STK & ODTK costing tens of thousands of dollars!
+-   :material-telescope:{ .lg .middle } __James Webb Space Telescope Monte Carlo Simulation__
+
+    ---
+
+    Blazing fast multithreaded Monte Carlo simulation of the JWST orbit, and comparison with an orbit determination prediction
+
+    [:octicons-arrow-right-24: Read more](./02_jwst_covar_monte_carlo/index.md)
+    
+    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/examples/02_jwst_covar_monte_carlo)
+
+-   :material-satellite-variant:{ .lg .middle } __GEO Low Thrust Orbit Raising & StationKeeping__
+
+    ---
+
+    GEO eclipse analysis, orbit raising when sunlit, and station keeping, in high fidelity dynamics
+
+    [:octicons-arrow-right-24: Read more](./03_geo_analysis/index.md)
+    
+    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/examples/03_geo_analysis)
+
+-   :material-motion:{ .lg .middle } __Lunar Reconnaissance Orbiter Orbit Determination__
+
+    ---
+
+    Orbit determination of the _as-flown_ LRO spacecraft using NASA Goddard's published definitive ephemeris
+
+    [:octicons-arrow-right-24: Read more](./04_lro_od/index.md)
+    
+    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/examples/04_lro_od)
+
+</div>
 
 --8<-- "includes/Abbreviations.md"
