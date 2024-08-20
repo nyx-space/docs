@@ -254,3 +254,7 @@ ul {
 .ctr {
     text-align: center;
 }
+
+div.cards>ul>li {
+    background-color: white;
+}

@@ -5,7 +5,7 @@ ANISE stores all of the orbit information as a Cartesian state, in units of kilo
 
 ## Initialization methods
 
-An orbit may be initialized from its Cartesian position and velocity components (from 64-bit floating point values or from a vector of that type), from Keplerian orbital elements where the phasing parameter is the true anomaly or mean anomaly, or from its geodetic elements (latitude, longitude and height compared to the reference ellipsoid of the frame, requires the mean angular speed of the object). The initializer also includes an epoch (cf. [Time MathSpec](/hifitime/index.md)) and a frame.
+An orbit may be initialized from its Cartesian position and velocity components (from 64-bit floating point values or from a vector of that type), from Keplerian orbital elements where the phasing parameter is the true anomaly or mean anomaly, or from its geodetic elements (latitude, longitude and height compared to the reference ellipsoid of the frame, requires the mean angular speed of the object). The initializer also includes an epoch (cf. [Time MathSpec](../../../hifitime/index.md)) and a frame.
 
 As discussed above, the state is stored in Cartesian form. Hence, initializing in Keplerian form will trigger the conversion of the state from Keplerian orbital element into Cartesian orbital elements. This method _supports_ hyperbolic, circular inclined, circular equatorial, and the common elliptical orbits. The eccentricity tolerance is set to $1e^{-11}$, i.e. if the eccentricity is below that number, then the orbit is considered circular and the appropriate conversions to Cartesian will be triggered.
 

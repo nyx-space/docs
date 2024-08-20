@@ -1,4 +1,4 @@
-# Module `anise.astro`
+# Module `astro`
 
     
 ## Classes
@@ -10,10 +10,13 @@
 >         epoch,
 >         azimuth_deg,
 >         elevation_deg,
->         range_km
+>         range_km,
+>         range_rate_km_s
 >     )
 
-A structure that stores the result of Azimuth, Elevation, and Range calculation.
+A structure that stores the result of Azimuth, Elevation, Range, Range rate calculation.
+
+# Algorithm
 
     
 #### Instance variables
@@ -35,6 +38,11 @@ Return an attribute of instance, which is of type owner.
 
     
 ##### Variable `range_km`
+
+Return an attribute of instance, which is of type owner.
+
+    
+##### Variable `range_rate_km_s`
 
 Return an attribute of instance, which is of type owner.
 
@@ -276,6 +284,17 @@ Returns the polar radius in km, if defined
 Returns the semi major radius of the tri-axial ellipoid shape of this frame, if defined
 
     
+##### Method `strip`
+
+>     def strip(
+>         self,
+>         /
+>     )
+
+Removes the graviational parameter and the shape information from this frame.
+Use this to prevent astrodynamical computations.
+
+    
 ##### Method `with_ephem`
 
 >     def with_ephem(
@@ -285,6 +304,17 @@ Returns the semi major radius of the tri-axial ellipoid shape of this frame, if 
 >     )
 
 Returns a copy of this Frame whose ephemeris ID is set to the provided ID
+
+    
+##### Method `with_mu_km3_s2`
+
+>     def with_mu_km3_s2(
+>         self,
+>         /,
+>         mu_km3_s2
+>     )
+
+Returns a copy of this frame with the graviational parameter set to the new value.
 
     
 ##### Method `with_orient`
@@ -419,9 +449,9 @@ Returns a copy of the state with a provided INC added to the current one
 Returns a copy of the state with a provided RAAN added to the current one
 
     
-##### Method `add_sma`
+##### Method `add_sma_km`
 
->     def add_sma(
+>     def add_sma_km(
 >         self,
 >         /,
 >         delta_sma
@@ -450,8 +480,7 @@ Returns a copy of the state with a provided TA added to the current one
 
 Returns the argument of latitude in degrees
 
-###### Note
-If the orbit is near circular, the AoL will be computed from the true longitude
+NOTE: If the orbit is near circular, the AoL will be computed from the true longitude
 instead of relying on the ill-defined true anomaly.
 
     
@@ -621,8 +650,7 @@ Creates a new Orbit around the provided Celestial or Geoid frame from the Kepler
 
 **Units:** km, none, degrees, degrees, degrees, degrees
 
-###### Note
-The state is defined in Cartesian coordinates as they are non-singular. This causes rounding
+NOTE: The state is defined in Cartesian coordinates as they are non-singular. This causes rounding
 errors when creating a state from its Keplerian orbital elements (cf. the state tests).
 One should expect these errors to be on the order of 1e-12.
 
@@ -690,7 +718,7 @@ Attempts to create a new Orbit from the provided radii of apoapsis and periapsis
 
 Initializes a new orbit from the Keplerian orbital elements using the mean anomaly instead of the true anomaly.
 
-###### Implementation notes
+##### Implementation notes
 This function starts by converting the mean anomaly to true anomaly, and then it initializes the orbit
 using the keplerian(..) method.
 The conversion is from GMAT's MeanToTrueAnomaly function, transliterated originally by Claude and GPT4 with human adjustments.
@@ -710,8 +738,7 @@ The conversion is from GMAT's MeanToTrueAnomaly function, transliterated origina
 Creates a new Orbit from the latitude (φ), longitude (λ) and height (in km) with respect to the frame's ellipsoid given the angular velocity.
 
 **Units:** degrees, degrees, km, rad/s
-###### Note
-This computation differs from the spherical coordinates because we consider the flattening of body.
+NOTE: This computation differs from the spherical coordinates because we consider the flattening of body.
 Reference: G. Xu and Y. Xu, "GPS", DOI 10.1007/978-3-662-50367-6_2, 2016
 
     
@@ -757,6 +784,17 @@ Returns the orbital momentum value on the X axis
 Returns the orbital momentum value on the Y axis
 
     
+##### Method `hyperbolic_anomaly_deg`
+
+>     def hyperbolic_anomaly_deg(
+>         self,
+>         /
+>     )
+
+Returns the hyperbolic anomaly in degrees between 0 and 360.0
+Returns an error if the orbit is not hyperbolic.
+
+    
 ##### Method `hz`
 
 >     def hz(
@@ -789,9 +827,7 @@ element set.
 
 This is a conversion from GMAT's StateConversionUtil::CartesianToBrouwerMeanShort.
 The details are at the log level <code>info</code>.
-
-###### Note
-Mean Brouwer Short are only defined around Earth. However, <code>nyx</code> does *not* check the
+NOTE: Mean Brouwer Short are only defined around Earth. However, <code>nyx</code> does *not* check the
 main celestial body around which the state is defined (GMAT does perform this verification).
 
     
@@ -804,7 +840,7 @@ main celestial body around which the state is defined (GMAT does perform this ve
 
 Returns the geodetic latitude (φ) in degrees. Value is between -180 and +180 degrees.
 
-###### Frame warning
+##### Frame warning
 This state MUST be in the body fixed frame (e.g. ITRF93) prior to calling this function, or the computation is **invalid**.
 
     
@@ -840,7 +876,7 @@ Returns the light time duration between this object and the origin of its refere
 
 Returns the geodetic longitude (λ) in degrees. Value is between 0 and 360 degrees.
 
-####### Frame warning
+##### Frame warning
 This state MUST be in the body fixed frame (e.g. ITRF93) prior to calling this function, or the computation is **invalid**.
 
     
@@ -894,6 +930,25 @@ Returns the period in seconds
 >     )
 
 Returns the right ascension of the ascending node in degrees
+
+    
+##### Method `ric_difference`
+
+>     def ric_difference(
+>         self,
+>         /,
+>         other
+>     )
+
+Returns a Cartesian state representing the RIC difference between self and other, in position and velocity (with transport theorem).
+Refer to dcm_from_ric_to_inertial for details on the RIC frame.
+
+##### Algorithm
+1. Compute the RIC DCM of self
+2. Rotate self into the RIC frame
+3. Rotation other into the RIC frame
+4. Compute the difference between these two states
+5. Strip the astrodynamical information from the frame, enabling only computations from <code>CartesianState</code>
 
     
 ##### Method `right_ascension_deg`
@@ -1002,9 +1057,9 @@ Mutates this orbit to change the INC
 Mutates this orbit to change the RAAN
 
     
-##### Method `set_sma`
+##### Method `set_sma_km`
 
->     def set_sma(
+>     def set_sma_km(
 >         self,
 >         /,
 >         new_sma_km
@@ -1053,14 +1108,22 @@ Returns the semi-major axis in km
 
 Returns the true anomaly in degrees between 0 and 360.0
 
-###### Note
-This function will emit a warning stating that the TA should be avoided if in a very near circular orbit
+NOTE: This function will emit a warning stating that the TA should be avoided if in a very near circular orbit
 Code from <https://github.com/ChristopherRabotin/GMAT/blob/80bde040e12946a61dae90d9fc3538f16df34190/src/gmatutil/util/StateConversionUtil.cpp#L6835>
 
-###### Limitation
-For an orbit whose true anomaly is (very nearly) 0.0 or 180.0, this function may return either 0.0 or 180.0 with a very small time increment.
+LIMITATION: For an orbit whose true anomaly is (very nearly) 0.0 or 180.0, this function may return either 0.0 or 180.0 with a very small time increment.
 This is due to the precision of the cosine calculation: if the arccosine calculation is out of bounds, the sign of the cosine of the true anomaly is used
 to determine whether the true anomaly should be 0.0 or 180.0. **In other words**, there is an ambiguity in the computation in the true anomaly exactly at 180.0 and 0.0.
+
+    
+##### Method `ta_dot_deg_s`
+
+>     def ta_dot_deg_s(
+>         self,
+>         /
+>     )
+
+Returns the time derivative of the true anomaly computed as the 360.0 degrees divided by the orbital period (in seconds).
 
     
 ##### Method `tlong_deg`
@@ -1081,6 +1144,30 @@ Returns the true longitude in degrees
 >     )
 
 Returns the velocity declination of this orbit in degrees
+
+    
+##### Method `vinf_periapsis_km`
+
+>     def vinf_periapsis_km(
+>         self,
+>         /,
+>         turn_angle_degrees
+>     )
+
+Returns the radius of periapse in kilometers for the provided turn angle of this hyperbolic orbit.
+Returns an error if the orbit is not hyperbolic.
+
+    
+##### Method `vinf_turn_angle_deg`
+
+>     def vinf_turn_angle_deg(
+>         self,
+>         /,
+>         periapsis_km
+>     )
+
+Returns the turn angle in degrees for the provided radius of periapse passage of this hyperbolic orbit
+Returns an error if the orbit is not hyperbolic.
 
     
 ##### Method `vmag_km_s`
@@ -1149,9 +1236,9 @@ Returns a copy of the state with a new INC
 Returns a copy of the state with a new RAAN
 
     
-##### Method `with_sma`
+##### Method `with_sma_km`
 
->     def with_sma(
+>     def with_sma_km(
 >         self,
 >         /,
 >         new_sma_km

@@ -1,4 +1,4 @@
-# Module `anise.astro.constants`
+# Module `astro.constants`
 
     
 ## Classes
