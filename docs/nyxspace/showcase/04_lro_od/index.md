@@ -175,7 +175,7 @@ The filter is configured with the default automatic residual rejection of Nyx wh
 
 # Results
 
-**Nyx provides a good estimation of the orbit of the Lunar Reconnaissance Orbiter, matching the LRO team's desired uncertainty of 800 meters when tracking the vehicle,** despite modeling and filtering differences between GTDS and Nyx. As discussed in the [filter setup](#filter-set-up) section just above, we've had to increase the state noise compensation to account for [oscillating modeling differences]((#preliminary-analysis-matching-dynamical-models)) between Nyx and the LRO definitive ephemeris.
+**Nyx provides a good estimation of the orbit of the Lunar Reconnaissance Orbiter, matching the LRO team's desired uncertainty of 800 meters when tracking the vehicle,** despite modeling and filtering differences between GTDS and Nyx. As discussed in the [filter setup](#filter-set-up) section just above, we've had to increase the state noise compensation to account for [oscillating modeling differences](#preliminary-analysis-matching-dynamical-models) between Nyx and the LRO definitive ephemeris.
 
 ![RIC Covar Position](./plots/covar-ric-pos.png)
 

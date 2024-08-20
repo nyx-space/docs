@@ -1,4 +1,4 @@
-# Module `anise.time`
+# Module `time`
 
     
 ## Classes
@@ -12,8 +12,7 @@
 
 Defines generally usable durations for nanosecond precision valid for 32,768 centuries in either direction, and only on 80 bits / 10 octets.
 
-#### Important conventions
-
+**Important conventions:**
 1. The negative durations can be mentally modeled "BC" years. One hours before 01 Jan 0000, it was "-1" years but  365 days and 23h into the current day.
 It was decided that the nanoseconds corresponds to the nanoseconds _into_ the current century. In other words,
 a duration with centuries = -1 and nanoseconds = 0 is _a greater duration_ (further from zero) than centuries = -1 and nanoseconds = 1.
@@ -24,6 +23,36 @@ As such, the largest negative duration that can be represented sets the centurie
 
     
 #### Methods
+
+    
+##### Method `EPSILON`
+
+>     def EPSILON()
+
+    
+##### Method `MAX`
+
+>     def MAX()
+
+    
+##### Method `MIN`
+
+>     def MIN()
+
+    
+##### Method `MIN_NEGATIVE`
+
+>     def MIN_NEGATIVE()
+
+    
+##### Method `MIN_POSITIVE`
+
+>     def MIN_POSITIVE()
+
+    
+##### Method `ZERO`
+
+>     def ZERO()
 
     
 ##### Method `abs`
@@ -49,6 +78,20 @@ This is useful to provide an approximate human duration. Under the hood, this fu
 so the "tipping point" of the rounding is half way to the next increment of the greatest unit.
 As shown below, one example is that 35 hours and 59 minutes rounds to 1 day, but 36 hours and 1 minute rounds
 to 2 days because 2 days is closer to 36h 1 min than 36h 1 min is to 1 day.
+
+##### Example
+
+```
+use hifitime::{Duration, TimeUnits};
+
+assert_eq!((2.hours() + 3.minutes()).approx(), 2.hours());
+assert_eq!((24.hours() + 3.minutes()).approx(), 1.days());
+assert_eq!((35.hours() + 59.minutes()).approx(), 1.days());
+assert_eq!((36.hours() + 1.minutes()).approx(), 2.days());
+assert_eq!((47.hours() + 3.minutes()).approx(), 2.days());
+assert_eq!((49.hours() + 3.minutes()).approx(), 2.days());
+```
+
     
 ##### Method `ceil`
 
@@ -61,6 +104,19 @@ to 2 days because 2 days is closer to 36h 1 min than 36h 1 min is to 1 day.
 Ceils this duration to the closest provided duration
 
 This simply floors then adds the requested duration
+
+##### Example
+```
+use hifitime::{Duration, TimeUnits};
+
+let two_hours_three_min = 2.hours() + 3.minutes();
+assert_eq!(two_hours_three_min.ceil(1.hours()), 3.hours());
+assert_eq!(two_hours_three_min.ceil(30.minutes()), 2.hours() + 30.minutes());
+assert_eq!(two_hours_three_min.ceil(4.hours()), 4.hours());
+assert_eq!(two_hours_three_min.ceil(1.seconds()), two_hours_three_min + 1.seconds());
+assert_eq!(two_hours_three_min.ceil(1.hours() + 5.minutes()), 2.hours() + 10.minutes());
+```
+
     
 ##### Method `decompose`
 
@@ -72,11 +128,6 @@ This simply floors then adds the requested duration
 Decomposes a Duration in its sign, days, hours, minutes, seconds, ms, us, ns
 
     
-##### Method `epsilon`
-
->     def epsilon()
-
-    
 ##### Method `floor`
 
 >     def floor(
@@ -86,10 +137,25 @@ Decomposes a Duration in its sign, days, hours, minutes, seconds, ms, us, ns
 >     )
 
 Floors this duration to the closest duration from the bottom
-    
-##### Method `init_from_all_parts`
 
->     def init_from_all_parts(
+##### Example
+```
+use hifitime::{Duration, TimeUnits};
+
+let two_hours_three_min = 2.hours() + 3.minutes();
+assert_eq!(two_hours_three_min.floor(1.hours()), 2.hours());
+assert_eq!(two_hours_three_min.floor(30.minutes()), 2.hours());
+// This is zero because we floor by a duration longer than the current duration, rounding it down
+assert_eq!(two_hours_three_min.floor(4.hours()), 0.hours());
+assert_eq!(two_hours_three_min.floor(1.seconds()), two_hours_three_min);
+assert_eq!(two_hours_three_min.floor(1.hours() + 1.minutes()), 2.hours() + 2.minutes());
+assert_eq!(two_hours_three_min.floor(1.hours() + 5.minutes()), 1.hours() + 5.minutes());
+```
+
+    
+##### Method `from_all_parts`
+
+>     def from_all_parts(
 >         sign,
 >         days,
 >         hours,
@@ -103,19 +169,9 @@ Floors this duration to the closest duration from the bottom
 Creates a new duration from its parts
 
     
-##### Method `init_from_max`
+##### Method `from_parts`
 
->     def init_from_max()
-
-    
-##### Method `init_from_min`
-
->     def init_from_min()
-
-    
-##### Method `init_from_parts`
-
->     def init_from_parts(
+>     def from_parts(
 >         centuries,
 >         nanoseconds
 >     )
@@ -123,20 +179,11 @@ Creates a new duration from its parts
 Create a normalized duration from its parts
 
     
-##### Method `init_from_total_nanoseconds`
+##### Method `from_total_nanoseconds`
 
->     def init_from_total_nanoseconds(
+>     def from_total_nanoseconds(
 >         nanos
 >     )
-
-    
-##### Method `init_from_truncated_nanoseconds`
-
->     def init_from_truncated_nanoseconds(
->         nanos
->     )
-
-Create a new duration from the truncated nanoseconds (+/- 2927.1 years of duration)
 
     
 ##### Method `is_negative`
@@ -169,8 +216,6 @@ assert_eq!(d1, d1.max(d0));
 assert_eq!(d1, d0.max(d1));
 ```
 
-_Note:_ this uses a pointer to <code>self</code> which will be copied immediately because Python requires a pointer.
-
     
 ##### Method `min`
 
@@ -192,26 +237,6 @@ assert_eq!(d0, d1.min(d0));
 assert_eq!(d0, d0.min(d1));
 ```
 
-_Note:_ this uses a pointer to <code>self</code> which will be copied immediately because Python requires a pointer.
-
-    
-##### Method `min_negative`
-
->     def min_negative()
-
-    
-##### Method `min_positive`
-
->     def min_positive()
-
-    
-##### Method `normalize`
-
->     def normalize(
->         self,
->         /
->     )
-
     
 ##### Method `round`
 
@@ -224,6 +249,17 @@ _Note:_ this uses a pointer to <code>self</code> which will be copied immediatel
 Rounds this duration to the closest provided duration
 
 This performs both a <code>ceil</code> and <code>floor</code> and returns the value which is the closest to current one.
+##### Example
+```
+use hifitime::{Duration, TimeUnits};
+
+let two_hours_three_min = 2.hours() + 3.minutes();
+assert_eq!(two_hours_three_min.round(1.hours()), 2.hours());
+assert_eq!(two_hours_three_min.round(30.minutes()), 2.hours());
+assert_eq!(two_hours_three_min.round(4.hours()), 4.hours());
+assert_eq!(two_hours_three_min.round(1.seconds()), two_hours_three_min);
+assert_eq!(two_hours_three_min.round(1.hours() + 5.minutes()), 2.hours() + 10.minutes());
+```
 
     
 ##### Method `signum`
@@ -280,33 +316,6 @@ For high fidelity comparisons, it is recommended to keep using the Duration stru
 Returns the total nanoseconds in a signed 128 bit integer
 
     
-##### Method `truncated_nanoseconds`
-
->     def truncated_nanoseconds(
->         self,
->         /
->     )
-
-Returns the truncated nanoseconds in a signed 64 bit integer, if the duration fits.
-WARNING: This function will NOT fail and will return the i64::MIN or i64::MAX depending on
-the sign of the centuries if the Duration does not fit on aa i64
-
-    
-##### Method `try_truncated_nanoseconds`
-
->     def try_truncated_nanoseconds(
->         self,
->         /
->     )
-
-Returns the truncated nanoseconds in a signed 64 bit integer, if the duration fits.
-
-    
-##### Method `zero`
-
->     def zero()
-
-    
 ### Class `Epoch`
 
 >     class Epoch(
@@ -320,16 +329,6 @@ Refer to the appropriate functions for initializing this Epoch from different ti
     
 #### Methods
 
-    
-##### Method `ceil`
-
->     def ceil(
->         self,
->         /,
->         duration
->     )
-
-Ceils this epoch to the closest provided duration in the TAI time scale
     
 ##### Method `day_of_year`
 
@@ -351,16 +350,6 @@ Returns the number of days since the start of the year.
 Returns the duration since the start of the year
 
     
-##### Method `floor`
-
->     def floor(
->         self,
->         /,
->         duration
->     )
-
-Floors this epoch to the closest provided duration
-
 ##### Method `hours`
 
 >     def hours(
@@ -369,17 +358,6 @@ Floors this epoch to the closest provided duration
 >     )
 
 Returns the hours of the Gregorian representation  of this epoch in the time scale it was initialized in.
-
-    
-##### Method `in_time_scale`
-
->     def in_time_scale(
->         self,
->         /,
->         new_time_scale
->     )
-
-Copies this epoch and sets it to the new time scale provided.
 
     
 ##### Method `init_from_bdt_days`
@@ -688,6 +666,37 @@ Initialize an Epoch from given MJD in TAI time scale
 Initialize an Epoch from given MJD in UTC time scale
 
     
+##### Method `init_from_qzsst_days`
+
+>     def init_from_qzsst_days(
+>         days
+>     )
+
+Initialize an Epoch from the number of days since the QZSS Time Epoch,
+defined as UTC midnight of January 5th to 6th 1980 (cf. <https://gssc.esa.int/navipedia/index.php/Time_References_in_GNSS#GPS_Time_.28GPST.29>).
+
+    
+##### Method `init_from_qzsst_nanoseconds`
+
+>     def init_from_qzsst_nanoseconds(
+>         nanoseconds
+>     )
+
+Initialize an Epoch from the number of nanoseconds since the QZSS Time Epoch,
+defined as UTC midnight of January 5th to 6th 1980 (cf. <https://gssc.esa.int/navipedia/index.php/Time_References_in_GNSS#GPS_Time_.28GPST.29>).
+This may be useful for time keeping devices that use QZSS as a time source.
+
+    
+##### Method `init_from_qzsst_seconds`
+
+>     def init_from_qzsst_seconds(
+>         seconds
+>     )
+
+Initialize an Epoch from the number of seconds since the QZSS Time Epoch,
+defined as UTC midnight of January 5th to 6th 1980 (cf. <https://gssc.esa.int/navipedia/index.php/Time_References_in_GNSS#GPS_Time_.28GPST.29>).
+
+    
 ##### Method `init_from_tai_days`
 
 >     def init_from_tai_days(
@@ -820,6 +829,9 @@ Equivalent to <code>datetime.isoformat</code>, and truncated to 23 chars, refer 
 Get the accumulated number of leap seconds up to this Epoch accounting only for the IERS leap seconds and the SOFA scaling from 1960 to 1972, depending on flag.
 Returns None if the epoch is before 1960, year at which UTC was defined.
 
+##### Why does this function return an <code>Option</code> when the other returns a value
+This is to match the <code>iauDat</code> function of SOFA (src/dat.c). That function will return a warning and give up if the start date is before 1960.
+
     
 ##### Method `leap_seconds_iers`
 
@@ -842,28 +854,9 @@ Get the accumulated number of leap seconds up to this Epoch accounting only for 
 
 Get the accumulated number of leap seconds up to this Epoch from the provided LeapSecondProvider.
 Returns None if the epoch is before 1960, year at which UTC was defined.
-    
-##### Method `max`
 
->     def max(
->         self,
->         /,
->         other
->     )
-
-Returns the maximum of the two epochs.
-
-```
-use hifitime::Epoch;
-
-let e0 = Epoch::from_gregorian_utc_at_midnight(2022, 10, 20);
-let e1 = Epoch::from_gregorian_utc_at_midnight(2022, 10, 21);
-
-assert_eq!(e1, e1.max(e0));
-assert_eq!(e1, e0.max(e1));
-```
-
-_Note:_ this uses a pointer to <code>self</code> which will be copied immediately because Python requires a pointer.
+##### Why does this function return an <code>Option</code> when the other returns a value
+This is to match the <code>iauDat</code> function of SOFA (src/dat.c). That function will return a warning and give up if the start date is before 1960.
 
     
 ##### Method `maybe_init_from_gregorian`
@@ -933,29 +926,6 @@ Returns the microseconds of the Gregorian representation  of this epoch in the t
 Returns the milliseconds of the Gregorian representation  of this epoch in the time scale it was initialized in.
 
     
-##### Method `min`
-
->     def min(
->         self,
->         /,
->         other
->     )
-
-Returns the minimum of the two epochs.
-
-```
-use hifitime::Epoch;
-
-let e0 = Epoch::from_gregorian_utc_at_midnight(2022, 10, 20);
-let e1 = Epoch::from_gregorian_utc_at_midnight(2022, 10, 21);
-
-assert_eq!(e0, e1.min(e0));
-assert_eq!(e0, e0.min(e1));
-```
-
-_Note:_ this uses a pointer to <code>self</code> which will be copied immediately because Python requires a pointer.
-
-    
 ##### Method `minutes`
 
 >     def minutes(
@@ -984,101 +954,6 @@ Returns the minutes of the Gregorian representation  of this epoch in the time s
 Returns the nanoseconds of the Gregorian representation  of this epoch in the time scale it was initialized in.
 
     
-##### Method `next`
-
->     def next(
->         self,
->         /,
->         weekday
->     )
-
-Returns the next weekday.
-
-```
-use hifitime::prelude::*;
-
-let epoch = Epoch::from_gregorian_utc_at_midnight(1988, 1, 2);
-assert_eq!(epoch.weekday_utc(), Weekday::Saturday);
-assert_eq!(epoch.next(Weekday::Sunday), Epoch::from_gregorian_utc_at_midnight(1988, 1, 3));
-assert_eq!(epoch.next(Weekday::Monday), Epoch::from_gregorian_utc_at_midnight(1988, 1, 4));
-assert_eq!(epoch.next(Weekday::Tuesday), Epoch::from_gregorian_utc_at_midnight(1988, 1, 5));
-assert_eq!(epoch.next(Weekday::Wednesday), Epoch::from_gregorian_utc_at_midnight(1988, 1, 6));
-assert_eq!(epoch.next(Weekday::Thursday), Epoch::from_gregorian_utc_at_midnight(1988, 1, 7));
-assert_eq!(epoch.next(Weekday::Friday), Epoch::from_gregorian_utc_at_midnight(1988, 1, 8));
-assert_eq!(epoch.next(Weekday::Saturday), Epoch::from_gregorian_utc_at_midnight(1988, 1, 9));
-```
-
-    
-##### Method `next_weekday_at_midnight`
-
->     def next_weekday_at_midnight(
->         self,
->         /,
->         weekday
->     )
-
-    
-##### Method `next_weekday_at_noon`
-
->     def next_weekday_at_noon(
->         self,
->         /,
->         weekday
->     )
-
-    
-##### Method `previous`
-
->     def previous(
->         self,
->         /,
->         weekday
->     )
-
-Returns the next weekday.
-
-```
-use hifitime::prelude::*;
-
-let epoch = Epoch::from_gregorian_utc_at_midnight(1988, 1, 2);
-assert_eq!(epoch.previous(Weekday::Friday), Epoch::from_gregorian_utc_at_midnight(1988, 1, 1));
-assert_eq!(epoch.previous(Weekday::Thursday), Epoch::from_gregorian_utc_at_midnight(1987, 12, 31));
-assert_eq!(epoch.previous(Weekday::Wednesday), Epoch::from_gregorian_utc_at_midnight(1987, 12, 30));
-assert_eq!(epoch.previous(Weekday::Tuesday), Epoch::from_gregorian_utc_at_midnight(1987, 12, 29));
-assert_eq!(epoch.previous(Weekday::Monday), Epoch::from_gregorian_utc_at_midnight(1987, 12, 28));
-assert_eq!(epoch.previous(Weekday::Sunday), Epoch::from_gregorian_utc_at_midnight(1987, 12, 27));
-assert_eq!(epoch.previous(Weekday::Saturday), Epoch::from_gregorian_utc_at_midnight(1987, 12, 26));
-```
-
-    
-##### Method `previous_weekday_at_midnight`
-
->     def previous_weekday_at_midnight(
->         self,
->         /,
->         weekday
->     )
-
-    
-##### Method `previous_weekday_at_noon`
-
->     def previous_weekday_at_noon(
->         self,
->         /,
->         weekday
->     )
-
-    
-##### Method `round`
-
->     def round(
->         self,
->         /,
->         duration
->     )
-
-Rounds this epoch to the closest provided duration in TAI
-    
 ##### Method `seconds`
 
 >     def seconds(
@@ -1087,17 +962,6 @@ Rounds this epoch to the closest provided duration in TAI
 >     )
 
 Returns the seconds of the Gregorian representation  of this epoch in the time scale it was initialized in.
-
-    
-##### Method `set`
-
->     def set(
->         self,
->         /,
->         new_duration
->     )
-
-Makes a copy of self and sets the duration and time scale appropriately given the new duration
 
     
 ##### Method `strftime`
@@ -1153,7 +1017,7 @@ Returns days past BDT (BeiDou) Time Epoch, defined as Jan 01 2006 UTC
 >         /
 >     )
 
-Returns <code>[Duration](#\_anise.time.Duration "\_anise.time.Duration")</code> past BDT (BeiDou) time Epoch.
+Returns <code>[Duration](#time.Duration "time.Duration")</code> past BDT (BeiDou) time Epoch.
 
     
 ##### Method `to_bdt_nanoseconds`
@@ -1178,52 +1042,16 @@ NOTE: This function will return an error if the centuries past GST time are not 
 Returns seconds past BDT (BeiDou) Time Epoch
 
     
-##### Method `to_duration`
-
->     def to_duration(
->         self,
->         /
->     )
-
-Returns this epoch with respect to the time scale this epoch was created in.
-This is needed to correctly perform duration conversions in dynamical time scales (e.g. TDB).
-
-###### Examples
-1. If an epoch was initialized as Epoch.init_from_..._utc(...) then the duration will be the UTC duration from J1900.
-2. If an epoch was initialized as Epoch.init_from_..._tdb(...) then the duration will be the UTC duration from J2000 because the TDB reference epoch is J2000.
-
-    
 ##### Method `to_duration_in_time_scale`
 
 >     def to_duration_in_time_scale(
 >         self,
 >         /,
->         time_scale
+>         ts
 >     )
 
 Returns this epoch with respect to the provided time scale.
 This is needed to correctly perform duration conversions in dynamical time scales (e.g. TDB).
-
-    
-##### Method `to_duration_since_j1900`
-
->     def to_duration_since_j1900(
->         self,
->         /
->     )
-
-Returns this epoch in duration since J1900 in the time scale this epoch was created in.
-
-    
-##### Method `to_duration_since_j1900_in_time_scale`
-
->     def to_duration_since_j1900_in_time_scale(
->         self,
->         /,
->         time_scale
->     )
-
-Returns this epoch in duration since J1900 with respect to the provided time scale.
 
     
 ##### Method `to_et_centuries_since_j2000`
@@ -1263,17 +1091,6 @@ line with IERS and the documentation in the leap seconds list.
 In order to match SPICE, the as_et_duration() function will manually get rid of that difference.
 
     
-##### Method `to_et_duration_since_j1900`
-
->     def to_et_duration_since_j1900(
->         self,
->         /
->     )
-
-Returns the Ephemeris Time in duration past 1900 JAN 01 at noon.
-**Only** use this if the subsequent computation expect J1900 seconds.
-
-    
 ##### Method `to_et_seconds`
 
 >     def to_et_seconds(
@@ -1301,7 +1118,7 @@ Returns days past GPS Time Epoch, defined as UTC midnight of January 5th to 6th 
 >         /
 >     )
 
-Returns <code>[Duration](#\_anise.time.Duration "\_anise.time.Duration")</code> past GPS time Epoch.
+Returns <code>[Duration](#time.Duration "time.Duration")</code> past GPS time Epoch.
 
     
 ##### Method `to_gpst_nanoseconds`
@@ -1325,58 +1142,6 @@ NOTE: This function will return an error if the centuries past GPST time are not
 Returns seconds past GPS Time Epoch, defined as UTC midnight of January 5th to 6th 1980 (cf. <https://gssc.esa.int/navipedia/index.php/Time_References_in_GNSS#GPS_Time_.28GPST.29>).
 
     
-##### Method `to_gregorian_str`
-
->     def to_gregorian_str(
->         self,
->         /,
->         time_scale
->     )
-
-Converts the Epoch to Gregorian in the provided time scale and in the ISO8601 format with the time scale appended to the string
-
-    
-##### Method `to_gregorian_tai`
-
->     def to_gregorian_tai(
->         self,
->         /
->     )
-
-Converts the Epoch to the Gregorian TAI equivalent as (year, month, day, hour, minute, second).
-WARNING: Nanoseconds are lost in this conversion!
-
-    
-##### Method `to_gregorian_tai_str`
-
->     def to_gregorian_tai_str(
->         self,
->         /
->     )
-
-Converts the Epoch to TAI Gregorian in the ISO8601 format with " TAI" appended to the string
-
-    
-##### Method `to_gregorian_utc`
-
->     def to_gregorian_utc(
->         self,
->         /
->     )
-
-Converts the Epoch to the Gregorian UTC equivalent as (year, month, day, hour, minute, second).
-WARNING: Nanoseconds are lost in this conversion!
-    
-##### Method `to_gregorian_utc_str`
-
->     def to_gregorian_utc_str(
->         self,
->         /
->     )
-
-Converts the Epoch to UTC Gregorian in the ISO8601 format.
-
-    
 ##### Method `to_gst_days`
 
 >     def to_gst_days(
@@ -1396,7 +1161,7 @@ starting on August 21st 1999 Midnight UT
 >         /
 >     )
 
-Returns <code>[Duration](#\_anise.time.Duration "\_anise.time.Duration")</code> past GST (Galileo) time Epoch.
+Returns <code>[Duration](#time.Duration "time.Duration")</code> past GST (Galileo) time Epoch.
 
     
 ##### Method `to_gst_nanoseconds`
@@ -1428,7 +1193,7 @@ Returns seconds past GST (Galileo) Time Epoch
 >         /
 >     )
 
-The standard ISO format of this epoch (six digits of subseconds), refer to <https://docs.rs/hifitime/latest/hifitime/efmt/format/struct.Format.html> for format options
+The standard ISO format of this epoch (six digits of subseconds) in the _current_ time scale, refer to <https://docs.rs/hifitime/latest/hifitime/efmt/format/struct.Format.html> for format options.
 
     
 ##### Method `to_jde_et`
@@ -1554,7 +1319,7 @@ Returns the Julian days in UTC.
 >         /
 >     )
 
-Returns the Julian days in UTC as a <code>[Duration](#\_anise.time.Duration "\_anise.time.Duration")</code>
+Returns the Julian days in UTC as a <code>[Duration](#time.Duration "time.Duration")</code>
 
     
 ##### Method `to_jde_utc_seconds`
@@ -1662,6 +1427,47 @@ If this is _not_ an issue, you should use <code>epoch.to\_duration\_in\_time\_sc
 in that century.
 
     
+##### Method `to_qzsst_days`
+
+>     def to_qzsst_days(
+>         self,
+>         /
+>     )
+
+Returns days past QZSS Time Epoch, defined as UTC midnight of January 5th to 6th 1980 (cf. <https://gssc.esa.int/navipedia/index.php/Time_References_in_GNSS#GPS_Time_.28GPST.29>).
+
+    
+##### Method `to_qzsst_duration`
+
+>     def to_qzsst_duration(
+>         self,
+>         /
+>     )
+
+Returns <code>[Duration](#time.Duration "time.Duration")</code> past QZSS time Epoch.
+
+    
+##### Method `to_qzsst_nanoseconds`
+
+>     def to_qzsst_nanoseconds(
+>         self,
+>         /
+>     )
+
+Returns nanoseconds past QZSS Time Epoch, defined as UTC midnight of January 5th to 6th 1980 (cf. <https://gssc.esa.int/navipedia/index.php/Time_References_in_GNSS#GPS_Time_.28GPST.29>).
+NOTE: This function will return an error if the centuries past QZSST time are not zero.
+
+    
+##### Method `to_qzsst_seconds`
+
+>     def to_qzsst_seconds(
+>         self,
+>         /
+>     )
+
+Returns seconds past QZSS Time Epoch, defined as UTC midnight of January 5th to 6th 1980 (cf. <https://gssc.esa.int/navipedia/index.php/Time_References_in_GNSS#GPS_Time_.28GPST.29>).
+
+    
 ##### Method `to_rfc3339`
 
 >     def to_rfc3339(
@@ -1757,24 +1563,13 @@ Given the embedded sine functions in the equation to compute the difference betw
 past J2000, one cannot solve the revert the operation analytically. Instead, we iterate until the value no longer changes.
 
 1. Assume that the TAI duration is in fact the TDB seconds from J2000.
-2. Offset to J2000 because <code>[Epoch](#\_anise.time.Epoch "\_anise.time.Epoch")</code> stores everything in the J1900 but the TDB duration is in J2000.
+2. Offset to J2000 because <code>[Epoch](#time.Epoch "time.Epoch")</code> stores everything in the J1900 but the TDB duration is in J2000.
 3. Compute the offset <code>g</code> due to the TDB computation with the current value of the TDB seconds (defined in step 1).
 4. Subtract that offset to the latest TDB seconds and store this as a new candidate for the true TDB seconds value.
 5. Compute the difference between this candidate and the previous one. If the difference is less than one nanosecond, stop iteration.
 6. Set the new candidate as the TDB seconds since J2000 and loop until step 5 breaks the loop, or we've done five iterations.
 7. At this stage, we have a good approximation of the TDB seconds since J2000.
 8. Reverse the algorithm given that approximation: compute the <code>g</code> offset, compute the difference between TDB and TAI, add the TT offset (32.184 s), and offset by the difference between J1900 and J2000.
-
-    
-##### Method `to_tdb_duration_since_j1900`
-
->     def to_tdb_duration_since_j1900(
->         self,
->         /
->     )
-
-Returns the Dynamics Barycentric Time (TDB) as a high precision Duration with reference epoch of 1900 JAN 01 at noon.
-**Only** use this if the subsequent computation expect J1900 seconds.
 
     
 ##### Method `to_tdb_seconds`
@@ -1785,18 +1580,6 @@ Returns the Dynamics Barycentric Time (TDB) as a high precision Duration with re
 >     )
 
 Returns the Dynamic Barycentric Time (TDB) (higher fidelity SPICE ephemeris time) whose epoch is 2000 JAN 01 noon TAI (cf. <https://gssc.esa.int/navipedia/index.php/Transformations_between_Time_Systems#TDT_-_TDB.2C_TCB>)
-
-    
-##### Method `to_time_of_week`
-
->     def to_time_of_week(
->         self,
->         /
->     )
-
-Converts this epoch into the time of week, represented as a rolling week counter into that time scale
-and the number of nanoseconds elapsed in current week (since closest Sunday midnight).
-This is usually how GNSS receivers describe a timestamp.
 
     
 ##### Method `to_tt_centuries_j2k`
@@ -1826,7 +1609,7 @@ Returns days past TAI epoch in Terrestrial Time (TT) (previously called Terrestr
 >         /
 >     )
 
-Returns <code>[Duration](#\_anise.time.Duration "\_anise.time.Duration")</code> past TAI epoch in Terrestrial Time (TT).
+Returns <code>[Duration](#time.Duration "time.Duration")</code> past TAI epoch in Terrestrial Time (TT).
 
     
 ##### Method `to_tt_seconds`
@@ -1900,28 +1683,6 @@ Returns the number milliseconds since the UNIX epoch defined 01 Jan 1970 midnigh
 Returns the number seconds since the UNIX epoch defined 01 Jan 1970 midnight UTC.
 
     
-##### Method `to_ut1`
-
->     def to_ut1(
->         self,
->         /,
->         provider
->     )
-
-Returns this time in a Duration past J1900 counted in UT1
-
-    
-##### Method `to_ut1_duration`
-
->     def to_ut1_duration(
->         self,
->         /,
->         provider
->     )
-
-Returns this time in a Duration past J1900 counted in UT1
-
-    
 ##### Method `to_utc`
 
 >     def to_utc(
@@ -1961,154 +1722,6 @@ Returns this time in a Duration past J1900 counted in UTC
 >     )
 
 Returns the number of UTC seconds since the TAI epoch
-
-    
-##### Method `ut1_offset`
-
->     def ut1_offset(
->         self,
->         /,
->         provider
->     )
-
-Get the accumulated offset between this epoch and UT1, assuming that the provider includes all data.
-
-    
-##### Method `weekday`
-
->     def weekday(
->         self,
->         /
->     )
-
-Returns weekday (uses the TAI representation for this calculation).
-
-    
-##### Method `weekday_in_time_scale`
-
->     def weekday_in_time_scale(
->         self,
->         /,
->         time_scale
->     )
-
-Returns the weekday in provided time scale **ASSUMING** that the reference epoch of that time scale is a Monday.
-You _probably_ do not want to use this. You probably either want <code>weekday()</code> or <code>weekday\_utc()</code>.
-Several time scales do _not_ have a reference day that's on a Monday, e.g. BDT.
-
-    
-##### Method `weekday_utc`
-
->     def weekday_utc(
->         self,
->         /
->     )
-
-Returns weekday in UTC timescale
-
-    
-##### Method `with_hms`
-
->     def with_hms(
->         self,
->         /,
->         hours,
->         minutes,
->         seconds
->     )
-
-Returns a copy of self where the time is set to the provided hours, minutes, seconds
-Invalid number of hours, minutes, and seconds will overflow into their higher unit.
-Warning: this does _not_ set the subdivisions of second to zero.
-
-    
-##### Method `with_hms_from`
-
->     def with_hms_from(
->         self,
->         /,
->         other
->     )
-
-Returns a copy of self where the hours, minutes, seconds is set to the time of the provided epoch but the
-sub-second parts are kept from the current epoch.
-
-```
-use hifitime::prelude::*;
-
-let epoch = Epoch::from_gregorian_utc(2022, 12, 01, 10, 11, 12, 13);
-let other_utc = Epoch::from_gregorian_utc(2024, 12, 01, 20, 21, 22, 23);
-let other = other_utc.in_time_scale(TimeScale::TDB);
-
-assert_eq!(
-    epoch.with_hms_from(other),
-    Epoch::from_gregorian_utc(2022, 12, 01, 20, 21, 22, 13)
-);
-```
-
-    
-##### Method `with_hms_strict`
-
->     def with_hms_strict(
->         self,
->         /,
->         hours,
->         minutes,
->         seconds
->     )
-
-Returns a copy of self where the time is set to the provided hours, minutes, seconds
-Invalid number of hours, minutes, and seconds will overflow into their higher unit.
-Warning: this will set the subdivisions of seconds to zero.
-
-    
-##### Method `with_hms_strict_from`
-
->     def with_hms_strict_from(
->         self,
->         /,
->         other
->     )
-
-Returns a copy of self where the time is set to the time of the other epoch but the subseconds are set to zero.
-
-```
-use hifitime::prelude::*;
-
-let epoch = Epoch::from_gregorian_utc(2022, 12, 01, 10, 11, 12, 13);
-let other_utc = Epoch::from_gregorian_utc(2024, 12, 01, 20, 21, 22, 23);
-let other = other_utc.in_time_scale(TimeScale::TDB);
-
-assert_eq!(
-    epoch.with_hms_strict_from(other),
-    Epoch::from_gregorian_utc(2022, 12, 01, 20, 21, 22, 0)
-);
-```
-
-    
-##### Method `with_time_from`
-
->     def with_time_from(
->         self,
->         /,
->         other
->     )
-
-Returns a copy of self where all of the time components (hours, minutes, seconds, and sub-seconds) are set to the time of the provided epoch.
-
-```
-use hifitime::prelude::*;
-
-let epoch = Epoch::from_gregorian_utc(2022, 12, 01, 10, 11, 12, 13);
-let other_utc = Epoch::from_gregorian_utc(2024, 12, 01, 20, 21, 22, 23);
-// If the other Epoch is in another time scale, it does not matter, it will be converted to the correct time scale.
-let other = other_utc.in_time_scale(TimeScale::TDB);
-
-assert_eq!(
-    epoch.with_time_from(other),
-    Epoch::from_gregorian_utc(2022, 12, 01, 20, 21, 22, 23)
-);
-```
 
     
 ##### Method `year`
@@ -2171,6 +1784,9 @@ Enum of the different time systems available
 
     
 ##### Variable `GST`
+
+    
+##### Variable `QZSST`
 
     
 ##### Variable `TAI`
@@ -2244,6 +1860,9 @@ An Enum to perform time unit conversions.
 
     
 ##### Variable `Second`
+
+    
+##### Variable `Week`
 
     
 #### Methods
