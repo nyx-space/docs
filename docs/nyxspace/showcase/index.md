@@ -10,6 +10,8 @@ This section showcases some of the problems that you can solve with the whole su
 
     _HPOP_ of an Earth centered spacecraft, exporting the OEM, and computing passes from Colorado, USA.
 
+    ![RAAN, AOP, INC over time](./01_orbit_prop/plots/cubesat-angles-v-time.png)
+
     [:octicons-arrow-right-24: Read more](./01_orbit_prop/index.md)
     
     [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/examples/01_orbit_prop)
@@ -19,6 +21,8 @@ This section showcases some of the problems that you can solve with the whole su
     ---
 
     Blazing fast multithreaded Monte Carlo simulation of the JWST orbit, and comparison with an orbit determination prediction
+
+    ![JWST INC (deg)](./02_jwst_covar_monte_carlo/plots/jwst_mc_inc_deg.png)
 
     [:octicons-arrow-right-24: Read more](./02_jwst_covar_monte_carlo/index.md)
     
@@ -30,6 +34,8 @@ This section showcases some of the problems that you can solve with the whole su
 
     GEO eclipse analysis, orbit raising when sunlit, and station keeping, in high fidelity dynamics
 
+    ![3D traj raise](./03_geo_analysis/plots/raise-traj-3d.png)
+
     [:octicons-arrow-right-24: Read more](./03_geo_analysis/index.md)
     
     [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/examples/03_geo_analysis)
@@ -39,6 +45,8 @@ This section showcases some of the problems that you can solve with the whole su
     ---
 
     Orbit determination of the _as-flown_ LRO spacecraft using NASA Goddard's published definitive ephemeris
+
+    ![Doppler resid](./04_lro_od/plots/doppler-resid.png)
 
     [:octicons-arrow-right-24: Read more](./04_lro_od/index.md)
     
