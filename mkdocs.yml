@@ -124,6 +124,7 @@ plugins:
   - mkdocs-jupyter:
       ignore_h1_titles: True
   - blog
+  - glightbox
   - redirects:
       redirect_maps:
         "hifitime/intro.md": "hifitime/index.md"
