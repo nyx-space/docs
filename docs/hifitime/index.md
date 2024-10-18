@@ -4,6 +4,21 @@ Hifitime is trusted by leading scientific and aerospace organizations for critic
 
 In addition to extensive unit and integration testing, the Rust code of Hifitime is [formally verified using the Kani model checker](https://model-checking.github.io/kani-verifier-blog/2023/03/31/how-kani-helped-find-bugs-in-hifitime.html).
 
+## Installation
+
+=== "Python"
+
+    ``` sh
+    pip install hifitime
+    ```
+
+=== "Rust"
+
+    ``` sh
+    cargo add hifitime
+    ```
+
+
 ## Time scales
 
 Time scales (or "time systems" in the ESA lingo) are best explained by IAU SOFA:
