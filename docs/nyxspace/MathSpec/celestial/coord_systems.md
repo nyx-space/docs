@@ -1,7 +1,10 @@
 # Coordinate systems
 
 ## Ephemerides
-_TODO_
+
+Nyx uses the SPICE developmental ephemerides for all ephemeris handling via ANISE, a modern rewrite of NAIF's SPICE.
+
+Learn all about [ANISE here](../../../anise/).
 
 ## Rotations and attitude frames
 ### Trajectory centered frames

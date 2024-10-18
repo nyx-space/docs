@@ -50,16 +50,14 @@ nav:
       - MathSpec:
           - Introduction: nyxspace/MathSpec/index.md
           - Celestial:
-              - Coordinate frames [WIP]: nyxspace/MathSpec/celestial/coord_systems.md
-              # - Ephemeris [WIP]: nyxspace/MathSpec/celestial/ephemeris.md
+              - Coordinate frames: nyxspace/MathSpec/celestial/coord_systems.md
               - Orbital elements: nyxspace/MathSpec/celestial/orbital_elements.md
               - Trajectory interpolation: nyxspace/MathSpec/celestial/interpolation.md
               - Eclipses: nyxspace/MathSpec/celestial/eclipse.md
-              # - Events [WIP]: nyxspace/MathSpec/celestial/events.md
           - Dynamical Models:
               - Overview: nyxspace/MathSpec/models/overview.md
               - Gravity: nyxspace/MathSpec/models/gravity.md
-              # - Spherical harmonics [WIP]: nyxspace/MathSpec/models/harmonics.md
+              - Spherical harmonics: nyxspace/MathSpec/models/harmonics.md
               - Solar radiation pressure: nyxspace/MathSpec/models/srp.md
               # - Drag [WIP]: nyxspace/MathSpec/models/drag.md
               # - Control laws [WIP]: nyxspace/MathSpec/models/control_laws.md
@@ -77,8 +75,6 @@ nav:
           - Optimization:
               - State transition matrix: nyxspace/MathSpec/optimization/stm.md
               - Targeting: nyxspace/MathSpec/optimization/targeting.md
-              # - Multiple shooting [WIP]: nyxspace/MathSpec/optimization/multiple_shooting.md
-              # - Optimizer [WIP]: nyxspace/MathSpec/optimization/panoc.md
           - Propagators: nyxspace/MathSpec/propagators.md
           - Appendices:
               - Dual numbers: nyxspace/MathSpec/appendix/dual_numbers.md
@@ -128,6 +124,7 @@ plugins:
   - mkdocs-jupyter:
       ignore_h1_titles: True
   - blog
+  - glightbox
   - redirects:
       redirect_maps:
         "hifitime/intro.md": "hifitime/index.md"

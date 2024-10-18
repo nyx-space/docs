@@ -1,2 +1,0 @@
-Talk about events and the Brent solver
-Talk about the default precision for each event, how it searches on multiple threads (so a super precise search may bottleneck a computer, better to do a breath-first approach), and how it falls back to search around the min/max of the overall state if the event isn't found.

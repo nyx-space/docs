@@ -108,23 +108,7 @@ All of the [initializers from Rust](https://docs.rs/hifitime/latest/hifitime/?se
 
 ## Converting into another time scale
 
-One of the main uses of hifitime is converting between time scales. Hifitime enables you to convert between UTC, TT, TAI, ET, JDE, GPST, and UNIX time scales, represented as centuries, days, hours, minutes, seconds, milliseconds, microseconds, or nanoseconds.
-
-Most of the time, you'll likely need to find the ET or TDB representation
-
-!!! important
-    Recall that in Hifitime, ET and TDB are different time scales. In SPICE, ET is actually TDB without the short fluctuations. Hifitime makes sure that its definition of ET exactly matches the SPICE ET (i.e. TDB without fluctuations). For high precision TDB, use the TDB time scale.
-
-```python
->>> leap_day_2000 = Epoch.init_from_gregorian_utc_hms(2000, 2, 29, 14, 57, 29)
->>> leap_day_2000.to_tdb_seconds()
-5108313.185384022
->>> leap_day_2000.to_et_seconds()
-5108313.185383182
->>> leap_day_2000.to_jde_et_days()
-2451604.123995201
->>> 
-```
+One of the main use cases of hifitime is converting between time scales. As of version 4, simply call `to_time_scale` on an epoch with the desired time scale as a parameter. This will return a copy of the original Epoch converted into the time scale of your choice.
 
 ## Converting into another time unit
 
@@ -179,7 +163,7 @@ Noon UTC after the first leap second is in fact ten seconds _after_ noon TAI. He
 
 ```python
 pre_ls_utc = Epoch.init_from_gregorian_utc_at_noon(1971, 12, 31)
-pre_ls_tai = pre_ls_utc.in_time_scale(TimeScale.TAI)
+pre_ls_tai = pre_ls_utc.to_time_scale(TimeScale.TAI)
 ```
 
 Before the first leap second, there is no time difference between both epochs (because only IERS announced leap seconds are accounted for by default).

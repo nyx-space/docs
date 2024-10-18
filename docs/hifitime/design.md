@@ -45,11 +45,6 @@ Time scaled are defined on a single octet (`u8`).
 
 Time units are defined on a single octet (`u8`).
 
-## Serializing for embedded applications
-
-The structures for Epoch, Duration, and Unit can be serialized and deserialized in the [ASN.1](https://en.wikipedia.org/wiki/ASN.1) format, which is memory efficient, does not require memory allocations, and is used thoroughly in the telecommunications and cryptography industries.
-
-
 ## Requirements
 
 Click on the requirement to see its description, verification method, and its children requirements. Note that the library has features in addition to those listed as requirements.

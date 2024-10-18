@@ -6,7 +6,7 @@ Put this in your `Cargo.toml`:
 
 ```toml
 [dependencies]
-hifitime = "3.8"
+hifitime = "4"
 ```
 
 Then at the top of each source file, just add the following line:
@@ -24,7 +24,7 @@ By default, the `std` feature is enabled. Practically, this enables functions th
 
 Optional features:
 
-+ `asn1der`: this feature allows serializing epochs, durations, time scales, and time units into ASN.1. This is extremely useful for sending data across the wire to other embedded systems without the need for memory allocations.
++ `ut1`: enables the UT1 time scale, the only true time with respect to the stars
 + `python`: this feature must be enabled to build the Python bindings
 
 ## Epoch initialization
@@ -131,37 +131,7 @@ All of the initialization functions start with [`from_`](https://docs.rs/hifitim
 
 ## Converting into another time scale
 
-One of the main use cases of hifitime is to initialize an epoch in one time scale and converting it into another. Hifitime provides the conversion from any Epoch into UTC, TAI, TDB, TT, and ET. That is done through two main ways.
-
-The first is with the `to_TIMESCALE_duration` such as `to_tai_duration` which will always return a `Duration` type. This can then be converted into the relevant time unit you with, like `Centuries` or `Days`:
-
-```rust
-println!("{}", my_epoch.to_tdb_duration().to_unit(Unit::Day))
-```
-
-All of the relevant functions are available in the [API documentation](https://docs.rs/hifitime/latest/hifitime/?search=_duration).
-
-For some often used conversions, a direct function is available:
-
-+ [`to_tai_days`](https://docs.rs/hifitime/latest/hifitime/prelude/struct.Epoch.html#method.to_tai_days)
-+ [`to_tai_seconds`](https://docs.rs/hifitime/latest/hifitime/prelude/struct.Epoch.html#method.to_tai_seconds)
-+ [`to_tdb_centuries_since_j2000`](https://docs.rs/hifitime/latest/hifitime/prelude/struct.Epoch.html#method.to_tdb_centuries_since_j2000)
-+ [`to_tdb_days_since_j2000`](https://docs.rs/hifitime/latest/hifitime/prelude/struct.Epoch.html#method.to_tdb_days_since_j2000)
-
-And [many others...](https://docs.rs/hifitime/latest/hifitime/?search=to_).
-
-### Example converting from Gregorian UTC to ET
-
-!!! note
-    The ET and TDB conversions are always in reference to J2000 to match NAIF SPICE, unless you use the `to_tdb_duration_since_j1900` or `to_et_duration_since_1900`.
-
-```rust
-let e = Epoch::from_gregorian_utc(2000, 2, 29, 14, 57, 29, 0);
-
-println!("{}", e.to_et_seconds()); // Prints `5108313.185383182`
-
-println!("{}", e.to_jde_utc_days()); // Prints `2451604.1232523`
-```
+One of the main use cases of hifitime is converting between time scales. As of version 4, simply call `to_time_scale` on an epoch with the desired time scale as a parameter. This will return a copy of the original Epoch converted into the time scale of your choice.
 
 ## Epoch arithmetics
 
@@ -218,7 +188,7 @@ Noon UTC after the first leap second is in fact ten seconds _after_ noon TAI. He
 
 ```rust
 let pre_ls_utc = Epoch::from_gregorian_utc_at_noon(1971, 12, 31);
-let pre_ls_tai = pre_ls_utc.in_time_scale(TimeScale::TAI);
+let pre_ls_tai = pre_ls_utc.to_time_scale(TimeScale::TAI);
 ```
 
 Before the first leap second, there is no time difference between both epochs (because only IERS announced leap seconds are accounted for by default).
