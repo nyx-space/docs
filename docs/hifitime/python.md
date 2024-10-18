@@ -163,7 +163,7 @@ Noon UTC after the first leap second is in fact ten seconds _after_ noon TAI. He
 
 ```python
 pre_ls_utc = Epoch.init_from_gregorian_utc_at_noon(1971, 12, 31)
-pre_ls_tai = pre_ls_utc.in_time_scale(TimeScale.TAI)
+pre_ls_tai = pre_ls_utc.to_time_scale(TimeScale.TAI)
 ```
 
 Before the first leap second, there is no time difference between both epochs (because only IERS announced leap seconds are accounted for by default).
