@@ -36,15 +36,22 @@ flowchart LR
     classDef engr fill:dodgerblue,opacity:0.6,stroke:navy,stroke-width:2px,color:black
 ```
 
-Time scales (or "time systems" in the ESA lingo) are a standard for measuring the passing of time. Humans typically follow Coordinated Universal Time (UTC) which is defined as the mean solar time at 0° longitude, with some longitude and geopolitical offset (time zones). We also abide by the concept that all seconds are of equal durations, i.e., the tick rate of a stopwatch does not change throughout days or years: the conflicts with UTC because the Earth does not complete a full rotation in an exact number of seconds, and the time it takes to complete a full rotation cannot be predicted exactly.
+Time scales, or "time systems" as referred to by the European Space Agency, are standardized methods for measuring the passage of time. They are essential for ensuring consistency and precision in various scientific and engineering contexts.
 
-The UT1 time scale measures time with respect to the stars: several scientific organizations publish the true UT1 time as part of their daily publication of the Earth Orientation Parameters (EOP). To simplify everyone's life, UTC still assumes that the Earth completes one full rotation in exactly 24 hours, or 86,400 seconds.
+Humans typically follow Coordinated Universal Time (UTC), which is based on the mean solar time at the prime meridian (0° longitude). Time zones are a longitude and geopolitical construct that apply a fixed offset to UTC such that noon is roughly when the Sun is at its highest point in the sky in a given day. UTC operates on the principle that all seconds are of equal duration, maintaining a constant tick rate over days and years. However, this conflicts with the Earth's rotation, which does not complete in an exact number of seconds and varies unpredictably.
 
-The Temps Atomique International (TAI) time scale is an average measure of atomic clocks throughout the world: it is the reference for the duration of a single second. UTC is an offset from TAI such that UTC stays within one second of UT1. These corrections are called _leap seconds_, and are announced by the International Earth Rotation and Reference Systems Service (IERS) at least six months in advance. The following plot shows how UTC deviates from so-called "glitch-free" time scales, which don't account for leap seconds.
+The UT1 time scale measures time relative to the stars, reflecting the Earth's actual rotation. Scientific organizations publish UT1 as part of their daily Earth Orientation Parameters (EOP) updates. Despite these complexities, UTC simplifies matters by assuming a constant 24-hour day, equivalent to 86,400 seconds.
+
+Temps Atomique International (TAI) is a time scale based on the average of atomic clocks worldwide, providing a precise standard for the duration of a second. UTC is an offset from TAI designed to keep it within one second of UT1. This alignment is achieved through leap seconds, which are adjustments announced by the International Earth Rotation and Reference Systems Service (IERS) at least six months in advance.
+
+The interplay between these time scales illustrates how UTC deviates from "glitch-free" systems that do not incorporate leap seconds, highlighting the ongoing challenge of synchronizing human timekeeping with astronomical realities.
 
 --8<-- "includes/time-scale-deviation.html"
 
-Relativity affects time: gravity wells warp the spacetime continuum by slowing down the passing of time. For example, a single second is slower on Earth than it is in the vacuum between Mars and Jupiter. Astronomy and astrodynamics applications must account for this by defining a new time scale. The Dynamic Barycentric Time (TDB) time scale includes a correction to the duration of a second compared to TAI to remove the effects of the gravity of Earth on the passing of time. Application-specific time scales also exist, like Global Positioning System (GPST), Galileo time scale (GST), and many more.
+Gravity wells distort the spacetime continuum, slowing down the passage of time. For instance, a second on Earth is slightly slower than a second in the vacuum between Mars and Jupiter. To address these variations, especially in astronomy and astrodynamics, specialized time scales are developed.
+
+Dynamic Barycentric Time (TDB) is one such time scale. It includes corrections to the duration of a second relative to TAI, compensating for the gravitational effects of Earth on time. In addition to TDB, there are application-specific time scales tailored to particular systems. For example, the Global Positioning System (GPST) and the Galileo time scale (GST) are designed to meet the unique requirements of their respective satellite navigation systems. 
+
 
 --8<-- "includes/time-scale-deviation-no-utc.html"
 
