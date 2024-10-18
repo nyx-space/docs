@@ -48,6 +48,11 @@ The interplay between these time scales illustrates how UTC deviates from "glitc
 
 --8<-- "includes/time-scale-deviation.html"
 
+!!! quote
+    Leap seconds pose tricky problems for software writers, and consequently there are concerns that these events put safety-critical systems at risk. The correct solution is for designers to base such systems on TAI or some other glitch-free time scale, not UTC, but this option is often overlooked until it is too late.
+    
+    -- "SOFA Time Scales and Calendar Tools", Document version 1.61, section 3.5.1
+
 Gravity wells distort the spacetime continuum, slowing down the passage of time. For instance, a second on Earth is slightly slower than a second in the vacuum between Mars and Jupiter. To address these variations, especially in astronomy and astrodynamics, specialized time scales are developed.
 
 Dynamic Barycentric Time (TDB) is one such time scale. It includes corrections to the duration of a second relative to TAI, compensating for the gravitational effects of Earth on time. In addition to TDB, there are application-specific time scales tailored to particular systems. For example, the Global Positioning System (GPST) and the Galileo time scale (GST) are designed to meet the unique requirements of their respective satellite navigation systems. 
@@ -71,27 +76,16 @@ As an example, Hifitime supports both the recent TDB time scale and the older Ep
 
 ## Comparison with SPICE
 
-1. Hifitime and SPICE perform the same computation for Ephemeris Time, i.e. the error between hifitime and SPICE in Ephemeris Time is constrained only by the precision of the SPICE representation.
-1. SPICE stores epochs in a single double-precision value (64-bit floats). This leads to considerable loss in precision when initializing epochs that are far from the 01 JAN 2000 ET.
-1. SPICE only supports the Ephemeris Time and UTC time scales, whereas hifitime also supports several other commonly used scales.
-1. Hifitime can also trivially be used in embedded systems, even for UTC conversions, without the need of an external file. SPICE requires parsing of the text file of leap seconds (e.g. `naif00012.tls`) prior to converting to/from a UTC datetime.
-1. Hifitime supports initializing and formatting epochs in RFC3339 and ISO8601 formats, in addition to the NAIF formats starting with `MJD`, `SEC`, or `JD`.
-1. SPICE incorrectly assumes that the difference between TAI and UTC is _nine_ seconds prior to the first leap second of 1972. Hifitime uses the SOFA leap seconds when requested.
-1. SPICE uses an approximation of ET instead of TDB which does not include the small perturbations.
-1. Hifitime stores its base epoch in TAI whereas NAIF uses an approximation of ET.
-
-!!! quote
-    Leap seconds pose tricky problems for software writers, and consequently there are concerns that these events put safety-critical systems at risk. The correct solution is for designers to base such systems on TAI or some other glitch-free time scale, not UTC, but this option is often overlooked until it is too late.
-    
-    -- "SOFA Time Scales and Calendar Tools", Document version 1.61, section 3.5.1
+1. Both Hifitime and SPICE perform calculations for Ephemeris Time, with discrepancies limited only by SPICE's precision.
+2. SPICE stores epochs using a single double-precision value (64-bit floats), leading to significant precision loss for epochs far from 01 January 2000 ET.
+3. While SPICE supports only Ephemeris Time and UTC, Hifitime handles several additional commonly used time scales.
+4. Hifitime is easily deployable in embedded systems, even for UTC conversions, without requiring external files. In contrast, SPICE needs to parse a leap seconds file (e.g., `naif00012.tls`) for UTC conversions.
+5. Hifitime supports initializing and formatting epochs in RFC3339 and ISO8601 formats, as well as NAIF formats like `MJD`, `SEC`, or `JD`.
+6. SPICE inaccurately assumes a nine-second difference between TAI and UTC before the first leap second in 1972. Hifitime uses SOFA leap seconds when requested.
+7. SPICE approximates ET instead of using TDB, omitting minor perturbations.
 
 ## Comparison with SOFA
 
-1. SOFA stores datetimes as a tuple of two double-precision floats (on 64-bits each). Instead, hifitime stores datetimes as a duration since J1900 TAI, and a duration is stored as a tuple of a signed 16-bit integer and an unsigned 64-bit integer.
-1. SOFA supports the TCB and TCG time scales, which hifitime does not support.
-1. SOFA supports the unpredictable `UT1` time scale, which hifitime does not support.
-
-
-[^1]: Note that hifitime does not support date-agnostic epochs or time-agnostic epochs, only a combination of both.
+SOFA stores datetimes as a pair of double-precision floats (64 bits each), whereas Hifitime represents them as a duration since the time scale's reference epoch, where the duration is a tuple of a signed 16-bit integer and an unsigned 64-bit integer.
 
 --8<-- "includes/Abbreviations.md"
