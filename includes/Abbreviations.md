@@ -50,3 +50,4 @@
 *[RCN]: Radial, Cross, Orbit normal frame
 *[VNC]: Velocity, Orbit normal, Cross
 *[SOFA]: Standards Of Fundamental Astronomy
+*[ESA]: European Space Agency
