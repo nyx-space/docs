@@ -1,73 +1,108 @@
-# Interpolated trajectories
-This section is focused on the generation of interpolated trajectories by propagators in Nyx.
+This section focuses on building interpolated trajectories by propagators in Nyx.
 
-Interpolated trajectories are computed in parallel leading to a negligible impact in computational performance. **All of the event finding requires an interpolated trajectory.**
+For details on interpolation methods for trajectories, including [Chebyshev](../../../anise/reference/mathspec/interpolation/chebyshev.md), [Lagrange](../../../anise/reference/mathspec/interpolation/lagrange.md), and [Hermite](../../../anise/reference/mathspec/interpolation/hermite.md) interpolators, refer the [ANISE math spec reference on interpolation](../../../anise/reference/mathspec/interpolation/index.md).
 
-Trajectories store a interpolation splines created from a Hermite interpolation (written from scratch and validated against NumPy). Specifically, the algorithm works by curve fitting the provided states in position, velocity, and fuel mass (when interpolating a spacecraft trajectory instead of just an orbital trajectory). This curve fit will generate a _Hermite series_ which is then converted into a _generic polynomial_. Note that none of these operations require memory allocations (and rely on Rust's [`const generic`](https://rust-lang.github.io/rfcs/2000-const-generics.html) feature).
+Interpolated trajectories are computed in parallel leading to a negligible impact in computational performance. To build a trajectory from a propagation event, call the [`for_duration_with_traj()`](https://rustdoc.nyxspace.com/nyx_space/propagators/struct.PropInstance.html#method.for_duration_with_traj) function on the propagator. Note that all of the event finding requires an interpolated trajectory.
 
-??? info "Technical note"
-    Starting a propagator with the `for_duration_with_traj()` will return the final state of the propagation and the associated trajectory. This only works for states which also implement the [`InterpState` trait](https://docs.rs/nyx-space/latest/nyx_space/md/trajectory/trait.InterpState.html).
+Trajectories in Nyx are a simple list of discrete states interpolated using the [Hermite interpolation](../../../anise/reference/mathspec/interpolation/hermite.md). They are akin to the NASA/SPICE Hermite Type 13 interpolator.
 
-    The segments in a trajectory are organized in a binary tree map allowing for blazing fast access to any segment of the trajectory.
+Spacecraft trajectories can be transformed into another frame by transforming each of the individual states into the desired frame.
 
-!!! warning "Limitations"
-    1. To support generating the trajectories in parallell and storing them in a binary tree, it was necessary to choose an indexing method independent of the duration of the interpolation spline. This has been chosen to be the _centiseconds_ (10 milliseconds) since the start of the trajectory, the start being the very first state used to seed the trajectory. This means that if two splines last _less than 10 ms_, one will **overwrite** the other in the binary tree, meaning that part of the trajectory will **not** be queryable.
-    1. Changing the frame of a trajectory follows the Shannon Nyquist sampling theorem. However, this will introduce _some imprecision_ nevertheless. Multiple conversions (e.g. from EME2000 to Moon J2000 back to EME2000) will accumulate errors quickly.
-    1. Trajectories can currently only be generated with forward propagation. (Fixed in version 1.1.)
+!!! warning
+    Transforming a trajectory into another frame _is different_ from propagating the original spacecraft in that other frame. A propagator will advance with a different step depending on the central body, refe to [the reference on propagator](../../../nyxspace/MathSpec/propagators.md).
+    
+    For example, propagating a spacecraft defined in the Earth Mean J2000 (EME2000) inertial frame when accounting for the point mass gravity of the Earth and the Moon and transforming that trajectory into a Moon J2000 centered frame will lead to a different trajectory that propagating that same inertial state defined in the Moon J2000 frame.
 
-## Ephemeris
+## Trajectory Ephemeris Integration Test
 
-1. Propagate a LEO orbit with STM for 31 days in two body dynamics and request the propagator to generate the trajectory on the fly.
-1. Compute the average SMA of that orbit by sampling the trajectory every 1 day (this ensures that the compiler does not remove the trajectory querying section from the test).
-1. Check that the first and last state of the trajectory are strictly equal to the input propagator state and output propagator state.
-1. Check that querying a trajectory one nanosecond after its end state returns an error.
-1. Request a new propagation from the initial state but without generating the trajectory and read every intermediate state from that propagation. For each state, compute the radius and velocity differences between each of those states and the interpolated states at those exact times.
-1. Ensure that the interpolation error in position is less than 1 micrometer and the error in velocity is less than 1 micrometer per second.
-1. Convert the whole trajectory to its equivalent in the Moon J2000 frame (called `Luna` in Nyx). Convert that new trajectory back into the Earth Mean Equator J2000 frame (`EME2000`).
-1. Sample that "double converted" trajectory every five minutes and compare each of those states with the initial interpolated trajectory.
-1. Ensure that the interpolation error in position is less than 1 micrometer and the error in velocity is less than 1 micrometer per second.
+Details of the `traj_ephem_forward` integration test.
 
-All of the above is computed in 0.9 seconds on a standard desktop computer.
+### Test Configuration
 
-!!! note
-    If propagating with the STM, then the trajectory will also include the STM for that specific step forward.
+- Initial epoch: 2021-01-01 12:00:00 UTC
+- Initial state: LEO orbit in Earth J2000 frame
+- Propagation duration: 31 days
+- Dynamics: Two-body
+- Integration method: variable step Runge-Kutta 8-9
 
-!!! check "Validation"
+### Success Criteria
+
+| Metric | Requirement |
+|--------|-------------|
+| Position Error (Direct) | 0 m |
+| Velocity Error (Direct) | 0 m/s |
+| Position Error (Post frame conv.) | < 1 m |
+| Velocity Error (Post frame conv.) | < 0.01 m/s |
+| Temporal Precision | < 1 μs |
+
+### Test Structure
+
+#### Trajectory Generation and Basic Validation
+
+   - Builds a trajectory
+   - Validates conservation of semi-major axis
+   - Verifies initial and final states match propagation
+   - Ensures STM (State Transition Matrix) is properly unset
+   - Confirms interpolation bounds are respected
+
+#### Interpolation Accuracy
+
+   - Parallel truth generation
+   - Compares interpolated states against truth trajectory
+   - Validates position and velocity errors at exact timesteps
+   - Expected accuracy: machine precision for stored states
+
+#### Persistence Testing
+
+   - Exports trajectory to Parquet format
+   - Includes eclipse event detection
+   - Reloads trajectory and verifies:
+     - State count consistency
+     - Temporal boundaries
+     - State vector equality
+     - Microsecond-level epoch precision
+
+#### Frame Transformation Validation
+
+   - Double conversion test: Earth J2000 → Moon J2000 → Earth J2000
+   - Samples every 5 minutes
+   - Validates:
+     - Temporal consistency
+     - Position error < 1 meter
+     - Velocity error < 0.01 m/s
+
+
+!!! check "Run log"
     ```sh
     $ RUST_LOG=info RUST_BACKTRACE=1 /usr/bin/time cargo test traj_ephem --release -- --nocapture
-     INFO  nyx_space::propagators::propagator > Propagating for 30 days 23 h 59 min 60 s 0 ms -0.021928026217210607 ns until 2021-02-01T12:00:00 UTC
+    INFO  nyx_space::propagators::instance > Propagating for 31 days until 2021-02-01T12:00:00 UTC
+    INFO  nyx_space::propagators::instance >       ... done in 247 ms 822 μs 611 ns
+    [TIMING] 293 ms 488 μs 896 ns
     Average SMA: 7712.186 km        Should be: 7712.186
-    [tests/propagation/trajectory.rs:46] sum_sma / cnt - start_state.sma() = 0.000000245786395680625
-    Ephem: Trajectory from 2021-01-01T12:00:00 UTC to 2021-02-01T12:00:00 UTC (30 days 23 h 59 min 60 s 0 ms -0.021928026217210607 ns, or 2678400.000 s) [4613 splines]
-     INFO  nyx_space::propagators::propagator > Propagating for 30 days 23 h 59 min 60 s 0 ms -0.021928026217210607 ns until 2021-02-01T12:00:00 UTC
-    [traj_ephem] Maximum interpolation error: pos: 2.25e-8 m                vel: 1.98e-11 m/s
-     INFO  nyx_space::md::trajectory::traj    > Converted trajectory from Earth J2000 to Moon J2000 in 189 ms
-    ephem_luna Trajectory from 2021-01-01T12:00:00 UTC to 2021-02-01T12:00:00 UTC (30 days 23 h 59 min 60 s 0 ms -0.021928026217210607 ns, or 2678400.000 s) [11203 splines]
-     INFO  nyx_space::md::trajectory::traj    > Converted trajectory from Moon J2000 to Earth J2000 in 448 ms
+    Ephem: Trajectory in Earth J2000 (μ = 398600.435436096 km^3/s^2, eq. radius = 6378.14 km, polar radius = 6356.75 km, f = 0.0033536422844278) from 2021-01-01T12:00:00 UTC to 2021-02-01T12:00:00 UTC (31 days, or 2678400.000 s) [32289 states]
+    INFO  nyx_space::propagators::instance > Propagating for 31 days until 2021-02-01T12:00:00 UTC
+    INFO  nyx_space::propagators::instance >       ... done in 274 ms 970 μs 367 ns
+    [traj_ephem] Maximum error on exact step: pos: 0.00e0 m         vel: 0.00e0 m/s
+    INFO  nyx_space::md::trajectory::traj  > Exporting trajectory to parquet file...
+    INFO  nyx_space::md::trajectory::traj  > Serialized 32289 states from 2021-01-01T12:00:00 UTC to 2021-02-01T12:00:00 UTC
+    INFO  nyx_space::md::trajectory::traj  > Evaluating 1 event(s)
+    INFO  nyx_space::md::trajectory::traj  > Trajectory written to /home/chris/Workspace/nyx-space/nyx/output_data/ephem_forward-2024-10-27T06-36-19.parquet in 2 s 245 ms 95 μs 680 ns
+    INFO  nyx_space::io::trajectory_data   > File: /home/chris/Workspace/nyx-space/nyx/output_data/ephem_forward-2024-10-27T06-36-19.parquet
+    INFO  nyx_space::io::trajectory_data   > Created on: 2024-10-27T06:36:20.258980864 UTC
+    INFO  nyx_space::io::trajectory_data   > nyx-space License: AGPL 3.0
+    INFO  nyx_space::io::trajectory_data   > Created by: Chris Rabotin (chris) on Linux
+    INFO  nyx_space::io::trajectory_data   > Purpose: Trajectory data
+    INFO  nyx_space::io::trajectory_data   > Generated by: Nyx v2.0.0-rc
+    INFO  nyx_space::md::trajectory::sc_traj > Converted trajectory from Earth J2000 (μ = 398600.435436096 km^3/s^2, eq. radius = 6378.14 km, polar radius = 6356.75 km, f = 0.0033536422844278) to Moon J2000 in 300 ms: Trajectory in Moon J2000 (μ = 4902.800066163796 km^3/s^2, radius = 1737.4 km) from 2021-01-01T12:00:00 UTC to 2021-02-01T12:00:00 UTC (31 days, or 2678400.000 s) [32289 states]
+    ephem_luna Trajectory in Moon J2000 (μ = 4902.800066163796 km^3/s^2, radius = 1737.4 km) from 2021-01-01T12:00:00 UTC to 2021-02-01T12:00:00 UTC (31 days, or 2678400.000 s) [32289 states]
+    INFO  nyx_space::md::trajectory::sc_traj > Converted trajectory from Moon J2000 (μ = 4902.800066163796 km^3/s^2, radius = 1737.4 km) to Earth J2000 (μ = 398600.435436096 km^3/s^2, eq. radius = 6378.14 km, polar radius = 6356.75 km, f = 0.0033536422844278) in 299 ms: Trajectory in Earth J2000 (μ = 398600.435436096 km^3/s^2, eq. radius = 6378.14 km, polar radius = 6356.75 km, f = 0.0033536422844278) from 2021-01-01T12:00:00 UTC to 2021-02-01T12:00:00 UTC (31 days, or 2678400.000 s) [32289 states]
+    Ephem back: Trajectory in Earth J2000 (μ = 398600.435436096 km^3/s^2, eq. radius = 6378.14 km, polar radius = 6356.75 km, f = 0.0033536422844278) from 2021-01-01T12:00:00 UTC to 2021-02-01T12:00:00 UTC (31 days, or 2678400.000 s) [32289 states]
+    2.328666121016051e-11
+    Eval: total mass = 0.000 kg @  [Earth J2000] 2021-01-01T12:05:00 UTC    position = [-834.810409, -3848.218391, 6622.529651] km  velocity = [5.519092, -4.261593, -1.778298] km/s  Coast
+    Conv: total mass = 0.000 kg @  [Earth J2000] 2021-01-01T12:05:00 UTC    position = [-834.810409, -3848.218391, 6622.529651] km  velocity = [5.519092, -4.261593, -1.778298] km/s  Coast 0.000 m
+
     (...)
 
-    [traj_ephem] Maximum interpolation error after double conversion: pos: 1.27e-1 m                vel: 4.41e-7 m/s
-    test propagation::trajectory::traj_ephem ... ok
-
-    test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured; 116 filtered out; finished in 0.94s
+    [traj_ephem] Maximum interpolation error after double conversion: pos: 3.76e-8 m                vel: 1.13e-9 m/s
+    test propagation::trajectory::traj_ephem_forward ... ok
     ```
-
-
-## Spacecraft trajectory
-
-!!! check "Validation"
-    ```sh
-    $ RUST_LOG=info RUST_BACKTRACE=1 /usr/bin/time cargo test traj_spacecraft --release -- --nocapture
-    (...)
-
-    [traj_spacecraft] Maximum interpolation error: pos: 1.75e-7 m           vel: 1.35e-6 m/s                fuel: 1.14e-10 g                full state: 3.06e-8 (no unit)
-     INFO  nyx_space::md::trajectory::traj         > Converted trajectory from Earth J2000 to Moon J2000 in 1 ms
-     INFO  nyx_space::md::trajectory::traj         > Converted trajectory from Moon J2000 to Earth J2000 in 3 ms
-    [traj_ephem] Maximum interpolation error after double conversion: pos: 5.76e-2 m                vel: 1.52e-7 m/s
-    test traj_spacecraft ... ok
-    
-    test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.35s
-    ```
-## Navigation trajectory
-
-Version 1.1 will allow generating navigation as well.

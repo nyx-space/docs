@@ -78,7 +78,7 @@ In practice, you can retrieve this rotation matrix by calling [`dcm_from_rcn_to_
 
 Nyx uses the NASA/JPL Developmental Ephemerides version 440 (DE440) by default for all ephemeris handling. The implementation is multi-threaded via ANISE, a modern rewrite of NAIF's SPICE.
 
-Learn all about [ANISE here](../../../anise/).
+Learn all about [ANISE here](../../../anise/index.md).
 
 
 --8<-- "includes/Abbreviations.md"
