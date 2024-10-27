@@ -2,7 +2,12 @@
 
 ## Locally
 
-Run `tasker.sh` to set up the pipenv and run mkdocs, e.g. `tasker.sh serve`.
++ Run `tasker.sh` to set up the pipenv and run mkdocs, e.g. `tasker.sh serve`.
++ Or with [`uv`](https://github.com/astral-sh/uv):
+    + `uv venv` to create the environment
+    + `source .venv/bin/activate` to jump into it
+    + `uv pip install -r reqs.txt` to install the requirements
+    + `mkdocs serve` to launch the server
 
 ### Generating Python documentation
 
