@@ -40,7 +40,7 @@ Time scales, or "time systems" as referred to by the European Space Agency, are 
 
 Humans typically follow Coordinated Universal Time (UTC), which is based on the mean solar time at the prime meridian (0° longitude). Time zones are a longitude and geopolitical construct that apply a fixed offset to UTC such that noon is roughly when the Sun is at its highest point in the sky in a given day. UTC operates on the principle that all seconds are of equal duration, maintaining a constant tick rate over days and years. However, this conflicts with the Earth's rotation, which does not complete in an exact number of seconds and varies unpredictably.
 
-The UT1 time scale measures time relative to the stars, reflecting the Earth's actual rotation. Scientific organizations publish UT1 as part of their daily Earth Orientation Parameters (EOP) updates. Despite these complexities, UTC simplifies matters by assuming a constant 24-hour day, equivalent to 86,400 seconds.
+The UT1 time scale measures time relative to the stars, reflecting the Earth's actual rotation. Scientific organizations publish UT1 as part of their daily Earth Orientation Parameters (EOP) updates. Despite these complexities, UTC simplifies matters by assuming a constant 24-hour day, equivalent to 86,400 seconds, unless a leap second is introduced that day.
 
 Temps Atomique International (TAI) is a time scale based on the average of atomic clocks worldwide, providing a precise standard for the duration of a second. UTC is an offset from TAI designed to keep it within one second of UT1. This alignment is achieved through leap seconds, which are adjustments announced by the International Earth Rotation and Reference Systems Service (IERS) at least six months in advance.
 

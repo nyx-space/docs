@@ -1,48 +1,47 @@
-# State Transition Matrix computation
+The State Transition Matrix (STM, $\boldsymbol \Phi$) is a linearization tool for dynamical systems: it is a local approximation of the dynamics of the system.
 
-Nyx uses dual number theory (i.e. automatic differentiation) to compute all state transition matrices (or Jacobian matrices) to machine precision without relying on finite differencing or error-prone manual derivations. All of the computations are handled by the [hyperdual](https://gitlab.com/chrisrabotin/hyperdual) Rust package, which I co-authored.
+In the field of astrodynamics, it is an approximation of the forces applied to the spacecraft over a short period of time. The STM is a necessary tool in orbit determination and in the circular restricted three-body problem (CRTBP), and may also be used in trajectory optimization.
 
-The following is an extract of the AAS-19-716 conference paper called _Application of Dual Number Theory to Statistical Orbital Determination_, by C. Rabotin [^1].
+For example, in orbit determination, the STM is computed from a propagated spacecraft state. It is considered a reasonable approximation of the forces acting on a spacecraft until the next time step (typically the next tracking measurement) through the time-propagation of the whole matrix.
 
-First, the mathematical notions of dual numbers and hyper-dual spaces is recalled, along with their error-free auto-differentiation properties. Subsequently, hyper-dual spaces are elegantly applied to statistical orbital determination problems, both for the computation of linearized dynamics, and for the sensitivity matrix of a Kalman filter. Further, a comparison of the execution speeds of the same statistical orbital determination problem using the hyper-dual space formulation and the traditional manual derivation formulation is provided.
+## System Dynamics
 
-Please refer to [Dual Numbers](../appendix/dual_numbers.md) for a primer on dual number theory.
+Consider an orbital state $\boldsymbol{X}$ in a Cartesian frame, comprising position $\boldsymbol{r} = [x,y,z]$ and velocity $\boldsymbol{v} = [\dot{x}, \dot{y}, \dot{z}]$:
 
-## Applying hyper-dual space to statistical orbital determination using Kalman filtering
-### The state transition matrix
-The state transition matrix (STM, $\boldsymbol \Phi$) is a linearization procedure of a dynamical system. In the field of astrodynamics, it is an approximation of the dynamics over a short period of time. In the case of statistical orbital determination, the STM is computed around a reference point of an orbit and propagated forward in time until the next propagation time step or until the next spacecraft observation. The STM is computed via the partials matrix $\boldsymbol A$ of the state $\boldsymbol X$ at a time $t$, as shown earlier.
+$$\boldsymbol{X} = \begin{bmatrix} x \\ y \\ z \\ \dot{x} \\ \dot{y} \\ \dot{z} \end{bmatrix}$$
 
-\begin{equation}
-\label{grad_stm}
-\boldsymbol A(t) = \frac{d \boldsymbol X(t)}{d\boldsymbol X_0}
-\end{equation}
+The time derivative $\boldsymbol{\dot{X}}$ represents system dynamics:
 
-If one only estimates the spacecraft state, then the partials matrix corresponds to the gradient of the orbital dynamics applied to the spacecraft. The state $\boldsymbol X$ of a spacecraft may be defined as the vector of its position and velocity in a Cartesian frame. The equation below shows the relation between the partials matrix and the STM, where $t$ and $t_0$ correspond to two different times such that $t>t_0$.
+$$\boldsymbol{\dot{X}} = F(\boldsymbol{X}, t)$$
 
-\begin{equation}
-\label{stm_def}
-\frac{d {\boldsymbol \Phi}(t, t_0)}{dt} = \boldsymbol A(t)\boldsymbol \Phi(t, t_0)
-\end{equation}
+For two-body problems, acceleration $\boldsymbol{\dot{v}}$ is $-\frac{\mu}{r^3}\boldsymbol{X}$. More complex dynamics extend $F$ to include additional state components. For example, when enabling [Solar Radiation Pressure (SRP)](../models/srp.md) estimation in Nyx, the state vector is expanded to include the coefficient of reflectivity $C_r$.
 
-The $\boldsymbol A$ matrix contains the partial derivatives of the accelerations ($a_x,~a_y,~a_z$) with respect to each of the components of the position of the spacecraft, cf. the next equation.
+### Computation
 
-\begin{equation}
-\label{tb_partials}
-\boldsymbol A = \begin{bmatrix}
-    0 & 0 & 0 & 1 & 0 & 0 \\
-    0 & 0 & 0 & 0 & 1 & 0 \\
-    0 & 0 & 0 & 0 & 0 & 1 \\
-    \frac{\partial a_x}{\partial x} & \frac{\partial a_y}{\partial x} & \frac{\partial a_z}{\partial x} & 0 & 0 & 0 \\
-    \frac{\partial a_x}{\partial y} & \frac{\partial a_y}{\partial y} & \frac{\partial a_z}{\partial y} & 0 & 0 & 0 \\
-    \frac{\partial a_x}{\partial z} & \frac{\partial a_y}{\partial z} & \frac{\partial a_z}{\partial z} & 0 & 0 & 0 \\
-\end{bmatrix}
-\end{equation}
+The STM is computed via the partials matrix (or _Jacobian_) $\boldsymbol A$ of the state $\boldsymbol X$ at a time $t$. A first order Taylor series expansion is used to compute this Jacobian.
 
-In the case of two-body dynamics, the $\boldsymbol A$ matrix is relatively simple to compute. Deriving this partials matrix for higher fidelity dynamics or for a larger state is more complicated. In practice, this may lead orbital estimation software to ignore part of these dynamics. Navigators may then account for smaller perturbations by inflating the covariance matrix with stochastic noise.
+$$ \boldsymbol{\dot{X}} = \boldsymbol{\dot{X}^*} + \frac{\partial F (\boldsymbol{X^*})}{\partial \boldsymbol{\dot{X}}} \cdot \left( \boldsymbol{\dot{X}} - \boldsymbol{\dot{X}^*} \right) $$
 
-Dual numbers, however, provide the partials matrix as part of the computation of the equations of motion (EOM) themselves, as long as these EOMs describe the movement of all of the state variables to be estimated. In practice, this requires defining a hyper-dual space whose size is equal to the number of variables in the state to be estimated. For example, if estimating the Cartesian state a spacecraft and a maneuver magnitude at a reference point during an orbital determination arc, building a seven-dimensional dual space will return the result of the EOMs and the partials matrix computed at that point. An open source example of the building of such hyper-dual space has been implemented as a test case in \textit{dual\_num}, a thorough dual number library in a programming language called Rust.
+where $\boldsymbol{X^*}$ is a reference state vector, e.g. the state at $t_0$.
 
+In practice, this Jacobian is the matrix of partial derivatives of the acceleration of the system, forming the $A$ matrix, where $\boldsymbol{a_{x,y,z}}$ is the acceleration in the X, Y, and Z axes:
 
-[^1]: That's me. `\o/`
+$$\boldsymbol A = \frac{d \boldsymbol X(t)}{d\boldsymbol X_0} = \begin{bmatrix} 0 & 0 & 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 0 & 0 & 1 \\ \frac{\partial a_x}{\partial x} & \frac{\partial a_y}{\partial x} & \frac{\partial a_z}{\partial x} & 0 & 0 & 0 \\ \frac{\partial a_x}{\partial y} & \frac{\partial a_y}{\partial y} & \frac{\partial a_z}{\partial y} & 0 & 0 & 0 \\ \frac{\partial a_x}{\partial z} & \frac{\partial a_y}{\partial z} & \frac{\partial a_z}{\partial z} & 0 & 0 & 0 \end{bmatrix}$$
+
+## Dual Numbers and Hyper-Dual Spaces
+
+Nyx computes STMs using dual number theory because it avoids manual derivation errors via its error-free auto-differentiation properties. This is implemented via the [hyperdual](https://github.com/christopherrabotin/hyperdual) Rust crate. Refer to the page on [Dual Number theory](../appendix/dual_numbers.md) for a primer on the topic.
+
+### Application in Kalman Filtering and Orbit determination
+
+In statistical orbital determination, the STM is computed around an orbit reference point and propagated forward. The partials matrix $\boldsymbol A(t)$ relates to the STM as:
+
+$$\frac{d {\boldsymbol \Phi}(t, t_0)}{dt} = \boldsymbol A(t)\boldsymbol \Phi(t, t_0)$$
+
+Refer to the [Kalman filtering](../orbit_determination/kalman.md) page for details on how the state transition matrix is used in orbit determination in Nyx.
+
+Dual numbers provide these derivatives directly from equations of motion, enabling efficient computation even in complex systems. For details, refer to the AAS-19-716 conference paper _Application of Dual Number Theory to Statistical Orbital Determination_, Rabotin.
+
+[^1]: For detailed STM discussion, refer to section 1.2.5 and 4.2.1. "Statistical Orbit Determination" by Tapley et al., Elsevier 2004.
 
 --8<-- "includes/Abbreviations.md"

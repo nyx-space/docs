@@ -73,7 +73,7 @@ nav:
               - Overview: nyxspace/MathSpec/monte_carlo/overview.md
               - Error modeling: nyxspace/MathSpec/monte_carlo/error_models.md
           - Optimization:
-              - State transition matrix: nyxspace/MathSpec/optimization/stm.md
+              - State transition matrix (STM): nyxspace/MathSpec/optimization/stm.md
               - Targeting: nyxspace/MathSpec/optimization/targeting.md
           - Propagators: nyxspace/MathSpec/propagators.md
           - Appendices:
@@ -105,6 +105,11 @@ nav:
           - Reference index: anise/reference/index.md
           - Math Spec:
               - Orbital elements: anise/reference/mathspec/orbital_elements.md
+              - Interpolation methods:
+                - Interpolation index: anise/reference/mathspec/interpolation/index.md
+                - Chebyshev interpolation: anise/reference/mathspec/interpolation/chebyshev.md
+                - Hermite interpolation: anise/reference/mathspec/interpolation/hermite.md
+                - Lagrange interpolation: anise/reference/mathspec/interpolation/lagrange.md
           - Python API:
               - ANISE Python: anise/reference/api/python/index.md
               - Astro: anise/reference/api/python/astro/index.md

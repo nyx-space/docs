@@ -1,5 +1,3 @@
-# Solar radiation pressure
-
 SRP is implemented as a `ForceModel`, meaning that the implementation computes a force from which the instantaneous mass of the spacecraft is subsequently divided to apply an acceleration. Therefore, as opposed to most formulations in the literature, we will use a force formulation.
 
 Currently, Nyx only supports spherical SRP model.
@@ -20,18 +18,19 @@ Note that $C_r$ and $\mathcal{A}$ are stored in the "context" passed to the EOM 
 
 First, we compute the position of the Sun as seen from the spacecraft, and its unit vector, respectively $\mathbf{r_\odot}$ and $\mathbf{\hat r_\odot}$. Then, we compute the shadowing factor, $k$, using the [eclipse model](../celestial/eclipse.md).
 
-Compute the norm of Sun vector in AU, $||\mathbf{r_\odot}||_{\text{AU}}$ by dividing the $\mathbf{r_\odot}$ vector by 1 AU.
+Compute the norm of Sun vector in AU, $||\mathbf{r_\odot}||$ by dividing the $\mathbf{r_\odot}$ vector by 1 AU.
 
-Compute the flux pressure as follows:
+Compute the flux pressure ($\Phi$) as follows:
 
-$$\Phi_{\text{SRP}} = \frac{k\phi}{c} \left(\frac{1.0}{||\mathbf{r_\odot}||_{\text{AU}}} \right)^2$$
+$$\Phi = \frac{k\phi}{c} \left(\frac{1.0}{||\mathbf{r_\odot}||} \right)^2$$
 
 Finally, return the SRP force [^2]:
 
-$$ \mathbf{F}_{\text{SRP}} = C_r \mathcal{A} \Phi_{\text{SRP}} \mathbf{\hat r_\odot}$$
+$$ \mathbf{F} = C_r \mathcal{A} \Phi \mathbf{\hat r_\odot}$$
 
-!!! note
-    Although the above derivation mentions the Sun, Nyx trivially supports any other light source regardless of the integration frame.
+## Estimation
+
+Nyx can estimate the coefficient of reflectivity $C_r$ in orbit determination scenarios, as shown in [the Lunar Reconnaissance Orbiter](../../showcase/04_lro_od/index.md) example.
 
 ??? check "Validation"
     Nyx has three validation scenarios for the SRP computation to ensure that we test full illumination (`srp_earth_full_vis`), long penumbra passages (`srp_earth_meo_ecc_inc`), and very short penumbra passages (`srp_earth_penumbra`). In all of the test cases, we propagate a spacecraft for 24 **days** to ensure that a high amount of error can accumulate if the modeling is incorrect. The worst absolute position error is _high_ compared to GMAT: 287 meters.
