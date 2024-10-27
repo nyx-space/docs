@@ -20,7 +20,7 @@ Note that $C_r$ and $\mathcal{A}$ are stored in the "context" passed to the EOM 
 
 First, we compute the position of the Sun as seen from the spacecraft, and its unit vector, respectively $\mathbf{r_\odot}$ and $\mathbf{\hat r_\odot}$. Then, we compute the shadowing factor, $k$, using the [eclipse model](../celestial/eclipse.md).
 
-Compute the norm of Sun vector in AU, $||\mathbf{r_\odot}||_{\text{AU}}$ by dividing the $\mathbf{r_\odot}$ vector by 1 AU.
+Compute the norm of Sun vector in AU, $ ||\mathbf{r_\odot}||_{\text{AU}}$ by dividing the $\mathbf{r_\odot} $ vector by 1 AU.
 
 Compute the flux pressure as follows:
 

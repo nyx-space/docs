@@ -24,8 +24,6 @@ $$
 
 In practice, you can retrieve this rotation matrix by calling [`dcm_from_vnc_to_inertial`](https://docs.rs/anise/latest/anise/astro/orbit/type.Orbit.html#method.dcm_from_vnc_to_inertial) on an `Orbit` structure, or [`dcm3x3_from_vnc_to_inertial`](https://docs.rs/anise/latest/anise/astro/orbit/type.Orbit.html#method.dcm3x3_from_vnc_to_inertial) for the $3 \times 3$ DCM only.
 
-Here are the two coordinate frame descriptions following the same style:
-
 ### RIC Frame
 
 The **RIC frame** is a trajectory-centered coordinate system ideal for analyzing spacecraft motion relative to its position vector and orbital plane. It is particularly useful for relative navigation and rendezvous operations, where spacecraft position relative to a target is critical.
