@@ -52,6 +52,16 @@ For $j = N \to 2$:
 
     $$ f'(x) = \frac{w_0 + xdw_0 - dw_1}{r_s} $$
 
+## Output
+
+The algorithm returns a tuple $(f, f')$ where:
+
+- $f$ is the interpolated function value at $x$
+- $f'$ is the interpolated derivative at $x$
+
+!!! note
+    A variation of this algorithm is used for Type 3 SPK/BSP SPICE files where the time derivative is not computed.
+
 ## Error Handling
 
 The implementation checks for:

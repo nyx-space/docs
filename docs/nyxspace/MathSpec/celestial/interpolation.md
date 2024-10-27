@@ -4,14 +4,14 @@ For details on interpolation methods for trajectories, including [Chebyshev](../
 
 Interpolated trajectories are computed in parallel leading to a negligible impact in computational performance. To build a trajectory from a propagation event, call the [`for_duration_with_traj()`](https://rustdoc.nyxspace.com/nyx_space/propagators/struct.PropInstance.html#method.for_duration_with_traj) function on the propagator. Note that all of the event finding requires an interpolated trajectory.
 
-Trajectories in Nyx are a simple list of discrete states interpolated using the [Hermite interpolation](../../../anise/reference/mathspec/interpolation/hermite.md). They are akin to the NASA/SPICE Hermite Type 13 interpolator.
+Trajectories in Nyx are a simple list of discrete states interpolated using the [Hermite interpolator](../../../anise/reference/mathspec/interpolation/hermite.md). They are akin to the NASA/SPICE Hermite Type 13 interpolator.
 
 Spacecraft trajectories can be transformed into another frame by transforming each of the individual states into the desired frame.
 
 !!! warning
-    Transforming a trajectory into another frame _is different_ from propagating the original spacecraft in that other frame. A propagator will advance with a different step depending on the central body, refe to [the reference on propagator](../../../nyxspace/MathSpec/propagators.md).
+    Transforming a trajectory into another frame _is different_ from propagating the original spacecraft in that other frame. A propagator will advance with a different step depending on the central body, refer to [the reference on propagator](../../../nyxspace/MathSpec/propagators.md).
     
-    For example, propagating a spacecraft defined in the Earth Mean J2000 (EME2000) inertial frame when accounting for the point mass gravity of the Earth and the Moon and transforming that trajectory into a Moon J2000 centered frame will lead to a different trajectory that propagating that same inertial state defined in the Moon J2000 frame.
+    For example, propagating a spacecraft defined in the Earth J2000 inertial frame when accounting for the gravitational forces of the Earth and the Moon, and transforming that trajectory into a Moon J2000 centered frame will lead to a different trajectory that propagating that same inertial state defined in the Moon J2000 frame.
 
 ## Trajectory Ephemeris Integration Test
 
