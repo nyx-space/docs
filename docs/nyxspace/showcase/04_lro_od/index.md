@@ -98,7 +98,7 @@ shape: (9, 2)
 
 For this example, we simulate measurements from three of the Deep Space Network ground stations: Canberra, Australia; Madrid, Spain; and Goldstone, CA, USA. Nyx allows configuration of ground stations using a YAML input file, cf. [`dsn-network`](https://github.com/nyx-space/nyx/blob/master/examples/04_lro_od/dsn-network.yaml). These are configured as unbiased white noise ground stations where the standard deviation of the white noise is taken directly from the JPL DESCANSO series. The stochastic modeling in Nyx supports first order Gauss Markov processes and biased white noise.
 
-In this simulation, we are generating geometric one-way range and Doppler measurements. Nyx supports all of the aberration computations provided by ANISE (and validated against SPICE).
+In this simulation, we are generating light-time corrected two-way range and Doppler measurements. Nyx supports all of the aberration computations provided by ANISE (and validated against SPICE).
 
 ## Tracking schedule
 
@@ -115,27 +115,30 @@ To prepare for a mission, flight dynamics engineers must simulate a tracking sch
 The tracking scheduler will start by finding the exact times when the vehicle comes in view, using the embedded event finder on an elevation event.
 
 ```log
+ INFO  nyx_space::od::simulator::arc      > Tracking Arc Simulator on Trajectory of LRO in Moon J2000 (μ = 4902.74987 km^3/s^2, radius = 1737.4 km) from 2024-01-01T00:00:00 UTC to 2024-01-02T00:00:00 UTC (1 day, or 86400.000 s) [17281 states] with devices ["DSS-13 Goldstone", "DSS-34 Canberra", "DSS-65 Madrid"] over TimeSeries [2024-01-01T00:00:00 UTC : 2024-01-02T00:00:00 UTC : 1 min]
+ INFO  nyx_space::od::simulator::arc      > Building schedule for DSS-13 Goldstone
+ INFO  nyx_space::md::trajectory::sc_traj > Converted trajectory from Moon J2000 (μ = 4902.74987 km^3/s^2, radius = 1737.4 km) to Earth IAU_EARTH (μ = 398600.435436096 km^3/s^2) in 221 ms: Trajectory in Earth IAU_EARTH (μ = 398600.436 km^3/s^2, eq. radius = 6378.1366 km, polar radius = 6356.7519 km, f = 0.0033528131084554717) from 2024-01-01T00:00:00 UTC to 2024-01-02T00:00:00 UTC (1 day, or 86400.000 s) [17281 states]
  INFO  nyx_space::md::events::search      > Searching for DSS-13 Goldstone (lat.: 35.2472 deg    long.: 243.2050 deg    alt.: 1071.149 m) [Earth IAU_EARTH (μ = 398600.435436096 km^3/s^2)] with initial heuristic of 14 min 24 s
  INFO  nyx_space::md::events::search      > Event DSS-13 Goldstone (lat.: 35.2472 deg    long.: 243.2050 deg    alt.: 1071.149 m) [Earth IAU_EARTH (μ = 398600.435436096 km^3/s^2)] found 2 times from 2024-01-01T05:49:54.697010810 UTC until 2024-01-01T18:08:53.555326604 UTC
  INFO  nyx_space::od::simulator::arc      > Built 1 tracking strands for DSS-13 Goldstone
  INFO  nyx_space::od::simulator::arc      > Building schedule for DSS-34 Canberra
- INFO  nyx_space::md::trajectory::sc_traj > Converted trajectory from Moon J2000 (μ = 4902.74987 km^3/s^2, radius = 1737.4 km) to Earth IAU_EARTH (μ = 398600.435436096 km^3/s^2) in 220 ms: Trajectory in Earth IAU_EARTH (μ = 398600.436 km^3/s^2, eq. radius = 6378.1366 km, polar radius = 6356.7519 km, f = 0.0033528131084554717) from 2024-01-01T00:00:00 UTC to 2024-01-02T00:00:00 UTC (1 day, or 86400.000 s) [17281 states]
+ INFO  nyx_space::md::trajectory::sc_traj > Converted trajectory from Moon J2000 (μ = 4902.74987 km^3/s^2, radius = 1737.4 km) to Earth IAU_EARTH (μ = 398600.435436096 km^3/s^2) in 212 ms: Trajectory in Earth IAU_EARTH (μ = 398600.436 km^3/s^2, eq. radius = 6378.1366 km, polar radius = 6356.7519 km, f = 0.0033528131084554717) from 2024-01-01T00:00:00 UTC to 2024-01-02T00:00:00 UTC (1 day, or 86400.000 s) [17281 states]
  INFO  nyx_space::md::events::search      > Searching for DSS-34 Canberra (lat.: -35.3983 deg    long.: 148.9819 deg    alt.: 691.750 m) [Earth IAU_EARTH (μ = 398600.435436096 km^3/s^2)] with initial heuristic of 14 min 24 s
  INFO  nyx_space::md::events::search      > Event DSS-34 Canberra (lat.: -35.3983 deg    long.: 148.9819 deg    alt.: 691.750 m) [Earth IAU_EARTH (μ = 398600.435436096 km^3/s^2)] found 2 times from 2024-01-01T13:19:29.424409217 UTC until 2024-01-01T23:47:35.676704956 UTC
  INFO  nyx_space::od::simulator::arc      > Built 1 tracking strands for DSS-34 Canberra
  INFO  nyx_space::od::simulator::arc      > Building schedule for DSS-65 Madrid
- INFO  nyx_space::md::trajectory::sc_traj > Converted trajectory from Moon J2000 (μ = 4902.74987 km^3/s^2, radius = 1737.4 km) to Earth IAU_EARTH (μ = 398600.435436096 km^3/s^2) in 220 ms: Trajectory in Earth IAU_EARTH (μ = 398600.436 km^3/s^2, eq. radius = 6378.1366 km, polar radius = 6356.7519 km, f = 0.0033528131084554717) from 2024-01-01T00:00:00 UTC to 2024-01-02T00:00:00 UTC (1 day, or 86400.000 s) [17281 states]
+ INFO  nyx_space::md::trajectory::sc_traj > Converted trajectory from Moon J2000 (μ = 4902.74987 km^3/s^2, radius = 1737.4 km) to Earth IAU_EARTH (μ = 398600.435436096 km^3/s^2) in 218 ms: Trajectory in Earth IAU_EARTH (μ = 398600.436 km^3/s^2, eq. radius = 6378.1366 km, polar radius = 6356.7519 km, f = 0.0033528131084554717) from 2024-01-01T00:00:00 UTC to 2024-01-02T00:00:00 UTC (1 day, or 86400.000 s) [17281 states]
  INFO  nyx_space::md::events::search      > Searching for DSS-65 Madrid (lat.: 40.4272 deg    long.: 4.2506 deg    alt.: 834.939 m) [Earth IAU_EARTH (μ = 398600.435436096 km^3/s^2)] with initial heuristic of 14 min 24 s
  INFO  nyx_space::md::events::search      > Event DSS-65 Madrid (lat.: 40.4272 deg    long.: 4.2506 deg    alt.: 834.939 m) [Earth IAU_EARTH (μ = 398600.435436096 km^3/s^2)] found 2 times from 2024-01-01T09:59:19.297494580 UTC until 2024-01-01T22:19:56.653993644 UTC
  INFO  nyx_space::od::simulator::arc      > Built 2 tracking strands for DSS-65 Madrid
  INFO  nyx_space::od::simulator::arc      > DSS-65 Madrid configured as Greedy, so DSS-13 Goldstone now starts on 2024-01-01T10:00:20 UTC
  INFO  nyx_space::od::simulator::arc      > DSS-13 Goldstone configured as Greedy, so DSS-34 Canberra now starts on 2024-01-01T18:09:50 UTC
  INFO  nyx_space::od::simulator::arc      > DSS-34 Canberra now hands off to DSS-65 Madrid on 2024-01-01T22:19:00 UTC because it's configured as Eager
- INFO  nyx_space::od::simulator::arc      > Simulated 319 measurements for DSS-13 Goldstone for 1 tracking strands in 13 ms
- INFO  nyx_space::od::simulator::arc      > Simulated 185 measurements for DSS-34 Canberra for 1 tracking strands in 7 ms
- INFO  nyx_space::od::simulator::arc      > Simulated 490 measurements for DSS-65 Madrid for 2 tracking strands in 18 ms
- INFO  nyx_space::od::msr::arc            > Serialized 994 measurements from {"DSS-34 Canberra", "DSS-13 Goldstone", "DSS-65 Madrid"} to ./04_lro_simulated_tracking.parquet
-994 measurements from {"DSS-13 Goldstone", "DSS-65 Madrid", "DSS-34 Canberra"}
+ INFO  nyx_space::od::simulator::arc      > Simulated 286 measurements for DSS-13 Goldstone for 1 tracking strands in 28 ms
+ INFO  nyx_space::od::simulator::arc      > Simulated 147 measurements for DSS-34 Canberra for 1 tracking strands in 14 ms
+ INFO  nyx_space::od::simulator::arc      > Simulated 428 measurements for DSS-65 Madrid for 2 tracking strands in 42 ms
+ INFO  nyx_space::od::msr::data_arc       > Serialized Tracking arc with 861 measurements of type {Doppler, Range} over 23 h 28 min (from 2024-01-01T00:00:00 UTC to 2024-01-01T23:28:00 UTC) with trackers {"DSS-65 Madrid", "DSS-13 Goldstone", "DSS-34 Canberra"} to ./04_lro_simulated_tracking.parquet
+Tracking arc with 861 measurements of type {Doppler, Range} over 23 h 28 min (from 2024-01-01T00:00:00 UTC to 2024-01-01T23:28:00 UTC) with trackers {"DSS-65 Madrid", "DSS-13 Goldstone", "DSS-34 Canberra"}
 ```
 
 ## Tracking arc
@@ -159,23 +162,39 @@ However, as seen in the model matching section, there remains a difference in th
 The filter is configured with the default automatic residual rejection of Nyx whereby any residual ratio greater than 4 sigmas causes the measurement to be rejected. If the residual ratio exceeds this threshold, the measurement is considered an outlier and is rejected by the filter. This process helps to prevent measurements with large errors from negatively impacting the orbit determination solution.
 
 ```log
- INFO  nyx_space::od::process             > Navigation propagating for a total of 1 day with step size 1 min
- INFO  nyx_space::od::process             > Processing 994 measurements with covariance mapping
- INFO  nyx_space::od::process             >  10% done - 101 measurements accepted, 0 rejected
- INFO  nyx_space::od::process             >  20% done - 200 measurements accepted, 0 rejected
- INFO  nyx_space::od::process             >  30% done - 300 measurements accepted, 0 rejected
- INFO  nyx_space::od::process             >  40% done - 394 measurements accepted, 5 rejected
- INFO  nyx_space::od::process             >  50% done - 489 measurements accepted, 9 rejected
- INFO  nyx_space::od::process             >  60% done - 586 measurements accepted, 12 rejected
- INFO  nyx_space::od::process             >  70% done - 677 measurements accepted, 20 rejected
- INFO  nyx_space::od::process             >  80% done - 767 measurements accepted, 30 rejected
- INFO  nyx_space::od::process             >  90% done - 863 measurements accepted, 33 rejected
- INFO  nyx_space::od::process             > 100% done - 955 measurements accepted, 39 rejected (done in 17 s 267 ms 50 μs 496 ns)
+ INFO  nyx_space::od::process             > Navigation propagating for a total of 23 h 28 min with step size 1 min
+ INFO  nyx_space::od::process             > Processing 861 measurements with covariance mapping
+ INFO  nyx_space::od::process             >  10% done - 86 measurements accepted, 2 rejected
+ INFO  nyx_space::od::process             >  20% done - 170 measurements accepted, 4 rejected
+ INFO  nyx_space::od::process             >  30% done - 251 measurements accepted, 9 rejected
+ INFO  nyx_space::od::process             >  40% done - 335 measurements accepted, 11 rejected
+ INFO  nyx_space::od::process             >  50% done - 417 measurements accepted, 15 rejected
+ INFO  nyx_space::od::process             >  60% done - 499 measurements accepted, 19 rejected
+ INFO  nyx_space::od::process             >  70% done - 576 measurements accepted, 28 rejected
+ INFO  nyx_space::od::process             >  80% done - 654 measurements accepted, 36 rejected
+ INFO  nyx_space::od::process             >  90% done - 733 measurements accepted, 43 rejected
+ INFO  nyx_space::od::process             > 100% done - 811 measurements accepted, 50 rejected (done in 16 s 205 ms 604 μs 864 ns)
+== RIC at end ==
+RIC Position (m): 
+  ┌                     ┐
+  │  15.036473615964496 │
+  │  25.260900609850978 │
+  │ -25.319909728125367 │
+  └                     ┘
+
+
+RIC Velocity (m/s): 
+  ┌                      ┐
+  │  0.12656421298129494 │
+  │ -0.10492648512250291 │
+  │   0.1866098373550229 │
+  └                      ┘
+
 ```
 
 # Results
 
-**Nyx provides a good estimation of the orbit of the Lunar Reconnaissance Orbiter, matching the LRO team's desired uncertainty of 800 meters when tracking the vehicle,** despite modeling and filtering differences between GTDS and Nyx. As discussed in the [filter setup](#filter-set-up) section just above, we've had to increase the state noise compensation to account for [oscillating modeling differences](#preliminary-analysis-matching-dynamical-models) between Nyx and the LRO definitive ephemeris.
+**Nyx provides a good estimation of the orbit of the Lunar Reconnaissance Orbiter, matching the LRO team's desired uncertainty of 70.7 meters when tracking the vehicle,** despite modeling and filtering differences between GTDS and Nyx. As discussed in the [filter setup](#filter-set-up) section just above, we've had to increase the state noise compensation to account for [oscillating modeling differences](#preliminary-analysis-matching-dynamical-models) between Nyx and the LRO definitive ephemeris.
 
 ![RIC Covar Position](./plots/covar-ric-pos.png)
 
@@ -183,11 +202,15 @@ The filter is configured with the default automatic residual rejection of Nyx wh
 
 ## Residual ratios
 
-One of the key metrics to determine whether an OD result is correct is to look at the residual ratios. Some orbit determination software, like ODTK (as specified in their MathSpec), treats all measurements as scalars. This could be problematic because the order in which the measurements are processed at each time step will lead to variations in the covariance. For example, if there is an excellent range measurement and an average Doppler measurement for that same time step, then the state covariance will decrease and that greater model filter confidence may cause the Doppler measurement to be rejected. _Instead_, Nyx treats all simultaneous measurements simultaneously, ensuring that the order in which each measurement is processed is not a concern. This mathematically correct approach leads to the loss of the sign of the residual because the ratio is computed as `y_k^T * R_k^{-1} * y_k`, where `y_k` is prefit residual (using the nomenclature from the [Nyx Kalman filter MathSpec](https://nyxspace.com/nyxspace/MathSpec/orbit_determination/kalman/?utm_source=github-lro-rr)). **Therefore, the goodness test of the residual ratios is Chi Square test** with a degree of freedom of 2 (range and Doppler).
+One of the key metrics to determine whether an OD result is correct is to look at the residual ratios. Some orbit determination software, like ODTK (as specified in their MathSpec), treats all measurements as scalars. This could be problematic because the order in which the measurements are processed at each time step will lead to variations in the covariance. For example, if there is an excellent range measurement and an average Doppler measurement for that same time step, then the state covariance will decrease and that greater model filter confidence may cause the Doppler measurement to be rejected.
+
+_Instead_, Nyx allows processing any number of identically time-tagged measurements simultaneously, ensuring that the order in which each measurement is processed is not a concern. This mathematically correct approach leads to the loss of the sign of the residual because the ratio is computed as `y_k^T * R_k^{-1} * y_k`, where `y_k` is prefit residual (using the nomenclature from the [Nyx Kalman filter MathSpec](https://nyxspace.com/nyxspace/MathSpec/orbit_determination/kalman/?utm_source=github-lro-rr)). The $R_k$ matrix is first square-rooted via a Cholesky decomposition: this returns the measurement noise. Then, the ratio is the average of all simultaneously processed prefits divided by the appropriate diagonal element of the decomposed $R_k$ matrix.
+
+**This approach ensures that the residual ratios are still a scalar despite the simultaneous processing.** Of course, the OD filter in Nyx can also be configured to process all measurements sequentially (which is the recommended approach if most measurements are sampled at different times).
 
 We can see that nearly all of the residuals are within the Chi Square distribution, although the tail-end of 4 sigmas is larger than it should be. This is entirely due to the models not matching perfectly, as can be seen in the plot of the residuals rejected over time: the further we are from the start of the OD track, the more measurements are rejected.
 
-![Chi-Squared](./plots/resid-chi-square.png)
+![Quantile-Quantile (QQ)](./plots/resid-qq.png)
 
 ![Rejection](./plots/resid-rejections.png)
 
@@ -202,8 +225,6 @@ Another key metric is whether the residuals fit well within the expected measure
 The following plots show an auto-scaled and a zoomed-in version of the range residuals over time because the state covariance rises with the state noise compensation, causing the auto-scaling to hide the fun details, namely that the oscillatory nature of the modeling difference shows up in the prefit residuals but that the filter adequately corrects its own knowledge with each accepted measurement. The values on this plot is in km as indicated by the legend.
 
 ![Range resid auto](./plots/range-resid.png)
-
-![Range resid zoom](./plots/range-resid-zoom.png)
 
 ### Doppler residuals
 
