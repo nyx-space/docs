@@ -208,13 +208,13 @@ _Instead_, Nyx allows processing any number of identically time-tagged measureme
 
 **This approach ensures that the residual ratios are still a scalar despite the simultaneous processing.** Of course, the OD filter in Nyx can also be configured to process all measurements sequentially (which is the recommended approach if most measurements are sampled at different times).
 
-We can see that nearly all of the residuals are within the Chi Square distribution, although the tail-end of 4 sigmas is larger than it should be. This is entirely due to the models not matching perfectly, as can be seen in the plot of the residuals rejected over time: the further we are from the start of the OD track, the more measurements are rejected.
-
-![Quantile-Quantile (QQ)](./plots/resid-qq.png)
+As the residuals are scalar, we can use the typical OD quality metrics of histograms per tracker, residual values, and Quantile-Quantile (QQ) plots.
 
 ![Rejection](./plots/resid-rejections.png)
 
 ![Per tracker](./plots/resid-per-tracker.png)
+
+![Quantile-Quantile (QQ)](./plots/resid-qq.png)
 
 ## Measurement residuals
 
