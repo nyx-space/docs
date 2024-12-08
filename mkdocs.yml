@@ -33,7 +33,7 @@ nav:
           - High fidelity orbit propagation: nyxspace/showcase/01_orbit_prop/index.md
           - James Webb Space Telescope Monte Carlo: nyxspace/showcase/02_jwst_covar_monte_carlo/index.md
           - GEO low thrust orbit raising: nyxspace/showcase/03_geo_analysis/index.md
-          - LRO orbit determination: nyxspace/showcase/04_lro_od/index.md
+          - Orbit Determination of the Lunar Reconnaissance Orbiter (LRO): nyxspace/showcase/04_lro_od/index.md
           # - Mission design:
           #     - Table of contents: nyxspace/showcase/mission_design/index.md
           #     # - Lunar transfer [WIP]: nyxspace/showcase/mission_design/lunar_transfer.md
