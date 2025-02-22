@@ -2,6 +2,7 @@ authors:
   me:
     name: Chris Rabotin
     description: Author of the Nyx Space tools # Author description
-    avatar: https://avatars.githubusercontent.com/u/4823784?v=4         # Author avatar
+    # avatar: https://avatars.githubusercontent.com/u/4823784?v=4         # Author avatar
+    avatar: ../../assets/blog/profile.jpg
     slug: crabotin           # Author profile slug
     url: https://nyxspace.com
