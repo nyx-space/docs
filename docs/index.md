@@ -66,10 +66,10 @@ hide:
             <h4>See who's already benefiting from our tools</h4>
             <p>Our tools are trusted and actively used by leading companies in the aerospace and technology sectors. Their commitment to using Nyx, Hifitime, and ANISE is a testament to the reliability, efficiency, and advanced capabilities of our software.</p>
             <ul>
+                <li><a href="/blog/2025/02/21/nyx-space-and-rust-power-fireflys-blue-ghost-lunar-landing/">Firefly Space - Blue Ghost 1 lunar lander</a></li>
                 <li>Advanced Space LLC</li>
                 <li>Amazon Web Services</li>
                 <li>CNRS (Femto-ST)</li>
-                <li>Firefly Space</li>
                 <li>Murchison Widefield Array</li>
                 <li>Rocketlab USA</li>
             </ul>
