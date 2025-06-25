@@ -1,5 +1,3 @@
-
-    
 # Module `anise.astro` {#anise.astro}
 
     
