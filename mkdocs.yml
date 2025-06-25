@@ -112,9 +112,10 @@ nav:
                 - Lagrange interpolation: anise/reference/mathspec/interpolation/lagrange.md
           - Python API:
               - ANISE Python: anise/reference/api/python/index.md
-              - Astro: anise/reference/api/python/astro/index.md
-              - Constants: anise/reference/api/python/astro/constants.md
+              - Astro: anise/reference/api/python/astro.md
+              - Constants: anise/reference/api/python/constants.md
               - Time: anise/reference/api/python/time.md
+              - Utils: anise/reference/api/python/utils.md
           - Rust API: anise/reference/api/rust/index.md
 
   - Pricing: pricing.md
