@@ -20,13 +20,18 @@
     red: #d55e00;
     purple: #cc79a7;
 } */
-:root  > * {
+:root > * {
   --md-primary-fg-color:        #0072b2;
   --md-accent-fg-color:        #0072b2;
   /* --md-accent-bg-color:        #d55e00 ; */
   /* --md-primary-fg-color--light: #e69f00; */
   /* --md-primary-fg-color--dark:  #e69f00; */
 }
+
+.text-accent {
+  color: #d55e00;
+}
+
 .md-main {
     background-image: url('../assets/background.png');
     background-attachment: fixed;

@@ -16,7 +16,7 @@ hide:
     <article class="card">
         <div class="card-content">
             <h2 style="margin: 0">Nyx: Comprehensive Spaceflight Dynamics</h2>
-            <h4 style="color: #d55e00">Empowering flight dynamics engineers with open-source software</h4>
+            <h4 class="text-accent">Empowering flight dynamics engineers with open-source software</h4>
             <p>Nyx provides flight dynamics engineers with a set of powerful, open-source tools for mission design and orbit determination. From trajectory optimization to orbit estimation, Nyx is built for speed, automation, and scalability. It dramatically reduces simulation time compared to commercial products, and integrates seamlessly into automated workflows across various platforms. Nyx has proven mission-critical reliability, already contributing to the success of three lunar missions.</p>
             <a href="/nyxspace/showcase/" class="md-button md-button--primary">Learn more</a>
             <a href="/nyxspace/MathSpec/" class="md-button">Math Spec
@@ -32,8 +32,8 @@ hide:
     <article class="card">
         <div class="card-content">
             <h2 style="margin: 0">ANISE: Modern rewrite of NASA's SPICE toolkit (TRL-9)</h2>
-            <h4 style="color: #d55e00">Landed Firefly Blue Ghost on the Moon in March 2025</h4>
-            <p>NASA's SPICE toolkit marked a significant advancement in space mission analysis. However, its FORTRAN foundation, complex API, and incompatibility with multi-threaded applications limits its scope. ANISE is a complete rewrite of SPICE, offering a user-friendly API and bindings to Rust, C++, and Python. Designed with thread- and memory-safety as a core feature from the outset, ANISE is a significant step forward in space mission software."</p>
+            <h4 class="text-accent">Landed Firefly Blue Ghost on the Moon in March 2025</h4>
+            <p>NASA's SPICE toolkit marked a significant advancement in space mission analysis. However, its FORTRAN foundation, complex API, and incompatibility with multi-threaded applications limits its scope. ANISE is a complete rewrite of SPICE, offering a user-friendly API and bindings to Rust, C++, and Python. Designed with thread- and memory-safety as a core feature from the outset, ANISE is a significant step forward in space mission software.</p>
             <a href="/anise/intro/" class="md-button md-button--primary">Learn more</a>
             <a href="/anise/tutorials/" class="md-button">Tutorials <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 10H3v2h11v-2m0-4H3v2h11V6M3 16h7v-2H3v2m18.5-4.5L23 13l-7 7-4.5-4.5L13 14l3 3 5.5-5.5Z"></path></svg></span></a>
             <a href="/anise/reference/" class="md-button">Reference
@@ -47,7 +47,7 @@ hide:
     <article class="card">
         <div class="card-content">
             <h2 style="margin: 0">Hifitime: Precision Time Management</h2>
-            <h4 style="color: #d55e00">Advanced library for time systems conversions (UTC, ET, TAI, ...)</h4>
+            <h4 class="text-accent">Advanced library for time systems conversions (UTC, ET, TAI, ...)</h4>
             <p>Space applications require high fidelity time compution, including time systems that ignore the relativistic effects due to the gravity of the Earth. Hifitime is formally verified, thoroughly tested, and works on desktop, web assembly, and bare-metal platforms. Hifitime is arguably the most precise time management library in the world and trusted by institutions that require nanosecond precision.</p>
             <a href="/hifitime/intro/" class="md-button md-button--primary">Learn more</a>
             <a href="/hifitime/python/" class="md-button">Python docs
@@ -62,7 +62,7 @@ hide:
     <article class="card">
         <div class="card-content">
             <h2 style="margin: 0">Trusted by Industry Leaders</h2>
-            <h4 style="color: #d55e00">See who's already benefiting from our tools</h4>
+            <h4 class="text-accent">See who's already benefiting from our tools</h4>
             <p>Our tools are trusted and actively used by leading companies in the aerospace and technology sectors. Their commitment to using Nyx, Hifitime, and ANISE is a testament to the reliability, efficiency, and advanced capabilities of our software.</p>
             <div class="marquee-container">
                 <div class="marquee-content">
@@ -103,8 +103,8 @@ hide:
                         <img src="/assets/corps/RocketLab.png" alt="Rocketlab USA">
                     </div>
                 </div>
-            </div>
-            <br> <a href="https://7ug5imdtt8v.typeform.com/to/neFvVW3p" class="md-button md-button--primary" target="_blank">Contact Form</a>
+            </div> <br />
+            <a href="https://7ug5imdtt8v.typeform.com/to/neFvVW3p" class="md-button md-button--primary" target="_blank">Contact Form</a>
         </div>
     </article>
     </section>

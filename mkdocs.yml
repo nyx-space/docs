@@ -19,7 +19,6 @@ theme:
   palette:
     scheme: default
     primary: custom
-    # accent: indigo
 
   icon:
     admonition:
