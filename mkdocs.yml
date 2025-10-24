@@ -14,8 +14,8 @@ theme:
   logo: assets/logo-icon-inverted.png
   favicon: assets/favicon-256.png
   font:
-    text: Montserrat
-    code: Inconsolata
+    text: Roboto
+    code: Roboto Mono
   palette:
     scheme: default
     primary: blue grey

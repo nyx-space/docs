@@ -52,31 +52,20 @@
 }
 
 
-/* Horizontal Card Layout with Content and Logo */
 .card {
-    display: flex;
-    flex-direction: row;
-    /* Align items horizontally */
-    justify-content: space-between;
-    align-items: center;
-    /* Center items vertically */
-    padding: 1em;
+    background-color: #2c2c2c;
+    border: 1px solid transparent;
     border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(213, 94, 0, 0.2);
+    padding: 2rem;
+    color: #f0f0f0;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-.card-content {
-    flex-grow: 1;
-    /* Allows content to fill available space */
-    padding-right: 1em;
-    /* Spacing between content and logo */
-}
-
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(213, 94, 0, 0.2);
+    transform: translateY(-5px) scale(1.02);
+    border-image: linear-gradient(45deg, #FFD700, #FF6347, #BA55D3) 1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive Adjustments */
@@ -102,15 +91,34 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
-    /* Adjust row height as needed */
     gap: 2em;
     padding: 2em;
     justify-content: center;
+    clear: both;
+}
+
+@media (min-width: 768px) {
+    #anise {
+        float: right;
+        width: 50%;
+    }
+
+    #hifitime {
+        float: left;
+        width: 50%;
+    }
 }
 
 .pitch {
     font-size: 150%;
     text-align: center;
+}
+
+:root {
+    --md-primary-fg-color:        #4A90E2;
+    --md-primary-fg-color--light: #7BB8FF;
+    --md-primary-fg-color--dark:  #2C5D9A;
+    --md-accent-fg-color:         #FFD700;
 }
 
 h1,
@@ -119,15 +127,21 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Federo', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .tagline {
-    font-weight: bold;
-    font-size: 200%;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
     text-align: center;
-    border-bottom: #0072b2 double 1px;
-    color: #d55e00 !important;
+    padding: 1rem;
+    color: transparent;
+    background: linear-gradient(45deg, #FFD700, #FF6347, #BA55D3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 99, 71, 0.6), 0 0 30px rgba(186, 85, 211, 0.4);
 }
 
 .subtagline {
