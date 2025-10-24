@@ -18,8 +18,8 @@ theme:
     code: Inconsolata
   palette:
     scheme: default
-    primary: blue grey
-    accent: orange
+    primary: custom
+    # accent: indigo
 
   icon:
     admonition:

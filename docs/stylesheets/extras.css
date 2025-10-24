@@ -20,7 +20,13 @@
     red: #d55e00;
     purple: #cc79a7;
 } */
-
+:root  > * {
+  --md-primary-fg-color:        #0072b2;
+  --md-accent-fg-color:        #0072b2;
+  /* --md-accent-bg-color:        #d55e00 ; */
+  /* --md-primary-fg-color--light: #e69f00; */
+  /* --md-primary-fg-color--dark:  #e69f00; */
+}
 .md-main {
     background-image: url('../assets/background.png');
     background-attachment: fixed;
@@ -75,7 +81,7 @@
 
 
 .card:hover {
-    transform: translateY(-5px);
+    /* transform: translateY(-5px); */
     box-shadow: 0 5px 15px rgba(213, 94, 0, 0.2);
 }
 
@@ -268,4 +274,79 @@ ul {
 
 div.cards>ul>li {
     background-color: white;
+}
+.marquee-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.marquee-content {
+    display: flex;
+    width: 200%; 
+    animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+/* * This is the "pill" or "card"
+ */
+.marquee-item {
+    flex-shrink: 0;
+    width: auto; /* Let the pill size itself based on content */
+    margin: 0 10px; /* This creates the space BETWEEN pills */
+    padding: 12px 20px; /* This creates the space INSIDE the pill */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* The shaded background style */
+    background-color: rgba(128, 128, 128, 0.05); /* Light shade for light mode */
+    border: 1px solid rgba(128, 128, 128, 0.1); /* Subtle border */
+    border-radius: 12px; /* The "pill" shape */
+    transition: background-color 0.3s;
+}
+
+/* Styling for the logos themselves */
+.marquee-item img {
+    height: 40px; /* Adjust this to your preferred logo height */
+    width: auto;
+    max-width: 100%;
+    
+    /* * This blend-mode intelligently handles logo colors.
+     * On light backgrounds, dark logos stay dark.
+     * White logos (like AWS) will blend in (which is OK).
+     */
+    mix-blend-mode: darken; 
+}
+
+
+/* * Dark Mode Handling 
+ * (This assumes your dark mode toggles [data-theme="dark"])
+ */
+[data-theme="dark"] .marquee-item {
+    background-color: rgba(255, 255, 255, 0.08); /* Light shade for dark mode */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .marquee-item img {
+    /* * This blend-mode inverts the logic for dark mode.
+     * Dark logos become light.
+     * White logos (like AWS) become light and are visible.
+     */
+    mix-blend-mode: lighten;
 }
