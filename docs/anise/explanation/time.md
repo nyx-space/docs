@@ -22,4 +22,4 @@ ANISE re-exports Hifitime as-is for convenience to avoid adding a package to you
     use anise::time::*;
     ```
 
-_Note:_ In Python, you must use the ex-exports instead of the Hifitime classes imported from the `hifitime` package because the Python interpreter does not know that both classes are in fact identical.
+_Note:_ In Python, you must use the re-exports instead of the Hifitime classes imported from the `hifitime` package because the Python interpreter does not know that both classes are in fact identical.

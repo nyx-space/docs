@@ -30,7 +30,7 @@ Defines a state relative to a body's surface. Useful for ground stations.
 
 ### `transform_to`
 `almanac.transform_to(orbit, target_frame, aberration)`
-Returns a new `Orbit` expressed in the `target_frame`. This accounts for sowohl translation as well as rotation of the frames.
+Returns a new `Orbit` expressed in the `target_frame`. This accounts for both translation as well as rotation of the frames.
 
 ### Orbital Elements
 You can extract orbital elements from an `Orbit` object:

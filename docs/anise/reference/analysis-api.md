@@ -40,7 +40,7 @@ A dictionary (or map) where keys are Epochs and values are maps of `{ "Alias": V
 
     # Add optional aliases (Tuple of (Scalar, Alias))
     scalars_with_aliases = [(s, None) for s in scalars]
-    
+
     # Build the final report object
     report = analysis.ReportScalars(scalars_with_aliases, state)
 
@@ -116,11 +116,6 @@ A list of `EventArc` objects, each containing:
         lro_state_spec, eclipse, start_epoch, start_epoch + period * 3
     )
 ```
-
-**Returns:**
-A list of `EventArc` objects, each containing:
-- `start`: The `EventDetails` of the start (Rising edge).
-- `end`: The `EventDetails` of the end (Falling edge).
 
 ## Common Expressions
 
