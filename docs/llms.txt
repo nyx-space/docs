@@ -1,0 +1,26 @@
+# Nyx Space and ANISE
+
+Nyx is a high fidelity astrodynamics tool licensed in AGPL 3.0.
+
+ANISE is validated and was used to land Blue Ghost on the Moon. It is available as MPL 2.0.
+
+## Documentation Structure
+
+The documentation is organized into the following top-level sections:
+
+- **Home**: The landing page of the documentation (index.md).
+- **Nyx**: Contains the showcase, user guide, and the MathSpec which details the mathematical models used.
+    - **MathSpec**: Detailed mathematical specifications.
+- **Hifitime**: Documentation for the Hifitime library, including design, Python and Rust user guides, and changelog.
+- **ANISE**: Documentation for the ANISE library.
+    - **Tutorials**: Jupyter notebook tutorials.
+    - **Explanation**: Explains the concepts and architecture.
+    - **Reference**: Detailed API documentation and reference material.
+- **Pricing**: Information about pricing (pricing.md).
+- **Blog**: Updates and articles.
+
+For detailed documentation, please refer to the rest of the website: https://nyxspace.com
+
+## Tutorials
+
+Agents are recommended to execute the Jupyter notebook tutorials to learn how to use the tools.
