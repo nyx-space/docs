@@ -2,6 +2,8 @@
 
 The `Almanac` is the primary interface for ANISE. It serves as the context for all ephemeris, orientation, and physical constant lookups.
 
+The following is a _small subset_ of all the functions available in the Almanac. Please refer to <https://docs.rs/anise/latest/anise/almanac/struct.Almanac.html> for the exhaustive list: Python functions are (almost) always named identically.
+
 ## Key Concepts
 
 - **Thread Safety**: The `Almanac` is `Send + Sync`, meaning it can be safely shared across threads.
@@ -21,7 +23,9 @@ Loads any supported ANISE or SPICE file.
 If you know the file type, you can use specialized loaders for better performance or specific configuration:
 - `with_spk(spk)`: Add SPK (ephemeris) data.
 - `with_bpc(bpc)`: Add BPC (high-precision orientation) data.
-- `with_planetary_data(pck)`: Add PCK/TPC data (constants and low-fidelity orientation).
+- `with_planetary_data(pca)`: Add an ANISE planetary constant data kernel (gravity and tri-axial ellipsoid constants and low-fidelity orientation).
+- `with_location_data(lka)`: Add an ANISE location data kernel (landmarks defined by their latitude, longitude, and height above the ellipsoid on a given body fixed frame).
+- `with_instrument_data(ika)`: Add an ANISE instrument kernel (an instrument is defined by its rotation quaternion/EP, its offset from the body center, and its field of view).
 
 ## Coordinate Transformations
 
@@ -50,8 +54,8 @@ The `Almanac` also stores physical data for bodies defined in the kernels.
 Retrieves a `Frame` object containing metadata for a given NAIF ID.
 - **Includes**: Gravitational parameter ($\mu$), body radii, and frame type.
 
-### `angular_velocity`
-Calculates the angular velocity of a frame relative to an inertial reference (usually J2000) at a specific epoch.
+### `angular_velocity_deg_s`
+Returns the angular velocity vector in deg/s of the from_frame wrt to the to_frame.
 
 ## Built-in Constants
 
