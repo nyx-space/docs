@@ -122,18 +122,8 @@ A list of `EventArc` objects, each containing:
 - `start`: The `EventDetails` of the start (Rising edge).
 - `end`: The `EventDetails` of the end (Falling edge).
 
-## Common Expressions
+The [`EventArc`](https://docs.rs/anise/latest/anise/analysis/event/struct.EventArc.html#impl-EventArc) provides the following helpers:
+- `duration`: the duration of the event, as a hifitime Duration
+- `start_epoch`, `end_epoch`: the epochs of the start and end of the event
+- `midpoint_epoch`: the half-way point in the event, useful if you need to check for some calculation that happens undoubtedly during the event itself.
 
-### Vector Expressions
-- `radius(state)`: Position vector.
-- `velocity(state)`: Velocity vector.
-- `sun_vector(state)`: Vector from observer to Sun.
-- `cross_product(a, b)`: Cross product of two vectors.
-
-### Scalar Expressions
-- `norm(vector)`: Magnitude of a vector.
-- `dot_product(a, b)`: Dot product.
-- `angle_between(a, b)`: Angle in degrees.
-- `element(type)`: Keplerian elements (SMA, ECC, INC, etc.).
-- `azimuth_from_location(loc_id)`: Azimuth to target from a ground station.
-- `elevation_from_location(loc_id)`: Elevation of target from a ground station.
