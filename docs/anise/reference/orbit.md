@@ -11,14 +11,14 @@ An `Orbit` consists of:
 
 ## Initialization
 
-You can initialize an `Orbit` from various representations:
+You can initialize an `Orbit` from various representations, including with the following initializers. Refer to <https://docs.rs/anise/latest/anise/astro/orbit/type.Orbit.html> for the exhaustive list, which includes Keplerian altitudes, Keplerian apses radii, Keplerian mean anomaly, etc.
 
 ### Cartesian
 `Orbit::cartesian(x, y, z, vx, vy, vz, epoch, frame)`
 Directly sets the position and velocity in km and km/s.
 
 ### Keplerian
-`Orbit::keplerian(a, e, i, raan, argp, nu, epoch, frame)`
+`Orbit::keplerian(sma, ecc, inc, raan, aop, true_anomaly, epoch, frame)`
 Calculates the state from classical orbital elements.
 - **Note**: Requires the frame to have a defined gravitational parameter ($\mu$).
 
