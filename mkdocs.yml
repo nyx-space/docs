@@ -99,10 +99,22 @@ nav:
           - Sun Probe Earth angle (SPE): anise/tutorials/Tutorial 06 - Sun probe Earth angle.ipynb
       - Explanation:
           - Explanation index: anise/explanation/index.md
+          - Why ANISE?: anise/explanation/why-anise.md
+          - Almanac: anise/explanation/almanac-and-context.md
+          - Frame Safety: anise/explanation/frame-safety.md
           - Time management: anise/explanation/time.md
+          - Analysis Engine: anise/explanation/analysis.md
           - Validation: anise/explanation/validation.md
       - Reference:
           - Reference index: anise/reference/index.md
+          - Almanac: anise/reference/almanac.md
+          - Frame: anise/reference/frame.md
+          - Orbit and States: anise/reference/orbit.md
+          - Analysis API: anise/reference/analysis-api.md
+          - Azimuth, Elevation, Range: anise/reference/azimuth-elevation-range.md
+          - Location Kernels: anise/reference/location.md
+          - Instrument Kernels: anise/reference/instrument.md
+          - API Documentation: anise/reference/api/index.md
           - Math Spec:
               - Orbital elements: anise/reference/mathspec/orbital_elements.md
               - Interpolation methods:
