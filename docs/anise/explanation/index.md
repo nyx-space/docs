@@ -8,5 +8,4 @@ This section delves into the design of ANISE, its architecture, and the core con
 - **[Frame Safety](frame-safety.md)**: How ANISE prevents coordinate system errors.
 - **[Analysis Engine](analysis.md)**: Declarative queries and superlinear event finding.
 - **[Time](time.md)**: The importance of high-precision timekeeping.
-- **[Validation](validation.md)**: How we ensure accuracy against SPICE.nanosecond precision without rounding errors.
 - **[Validation](validation.md)**: How we ensure ANISE matches (or exceeds) the accuracy of the SPICE toolkit.
