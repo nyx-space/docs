@@ -5,10 +5,13 @@ In most legacy astrodynamics toolkits, loading "kernels" (data files) is a globa
 ## The Almanac as a Container
 
 ANISE replaces the global pool with the `Almanac`. An `Almanac` is a self-contained object that stores:
-- Ephemeris data (SPK)
-- Orientation data (BPC, PCK)
-- Frame relationship data (FK)
-- Mathematical constants (TPC)
+- Ephemeris data (SPICE SPK)
+- Orientation data (SPICE BPC, PCK)
+- Planetary data (PCA)
+- Spacecraft data (SCA)
+- Euler Parameter / Unit quaternion data (EPA)
+- Location data (LKA)
+- Instrument data (IKA)
 
 ```rust
 // In ANISE, you manage your own context
@@ -22,8 +25,8 @@ Because the `Almanac` is an object, you can have as many as you want. One thread
 
 A common concern with moving away from global state is the overhead of passing around a large context object. ANISE solves this through its memory management:
 
-1. **Zero-Copy**: When you load a kernel into an `Almanac`, the data is typically memory-mapped.
-2. **Shared Data**: Internally, the `Almanac` uses reference-counting or shared buffers. 
+1. **In-Memory storing**: When you load a kernel into an `Almanac`, the data is read once in memory (on the heap), reducing the overhead of maintaining a file handler;
+2. **Shared Data**: Internally, the `Almanac` uses reference-counting buffers;
 3. **Cheap Clones**: Cloning an `Almanac` does not copy the gigabytes of ephemeris data; it simply creates a new handle to the same underlying memory.
 
 This allows you to pass the `Almanac` into parallel loops (e.g., using `rayon` in Rust) with near-zero overhead.
