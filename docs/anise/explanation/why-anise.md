@@ -23,11 +23,12 @@ By building on Rust, ANISE leverages a powerful type system and ownership model 
 ANISE matches SPICE's mathematical precision—and in many cases, exceeds it.
 
 - **Integer-based Time**: By using the `hifitime` library, ANISE avoids the rounding errors inherent in floating-point time representations (used by SPICE). This is particularly critical for high-fidelity planetary rotations where a few microseconds of error can accumulate over years.
-- **Zero-copy Parsing**: ANISE uses memory-mapped files and zero-copy parsing techniques to load and query large kernel files (like DE440) with minimal memory overhead and maximum speed.
+- **Limited file system calls**: ANISE uses copies the content of files on the heap on load, allowing it to query large kernel files (like DE440) with zero file system waits, minimal memory overhead and maximum speed.
 
 ## Multi-language from the Core
 
 ANISE is an ecosystem. While the core engine is written in Rust for maximum performance, it is designed to be easily accessible from other languages.
 - **Rust**: Native performance and type safety.
-- **Python**: A pythonic API (`anise-py`) that feels familiar to users of `SpiceyPy` but offers the performance and safety of the Rust core.
+- **Python**: A pythonic API (`anise-py`) that offers the performance and safety of the Rust core.
 - **CLI/GUI**: Tools for quick inspection and visualization that work cross-platform.
+- **C++**: While planned, this interface is stalled due to limited resources.
