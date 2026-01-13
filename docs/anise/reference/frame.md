@@ -2,26 +2,6 @@
 
 Frames define the coordinate systems used for all calculations in ANISE. Every position, velocity, and rotation is defined with respect to a specific Frame.
 
-## Frame Types
-
-ANISE categorizes frames into several types, which determines how transformations are calculated:
-
-### 1. Celestial (Inertial)
-These frames are fixed relative to distant stars. They do not rotate over time (or rotate very slowly).
-- **Example**: `J2000`, `ICRF`, `EME2000`.
-- **NAIF IDs**: Usually 1, 10, etc.
-
-### 2. Planetocentric (Body-Fixed)
-These frames are attached to a celestial body and rotate with it.
-- **Example**: `ITRF93` (Earth), `IAU_MOON`, `IAU_MARS`.
-- **NAIF IDs**: Usually 10xxx or 13xxx.
-- **Computation**: Requires a BPC or PCK kernel to determine the rotation at a specific epoch.
-
-### 3. Topocentric
-These are frames defined at a specific point on the surface of a body.
-- **Example**: `SEZ` (South-East-Zenith), `NED` (North-East-Down).
-- **Computation**: Requires the location (latitude, longitude, altitude) and the orientation of the parent body.
-
 ## Frame Identification
 
 ANISE is compatible with the standard NAIF ID system. You can refer to frames using:
@@ -45,7 +25,7 @@ If you attempt to perform a math operation between two orbits in different frame
 ## Metadata
 A `Frame` object retrieved via `almanac.frame_info()` contains data retrieved from the loaded datasets (SPK, PCK, BPC):
 
-- **`mu`**: The gravitational parameter ($GM$) of the center body in $km^3/s^2$.
+- **`mu_km3_s2`**: The gravitational parameter ($GM$) of the center body in $km^3/s^2$.
 - **`shape`**: A tri-axial `Ellipsoid` defining the body's semi-major, semi-minor, and polar radii. It provides methods for surface intersection testing and calculating lighting angles (emission, solar incidence).
 - **`ephemeris_id`**: The NAIF ID used for translation and trajectory lookups.
 - **`orientation_id`**: The NAIF ID used for rotation lookups.
