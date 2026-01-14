@@ -1,5 +1,5 @@
 Covariances are matrices of expected values, e.g., the square of standard deviations, and are therefore positive semi-definite (PSD) matrices.
-In the case of the CCSDS OEM files, they represent the uncertainty of a Cartesian position and velocity, in either an inertial frame or an orbit-local frame like the [RIC frame](nyxspace/MathSpec/celestial/coord_systems/#ric-frame).
+In the case of the CCSDS OEM files, they represent the uncertainty of a Cartesian position and velocity, in either an inertial frame or an orbit-local frame like the [RIC frame](/nyxspace/MathSpec/celestial/coord_systems/#ric-frame).
 
 ## Foundation
 
@@ -15,33 +15,39 @@ respects the geometric manifold of Symmetric Positive Definite (SPD) matrices. T
 
 _Note:_ While covariances only need to be PSD, this method only works for positive definite matrices, i.e. none of the eigenvalues of the matrix may be zero due to the use of the natural logarithm.
 
-1. Find the nearest covariance before and after the requested epoch, storing the epochs $t_0$ and $t_1$ of the nearest records
-2. Rotate each of these covariances into the desired frame (e.g. if the user wants the interpolated matrix in the RIC frame, rotate both covariances into the RIC frame before proceeding as they are _stable_ points of the interpolation)
-3. For each matrix:
-    1. Compute the Eigendecomposition of the matrix, building a matrix with the eigenvectors and a diagonal matrix of the associated eigenvalues:
+1. Find the nearest covariance before and after the requested epoch, storing the epochs $t_0$ and $t_1$ of the nearest records whose covariance is respectively $P_0$ and $P_1$
+2. **Frame rotation:** Rotate each of these covariances into the desired frame (e.g. if the user wants the interpolated matrix in the RIC frame, rotate both covariances into the RIC frame before proceeding as they are _stable_ points of the interpolation)
+3. For each matrix $P \in \{P_0, P_1\}$ :
+    1. Perform the Eigendecomposition of the matrix, building a matrix with the eigenvectors and a diagonal matrix of the associated eigenvalues:
 
         $$ P = Q \Lambda Q^T $$
 
-    1. Ensure all eigenvalues are positive, else this is not a valid covariance because the matrix is not PSD
+    1. Ensure all eigenvalues are positive
     1. Compute the matrix natural logarithm of diagonal matrix, which is simply the natural log of each diagonal element:
 
-        $$ \Lambda ' = diag(\ln(\lambda_i)) $$
+        $$ \Lambda ' = \text{diag}(\ln(\lambda_i)) $$
 
     1. Reconstruct the matrix logarithm by mapping the diagonal log-eigenvalues back using the original eigenvectors:
 
         $$ \ln(P) = Q \Lambda ' Q^T $$
 
-4. Linearly interpolate in the natural logarithm domain after computing the blending factor for the requested epoch:
+4. **Interpolate:** Linearly interpolate in the natural logarithm domain after computing the blending factor for the requested epoch:
 
-    $$ \ln(P_k) = (1 - \alpha) \ln(P) + \alpha \ln(P_1) $$
+    $$ \ln(P_k) = (1 - \alpha) \ln(P_0) + \alpha \ln(P_1) $$
 
-5. Compute the Eigendecomposition of the interpolated matrix, note that $Q_k$ and $\Lambda_k$ are the new eigenvectors and eigenvalues from the previous step:
+5. **Map to Manifold:** Compute the exponential of the interpolated matrix:
 
-    $$ ln(P_k) = Q_k \Lambda_k Q_k^T $$
+    1. Perform Spectral Decomposition on the result from Step 4:
 
-6. Compute the _exponential_ of the diagonal matrix of eigenvalues to map this covariance back into the original manifold:
+        $$ \ln(P_k) = Q_k \Lambda_k' Q_k^T $$
 
-    $$ P_k = Q_k~diag(\exp(\lambda_{k_i}))~Q_k^T $$
+    2. Exponentiate the diagonal eigenvalues:
+
+        $$ \Lambda_k = \text{diag}(\exp(\lambda_{k,i}')) $$
+
+    3. Reconstruct the final covariance:
+
+        $$ P_k = Q_k \Lambda_k Q_k^T $$
 
 
 ## Scalar example
@@ -54,7 +60,7 @@ $$ P(0.5) = \frac{\sigma^2_0 + \sigma^2_1}{2} = 50.5 $$
 
 Which leads to a variance of:
 
-$$ sigma_{0.5} = \sqrt{50.5} \simeq 7.10 $$
+$$ \sigma_{0.5} = \sqrt{50.5} \simeq 7.10 $$
 
 At the halfway mark, the standard deviation should not be 70% of the final standard deviation.
 Since uncertainty grows geometrically, the halfway point should be between 1 and 10.
@@ -65,6 +71,6 @@ Let's compute the same covariance with the Log-Euclidean interpolation method.
 
 $$ P(0.5) = \exp(0.5 \ln(1) + 0.5 \ln(100)) = 10 $$
 
-Which leads to a standard deviation of $sigma_{0.5} \simeq 3.16$.
+Which leads to a standard deviation of $\sigma_{0.5} \simeq 3.16$.
 
 When considering that a covariance represents a volume, we note that the Log-Euclidean method interpolates the volume log-linearly, preventing the artificial volume inflation seen in linear interpolation.
