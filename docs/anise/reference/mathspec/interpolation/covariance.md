@@ -13,6 +13,8 @@ respects the geometric manifold of Symmetric Positive Definite (SPD) matrices. T
 
 ## Algorithm
 
+_Note:_ While covariances only need to be PSD, this method only works for positive definite matrices, i.e. none of the eigenvalues of the matrix may be zero due to the use of the natural logarithm.
+
 1. Find the nearest covariance before and after the requested epoch, storing the epochs $t_0$ and $t_1$ of the nearest records
 2. Rotate each of these covariances into the desired frame (e.g. if the user wants the interpolated matrix in the RIC frame, rotate both covariances into the RIC frame before proceeding as they are _stable_ points of the interpolation)
 3. For each matrix:
