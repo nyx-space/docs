@@ -15,12 +15,16 @@ The following is a _small subset_ of all the functions available in the Almanac.
 The `Almanac` supports loading various kernel types. You can load files directly or allow ANISE to "guess" the file type.
 
 ### `load`
+
 Loads any supported ANISE or SPICE file.
+
 - **Rust**: `almanac.load("path/to/file")?`
 - **Python**: `almanac.load("path/to/file")`
 
 ### Specialized Loaders
+
 If you know the file type, you can use specialized loaders for better performance or specific configuration:
+
 - `with_spk(spk)`: Add SPK (ephemeris) data.
 - `with_bpc(bpc)`: Add BPC (high-precision orientation) data.
 - `with_planetary_data(pca)`: Add an ANISE planetary constant data kernel (gravity and tri-axial ellipsoid constants and low-fidelity orientation).
@@ -32,17 +36,23 @@ If you know the file type, you can use specialized loaders for better performanc
 The most common use of the `Almanac` is to transform positions and velocities between frames.
 
 ### `transform_to`
+
 Transforms an `Orbit` (state vector) into a different frame at its own epoch.
+
 - **Parameters**: `orbit`, `target_frame`, `aberration`.
 - **Returns**: A new `Orbit` in the target frame.
 
 ### `translate`
+
 Calculates the relative position and velocity between two frames.
+
 - **Parameters**: `target`, `observer`, `epoch`, `aberration`.
 - **Returns**: A `StateVector` (Position + Velocity).
 
 ### `rotate`
+
 Calculates the rotation (DCM) from one orientation frame to another.
+
 - **Parameters**: `target`, `observer`, `epoch`.
 - **Returns**: A 3x3 Direction Cosine Matrix.
 
@@ -51,10 +61,13 @@ Calculates the rotation (DCM) from one orientation frame to another.
 The `Almanac` also stores physical data for bodies defined in the kernels.
 
 ### `frame_info`
+
 Retrieves a `Frame` object containing metadata for a given NAIF ID.
+
 - **Includes**: Gravitational parameter ($\mu$), body radii, and frame type.
 
 ### `angular_velocity_deg_s`
+
 Returns the angular velocity vector in deg/s of the from_frame wrt to the to_frame.
 
 ## Built-in Constants

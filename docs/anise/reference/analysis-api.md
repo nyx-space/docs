@@ -11,12 +11,14 @@ Use `report_scalars` to generate time-series data for analysis or plotting.
 Expects a `ReportScalars` object containing a list of expressions and a `StateSpec`.
 
 **Parameters:**
+
 - `report`: A `ReportScalars` instance defined with:
     - `state_spec`: The context (Target, Observer, Frame) to evaluate against.
     - `scalars`: A list of `ScalarExpr` items.
 - `time_series`: A `hifitime::TimeSeries` defining the start, end, and step.
 
 **Returns:**
+
 A dictionary (or map) where keys are Epochs and values are maps of `{ "Alias": Value }`.
 
 ```python
@@ -61,12 +63,15 @@ Use `report_events` to find specific instants (points in time).
 ### `almanac.report_events(state, event, start, end)`
 
 Finds discrete events such as:
+
 - **Orbital Events**: Apoapsis, Periapsis.
 - **Min/Max**: Time of maximum elevation, minimum range.
 - **Crossings**: Time when altitude crosses 100km.
 
 **Returns:**
+
 A list of `EventDetails` objects, each containing:
+
 - `epoch`: The precise time of the event.
 - `value`: The value of the scalar at that time.
 - `orbit`: The full spacecraft state at that time.
@@ -95,12 +100,15 @@ Use `report_event_arcs` to find durations.
 ### `almanac.report_event_arcs(state, event, start, end)`
 
 Finds time intervals where a condition is continuously true.
+
 - **Visibility**: "When can I see the station?"
 - **Battery**: "When am I in sunlight?"
 - **Geometry**: "When is the Earth-Sun-Probe angle < 90?"
 
 **Returns:**
+
 A list of `EventArc` objects, each containing:
+
 - `start`: The `EventDetails` of the start (Rising edge).
 - `end`: The `EventDetails` of the end (Falling edge).
 
@@ -118,11 +126,14 @@ A list of `EventArc` objects, each containing:
 ```
 
 **Returns:**
+
 A list of `EventArc` objects, each containing:
+
 - `start`: The `EventDetails` of the start (Rising edge).
 - `end`: The `EventDetails` of the end (Falling edge).
 
 The [`EventArc`](https://docs.rs/anise/latest/anise/analysis/event/struct.EventArc.html#impl-EventArc) provides the following helpers:
+
 - `duration`: the duration of the event, as a hifitime Duration
 - `start_epoch`, `end_epoch`: the epochs of the start and end of the event
 - `midpoint_epoch`: the half-way point in the event, useful if you need to check for some calculation that happens undoubtedly during the event itself.

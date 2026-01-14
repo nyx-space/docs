@@ -40,7 +40,7 @@
 
 .md-main::before {
     content: "";
-    background-color: rgba(256, 256, 256, 0.93);
+    background-color: rgba(256, 256, 256, 0.95);
     /* Adjust the alpha value to control the tint intensity */
     position: fixed;
     top: 0;

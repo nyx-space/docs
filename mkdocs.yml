@@ -97,6 +97,8 @@ nav:
           - Planetary constant kernels (PCK): anise/tutorials/Tutorial 05 - Using frame kernels and text planetary kernels.ipynb
           - Custom Plantary and Euler Parameter (Quaternion) Kernels (PCK & EPA): anise/tutorials/Tutorial 05 - Using frame kernels and text planetary kernels.ipynb
           - Sun Probe Earth angle (SPE): anise/tutorials/Tutorial 06 - Sun probe Earth angle.ipynb
+          - Analysis engine: anise/tutorials/Tutorial 07 - Analysis.ipynb
+          - OEM and Covariance: anise/tutorials/Tutorial 08 - OEM and Covariance.ipynb
       - Explanation:
           - Explanation index: anise/explanation/index.md
           - Why ANISE?: anise/explanation/why-anise.md
@@ -119,6 +121,7 @@ nav:
               - Orbital elements: anise/reference/mathspec/orbital_elements.md
               - Interpolation methods:
                 - Interpolation index: anise/reference/mathspec/interpolation/index.md
+                - Covariance interpolation: anise/reference/mathspec/interpolation/covariance.md
                 - Chebyshev interpolation: anise/reference/mathspec/interpolation/chebyshev.md
                 - Hermite interpolation: anise/reference/mathspec/interpolation/hermite.md
                 - Lagrange interpolation: anise/reference/mathspec/interpolation/lagrange.md
@@ -148,6 +151,7 @@ plugins:
         "hifitime/intro.md": "hifitime/index.md"
         "anise/intro.md": "anise/index.md"
         "nyxspace/MathSpec/celestial/orbital_elements.md": "anise/reference/mathspec/orbital_elements.md"
+        "nyxspace/MathSpec/celestial/interpolation.md": "anise/reference/mathspec/interpolation/index.md"
 
 copyright: Copyright &copy; 2024 - Christopher Rabotin
 

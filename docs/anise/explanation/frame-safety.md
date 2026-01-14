@@ -9,6 +9,7 @@ ANISE introduces the concept of **Frame Safety** to eliminate these errors.
 In the SPICE toolkit, frames are often referred to by integer IDs. While ANISE maintains compatibility with NAIF IDs, it treats Frames as rich objects. 
 
 Every Frame in ANISE has an `ephemeris_id` and an `orientation_id`, which store the central object identifier and the reference frame orientation identifier. Each frame may also set properties related to the central object, notably:
+
 - **`mu_km3_s2`**: the gravitational parameter in km^3/s^2
 - **`shape`**: the tri-axial ellipsoid shape of the central object, defined by its semi major and semi minor axes and its polar axis.
 
@@ -30,6 +31,7 @@ Before any computation:
 ANISE represents the relationship between frames as a tree. 
 
 When transforming from Frame A to Frame B:
+
 - **Translation Path**: Finds the common ephemeris ancestor (e.g., the Solar System Barycenter) and sums the vectors along the branches.
 - **Rotation Path**: Finds the common orientation ancestor and composes the Direction Cosine Matrices (DCMs) or Quaternions.
 

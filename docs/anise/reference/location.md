@@ -17,6 +17,7 @@ Real-world ground stations do not have a perfect 0-degree horizon. Mountains or 
 ANISE supports **Terrain Masks** to account for this.
 
 A `TerrainMask` is a list of Azimuth/Elevation pairs.
+
 - **Azimuth**: The start of the mask segment.
 - **Elevation**: The minimum elevation required for visibility in that segment.
 
