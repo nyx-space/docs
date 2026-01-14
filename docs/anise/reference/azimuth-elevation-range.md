@@ -39,7 +39,9 @@ ANISE follows the algorithm described in **Vallado, Section 4.4.3** for SEZ (Sou
 If an `obstructing_body` is provided, ANISE first performs an ellipsoid intersection test. A line segment is drawn from the transmitter to the receiver. If this segment intersects the body's tri-axial ellipsoid, the `obstructed_by` field is populated, and the calculation reflects the obstruction.
 
 ### 2. SEZ Frame Transformation
+
 The transmitter's state is used to define a local **SEZ frame**:
+
 - **Zenith (Z)**: Normal to the reference ellipsoid at the transmitter's location.
 - **South (S)**: Points toward the South pole of the central body.
 - **East (E)**: Completes the right-handed system ($E = Z \times S$).
@@ -49,6 +51,7 @@ Both the transmitter ($\mathbf{r}_{tx}$) and receiver ($\mathbf{r}_{rx}$) positi
 $$\boldsymbol{\rho}_{sez} = \mathbf{r}_{rx\_sez} - \mathbf{r}_{tx\_sez}$$
 
 ### 4. Angle Computation
+
 - **Range**: $\rho = \|\boldsymbol{\rho}_{sez}\|$
 - **Elevation**: $\phi = \arcsin\left(\frac{\rho_z}{\rho}\right)$
 - **Azimuth**: $A = \operatorname{atan2}(\rho_y, -\rho_x)$

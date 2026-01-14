@@ -5,6 +5,7 @@ In ANISE, an `Orbit` represents the full state of an object at a specific time w
 ## The `Orbit` Struct
 
 An `Orbit` consists of:
+
 - **State Vector**: Position and Velocity ($\mathbf{r}, \mathbf{v}$).
 - **Epoch**: The time at which the state is defined (using `hifitime`).
 - **Frame**: The reference frame in which the vectors are expressed.
@@ -33,7 +34,9 @@ Defines a state relative to a body's surface. Useful for ground stations.
 Returns a new `Orbit` expressed in the `target_frame`. This accounts for both translation and rotation of the frames.
 
 ### Orbital Elements
+
 You can extract orbital elements from an `Orbit` object:
+
 - `sma_km()`, `ecc()`, `inc_deg()`, `raan_deg()`, `aop_deg()`, `ta_deg()`
 - **Other Anomalies**: `ma_deg()` (Mean Anomaly), `ea_deg()` (Eccentric Anomaly).
 - **Other Parameters**: `periapsis_km()`, `apoapsis_km()`, `hmag()` (Specific Angular Momentum).
@@ -41,6 +44,8 @@ You can extract orbital elements from an `Orbit` object:
 
 
 ### Propagation (Two-Body)
+
 ANISE provides basic two-body propagation for quick estimates:
+
 - `at_epoch(new_epoch)`: Propagates the orbit to a new time using Keplerian motion.
 - **Warning**: For high-fidelity propagation including J2, solar radiation pressure, etc., use a dedicated propagator like those found in the `Nyx` library.
