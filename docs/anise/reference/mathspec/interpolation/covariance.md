@@ -1,5 +1,5 @@
 Covariances are matrices of expected values, e.g., the square of standard deviations, and are therefore positive semi-definite (PSD) matrices.
-In the case of the CCSCS OEM files, they represent the uncertainty of a Cartesian position and velocity, in either an inertial frame or an orbit-local frame like the [RIC frame](nyxspace/MathSpec/celestial/coord_systems/#ric-frame).
+In the case of the CCSDS OEM files, they represent the uncertainty of a Cartesian position and velocity, in either an inertial frame or an orbit-local frame like the [RIC frame](nyxspace/MathSpec/celestial/coord_systems/#ric-frame).
 
 ## Foundation
 
@@ -59,7 +59,7 @@ Since uncertainty grows geometrically, the halfway point should be between 1 and
 
 **In other words, the uncertainty swells artificially, creating a larger volume than physically warranted.**
 
-Let's compute the same covariance with the Log-Eucledian interpolation method.
+Let's compute the same covariance with the Log-Euclidean interpolation method.
 
 $$ P(0.5) = \exp(0.5 \ln(1) + 0.5 \ln(100)) = 10 $$
 
