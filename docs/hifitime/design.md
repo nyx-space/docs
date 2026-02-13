@@ -29,9 +29,9 @@ A packed structured is composed of two items and fits on 11 octets.
 
 ```mermaid
 classDiagram
-    class duration_since_j1900_tai
-    duration_since_j1900_tai: Duration
-    duration_since_j1900_tai: 80 bits
+    class duration
+    duration: Duration
+    duration: 80 bits
     class time_scale
     time_scale: Timescale
     time_scale: 8 bits
