@@ -1,7 +1,7 @@
 # Coordinate systems
 
 !!! tip "Try it out!"
-    Did you know that all these coordinate frames are readily available to compute in [**ANISE**](../../../anise/index.md), [**Nyx**](../../../nyxspace/MathSpec/index.md), and powered by [**hifitime**](../../../hifitime/index.md)? They are available for both Rust and Python users!
+    Did you know that all these coordinate frames are readily available to compute in [**ANISE**](../../../anise/index.md) and [**Nyx**](../index.md), both powered by [**hifitime**](../../../hifitime/index.md)? They are available for both Rust and Python users!
 
 ## Rotations and attitude frames
 
@@ -9,7 +9,7 @@
 
 The **VNC frame** is a trajectory-centered coordinate system ideal for analyzing spacecraft motion relative to its velocity vector and orbital plane. It is particularly useful for planning maneuvers, such as ensuring a spacecraft burns in the anti-velocity direction during a finite burn.
 
-The VNC frame is right-handed and orthonormal, with axes that are mutually perpendicular and unit-length. In some contexts, such as GMAT, it is also referred to as the VNB frame, or the TCN frame in ODTK and STK.
+The VNC frame is right-handed and orthonormal, with axes that are mutually perpendicular and unit-length. In some contexts, it is also referred to as the VNB frame (GMAT) or the TCN frame (ODTK and STK).
 
 The transformation from the inertial frame to the VNC frame can be represented by a $3 \times 3$ rotation matrix $[C]$. This matrix is constructed using the components of the unit vectors:
 
