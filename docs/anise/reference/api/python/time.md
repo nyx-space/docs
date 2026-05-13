@@ -1,3 +1,18 @@
+---
+description: |
+    API documentation for modules: anise.time.
+
+lang: en
+
+classoption: oneside
+geometry: margin=1in
+papersize: a4
+
+linkcolor: blue
+links-as-notes: true
+...
+
+    
 # Module `anise.time` {#anise.time}
 
     
@@ -19,11 +34,9 @@ Defines generally usable durations for nanosecond precision valid for 32,768 cen
    Duration zero minus one nanosecond returns a century of -1 and a nanosecond set to the number of nanoseconds in one century minus one.
    That difference is exactly 1 nanoseconds, where the former duration is "closer to zero" than the latter.
    As such, the largest negative duration that can be represented sets the centuries to i16::MAX and its nanoseconds to NANOSECONDS_PER_CENTURY.
-2. It was also decided that opposite durations are equal, e.g. -15 minutes == 15 minutes. If the direction of time matters, use the signum function.
+2. Negative and positive durations are distinct: -15 minutes != 15 minutes. Use the signum function to check the sign, and abs() to get the absolute value.
 
-(Python documentation hints)
 :type string_repr: str
-:rtype: Duration
 
     
 #### Methods
@@ -137,7 +150,7 @@ assert_eq!(two_hours_three_min.ceil(1.hours() + 5.minutes()), 2.hours() + 10.min
 
 Decomposes a Duration in its sign, days, hours, minutes, seconds, ms, us, ns
 
-:rtype: typing.Tuple
+:rtype: tuple[int, int, int, int, int, int, int, int]
 
     
 ##### Method `floor` {#anise.time.Duration.floor}
@@ -193,6 +206,72 @@ Creates a new duration from its parts
 :rtype: Duration
 
     
+##### Method `from_days` {#anise.time.Duration.from_days}
+
+>     def from_days(
+>         value
+>     )
+
+Creates a new duration from the provided number of days
+:type value: float
+:rtype: Duration
+
+    
+##### Method `from_hours` {#anise.time.Duration.from_hours}
+
+>     def from_hours(
+>         value
+>     )
+
+Creates a new duration from the provided number of hours
+:type value: float
+:rtype: Duration
+
+    
+##### Method `from_microseconds` {#anise.time.Duration.from_microseconds}
+
+>     def from_microseconds(
+>         value
+>     )
+
+Creates a new duration from the provided number of microseconds
+:type value: float
+:rtype: Duration
+
+    
+##### Method `from_milliseconds` {#anise.time.Duration.from_milliseconds}
+
+>     def from_milliseconds(
+>         value
+>     )
+
+Creates a new duration from the provided number of milliseconds
+:type value: float
+:rtype: Duration
+
+    
+##### Method `from_minutes` {#anise.time.Duration.from_minutes}
+
+>     def from_minutes(
+>         value
+>     )
+
+Creates a new duration from the provided number of minutes
+:type value: float
+:rtype: Duration
+
+    
+##### Method `from_nanoseconds` {#anise.time.Duration.from_nanoseconds}
+
+>     def from_nanoseconds(
+>         value
+>     )
+
+Creates a new duration from the provided number of nanoseconds
+:type value: float
+:rtype: Duration
+
+    
 ##### Method `from_parts` {#anise.time.Duration.from_parts}
 
 >     def from_parts(
@@ -203,6 +282,17 @@ Creates a new duration from its parts
 Create a normalized duration from its parts
 :type centuries: int
 :type nanoseconds: int
+:rtype: Duration
+
+    
+##### Method `from_seconds` {#anise.time.Duration.from_seconds}
+
+>     def from_seconds(
+>         value
+>     )
+
+Creates a new duration from the provided number of seconds
+:type value: float
 :rtype: Duration
 
     
@@ -326,7 +416,7 @@ Returns the sign of this duration
 
 Returns the centuries and nanoseconds of this duration
 NOTE: These items are not public to prevent incorrect durations from being created by modifying the values of the structure directly.
-:rtype: typing.Tuple
+:rtype: tuple[int, int]
 
     
 ##### Method `to_seconds` {#anise.time.Duration.to_seconds}
@@ -390,7 +480,6 @@ Refer to the appropriate functions for initializing this Epoch from different ti
 
 (Python documentation hints)
 :type string_repr: str
-:rtype: Epoch
 
     
 #### Instance variables
@@ -438,6 +527,24 @@ assert_eq!(
 ```
 :type duration: Duration
 :rtype: Epoch
+
+    
+##### Method `day_of_month` {#anise.time.Epoch.day_of_month}
+
+>     def day_of_month(
+>         self,
+>         /
+>     )
+
+Returns the number of days since the start of the Gregorian month in the current time scale.
+
+##### Example
+```
+use hifitime::Epoch;
+let dt = Epoch::from_gregorian_tai_at_midnight(2025, 7, 3);
+assert_eq!(dt.day_of_month(), 3);
+```
+:rtype: int
 
     
 ##### Method `day_of_year` {#anise.time.Epoch.day_of_year}
@@ -526,6 +633,17 @@ This may be useful for time keeping devices that use BDT as a time source.
 Initialize an Epoch from the number of seconds since the BeiDou Time Epoch,
 defined as January 1st 2006 (cf. <https://gssc.esa.int/navipedia/index.php/Time_References_in_GNSS>).
 :type seconds: float
+:rtype: Epoch
+
+    
+##### Method `from_datetime` {#anise.time.Epoch.from_datetime}
+
+>     def from_datetime(
+>         dt
+>     )
+
+Builds an Epoch in UTC from the provided datetime after timezone correction if any is present.
+:type dt: datetime.datetime
 :rtype: Epoch
 
     
@@ -968,6 +1086,20 @@ Initialize an Epoch from the provided UNIX second timestamp since UTC midnight 1
 :rtype: Epoch
 
     
+##### Method `from_ut1_duration` {#anise.time.Epoch.from_ut1_duration}
+
+>     def from_ut1_duration(
+>         duration,
+>         provider
+>     )
+
+Initialize a new Epoch from a duration in UT1
+
+:type duration: Duration
+:type provider: Ut1Provider
+:rtype: Epoch
+
+    
 ##### Method `from_utc_days` {#anise.time.Epoch.from_utc_days}
 
 >     def from_utc_days(
@@ -996,7 +1128,7 @@ Initialize an Epoch from the provided UTC seconds since 1900 January 01 at midni
 >         dt
 >     )
 
-Builds an Epoch in UTC from the provided datetime after timezone correction if any is present.
+Builds an Epoch in UTC from the provided datetime. Datetime must either NOT have any timezone, or timezone MUST be UTC.
 :type dt: datetime.datetime
 :rtype: Epoch
 
@@ -1983,6 +2115,20 @@ Returns seconds past BDT (BeiDou) Time Epoch
 :rtype: float
 
     
+##### Method `to_datetime` {#anise.time.Epoch.to_datetime}
+
+>     def to_datetime(
+>         self,
+>         /,
+>         set_tz=None
+>     )
+
+Returns a Python datetime object from this Epoch (truncating the nanoseconds away)
+If set_tz is True, then this will return a time zone aware datetime object
+:type set_tz: bool or None, optional
+:rtype: datetime.datetime
+
+    
 ##### Method `to_duration_in_time_scale` {#anise.time.Epoch.to_duration_in_time_scale}
 
 >     def to_duration_in_time_scale(
@@ -2091,6 +2237,21 @@ NOTE: This function will return an error if the centuries past GPST time are not
 
 Returns seconds past GPS Time Epoch, defined as UTC midnight of January 5th to 6th 1980 (cf. <https://gssc.esa.int/navipedia/index.php/Time_References_in_GNSS#GPS_Time_.28GPST.29>).
 :rtype: float
+
+    
+##### Method `to_gregorian` {#anise.time.Epoch.to_gregorian}
+
+>     def to_gregorian(
+>         self,
+>         /,
+>         time_scale=None
+>     )
+
+Converts the Epoch to the Gregorian parts in the (optionally) provided time scale as (year, month, day, hour, minute, second).
+
+:type time_scale: TimeScale, optional
+
+:rtype: tuple[int, int, int, int, int, int, int]
 
     
 ##### Method `to_gst_days` {#anise.time.Epoch.to_gst_days}
@@ -2516,7 +2677,7 @@ Returns this time in a Duration past J1900 counted in TAI
 >     )
 
 Returns the TAI parts of this duration
-:rtype: typing.Tuple
+:rtype: tuple
 
     
 ##### Method `to_tai_seconds` {#anise.time.Epoch.to_tai_seconds}
@@ -2527,6 +2688,50 @@ Returns the TAI parts of this duration
 >     )
 
 Returns the number of TAI seconds since J1900
+:rtype: float
+
+    
+##### Method `to_tcb_duration` {#anise.time.Epoch.to_tcb_duration}
+
+>     def to_tcb_duration(
+>         self,
+>         /
+>     )
+
+Returns the Barycentric Coordinate Time (TCB) as a Duration its reference epoch (1977-01-01 + 65.5 µs)
+:rtype: Duration
+
+    
+##### Method `to_tcb_seconds` {#anise.time.Epoch.to_tcb_seconds}
+
+>     def to_tcb_seconds(
+>         self,
+>         /
+>     )
+
+Returns the Barycentric Coordinate Time (TCB) as seconds its reference epoch (1977-01-01 + 65.5 µs)
+:rtype: float
+
+    
+##### Method `to_tcg_duration` {#anise.time.Epoch.to_tcg_duration}
+
+>     def to_tcg_duration(
+>         self,
+>         /
+>     )
+
+Returns the Geocentric Coordinate Time (TCG) as a Duration its reference epoch (1977-01-01)
+:rtype: Duration
+
+    
+##### Method `to_tcg_seconds` {#anise.time.Epoch.to_tcg_seconds}
+
+>     def to_tcg_seconds(
+>         self,
+>         /
+>     )
+
+Returns the Geocentric Coordinate Time (TCG) as seconds its reference epoch (1977-01-01)
 :rtype: float
 
     
@@ -2598,7 +2803,7 @@ Returns the Dynamic Barycentric Time (TDB) (higher fidelity SPICE ephemeris time
 Converts this epoch into the time of week, represented as a rolling week counter into that time scale
 and the number of nanoseconds elapsed in current week (since closest Sunday midnight).
 This is usually how GNSS receivers describe a timestamp.
-:rtype: typing.Tuple[int]
+:rtype: tuple
 
     
 ##### Method `to_time_scale` {#anise.time.Epoch.to_time_scale}
@@ -2730,6 +2935,34 @@ Returns the number seconds since the UNIX epoch defined 01 Jan 1970 midnight UTC
 :rtype: float
 
     
+##### Method `to_ut1` {#anise.time.Epoch.to_ut1}
+
+>     def to_ut1(
+>         self,
+>         /,
+>         provider
+>     )
+
+Convert this epoch to Ut1
+
+:type provider: Ut1Provider
+:rtype: Epoch
+
+    
+##### Method `to_ut1_duration` {#anise.time.Epoch.to_ut1_duration}
+
+>     def to_ut1_duration(
+>         self,
+>         /,
+>         provider
+>     )
+
+Returns this time in a Duration past J1900 counted in UT1
+
+:type provider: Ut1Provider
+:rtype: Duration
+
+    
 ##### Method `to_utc` {#anise.time.Epoch.to_utc}
 
 >     def to_utc(
@@ -2780,11 +3013,28 @@ Returns the number of UTC seconds since the TAI epoch
 
 >     def todatetime(
 >         self,
->         /
+>         /,
+>         set_tz=None
 >     )
 
-Returns a Python datetime object from this Epoch (truncating the nanoseconds away)
+Returns a Python datetime object from this Epoch (truncating the nanoseconds away).
+If set_tz is True, then this will return a time zone aware datetime object
+:type set_tz: bool or None, optional
 :rtype: datetime.datetime
+
+    
+##### Method `ut1_offset` {#anise.time.Epoch.ut1_offset}
+
+>     def ut1_offset(
+>         self,
+>         /,
+>         provider
+>     )
+
+Get the accumulated offset between this epoch and UT1.
+
+:type provider: Ut1Provider
+:rtype: Duration
 
     
 ##### Method `weekday` {#anise.time.Epoch.weekday}
@@ -2824,6 +3074,124 @@ Returns weekday in UTC timescale
 :rtype: Weekday
 
     
+##### Method `with_hms` {#anise.time.Epoch.with_hms}
+
+>     def with_hms(
+>         self,
+>         /,
+>         hours,
+>         minutes,
+>         seconds
+>     )
+
+Returns a copy of self where the time is set to the provided hours, minutes, seconds
+Invalid number of hours, minutes, and seconds will overflow into their higher unit.
+Warning: this does _not_ set the subdivisions of second to zero.
+:type hours: int
+:type minutes: int
+:type seconds: int
+:rtype: Epoch
+
+    
+##### Method `with_hms_from` {#anise.time.Epoch.with_hms_from}
+
+>     def with_hms_from(
+>         self,
+>         /,
+>         other
+>     )
+
+Returns a copy of self where the hours, minutes, seconds is set to the time of the provided epoch but the
+sub-second parts are kept from the current epoch.
+
+:type other: Epoch
+:rtype: Epoch
+```
+use hifitime::prelude::*;
+
+let epoch = Epoch::from_gregorian_utc(2022, 12, 01, 10, 11, 12, 13);
+let other_utc = Epoch::from_gregorian_utc(2024, 12, 01, 20, 21, 22, 23);
+let other = other_utc.to_time_scale(TimeScale::TDB);
+
+assert_eq!(
+    epoch.with_hms_from(other),
+    Epoch::from_gregorian_utc(2022, 12, 01, 20, 21, 22, 13)
+);
+```
+
+    
+##### Method `with_hms_strict` {#anise.time.Epoch.with_hms_strict}
+
+>     def with_hms_strict(
+>         self,
+>         /,
+>         hours,
+>         minutes,
+>         seconds
+>     )
+
+Returns a copy of self where the time is set to the provided hours, minutes, seconds
+Invalid number of hours, minutes, and seconds will overflow into their higher unit.
+Warning: this will set the subdivisions of seconds to zero.
+:type hours: int
+:type minutes: int
+:type seconds: int
+:rtype: Epoch
+
+    
+##### Method `with_hms_strict_from` {#anise.time.Epoch.with_hms_strict_from}
+
+>     def with_hms_strict_from(
+>         self,
+>         /,
+>         other
+>     )
+
+Returns a copy of self where the time is set to the time of the other epoch but the subseconds are set to zero.
+
+:type other: Epoch
+:rtype: Epoch
+```
+use hifitime::prelude::*;
+
+let epoch = Epoch::from_gregorian_utc(2022, 12, 01, 10, 11, 12, 13);
+let other_utc = Epoch::from_gregorian_utc(2024, 12, 01, 20, 21, 22, 23);
+let other = other_utc.to_time_scale(TimeScale::TDB);
+
+assert_eq!(
+    epoch.with_hms_strict_from(other),
+    Epoch::from_gregorian_utc(2022, 12, 01, 20, 21, 22, 0)
+);
+```
+
+    
+##### Method `with_time_from` {#anise.time.Epoch.with_time_from}
+
+>     def with_time_from(
+>         self,
+>         /,
+>         other
+>     )
+
+Returns a copy of self where all of the time components (hours, minutes, seconds, and sub-seconds) are set to the time of the provided epoch.
+
+:type other: Epoch
+:rtype: Epoch
+```
+use hifitime::prelude::*;
+
+let epoch = Epoch::from_gregorian_utc(2022, 12, 01, 10, 11, 12, 13);
+let other_utc = Epoch::from_gregorian_utc(2024, 12, 01, 20, 21, 22, 23);
+// If the other Epoch is in another time scale, it does not matter, it will be converted to the correct time scale.
+let other = other_utc.to_time_scale(TimeScale::TDB);
+
+assert_eq!(
+    epoch.with_time_from(other),
+    Epoch::from_gregorian_utc(2022, 12, 01, 20, 21, 22, 23)
+);
+```
+
+    
 ##### Method `year` {#anise.time.Epoch.year}
 
 >     def year(
@@ -2843,7 +3211,7 @@ Returns the number of Gregorian years of this epoch in the current time scale.
 >     )
 
 Returns the year and the days in the year so far (days of year).
-:rtype: typing.Tuple
+:rtype: tuple
 
     
 ### Class `HifitimeError` {#anise.time.HifitimeError}
@@ -2864,9 +3232,30 @@ Returns the year and the days in the year so far (days of year).
 
 >     class LatestLeapSeconds
 
-List of leap seconds from <https://www.ietf.org/timezones/data/leap-seconds.list>.
+List of leap seconds from <https://data.iana.org/time-zones/data/leap-seconds.list>.
 This list corresponds the number of seconds in TAI to the UTC offset and to whether it was an announced leap second or not.
 The unannoucned leap seconds come from dat.c in the SOFA library.
+
+    
+#### Methods
+
+    
+##### Method `is_up_to_date` {#anise.time.LatestLeapSeconds.is_up_to_date}
+
+>     def is_up_to_date(
+>         self,
+>         /
+>     )
+
+Downloads the latest leap second list from IANA, and returns whether the embedded leap seconds are still up to date
+
+```
+use hifitime::leap_seconds::LatestLeapSeconds;
+
+assert!(LatestLeapSeconds::default().is_up_to_date().unwrap(), "Hifitime needs to update its leap seconds list!");
+```
+
+:rtype: bool
 
     
 ### Class `LeapSecondsFile` {#anise.time.LeapSecondsFile}
@@ -2877,16 +3266,18 @@ The unannoucned leap seconds come from dat.c in the SOFA library.
 
 A leap second provider that uses an IERS formatted leap seconds file.
 
-(Python documentation hints)
 :type path: str
-:rtype: LeapSecondsFile
 
     
 ### Class `MonthName` {#anise.time.MonthName}
 
 >     class MonthName(
->         ...
+>         month
 >     )
+
+Defines Month names, can be initialized either from its variant or its integer (1 for January).
+
+:type month: int
 
     
 #### Class variables
@@ -2944,18 +3335,10 @@ A leap second provider that uses an IERS formatted leap seconds file.
     
 ### Class `Polynomial` {#anise.time.Polynomial}
 
->     class Polynomial(
->         ...
->     )
+>     class Polynomial
 
 Interpolation [Polynomial] used for example in [TimeScale]
 maintenance, precise monitoring or conversions.
-
-(Python documentation hints)
-:type constant: Duration
-:type rate: Duration
-:type accel: Duration
-:rtype: Polynomial
 
     
 #### Methods
@@ -3025,9 +3408,7 @@ Create a [Polynomial] structure from a static offset and drift, in nanoseconds a
     
 ### Class `TimeScale` {#anise.time.TimeScale}
 
->     class TimeScale(
->         ...
->     )
+>     class TimeScale
 
 Enum of the different time systems available
 
@@ -3053,7 +3434,19 @@ Enum of the different time systems available
 ##### Variable `TAI` {#anise.time.TimeScale.TAI}
 
     
+##### Variable `TCB` {#anise.time.TimeScale.TCB}
+
+    
+##### Variable `TCG` {#anise.time.TimeScale.TCG}
+
+    
+##### Variable `TCL` {#anise.time.TimeScale.TCL}
+
+    
 ##### Variable `TDB` {#anise.time.TimeScale.TDB}
+
+    
+##### Variable `TL` {#anise.time.TimeScale.TL}
 
     
 ##### Variable `TT` {#anise.time.TimeScale.TT}
@@ -3092,14 +3485,11 @@ An iterator of a sequence of evenly spaced Epochs.
 :type end: Epoch
 :type step: Duration
 :type inclusive: bool
-:rtype: TimeSeries
 
     
 ### Class `Unit` {#anise.time.Unit}
 
->     class Unit(
->         ...
->     )
+>     class Unit
 
 An Enum to perform time unit conversions.
 
@@ -3160,11 +3550,49 @@ An Enum to perform time unit conversions.
 A structure storing all of the TAI-UT1 data
 
     
+#### Instance variables
+
+    
+##### Variable `data` {#anise.time.Ut1Provider.data}
+
+vector of Delta TAI-UT1 values
+:rtype: list
+
+    
+##### Variable `iter_pos` {#anise.time.Ut1Provider.iter_pos}
+
+current position of the iterator
+:rtype: int
+
+    
+#### Methods
+
+    
+##### Method `as_list` {#anise.time.Ut1Provider.as_list}
+
+>     def as_list(
+>         self,
+>         /
+>     )
+
+Returns the list of Delta TAI-UT1 values
+:rtype: list
+
+    
+##### Method `from_eop_file` {#anise.time.Ut1Provider.from_eop_file}
+
+>     def from_eop_file(
+>         path
+>     )
+
+Builds a UT1 provider from the provided path to an EOP file.
+:type path: str
+:rtype: Ut1Provider
+
+    
 ### Class `Weekday` {#anise.time.Weekday}
 
->     class Weekday(
->         ...
->     )
+>     class Weekday
 
     
 #### Class variables
