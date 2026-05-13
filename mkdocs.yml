@@ -129,6 +129,7 @@ nav:
               - ANISE Python: anise/reference/api/python/index.md
               - Astro: anise/reference/api/python/astro.md
               - Constants: anise/reference/api/python/constants.md
+              - Rotation: anise/reference/api/python/rotation.md
               - Time: anise/reference/api/python/time.md
               - Utils: anise/reference/api/python/utils.md
           - Rust API: anise/reference/api/rust/index.md
@@ -160,9 +161,6 @@ repo_name: nyx-space/nyx
 
 extra:
   social:
-    - icon: material/comment-multiple
-      link: https://app.element.io/#/room/#astrodyn:matrix.org
-      name: Astrodynamics on Matrix.org
     - icon: material/linkedin
       link: https://www.linkedin.com/in/chrisrabotin/
       name: Chris Rabotin on LinkedIn

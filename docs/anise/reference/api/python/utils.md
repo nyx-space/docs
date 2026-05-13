@@ -1,3 +1,18 @@
+---
+description: |
+    API documentation for modules: anise.utils.
+
+lang: en
+
+classoption: oneside
+geometry: margin=1in
+papersize: a4
+
+linkcolor: blue
+links-as-notes: true
+...
+
+    
 # Module `anise.utils` {#anise.utils}
 
     

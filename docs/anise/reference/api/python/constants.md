@@ -1,3 +1,18 @@
+---
+description: |
+    API documentation for modules: anise.constants.
+
+lang: en
+
+classoption: oneside
+geometry: margin=1in
+papersize: a4
+
+linkcolor: blue
+links-as-notes: true
+...
+
+    
 # Module `anise.constants` {#anise.constants}
 
     
@@ -6,9 +21,7 @@
     
 ### Class `CelestialObjects` {#anise.constants.CelestialObjects}
 
->     class CelestialObjects(
->         ...
->     )
+>     class CelestialObjects
 
     
 #### Class variables
@@ -70,9 +83,7 @@
     
 ### Class `Frames` {#anise.constants.Frames}
 
->     class Frames(
->         ...
->     )
+>     class Frames
 
     
 #### Class variables
@@ -87,10 +98,31 @@
 ##### Variable `EARTH_J2000` {#anise.constants.Frames.EARTH_J2000}
 
     
+##### Variable `EARTH_MOD_FRAME` {#anise.constants.Frames.EARTH_MOD_FRAME}
+
+    
+##### Variable `EARTH_MOD_LEGACY_FRAME` {#anise.constants.Frames.EARTH_MOD_LEGACY_FRAME}
+
+    
 ##### Variable `EARTH_MOON_BARYCENTER_J2000` {#anise.constants.Frames.EARTH_MOON_BARYCENTER_J2000}
 
     
+##### Variable `EARTH_TEME_FRAME` {#anise.constants.Frames.EARTH_TEME_FRAME}
+
+    
+##### Variable `EARTH_TEME_LEGACY_FRAME` {#anise.constants.Frames.EARTH_TEME_LEGACY_FRAME}
+
+    
+##### Variable `EARTH_TOD_FRAME` {#anise.constants.Frames.EARTH_TOD_FRAME}
+
+    
+##### Variable `EARTH_TOD_LEGACY_FRAME` {#anise.constants.Frames.EARTH_TOD_LEGACY_FRAME}
+
+    
 ##### Variable `EME2000` {#anise.constants.Frames.EME2000}
+
+    
+##### Variable `GCRF` {#anise.constants.Frames.GCRF}
 
     
 ##### Variable `IAU_EARTH_FRAME` {#anise.constants.Frames.IAU_EARTH_FRAME}
@@ -120,10 +152,22 @@
 ##### Variable `IAU_VENUS_FRAME` {#anise.constants.Frames.IAU_VENUS_FRAME}
 
     
+##### Variable `ICRF` {#anise.constants.Frames.ICRF}
+
+    
 ##### Variable `JUPITER_BARYCENTER_J2000` {#anise.constants.Frames.JUPITER_BARYCENTER_J2000}
 
     
+##### Variable `JUPITER_INERTIAL_FRAME` {#anise.constants.Frames.JUPITER_INERTIAL_FRAME}
+
+    
 ##### Variable `MARS_BARYCENTER_J2000` {#anise.constants.Frames.MARS_BARYCENTER_J2000}
+
+    
+##### Variable `MARS_INERTIAL_FRAME` {#anise.constants.Frames.MARS_INERTIAL_FRAME}
+
+    
+##### Variable `MERCURY_INERTIAL_FRAME` {#anise.constants.Frames.MERCURY_INERTIAL_FRAME}
 
     
 ##### Variable `MERCURY_J2000` {#anise.constants.Frames.MERCURY_J2000}
@@ -141,6 +185,9 @@
 ##### Variable `MOON_ME_FRAME` {#anise.constants.Frames.MOON_ME_FRAME}
 
     
+##### Variable `MOON_MOD_FRAME` {#anise.constants.Frames.MOON_MOD_FRAME}
+
+    
 ##### Variable `MOON_PA_DE421_FRAME` {#anise.constants.Frames.MOON_PA_DE421_FRAME}
 
     
@@ -150,13 +197,22 @@
 ##### Variable `MOON_PA_FRAME` {#anise.constants.Frames.MOON_PA_FRAME}
 
     
+##### Variable `MOON_TOD_FRAME` {#anise.constants.Frames.MOON_TOD_FRAME}
+
+    
 ##### Variable `NEPTUNE_BARYCENTER_J2000` {#anise.constants.Frames.NEPTUNE_BARYCENTER_J2000}
+
+    
+##### Variable `NEPTUNE_INERTIAL_FRAME` {#anise.constants.Frames.NEPTUNE_INERTIAL_FRAME}
 
     
 ##### Variable `PLUTO_BARYCENTER_J2000` {#anise.constants.Frames.PLUTO_BARYCENTER_J2000}
 
     
 ##### Variable `SATURN_BARYCENTER_J2000` {#anise.constants.Frames.SATURN_BARYCENTER_J2000}
+
+    
+##### Variable `SATURN_INERTIAL_FRAME` {#anise.constants.Frames.SATURN_INERTIAL_FRAME}
 
     
 ##### Variable `SSB_J2000` {#anise.constants.Frames.SSB_J2000}
@@ -168,17 +224,48 @@
 ##### Variable `URANUS_BARYCENTER_J2000` {#anise.constants.Frames.URANUS_BARYCENTER_J2000}
 
     
+##### Variable `URANUS_INERTIAL_FRAME` {#anise.constants.Frames.URANUS_INERTIAL_FRAME}
+
+    
+##### Variable `VENUS_INERTIAL_FRAME` {#anise.constants.Frames.VENUS_INERTIAL_FRAME}
+
+    
 ##### Variable `VENUS_J2000` {#anise.constants.Frames.VENUS_J2000}
 
     
 ### Class `Orientations` {#anise.constants.Orientations}
 
->     class Orientations(
->         ...
->     )
+>     class Orientations
 
     
 #### Class variables
+
+    
+##### Variable `EARTH_MOD` {#anise.constants.Orientations.EARTH_MOD}
+
+    
+##### Variable `EARTH_MOD_1976` {#anise.constants.Orientations.EARTH_MOD_1976}
+
+    
+##### Variable `EARTH_MOD_2000` {#anise.constants.Orientations.EARTH_MOD_2000}
+
+    
+##### Variable `EARTH_TEME` {#anise.constants.Orientations.EARTH_TEME}
+
+    
+##### Variable `EARTH_TEME_LEGACY` {#anise.constants.Orientations.EARTH_TEME_LEGACY}
+
+    
+##### Variable `EARTH_TOD` {#anise.constants.Orientations.EARTH_TOD}
+
+    
+##### Variable `EARTH_TOD_1980` {#anise.constants.Orientations.EARTH_TOD_1980}
+
+    
+##### Variable `EARTH_TOD_2000A` {#anise.constants.Orientations.EARTH_TOD_2000A}
+
+    
+##### Variable `EARTH_TOD_2000B` {#anise.constants.Orientations.EARTH_TOD_2000B}
 
     
 ##### Variable `ECLIPJ2000` {#anise.constants.Orientations.ECLIPJ2000}
@@ -211,6 +298,9 @@
 ##### Variable `IAU_VENUS` {#anise.constants.Orientations.IAU_VENUS}
 
     
+##### Variable `ICRS` {#anise.constants.Orientations.ICRS}
+
+    
 ##### Variable `ITRF93` {#anise.constants.Orientations.ITRF93}
 
     
@@ -226,6 +316,9 @@
 ##### Variable `MOON_ME_DE440_ME421` {#anise.constants.Orientations.MOON_ME_DE440_ME421}
 
     
+##### Variable `MOON_MOD` {#anise.constants.Orientations.MOON_MOD}
+
+    
 ##### Variable `MOON_PA` {#anise.constants.Orientations.MOON_PA}
 
     
@@ -235,11 +328,12 @@
 ##### Variable `MOON_PA_DE440` {#anise.constants.Orientations.MOON_PA_DE440}
 
     
+##### Variable `MOON_TOD` {#anise.constants.Orientations.MOON_TOD}
+
+    
 ### Class `UsualConstants` {#anise.constants.UsualConstants}
 
->     class UsualConstants(
->         ...
->     )
+>     class UsualConstants
 
     
 #### Class variables
