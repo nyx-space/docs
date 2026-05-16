@@ -20,8 +20,8 @@ from manim import *
 
 # Manim's default coordinate frame is 14.222... x 8 units for 16:9 output.
 # These safe bounds leave room for titles, captions, and video-platform cropping.
-SAFE_WIDTH = 120.6
-SAFE_HEIGHT = 60.5
+SAFE_WIDTH = 12.6
+SAFE_HEIGHT = 6.5
 
 
 # -----------------------------------------------------------------------------
@@ -61,11 +61,12 @@ DYNAMIC_ID_BYTES = [
 ]
 
 
-class Anise010DynamicFrameAnnouncement(Scene):
+class Anise010DynamicFrameAnnouncement(MovingCameraScene):
     """Announcement animation for ANISE 0.10 dynamic frames."""
 
     def construct(self) -> None:
         self.camera.background_color = BG
+        self.reset_camera_frame()
 
         self.title_card()
         self.standard_id()
@@ -92,6 +93,7 @@ class Anise010DynamicFrameAnnouncement(Scene):
 
         marker = self.code_chip("0xA0 FF AA BB", color=CYAN, font_size=34)
         marker.next_to(group, DOWN, buff=0.65)
+        self.camera_fit(group, marker)
 
         self.play(FadeIn(title, shift=0.35 * UP), run_time=0.8)
         self.play(FadeIn(subtitle), FadeIn(marker, shift=0.2 * UP), run_time=0.9)
@@ -123,6 +125,7 @@ class Anise010DynamicFrameAnnouncement(Scene):
             font_size=24,
             color=MUTED,
         ).next_to(group, DOWN, buff=0.45)
+        self.camera_fit(header, group, arrows, note)
 
         self.play(FadeIn(header), FadeIn(frame_box, shift=0.25 * UP), run_time=0.8)
         self.play(GrowArrow(arrows[0]), FadeIn(lookup), run_time=0.55)
@@ -152,6 +155,8 @@ class Anise010DynamicFrameAnnouncement(Scene):
             font_size=23,
             color=MUTED,
         ).next_to(bytes_group, DOWN, buff=0.45)
+
+        self.camera_fit(header, signed, bytes_group, equation)
 
         self.play(FadeIn(header), FadeIn(signed, shift=0.2 * UP), run_time=0.7)
         self.play(LaggedStart(*[FadeIn(c, shift=0.3 * UP) for c in bytes_group], lag_ratio=0.12), run_time=1.2)
@@ -186,6 +191,7 @@ class Anise010DynamicFrameAnnouncement(Scene):
         self.fit_to_frame(VGroup(code, params), max_width=SAFE_WIDTH, max_height=5.0)
 
         pulse = SurroundingRectangle(params, color=PURPLE, buff=0.16, corner_radius=0.12)
+        self.camera_fit(header, code, params, pulse)
 
         self.play(FadeIn(header), FadeIn(code, shift=0.25 * UP), run_time=0.8)
         self.play(LaggedStart(*[FadeIn(p, shift=0.2 * UP) for p in params], lag_ratio=0.15), run_time=0.8)
@@ -217,6 +223,7 @@ class Anise010DynamicFrameAnnouncement(Scene):
 
         dcm = self.block_dcm(label="6×6 DCM", highlight=GREEN).next_to(details, RIGHT, buff=1.0)
         self.fit_to_frame(VGroup(stages, arrows, details, dcm), max_width=SAFE_WIDTH, max_height=5.4)
+        self.camera_fit(header, stages, arrows, details, dcm)
 
         self.play(FadeIn(header), LaggedStart(*[FadeIn(s, shift=0.2 * UP) for s in stages], lag_ratio=0.1), run_time=1.0)
         self.play(LaggedStart(*[GrowArrow(a) for a in arrows], lag_ratio=0.15), run_time=0.6)
@@ -252,6 +259,7 @@ class Anise010DynamicFrameAnnouncement(Scene):
             highlight_lines={1: YELLOW, 2: BLUE},
         ).next_to(group, DOWN, buff=0.5)
         self.fit_to_frame(VGroup(group, arrows, code), max_width=SAFE_WIDTH, max_height=5.4)
+        self.camera_fit(header, group, arrows, code)
 
         self.play(FadeIn(header), FadeIn(card_epoch, shift=0.25 * UP), run_time=0.7)
         self.play(GrowArrow(arrows[0]), FadeIn(convert), run_time=0.45)
@@ -289,6 +297,7 @@ class Anise010DynamicFrameAnnouncement(Scene):
             color=GREEN,
         ).next_to(live, DOWN, buff=0.28)
         self.fit_to_frame(VGroup(cards, frozen_note, forced_note, live_note), max_width=SAFE_WIDTH, max_height=5.4)
+        self.camera_fit(header, cards, frozen_note, forced_note, live_note)
 
         self.play(FadeIn(header), FadeIn(live, shift=0.25 * UP), FadeIn(live_note), run_time=0.75)
         self.play(FadeIn(frozen, shift=0.25 * UP), FadeIn(frozen_note), run_time=0.65)
@@ -311,6 +320,7 @@ class Anise010DynamicFrameAnnouncement(Scene):
         )
         bits = self.code_chip("0xA0 FF AA BB  →  DCM(epoch)", color=CYAN, font_size=34)
         stack = VGroup(title, subtitle, bits).arrange(DOWN, buff=0.32)
+        self.camera_fit(stack)
         self.play(FadeIn(stack, shift=0.25 * UP), run_time=0.85)
         self.wait(1.3)
         self.play(FadeOut(stack), run_time=0.6)
@@ -433,13 +443,30 @@ class Anise010DynamicFrameAnnouncement(Scene):
         row = VGroup(k, arrow, v).arrange(RIGHT, buff=0.18)
         return row
 
+    def reset_camera_frame(self) -> None:
+        """Restore the normal 16:9 Manim camera frame."""
+        self.camera.frame.set(width=config.frame_width)
+        self.camera.frame.move_to(ORIGIN)
+
+    def camera_fit(self, *mobjects: Mobject, margin: float = 1.12) -> None:
+        """Zoom the camera frame out until all supplied mobjects are visible.
+
+        This is more robust than scaling individual objects because it fixes the
+        actual thing responsible for clipping: the camera frame.
+        """
+        group = VGroup(*mobjects)
+        aspect = config.frame_width / config.frame_height
+        required_width = max(group.width * margin, group.height * margin * aspect, config.frame_width)
+        self.camera.frame.set(width=required_width)
+        self.camera.frame.move_to(group.get_center())
+
     def fit_to_frame(
         self,
         mob: Mobject,
         max_width: float = SAFE_WIDTH,
         max_height: float = SAFE_HEIGHT,
     ) -> Mobject:
-        """Scale a layout down only if it would otherwise exceed the camera frame."""
+        """Scale a layout down only if it would otherwise exceed the chosen safe area."""
         scale = min(max_width / mob.width if mob.width else 1.0, max_height / mob.height if mob.height else 1.0, 1.0)
         if scale < 1.0:
             mob.scale(scale)
@@ -498,6 +525,7 @@ class Anise010DynamicFrameAnnouncement(Scene):
 class Anise010DynamicFrameShort(Anise010DynamicFrameAnnouncement):
     def construct(self) -> None:
         self.camera.background_color = BG
+        self.reset_camera_frame()
         self.title_card()
         self.dynamic_id_decode()
         self.rotate_call()
