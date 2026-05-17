@@ -97,7 +97,7 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
 
         self.play(FadeIn(title, shift=0.35 * UP), run_time=0.8)
         self.play(FadeIn(subtitle), FadeIn(marker, shift=0.2 * UP), run_time=0.9)
-        self.wait(0.8)
+        self.wait(2)
         self.play(FadeOut(group), FadeOut(marker), run_time=0.5)
 
     def standard_id(self) -> None:
@@ -106,7 +106,7 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
         frame_box = self.id_card(
             title="orientation_id",
             value="399",
-            subtitle="Earth IAU orientation model",
+            subtitle="Earth IAU model",
             color=GREEN,
         ).scale(1.08)
         lookup = self.pipeline_box("lookup orientation data", GREEN)
@@ -131,7 +131,7 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
         self.play(GrowArrow(arrows[0]), FadeIn(lookup), run_time=0.55)
         self.play(GrowArrow(arrows[1]), FadeIn(dcm), run_time=0.7)
         self.play(FadeIn(note), run_time=0.4)
-        self.wait(1.0)
+        self.wait(5.0)
         self.play(FadeOut(VGroup(header, group, arrows, note)), run_time=0.55)
 
     def dynamic_id_decode(self) -> None:
@@ -166,7 +166,7 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
         self.play(Indicate(bytes_group[0], color=CYAN, scale_factor=1.05), run_time=0.6)
         self.play(Transform(prefix_box, SurroundingRectangle(bytes_group[1:], color=BLUE, buff=0.08, corner_radius=0.08)), run_time=0.55)
         self.play(FadeIn(equation), run_time=0.55)
-        self.wait(0.9)
+        self.wait(3.0)
         self.play(FadeOut(VGroup(header, signed, bytes_group, equation, prefix_box)), run_time=0.55)
 
     def rotate_call(self) -> None:
@@ -176,17 +176,16 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
         code = self.code_panel(
             [
                 "let dcm = almanac.rotate(",
-                "    from_frame,",
-                "    to_frame,",
-                "    epoch,",
-                ")?;",
+                "from_frame,",
+                "to_frame,",
+                "epoch)?",
             ],
             highlight_lines={0: BLUE, 3: PURPLE},
         ).scale(1.0).move_to(ORIGIN + 0.25 * UP)
 
         left = self.small_frame_card("from_frame", "EME2000", BLUE)
         right = self.small_frame_card("to_frame", "0xA0E10303", CYAN)
-        epoch = self.small_frame_card("epoch", "2032-04-12T08:15:00 TCL", PURPLE)
+        epoch = self.small_frame_card("epoch", "2024-02-29T05:17:31 TCL", PURPLE, True)
         params = VGroup(left, right, epoch).arrange(RIGHT, buff=0.35).next_to(code, DOWN, buff=0.55)
         self.fit_to_frame(VGroup(code, params), max_width=SAFE_WIDTH, max_height=5.0)
 
@@ -197,7 +196,7 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
         self.play(LaggedStart(*[FadeIn(p, shift=0.2 * UP) for p in params], lag_ratio=0.15), run_time=0.8)
         self.play(Create(pulse), run_time=0.35)
         self.play(pulse.animate.set_stroke(opacity=0.0), run_time=0.55)
-        self.wait(0.7)
+        self.wait(5.0)
         self.play(FadeOut(VGroup(header, code, params, pulse)), run_time=0.55)
 
     def dcm_pipeline(self) -> None:
@@ -229,7 +228,7 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
         self.play(LaggedStart(*[GrowArrow(a) for a in arrows], lag_ratio=0.15), run_time=0.6)
         self.play(FadeIn(details, shift=0.25 * UP), run_time=0.75)
         self.play(FadeIn(dcm, scale=0.92), run_time=0.65)
-        self.wait(1.0)
+        self.wait(5.0)
         self.play(FadeOut(VGroup(header, stages, arrows, details, dcm)), run_time=0.55)
 
     def time_scale_conversion(self) -> None:
@@ -238,12 +237,13 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
 
         card_epoch = self.id_card(
             title="incoming epoch",
-            value="2032-04-12T08:15:00 TCL",
-            subtitle="lunar coordinate time scale in user code",
+            value="2024-02-29T05:17:31 TCL",
+            subtitle="lunar coordinate time scale",
             color=PURPLE,
+            large=True,
         )
         convert = self.pipeline_box("convert to TT", YELLOW)
-        sofa = self.pipeline_box("SOFA precession / nutation", BLUE, width=3.05)
+        sofa = self.pipeline_box("SOFA prec. / nutation", BLUE, width=3.05)
         matrix = self.block_dcm(label="R(TT),  Ṙ(TT)", highlight=BLUE)
 
         group = VGroup(card_epoch, convert, sofa, matrix).arrange(RIGHT, buff=0.45).move_to(0.15 * UP)
@@ -256,7 +256,7 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
                 "let r = sofa_precession_nutation(tt, model);",
             ],
             font_size=22,
-            highlight_lines={1: YELLOW, 2: BLUE},
+            highlight_lines={0: PURPLE, 1: YELLOW, 2: BLUE},
         ).next_to(group, DOWN, buff=0.5)
         self.fit_to_frame(VGroup(group, arrows, code), max_width=SAFE_WIDTH, max_height=5.4)
         self.camera_fit(header, group, arrows, code)
@@ -266,38 +266,38 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
         self.play(GrowArrow(arrows[1]), FadeIn(sofa), run_time=0.45)
         self.play(GrowArrow(arrows[2]), FadeIn(matrix), run_time=0.55)
         self.play(FadeIn(code, shift=0.25 * UP), run_time=0.75)
-        self.wait(1.0)
+        self.wait(5.0)
         self.play(FadeOut(VGroup(header, group, arrows, code)), run_time=0.55)
 
     def frozen_and_force_inertial(self) -> None:
         self.next_section("frozen and forced inertial")
         header = self.section_header("6. Frame fields decide whether the DCM evolves")
 
-        live = self.block_dcm(label="dynamic frame", highlight=GREEN).scale(1.08)
-        frozen = self.block_dcm(label="frozen_epoch set", highlight=YELLOW).scale(1.08)
-        forced = self.block_dcm(label="force_inertial = true", highlight=RED).scale(1.08)
-        cards = VGroup(live, frozen, forced).arrange(RIGHT, buff=0.65).move_to(0.1 * UP)
+        live = self.block_dcm(label="dynamic", highlight=GREEN).scale(0.96)
+        frozen = self.block_dcm(label="frozen_epoch", highlight=YELLOW).scale(0.96)
+        forced = self.block_dcm(label="force_inertial", highlight=RED).scale(0.96)
+        cards = VGroup(live, frozen, forced).arrange(RIGHT, buff=1.0).move_to(0.25 * UP)
 
-        frozen_note = Text(
-            "evaluate dynamic model at frozen_epoch instead of integration epoch",
-            font=FONT,
-            font_size=22,
-            color=YELLOW,
-        ).next_to(frozen, DOWN, buff=0.28)
-        forced_note = Text(
-            "zero the time derivative block: Ṙ = 0",
-            font=FONT,
-            font_size=22,
-            color=RED,
-        ).next_to(forced, DOWN, buff=0.28)
-        live_note = Text(
-            "R and Ṙ evolve with epoch",
-            font=FONT,
-            font_size=22,
-            color=GREEN,
+        live_note = self.caption_badge(
+            "default",
+            "R and Ṙ evolve\nwith the epoch",
+            GREEN,
         ).next_to(live, DOWN, buff=0.28)
-        self.fit_to_frame(VGroup(cards, frozen_note, forced_note, live_note), max_width=SAFE_WIDTH, max_height=5.4)
-        self.camera_fit(header, cards, frozen_note, forced_note, live_note)
+        frozen_note = self.caption_badge(
+            "frozen",
+            "evaluate at\nfrozen_epoch",
+            YELLOW,
+        ).next_to(frozen, DOWN, buff=0.28)
+        forced_note = self.caption_badge(
+            "inertialized",
+            "zero derivative\nblock: Ṙ = 0",
+            RED,
+        ).next_to(forced, DOWN, buff=0.28)
+        notes = VGroup(live_note, frozen_note, forced_note)
+
+        section = VGroup(cards, notes)
+        self.fit_to_frame(section, max_width=SAFE_WIDTH, max_height=4.7)
+        self.camera_fit(header, section)
 
         self.play(FadeIn(header), FadeIn(live, shift=0.25 * UP), FadeIn(live_note), run_time=0.75)
         self.play(FadeIn(frozen, shift=0.25 * UP), FadeIn(frozen_note), run_time=0.65)
@@ -306,8 +306,8 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
         zero_box = SurroundingRectangle(self.dcm_rdot_cell(forced), color=RED, buff=0.05, corner_radius=0.05)
         self.play(Create(zero_box), run_time=0.35)
         self.play(Indicate(self.dcm_rdot_cell(forced), color=RED, scale_factor=1.15), run_time=0.55)
-        self.wait(1.0)
-        self.play(FadeOut(VGroup(header, cards, frozen_note, forced_note, live_note, zero_box)), run_time=0.55)
+        self.wait(5.0)
+        self.play(FadeOut(VGroup(header, section, zero_box)), run_time=0.55)
 
     def end_card(self) -> None:
         self.next_section("end")
@@ -319,10 +319,19 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
             color=MUTED,
         )
         bits = self.code_chip("0xA0 FF AA BB  →  DCM(epoch)", color=CYAN, font_size=34)
-        stack = VGroup(title, subtitle, bits).arrange(DOWN, buff=0.32)
+        code = self.code_panel(
+            [
+                "pip install --upgrade anise",
+                "cargo add anise",
+                "https://nyxspace.com"
+            ],
+            highlight_lines={0: GREEN, 1: ORANGE, 2: BLUE},
+        ).scale(1.0).move_to(ORIGIN + 0.25 * UP)
+
+        stack = VGroup(title, subtitle, bits, code).arrange(DOWN, buff=0.32)
         self.camera_fit(stack)
         self.play(FadeIn(stack, shift=0.25 * UP), run_time=0.85)
-        self.wait(1.3)
+        self.wait(5)
         self.play(FadeOut(stack), run_time=0.6)
 
     # ------------------------------------------------------------------
@@ -335,9 +344,9 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
         group.to_edge(UP, buff=0.35).to_edge(LEFT, buff=0.55)
         return group
 
-    def id_card(self, title: str, value: str, subtitle: str, color: str) -> VGroup:
+    def id_card(self, title: str, value: str, subtitle: str, color: str, large: bool=False) -> VGroup:
         rect = RoundedRectangle(
-            width=3.25,
+            width=7.5 if large else 3.25,
             height=1.65,
             corner_radius=0.13,
             stroke_color=color,
@@ -351,9 +360,9 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
         stack = VGroup(t, v, s).arrange(DOWN, buff=0.12).move_to(rect.get_center())
         return VGroup(rect, stack)
 
-    def small_frame_card(self, title: str, value: str, color: str) -> VGroup:
+    def small_frame_card(self, title: str, value: str, color: str, large:bool=False) -> VGroup:
         rect = RoundedRectangle(
-            width=3.25,
+            width=5.5 if large else 3.25,
             height=1.0,
             corner_radius=0.11,
             stroke_color=color,
@@ -435,6 +444,21 @@ class Anise010DynamicFrameAnnouncement(MovingCameraScene):
         )
         label.move_to(rect)
         return VGroup(rect, label)
+
+    def caption_badge(self, title: str, body: str, color: str) -> VGroup:
+        rect = RoundedRectangle(
+            width=2.55,
+            height=1.02,
+            corner_radius=0.11,
+            stroke_color=color,
+            stroke_width=1.3,
+            fill_color=PANEL,
+            fill_opacity=0.92,
+        )
+        t = Text(title, font=FONT, font_size=16, color=color, weight=BOLD)
+        b = Text(body, font=FONT, font_size=17, color=FG, line_spacing=0.85)
+        stack = VGroup(t, b).arrange(DOWN, buff=0.06).move_to(rect)
+        return VGroup(rect, stack)
 
     def key_value(self, key: str, value: str, color: str) -> VGroup:
         k = self.code_chip(key, color=color, font_size=20)
