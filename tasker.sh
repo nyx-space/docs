@@ -1,6 +1,4 @@
 #!/bin/bash
-set -euo pipefail
-
 VENV_DIR=".venv"
 
 # 1. Ensure uv is available
