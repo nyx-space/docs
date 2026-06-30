@@ -1,21 +1,18 @@
 #!/bin/bash
+VENV_DIR=".venv"
 
-# Define a function
-setup() {
-  pip install pipenv
-  pipenv install
-}
-
-if [ -z "$VIRTUAL_ENV" ]; then
-  # Not in a VENV
-  if [ ! -d ".venv" ]; then
-    # Build the new venv
-    python3 -m venv .venv
-  fi
-  # Jump into it
-  source .venv/bin/activate
+# 1. Ensure uv is available
+if ! command -v uv &> /dev/null; then
+  pip install uv
 fi
 
-setup
+# 2. Force everything inside the venv
+if [ ! -d "$VENV_DIR" ]; then
+    uv venv "$VENV_DIR"
+fi
 
-pipenv run mkdocs $1
+# Direct uv to use the venv explicitly for the install
+uv pip install --python "$VENV_DIR/bin/python" -r reqs.txt
+
+# 3. Execute zensical directly out of the venv bin directory
+exec "$VENV_DIR/bin/zensical" "$@"
