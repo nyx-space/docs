@@ -2,7 +2,7 @@ site_name: Nyx Space
 site_url: https://nyxspace.com
 edit_uri: ""
 theme:
-  name: material
+  name: zensical
   features:
     - navigation.tabs
     - navigation.tracking

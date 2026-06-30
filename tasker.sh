@@ -18,4 +18,4 @@ fi
 
 setup
 
-pipenv run mkdocs $1
+pipenv run zensical $1
