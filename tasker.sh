@@ -1,21 +1,7 @@
 #!/bin/bash
 
-# Define a function
-setup() {
-  pip install pipenv
-  pipenv install
-}
+pip install uv
 
-if [ -z "$VIRTUAL_ENV" ]; then
-  # Not in a VENV
-  if [ ! -d ".venv" ]; then
-    # Build the new venv
-    python3 -m venv .venv
-  fi
-  # Jump into it
-  source .venv/bin/activate
-fi
+uv pip install -r reqs.txt
 
-setup
-
-pipenv run zensical $1
+zensical "$@"
