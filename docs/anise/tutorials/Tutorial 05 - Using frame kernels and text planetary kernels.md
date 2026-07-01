@@ -146,7 +146,7 @@ iau_jupiter_frame.mu_km3_s2()
 + Make a copy of the `pck00008.tpc` file, removing everything except Earth related data.
 + Build a new PCA file using these two new files
 + Load a default Almanac and an empty Almanac where you'll load these two files into, along with the `DE440s.bsp` file.
-+ Query the Cartesian state of the Earth at any time of your choosing from both of these Almanac. The state should be the same, since it'll be from the DE440s.bsp.
++ Query the Cartesian state of the Earth at any time of your choosing from both of these Almanacs. The state should be the same, since it'll be from the DE440s.bsp.
 + Observe how the frame gravitational parameter information of both will differ.
 + Finally, using the `at_epoch` function on both of these states, perform a two-body propagation for both and notice how the gravitational parameter affects the result.
 

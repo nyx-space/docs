@@ -581,7 +581,7 @@ print(state.light_time().to_seconds())
     491.259084389
 
 
-## Exerices
+## Exercises
 
 1. Query the position of the Earth at different times using a time series. Note that the DE440s file is only valid for 200 years centered on 1950.
 2. Query the position of Venus as seen from the Earth, both in the J2000 frame, and make a plot of the light time between these two planets throughout a given year.
