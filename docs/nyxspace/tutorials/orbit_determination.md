@@ -131,7 +131,7 @@ od_proc_deviation = SpacecraftODProcess(
 od_dev_sol = od_proc_deviation.process_arc(estimate, trk_arc)
 
 # Export the whole orbit determination solution into a single Parquet file.
-od_dev_sol.to_parquet("od_dev_smoothed.pq", ExportCfg(False))
+od_dev_sol.to_parquet("od_dev.pq", ExportCfg(False))
 
 # Step 8: Running the smoother
 smoothed = od_dev_sol.smooth(almanac)

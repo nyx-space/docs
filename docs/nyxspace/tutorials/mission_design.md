@@ -49,8 +49,12 @@ accel_models = AccelModels(
 # Step 3: Configure Non-Gravitational Force Models
 almanac = MetaAlmanac.latest()
 
-# Define Atmospheric Drag. We use the MSIS-00 empirical atmosphere model.
-drag = Drag(AtmDensity.msis00())
+# Define Atmospheric Drag.
+drag = Drag(
+    AtmDensity.earth_exponential(),
+    almanac.frame_info(Frames.IAU_EARTH_FRAME),
+    estimate=False,
+)
 
 # Define Solar Radiation Pressure (SRP).
 # We configure this to account for eclipses cast by the Earth and the Moon.
