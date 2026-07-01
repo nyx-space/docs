@@ -6,8 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-mkdocs = "*"
-mkdocs-material = "*"
+zensical = "*"
 mkdocs-git-revision-date-localized-plugin = "*"
 mkdocs-jupyter = "*"
 mkdocs-redirects = "*"
