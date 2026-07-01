@@ -5,7 +5,9 @@ ANISE is a modern rewrite of NAIF SPICE, written in Rust and providing interface
 Evidently, this tutorial applies to the Python usage of ANISE.
 
 ## Goal
-By the end of this tutorial, you should know how to build a data frame containing the Sun probe Earth angle of a given spacecraft BSP and plot that information. Your exercise will be to confirm that this calculation is correct by computing the Sun elevation at nadir below the spacecraft as detailed in tutorial 04.## Loading the latest orientation and planetary data
+By the end of this tutorial, you should know how to build a data frame containing the Sun probe Earth angle of a given spacecraft BSP and plot that information. Your exercise will be to confirm that this calculation is correct by computing the Sun elevation at nadir below the spacecraft as detailed in tutorial 04.
+
+## Loading the latest orientation and planetary data
 
 Let's start by installing ANISE: `pip install anise`
 

@@ -1,6 +1,6 @@
 # ANISE
 
-ANISE is a modern rewrite of NAIF SPICE, written in Rust and providing interfaces to other languages include Python.
+ANISE is a modern rewrite of NAIF SPICE, written in Rust and providing interfaces to other languages including Python.
 
 Evidently, this tutorial applies to the Python usage of ANISE.
 
@@ -274,8 +274,8 @@ All Almanac translation/transform queries return an instance of `Orbit`, populat
 
 **Tasks:**
  1. Fetch the state of a celestial object, like the Moon, at the epoch of your choice.
- 3. Use the Orbit instance's `at_epoch` to propagate the position of that object forward in time, assuming it was subjected only to two body dynamics.
- 4. Fetch the state of that same object from the Almanac at that other time, and look at the difference in Cartesian state and orbital elements.
+ 2. Use the Orbit instance's `at_epoch` to propagate the position of that object forward in time, assuming it was subjected only to two body dynamics.
+ 3. Fetch the state of that same object from the Almanac at that other time, and look at the difference in Cartesian state and orbital elements.
 
 **Learning Goal:** Understand the basics of orbital propagation and its limitations.
 

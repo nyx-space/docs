@@ -1,6 +1,6 @@
 # ANISE
 
-ANISE is a modern rewrite of NAIF SPICE, written in Rust and providing interfaces to other languages include Python.
+ANISE is a modern rewrite of NAIF SPICE, written in Rust and providing interfaces to other languages including Python.
 
 Evidently, this tutorial applies to the Python usage of ANISE.
 
@@ -143,7 +143,7 @@ The CRC32 integrity number is not set for local paths because in any case, the M
 
 The MetaAlmanac is designed to work seamlessly with the Alamac itself. In the following example, we'll use the latest MetaAlmanac (the same that's in `latest.dhall`) and see that it can be used to return the Almanac directly.
 
-
+The MetaAlmanac is designed to work seamlessly with the Almanac itself. In the following example, we'll use the latest MetaAlmanac (the same that's in `latest.dhall`) and see that it can be used to return the Almanac directly.
 ```python
 meta = MetaAlmanac.load("../../data/latest.dhall")
 print(meta)
@@ -338,4 +338,4 @@ print(de440s_and_moon.frame_info(Frames.MOON_PA_FRAME))
 + Compare the process of using MetaFile with manual Dhall file creation.
 + Load the generated configuration into the MetaAlmanac.
 
-_Note:_ Almanac, MetaFile, and MetaAlmana all support the equality operation in Python.
+_Note:_ Almanac, MetaFile, and MetaAlmanac all support the equality operation in Python.
