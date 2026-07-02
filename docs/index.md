@@ -24,6 +24,7 @@ hide:
             <li><b>100% free license</b> designed for Air-gapped Mission Ops Centers, and continuous integration pipelines</li>
             </ul></p>
             <a href="https://7ug5imdtt8v.typeform.com/to/BEzJQESl" class="md-button md-button--primary" target="_blank">Learn more</a>
+            <a href="https://platform.nyxspace.com" class="md-button">Login</a>
         </div>
     </article>
     <article class="card" style="flex-direction: column; align-items: flex-start;">
