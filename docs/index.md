@@ -19,7 +19,7 @@ hide:
             <ul>
             <li>Access validated gravity model datasets and daily updates to atmospheric and Earth rotation data</li>
             <li>Augmented state estimation and consider covariance, including ground station location, and radio delays and biases</li>
-            <li>Target coupled multi-spacecraft trajectories and automating repeated, multi-phase operational conops sequences</li>
+            <li>Target coupled multi-spacecraft trajectories and automate repeated, multi-phase operational conops sequences</li>
             <li>Genetic algorithm global optimization of low thrust constellation orbit raising</li>
             <li><b>100% free license</b> designed for Air-gapped Mission Ops Centers, and continuous integration pipelines</li>
             </ul>
@@ -32,11 +32,11 @@ hide:
             <h2 style="margin: 0">Orbit Determination</h2>
             <h3 class="text-accent">Scriptable, CI-ready replacement for Ansys ODTK</h3>
             <ul>
-            <li>Extended Kalman Filters, with smoothing, and Batch Least Squares Estimators (incl. Levenberg Marquart)</li>
+            <li>Extended Kalman Filters, with smoothing, and Batch Least Squares Estimators (incl. Levenberg-Marquardt)</li>
             <li>Access Normalized Innovation Squared (NIS) and Normalized Estimation Error Square (NEES)</li>
             <li>Export whitened residuals, Kalman gains, Filter-Smoother consistency, Uncertainty of orbital elements</li>
             <li>State noise compensation (process noise) available in inertial, RIC, or VNC frames, with maximum inflation duration, or exponentially decaying</li>
-            <li>Full OD Monte Carlo simulation suite with multivariate dispersions from covariance</li
+            <li>Full OD Monte Carlo simulation suite with multivariate dispersions from covariance</li>
             </ul>
             <a href="/nyxspace/showcase/04_lro_od/" class="md-button md-button--primary" target="_blank">Lunar OD demo</a>
         </div>
@@ -48,7 +48,7 @@ hide:
             <ul>
             <li>Third-body effects, solar radiation pressure accounting for tri-axial ellipsoid of the shadow object, drag model (NRLMSISE-00), multi-body solid tides (compatible with gas giants)</li>
             <li>Maneuver targeting and modeling: impulsive, finite high-thrust burns, low-thrust optimization</li>
-            <li>Multi-variable differential correctors (<i>targeters</i>) using either Newton Raphson or Broyden's method (<i>Secant</i>)</li>
+            <li>Multi-variable differential correctors (<i>targeters</i>) using either Newton-Raphson or Broyden's method (<i>Secant</i>)</li>
             <li>Propagation stopping conditions on epoch, duration, orbital element, or any ANISE calculation object (e.g. LST of 0615)</li>
             </ul>
             <a href="/nyxspace/showcase/03_geo_analysis/" class="md-button md-button--primary" target="_blank">GEO low thrust orbit raise</a>
