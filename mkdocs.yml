@@ -46,6 +46,11 @@ nav:
       #     - Orbit definition and manipulation [WIP]: nyxspace/user_guide/orbits.md
       #     - Propagators and Monte Carlo runs [WIP]: nyxspace/user_guide/prop-mc.md
       #     - High fidelity models [WIP]: nyxspace/user_guide/hifimodels.md
+      - Tutorials:
+          - Tutorials index: nyxspace/tutorials/index.md
+          - Mission design: nyxspace/tutorials/mission_design.md
+          - Orbit determination: nyxspace/tutorials/orbit_determination.md
+          - Spacecraft: nyxspace/tutorials/spacecraft.md
       - MathSpec:
           - Introduction: nyxspace/MathSpec/index.md
           - Celestial:
