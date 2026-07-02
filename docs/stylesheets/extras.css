@@ -195,12 +195,6 @@ code {
     text-transform: none;
 }
 
-p {
-    margin-bottom: 1em;
-    text-align: justify;
-    /* Improved readability */
-}
-
 /* List and Emphasis Styles */
 ul {
     list-style: inside;
@@ -290,7 +284,7 @@ div.cards>ul>li {
 
 .marquee-content {
     display: flex;
-    width: 200%; 
+    width: 200%;
     animation: scroll 30s linear infinite;
 }
 
@@ -318,7 +312,7 @@ div.cards>ul>li {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     /* The shaded background style */
     background-color: rgba(128, 128, 128, 0.05); /* Light shade for light mode */
     border: 1px solid rgba(128, 128, 128, 0.1); /* Subtle border */
@@ -331,16 +325,16 @@ div.cards>ul>li {
     height: 40px; /* Adjust this to your preferred logo height */
     width: auto;
     max-width: 100%;
-    
+
     /* * This blend-mode intelligently handles logo colors.
      * On light backgrounds, dark logos stay dark.
      * White logos (like AWS) will blend in (which is OK).
      */
-    mix-blend-mode: darken; 
+    mix-blend-mode: darken;
 }
 
 
-/* * Dark Mode Handling 
+/* * Dark Mode Handling
  * (This assumes your dark mode toggles [data-theme="dark"])
  */
 [data-theme="dark"] .marquee-item {
