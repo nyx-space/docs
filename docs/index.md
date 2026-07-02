@@ -44,10 +44,10 @@ hide:
             <h2 style="margin: 0">Mission Design &amp; Optimization</h2>
             <h3 class="text-accent">Fidelity of Ansys STK, at several times the speed</h3>
             <p><ul>
-            <li>Third-body effects, solar radiation pressure, drag model (NRLMSISE-00), multi-body solid tides (compatible with gas giants)</li>
+            <li>Third-body effects, solar radiation pressure accounting for tri-axial ellipsoid of the shadow object, drag model (NRLMSISE-00), multi-body solid tides (compatible with gas giants)</li>
             <li>Maneuver targeting and modeling: impulsive, finite high-thrust burns, low-thrust optimization</li>
             <li>Multi-variable differential correctors (<i>targeters</i>) using either Newton Raphson or Broyden's method (<i>Secant</i>)</li>
-            <li>Validated shadow modeling accounting for the shape of the shadow body, defined as a tri-axial ellipsoid from the NASA/NAIF PCK</li>
+            <li>Propagation stopping conditions on epoch, duration, orbital element, or any ANISE calculation object (e.g. LST of 0615)</li>
             </ul></p>
             <a href="/nyxspace/showcase/03_geo_analysis/" class="md-button md-button--primary" target="_blank">GEO low thrust orbit raise</a>
         </div>
@@ -56,16 +56,24 @@ hide:
         <div class="card-content">
             <h2 style="margin: 0">Monte Carlo &amp; Dispersion Analysis</h2>
             <h3 class="text-accent">3,000 simulation days per minute per CPU core</h3>
-            <p>Massive-scale parallel operational-level risk analysis. Leverage concurrent, thread-safe architecture to distribute thousands of high-fidelity orbital runs across cloud-compute instances, translating statistical uncertainty into hard operational constraints, all on prem, for free.</p>
+            <p><ul>
+            <li>Parallel and thread-safe by design, enabling massive-scale operational-level risk analysis</li>
+            <li>Multivariate normal dispersions from covariance, or specific orbital element uncertainty, mapped to Cartesian space with automatic differentiation</li>
+            <li><b>Blazing fast speeds</b>, low memory footprint, unmatched by any proprietary toolsuite</li>
             <a href="/nyxspace/showcase/02_jwst_covar_monte_carlo/" class="md-button md-button--primary" target="_blank">James Webb Monte Carlo</a>
         </div>
     </article>
     <!-- ANISE Card -->
     <article class="card" style="flex-direction: column; align-items: flex-start;">
         <div class="card-content">
-            <h2 style="margin: 0">Validated SPICE Replacement</h2>
-            <h3 class="text-accent">ANISE</h3>
-            <p>A thread-safe, zero-cost alternative to legacy SPICE toolkits, delivering deterministic planetary, coordinate frame, and instrument transformations. Engineered for high-throughput Python concurrent execution and bare-metal flight software, with proven lunar flight heritage, landing Blue Ghost on the Moon in March 2025.</p>
+            <h2 style="margin: 0">ANISE</h2>
+            <h3 class="text-accent">Landed Firefly Blue Ghost on the Moon</h3>
+            <p><ul>
+            <li>Thread-safe, FSW-ready alternative to legacy SPICE toolkit</li>
+            <li>Ephemeris, Orientation, Instrument, Eclipse modeling validated against CSPICE in continuous integration</li>
+            <li>Calculations of orbital elements, ground station azimuth, elevation, range, and range-rate data, orbital element uncertainties from covariance, etc.</li>
+            <li>Supports NASA SPICE kernels, CCSDS OEM and OPM, and STK .e files</li>
+            </ul></p>
             <a href="/anise/" class="md-button md-button--primary">Learn more</a>
             <a href="/anise/tutorials/" class="md-button">Tutorials</a>
         </div>
@@ -73,8 +81,8 @@ hide:
     <!-- Hifitime Card -->
     <article class="card" style="flex-direction: column; align-items: flex-start;">
         <div class="card-content">
-            <h2 style="margin: 0">Precision Time Management</h2>
-            <h3 class="text-accent">Hifitime</h3>
+            <h2 style="margin: 0">Hifitime</h2>
+            <h3 class="text-accent">Precision Time Management</h3>
             <p>An overflow-safe, high-performance datetime library providing leap-second-correct nanosecond precision across UTC, GPST, and relativistic time-scales. Flight-proven in lunar and deep-space missions, it works on desktop, web assembly, and bare-metal platforms.</p>
             <a href="/hifitime/" class="md-button md-button--primary">Learn more</a>
             <a href="/hifitime/python/" class="md-button">Python Docs</a>
