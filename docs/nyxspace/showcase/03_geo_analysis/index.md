@@ -6,13 +6,13 @@ GEO birds have specific station keeping requirements. In this preliminary study,
 
 ### Objective
 
-As documented in the [drift analysis code](https://github.com/nyx-space/nyx/blob/master/examples/03_geo_analysis/drift.rs), we're trying to gain insight into how quickly a vehicle would drift outside of an arbitrary box. The spacecraft is placed arbitrarily to be in a GEO orbit centered on Colorado, USA. We then propagate the original spacecraft position in high fidelity with the following dynamics:
+As documented in the [drift analysis code](https://github.com/nyx-space/nyx/blob/master/nyx-core/examples/03_geo_analysis/drift.rs), we're trying to gain insight into how quickly a vehicle would drift outside of an arbitrary box. The spacecraft is placed arbitrarily to be in a GEO orbit centered on Colorado, USA. We then propagate the original spacecraft position in high fidelity with the following dynamics:
 
 - Earth gravity field of 21x21, JGM3 model -- we don't need a super high field here because the spacecraft is ~42 Mm above the Earth
 - Solar radiation pressure, accounting for the shadow and penumbra cast by the Earth and the Moon at each time step
 - Point mass gravity of the Moon and Sun (in addition to the Earth, the central body)
 
-To run the [drift analysis](https://github.com/nyx-space/nyx/blob/master/examples/03_geo_analysis/drift.rs) example, just execute:
+To run the [drift analysis](https://github.com/nyx-space/nyx/blob/master/nyx-core/examples/03_geo_analysis/drift.rs) example, just execute:
 ```sh
 RUST_LOG=info cargo run --example 03_geo_drift --release
 ```
@@ -82,7 +82,7 @@ Most GEO spacecraft are deployed on a geostationary transfer orbit (GTO) and mus
 
 As of version 2.0.0-rc, Nyx ships with the closed loop Ruggerio guidance law. This is a locally optimal law for low thrust propulsion. It allows targeting of all orbital elements _apart_ from the phasing (e.g. the true anomaly). As such, when applied to orbit raising, it is useful for reaching the vicinity of a desired orbital slot and maintaining control of the shape and inclination of an orbit, but more complicated methods are recommended to reach to exact ITU-allocated slot. **A more optimal guidance law for this problem is the Q-Law**, whose implementation in Nyx has been on the backburner for years. The Q-law guidance law is as optimal as a global trajectory optimizer where the phasing is left free, but runs extremely fast.
 
-To run the [orbit raise analysis](https://github.com/nyx-space/nyx/blob/master/examples/03_geo_analysis/raise.rs) example, just execute:
+To run the [orbit raise analysis](https://github.com/nyx-space/nyx/blob/master/nyx-core/examples/03_geo_analysis/raise.rs) example, just execute:
 ```sh
 RUST_LOG=info cargo run --example 03_geo_raise --release
 ```
@@ -107,7 +107,7 @@ During the orbit raise, a low thrust vehicle will most likely not thrust when it
 
 As previously mentioned, station keeping is required for a GEO slot. In the third program, we look at the use of the Monte Carlo framework in Nyx which uses the multivariate normal distribution structure. We distribute the SMA of 25 spacecraft, propagate them for a two week period in high fidelity, and ensure that they Ruggiero guidance law is enabled and tight around the GEO box. **The Monte Carlo capabilities of Nyx are better demonstrated in the [02 JWST](../02_jwst_covar_monte_carlo/index.md) example.**
 
-To run the [station keeping Monte Carlo](https://github.com/nyx-space/nyx/blob/master/examples/03_geo_analysis/stationkeeping.rs) example, just execute:
+To run the [station keeping Monte Carlo](https://github.com/nyx-space/nyx/blob/master/nyx-core/examples/03_geo_analysis/stationkeeping.rs) example, just execute:
 ```sh
 RUST_LOG=info cargo run --example 03_geo_sk --release
 ```
