@@ -96,13 +96,13 @@ shape: (9, 2)
 
 ## Ground network
 
-For this example, we simulate measurements from three of the Deep Space Network ground stations: Canberra, Australia; Madrid, Spain; and Goldstone, CA, USA. Nyx allows configuration of ground stations using a YAML input file, cf. [`dsn-network`](https://github.com/nyx-space/nyx/blob/master/examples/04_lro_od/dsn-network.yaml). These are configured as unbiased white noise ground stations where the standard deviation of the white noise is taken directly from the JPL DESCANSO series. The stochastic modeling in Nyx supports first order Gauss Markov processes and biased white noise.
+For this example, we simulate measurements from three of the Deep Space Network ground stations: Canberra, Australia; Madrid, Spain; and Goldstone, CA, USA. Nyx allows configuration of ground stations using a YAML input file, cf. [`dsn-network`](https://github.com/nyx-space/nyx/blob/master/nyx-core/examples/04_lro_od/dsn-network.yaml). These are configured as unbiased white noise ground stations where the standard deviation of the white noise is taken directly from the JPL DESCANSO series. The stochastic modeling in Nyx supports first order Gauss Markov processes and biased white noise.
 
 In this simulation, we are generating light-time corrected two-way range and Doppler measurements. Nyx supports all of the aberration computations provided by ANISE (and validated against SPICE).
 
 ## Tracking schedule
 
-To prepare for a mission, flight dynamics engineers must simulate a tracking schedule and determine, through trial and error, how much tracking is required throughout the different orbital regimes of the mission. Unlike most orbit determination software, Nyx provides a "schedule generator" for simulation. Refer to [`tracking-cfg.yaml`](https://github.com/nyx-space/nyx/blob/master/examples/04_lro_od/tracking-cfg.yaml) for the tracking configuration. In short, this feature allows engineers to configure the following key inputs to a schedule:
+To prepare for a mission, flight dynamics engineers must simulate a tracking schedule and determine, through trial and error, how much tracking is required throughout the different orbital regimes of the mission. Unlike most orbit determination software, Nyx provides a "schedule generator" for simulation. Refer to [`tracking-cfg.yaml`](https://github.com/nyx-space/nyx/blob/master/nyx-core/examples/04_lro_od/tracking-cfg.yaml) for the tracking configuration. In short, this feature allows engineers to configure the following key inputs to a schedule:
 
 - how to deal with overlapping measurements: greedy, eager, or overlap.
     - Greedy: when two stations overlap, the one which was previously tracking will continue until the vehicle is no longer in sight

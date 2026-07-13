@@ -14,7 +14,7 @@ This section showcases some of the problems that you can solve with the whole su
 
     [:octicons-arrow-right-24: Read more](./01_orbit_prop/index.md)
     
-    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/examples/01_orbit_prop)
+    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/nyx-core/examples/01_orbit_prop)
 
 -   :material-telescope:{ .lg .middle } __James Webb Space Telescope Monte Carlo Simulation__
 
@@ -26,7 +26,7 @@ This section showcases some of the problems that you can solve with the whole su
 
     [:octicons-arrow-right-24: Read more](./02_jwst_covar_monte_carlo/index.md)
     
-    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/examples/02_jwst_covar_monte_carlo)
+    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/nyx-core/examples/02_jwst_covar_monte_carlo)
 
 -   :material-satellite-variant:{ .lg .middle } __GEO Low Thrust Orbit Raising & StationKeeping__
 
@@ -38,7 +38,7 @@ This section showcases some of the problems that you can solve with the whole su
 
     [:octicons-arrow-right-24: Read more](./03_geo_analysis/index.md)
     
-    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/examples/03_geo_analysis)
+    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/nyx-core/examples/03_geo_analysis)
 
 -   :material-motion:{ .lg .middle } __Lunar Reconnaissance Orbiter Orbit Determination__
 
@@ -50,7 +50,7 @@ This section showcases some of the problems that you can solve with the whole su
 
     [:octicons-arrow-right-24: Read more](./04_lro_od/index.md)
     
-    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/examples/04_lro_od)
+    [:material-code-tags: Source code](https://github.com/nyx-space/nyx/tree/master/nyx-core/examples/04_lro_od)
 
 </div>
 
